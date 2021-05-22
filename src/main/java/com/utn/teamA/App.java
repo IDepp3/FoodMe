@@ -3,6 +3,9 @@ package com.utn.teamA;
 public class App {
     
     public static void main(String[] args) {
-        System.out.println("Hello World");
+
+        Jose jose = new Jose();
+
+        jose.saludo("Jose");
     }
 }
