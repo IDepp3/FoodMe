@@ -1,3 +1,5 @@
+package com.utn.teamA;
+
 public enum TipoEmpleado {
     MOZO("mozo",1500),
     BARTENDER("bartender",2200),
