@@ -12,8 +12,8 @@ public class Persona {
     private String dni;
     private String email;
 
-    public Persona(int id, String nombre, String apellido, LocalDate Nacimiento, String telefono, String direccion, String dni,
-            String email) {
+    public Persona(int id, String nombre, String apellido, LocalDate Nacimiento, String telefono, String direccion,
+            String dni, String email) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -24,7 +24,7 @@ public class Persona {
         this.email = email;
     }
 
-    public Persona(){
+    public Persona() {
 
     }
 
@@ -60,11 +60,11 @@ public class Persona {
         this.Nacimiento = Nacimiento;
     }
 
-    public String getTelefono(){
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(String telefono){
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
@@ -92,15 +92,33 @@ public class Persona {
         this.email = email;
     }
 
-    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int resultado = 1;
+        resultado = prime * resultado + dni;
+        return resultado;
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Persona) {
+            Persona otraPersona = (Persona) o;
+            if (this.id == otraPersona.id) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+
+    }
 
     @Override
     public String toString() {
         return "Persona ID: " + id + " Nombre: " + nombre + " Apellido: " + apellido + " Nacimiento: " + Nacimiento
-                + " Telefono: " + telefono + " Direccion: " + direccion + " DNI: " + dni + "Email: "+ email;
+                + " Telefono: " + telefono + " Direccion: " + direccion + " DNI: " + dni + "Email: " + email;
     }
-
-    
 
 }
