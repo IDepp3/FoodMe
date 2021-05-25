@@ -92,6 +92,9 @@ public class Persona {
         this.email = email;
     }
 
+    
+
+
     @Override
     public String toString() {
         return "Persona ID: " + id + " Nombre: " + nombre + " Apellido: " + apellido + " Nacimiento: " + Nacimiento
