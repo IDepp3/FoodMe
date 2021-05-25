@@ -94,7 +94,7 @@ public class Ingrediente {
         this.descripcion =  teclado.nextLine();
 
         System.out.println("Ingrese precio:");
-        this.precio =  teclado.nextDouble();
+        this.precio =  Helpers.nextDouble();
 
     }
 }

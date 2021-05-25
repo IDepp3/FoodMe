@@ -6,20 +6,12 @@ import java.util.Scanner;
 
 public class JoseAux {
 
+    //TODO ver donde va la lista de ingredientes Map o List
     private List<Ingrediente> listaDeIngredites = new ArrayList<>();
 
     public void init(){
 
-        Scanner teclado = new Scanner(System.in);
-        char otroIngrediente = 's';
-
-        while ( otroIngrediente == 's' ){
-            agregarIngrediente();
-
-            System.out.println("Desea agregar otro ingrediente? [ S/N ] ");
-            otroIngrediente = teclado.next().charAt(0);
-
-        }
+        agregarIngredienteView();
 
     }
 
@@ -30,5 +22,19 @@ public class JoseAux {
         nuevoIngrediente.crear();
 
         listaDeIngredites.add(nuevoIngrediente);
+    }
+
+    public void agregarIngredienteView(){
+
+        char otroIngrediente = 's';
+
+        while ( otroIngrediente == 's' ){
+            agregarIngrediente();
+
+            System.out.println("Desea agregar otro ingrediente? [ S/N ] ");
+            otroIngrediente = Helpers.charAt0();
+
+        }
+
     }
 }
