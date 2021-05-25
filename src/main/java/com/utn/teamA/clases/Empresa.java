@@ -1,4 +1,4 @@
-package com.utn.teamA.modelo;
+package com.utn.teamA.clases;
 
 import java.util.InputMismatchException;
 
