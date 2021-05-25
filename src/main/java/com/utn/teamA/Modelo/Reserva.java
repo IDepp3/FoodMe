@@ -10,7 +10,7 @@ import java.util.Objects;
 * 24/5
 *   La clase crea una reserva y calcula el costo de esa reserva
 * en funcion al los menu seleccionados y cantidad de personas por menu. Ademas calcula el costo de mano de obra + IVA y
-* Rentabilidad al %50.
+* Rentabilidad al %25.
 * *
  */
 
@@ -33,6 +33,8 @@ public class Reserva {
     private Double costoTotal;
     private boolean quiereBartender;
     private boolean quiereSushiman; // no es necesario porque nole preguntamos al cliente
+    //CREAR CONSTANTE IVA
+    //CREAR CONSTANTE RENTABILIDAD
 
     //region Constructor
     public Reserva() {
@@ -105,10 +107,8 @@ public class Reserva {
             if(quiereBartender == true){
                 costoTotal += TipoEmpleado.BARTENDER;
             }
-            // costo + IVA y RENTABILIDAD al %50
-           return costoTotal = costoTotal + ((costoTotal + ((precioVeg * cantidadPersonasVegetariano) + (precioCla * cantidadPersonasVegetariano)
-                   + (precioVega * cantidadPersonasVegano) + (precioDiab * cantidadPersonasDiabetico))) * 0.21) + (((costoTotal + ((precioVeg * cantidadPersonasVegetariano) + (precioCla * cantidadPersonasVegetariano)
-                   + (precioVega * cantidadPersonasVegano) + (precioDiab * cantidadPersonasDiabetico))) * 0.21)) ;
+            // costo + IVA y RENTABILIDAD al %25
+           return costoTotal = (costoTotal * 0.21 / 0.25);
     }
     //endregion
 
