@@ -1,4 +1,4 @@
-package com.utn.teamA.Modelo;
+package com.utn.teamA;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -92,7 +92,7 @@ public class Reserva {
         int cantidadPersonasTotal = cantidadPersonasVegetariano + cantidadPersonasClasico + cantidadPersonasVegano + cantidadPersonasDiabetico;
         if (cantidadPersonasTotal < 3) {
             System.out.println("No hacemos reservas para menos de 4 personas");
-        } else if (cantidadPersonasTotal > 3 && cantidadPersonasTotal <= 16)){
+        } else if (cantidadPersonasTotal > 3 && cantidadPersonasTotal <= 16){
              costoTotal =+ TipoEmpleado.MOZO;}
             if (cantidadPersonasTotal > 16  && cantidadPersonasTotal <= 32) {
                  costoTotal =+ TipoEmpleado.MOZO + TipoEmpleado.SUSHIMAN;
