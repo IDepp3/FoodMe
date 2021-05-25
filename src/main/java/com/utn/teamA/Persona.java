@@ -6,18 +6,18 @@ public class Persona {
     private int id;
     private String nombre;
     private String apellido;
-    private LocalDate fechaNacimiento;
+    private LocalDate Nacimiento;
     private String telefono;
     private String direccion;
     private String dni;
     private String email;
 
-    public Persona(int id, String nombre, String apellido, LocalDate fechaNacimiento, String telefono, String direccion, String dni,
+    public Persona(int id, String nombre, String apellido, LocalDate Nacimiento, String telefono, String direccion, String dni,
             String email) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
-        this.fechaNacimiento = fechaNacimiento;
+        this.Nacimiento = Nacimiento;
         this.telefono = telefono;
         this.direccion = direccion;
         this.dni = dni;
@@ -52,12 +52,12 @@ public class Persona {
         this.apellido = apellido;
     }
 
-    public LocalDate getFechaNacimiento() {
-        return fechaNacimiento;
+    public LocalDate getNacimiento() {
+        return Nacimiento;
     }
 
-    public void setFechaNacimiento(LocalDate fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
+    public void setNacimiento(LocalDate Nacimiento) {
+        this.Nacimiento = Nacimiento;
     }
 
     public String getTelefono(){
@@ -94,7 +94,7 @@ public class Persona {
 
     @Override
     public String toString() {
-        return "Persona ID: " + id + " Nombre: " + nombre + " Apellido: " + apellido + " Nacimiento: " + fechaNacimiento
+        return "Persona ID: " + id + " Nombre: " + nombre + " Apellido: " + apellido + " Nacimiento: " + Nacimiento
                 + " Telefono: " + telefono + " Direccion: " + direccion + " DNI: " + dni + "Email: "+ email;
     }
 
