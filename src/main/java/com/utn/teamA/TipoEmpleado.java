@@ -7,6 +7,7 @@ public enum TipoEmpleado {
 
     protected final int sueldo;
     protected final String tipo;
+    
     private TipoEmpleado(String tipo, int sueldo) {
         this.tipo = tipo;
         this.sueldo = sueldo;
