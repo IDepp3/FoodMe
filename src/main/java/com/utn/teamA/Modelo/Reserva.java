@@ -8,18 +8,16 @@ import java.util.Objects;
 * Clase Reserva
 * @Antonela
 * 24/5
-*   La clase crea una reserva y calcula el costo de esa reserva
-* en funcion al los menu seleccionados y cantidad de personas por menu. Ademas calcula el costo de mano de obra + IVA y
-* Rentabilidad al %25.
-* *
+*
+*
  */
 
 public class Reserva {
 
     private static int idClase = 1;
     private int orderId;
-    private LocalDate fechaReserva; // Lo puedo hacer String
-    private LocalDate fechaEvento; // Lo puedo hacer String
+    private LocalDate fechaReserva;
+    private LocalDate fechaEvento;
     private int idUsuario;
     private String nombreCliente;
     private boolean status;
@@ -32,9 +30,7 @@ public class Reserva {
     private String descripcion;
     private Double costoTotal;
     private boolean quiereBartender;
-    private boolean quiereSushiman; // no es necesario porque nole preguntamos al cliente
-    //CREAR CONSTANTE IVA
-    //CREAR CONSTANTE RENTABILIDAD
+    private boolean quiereSushiman; // no es necesario porque no se le pregunta al cliente si quiere + SushiMan
 
     //region Constructor
     public Reserva() {
