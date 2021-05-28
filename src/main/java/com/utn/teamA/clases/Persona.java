@@ -2,7 +2,16 @@ package com.utn.teamA.clases;
 
 import java.time.LocalDate;
 
-public class Persona {
+/**
+ * Clase Abstracta Persona
+ * Registra los datos de las personas
+ * Cada vez que se intancia la clase se genera el id de la persona.
+ *
+ * @Marco
+ */
+
+public abstract class Persona extends Usuario {
+    private static int idClass =1;
     private int id;
     private String nombre;
     private String apellido;
@@ -12,9 +21,29 @@ public class Persona {
     private String dni;
     private String email;
 
-    public Persona(int id, String nombre, String apellido, LocalDate fechaNacimiento, String telefono, String direccion, String dni,
+    //region Constructores
+
+    /**
+     * Constructor Vacio
+     */
+    public Persona(){
+        this.id = getId();
+    }
+
+    /**
+     * Constructor Persona
+     *
+     * @param nombre
+     * @param apellido
+     * @param fechaNacimiento
+     * @param telefono
+     * @param direccion
+     * @param dni
+     * @param email
+     */
+    public Persona( String nombre, String apellido, LocalDate fechaNacimiento, String telefono, String direccion, String dni,
             String email) {
-        this.id = id;
+        this.id = getId();
         this.nombre = nombre;
         this.apellido = apellido;
         this.fechaNacimiento = fechaNacimiento;
@@ -24,9 +53,37 @@ public class Persona {
         this.email = email;
     }
 
-    public Persona(){
-
+    /**
+     * Constructor de Persona y Usuario para usar el Loguin
+     * @param username
+     * @param password
+     * @param fechaRegistro
+     * @param nombre
+     * @param apellido
+     * @param fechaNacimiento
+     * @param telefono
+     * @param direccion
+     * @param dni
+     * @param email
+     */
+    public Persona(String username, String password, LocalDate fechaRegistro,String nombre, String apellido, LocalDate fechaNacimiento,
+                   String telefono, String direccion, String dni,
+                   String email){
+        super( username, password, fechaRegistro);
+        this.id = getId();
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.fechaNacimiento = fechaNacimiento;
+        this.telefono = telefono;
+        this.direccion = direccion;
+        this.dni = dni;
+        this.email = email;
     }
+
+
+    //endregion
+
+    //region Getters
 
     public int getId() {
         return id;
@@ -64,6 +121,10 @@ public class Persona {
         return telefono;
     }
 
+    //endregion
+
+    //region Setters
+
     public void setTelefono(String telefono){
         this.telefono = telefono;
     }
@@ -92,12 +153,36 @@ public class Persona {
         this.email = email;
     }
 
+    //endregion
+
+    //region To String
+
     @Override
     public String toString() {
-        return "Persona ID: " + id + " Nombre: " + nombre + " Apellido: " + apellido + " Nacimiento: " + fechaNacimiento
-                + " Telefono: " + telefono + " Direccion: " + direccion + " DNI: " + dni + "Email: "+ email;
+        return "Persona{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", fechaNacimiento=" + fechaNacimiento +
+                ", telefono='" + telefono + '\'' +
+                ", direccion='" + direccion + '\'' +
+                ", dni='" + dni + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 
-    
+
+    //endregion
+
+    //region Mostrar
+    public abstract void mostrar();
+    //endregion
+
+    //region Get Id
+    public int getIdClass(){
+        return id = idClass + 1;
+    }
+    //endregion
+
 
 }

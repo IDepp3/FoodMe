@@ -4,14 +4,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/*
+/**
 * Clase Reserva
 * @Antonela
 * 24/5
-*   La clase crea una reserva y calcula el costo de esa reserva
-* en funcion al los menu seleccionados y cantidad de personas por menu. Ademas calcula el costo de mano de obra + IVA y
-* Rentabilidad al %25.
-* *
+*   La clase registra  una reserva
+ *   Chequea dias disponibles  para tal.
+ *
+* *  @Antonela
  */
 
 public class Reserva {
@@ -36,10 +36,28 @@ public class Reserva {
 
 
     //region Constructor
+
+    /**
+     * Constructor vacio
+     */
     public Reserva() {
 
     }
 
+    /**
+     * Constructor completo
+     *
+     * @param fechaEvento
+     * @param idUsuario
+     * @param nombreCliente
+     * @param cantidadPersonasVegetariano
+     * @param cantidadPersonasClasico
+     * @param cantidadPersonasVegano
+     * @param cantidadPersonasDiabetico
+     * @param menus
+     * @param descripcion
+     * @param quiereBartender
+     */
     public Reserva(LocalDate fechaEvento, int idUsuario, String nombreCliente, int cantidadPersonasVegetariano,
         int cantidadPersonasClasico, int cantidadPersonasVegano, int cantidadPersonasDiabetico, ArrayList menus,
         String descripcion, boolean quiereBartender) {
