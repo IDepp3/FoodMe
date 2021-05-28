@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Scanner;
 
 
 /**
@@ -220,6 +221,18 @@ public class Empresa {
                     break;
             }
         }
+    }
+    //endregion
+
+    //region Menu Administrador
+    public void getMenuAdministrador(){
+
+    }
+    //endregion
+
+    //region Menu Cliente
+    public void getMenuCliente(){
+
     }
     //endregion
 

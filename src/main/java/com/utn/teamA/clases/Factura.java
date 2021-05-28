@@ -3,6 +3,8 @@ package com.utn.teamA.clases;
 import com.utn.teamA.clases.Cliente;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *  Clase Factura
@@ -13,7 +15,7 @@ public class Factura {
     private Cliente cliente;
     private Double precioFinal;
     private Empresa empresa;
-    private List<Menu> listaMenusSeleccionados;
+    private List<Menu> listaMenusSeleccionados = new ArrayList<Menu>();
 
     //region Constructores
     /**
