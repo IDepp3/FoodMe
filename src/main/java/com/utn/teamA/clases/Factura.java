@@ -1,4 +1,6 @@
-package com.utn.teamA.Modelo;
+package com.utn.teamA.clases;
+
+import com.utn.teamA.clases.Cliente;
 
 import java.time.LocalDate;
 
