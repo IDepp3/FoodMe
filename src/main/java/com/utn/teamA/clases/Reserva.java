@@ -57,14 +57,10 @@ public class Reserva {
      * @param descripcion
      * @param quiereBartender
      */
-    public Reserva(LocalDate fechaEvento, int idUsuario, String nombreCliente, int cantidadPersonasVegetariano,
-<<<<<<< HEAD:src/main/java/com/utn/teamA/clases/Reserva.java
-        int cantidadPersonasClasico, int cantidadPersonasVegano, int cantidadPersonasDiabetico, ArrayList menus,
+    public Reserva(LocalDate fechaEvento, int idUsuario, String nombreCliente,  int cantidadPersonasVegetariano,
+    int cantidadPersonasClasico, int cantidadPersonasVegano, int cantidadPersonasDiabetico, ArrayList menus,
         String descripcion, boolean quiereBartender) {
-=======
-                   int cantidadPersonasClasico, int cantidadPersonasVegano, int cantidadPersonasDiabetico, ArrayList menus,
-                   String descripcion, boolean quiereBartender) {
->>>>>>> Anto:src/main/java/com/utn/teamA/Modelo/Reserva.java
+
 
         this.fechaEvento = fechaEvento;
         this.idUsuario = idUsuario;
