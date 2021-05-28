@@ -19,7 +19,7 @@ public class App {
          * "San martin 2475","33333333", "wonderWoman@gmail.com",null );
          * unoUsuario.mostrar(); unoPersona.mostrar()
          */
-
+        // TODO Clase Menu y Tipo A trabajar: Jose
          new Empresa().iniciarSistema();
     }
 

@@ -216,6 +216,8 @@ public class Empresa {
     // endregion
 
     // region Menu Administrador
+    // TODO crear vistas del administrador A trabajar: Marco
+    // TODO administrar empleados A trabajar: Antonela
     public void getMenuAdministrador() {
 
     }
@@ -303,6 +305,7 @@ public class Empresa {
         }
     }
 
+    // TODO archivos modificar info personal cliente A Trabajar: Joaquin
     public void menuModificarDatos() {
         boolean resp = true;
         Scanner entradaScanner = new Scanner(System.in);
