@@ -1,23 +1,25 @@
-package com.utn.teamA.Modelo;
+package com.utn.teamA.clases;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/*
-* Clase Reserva
-* @Antonela
-* 24/5
-*
-*
+/**
+ * Clase Reserva
+ * @Antonela
+ * 24/5
+ *   La clase registra  una reserva
+ *   Chequea dias disponibles  para tal.
+ *
+ * *  @Antonela
  */
 
 public class Reserva {
 
     private static int idClase = 1;
     private int orderId;
-    private LocalDate fechaReserva;
-    private LocalDate fechaEvento;
+    private LocalDate fechaReserva; // Lo puedo hacer String
+    private LocalDate fechaEvento; // Lo puedo hacer String
     private int idUsuario;
     private String nombreCliente;
     private boolean status;
@@ -30,13 +32,48 @@ public class Reserva {
     private String descripcion;
     private Double costoTotal;
     private boolean quiereBartender;
-    private boolean quiereSushiman; // no es necesario porque no se le pregunta al cliente si quiere + SushiMan
+    private boolean quiereSushiman; // no es necesario porque nole preguntamos al cliente
+
 
     //region Constructor
+
+    /**
+     * Constructor vacio
+     */
     public Reserva() {
 
-
     }
+
+    /**
+     * Constructor completo
+     *
+     * @param fechaEvento
+     * @param idUsuario
+     * @param nombreCliente
+     * @param cantidadPersonasVegetariano
+     * @param cantidadPersonasClasico
+     * @param cantidadPersonasVegano
+     * @param cantidadPersonasDiabetico
+     * @param menus
+     * @param descripcion
+     * @param quiereBartender
+     */
+    public Reserva(LocalDate fechaEvento, int idUsuario, String nombreCliente, int cantidadPersonasVegetariano,
+                   int cantidadPersonasClasico, int cantidadPersonasVegano, int cantidadPersonasDiabetico, ArrayList menus,
+                   String descripcion, boolean quiereBartender) {
+
+        this.fechaEvento = fechaEvento;
+        this.idUsuario = idUsuario;
+        this.nombreCliente = nombreCliente;
+        this.cantidadPersonasVegetariano = cantidadPersonasVegetariano;
+        this.cantidadPersonasClasico = cantidadPersonasClasico;
+        this.cantidadPersonasVegano = cantidadPersonasVegano;
+        this.cantidadPersonasDiabetico = cantidadPersonasDiabetico;
+        this.menus = menus;
+        this.descripcion = descripcion;
+        this.quiereBartender = quiereBartender;
+    }
+    //endregion
 
     //region   Getters
     public static int getIdClase() {
