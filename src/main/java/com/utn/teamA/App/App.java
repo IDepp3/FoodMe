@@ -1,5 +1,6 @@
 package com.utn.teamA.App;
 
+<<<<<<< HEAD
 
 import com.utn.teamA.clases.Cliente;
 import com.utn.teamA.clases.Persona;
@@ -10,6 +11,12 @@ import java.time.LocalDate;
 public class App {
     
     public static void main(String[] args) {
+=======
+public class App {
+    
+    public static void main(String[] args) {
+
+>>>>>>> Anto
 
         System.out.println("Bienvenidos a FOODME");
         Usuario unoUsuario = new Cliente("BatMan", "Marble",LocalDate.of(1915,04,17),"2235249636", "Lamadrid 5475","666666666", "batman@hotmail.com",null);
