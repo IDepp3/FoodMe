@@ -55,6 +55,7 @@ public class Reserva {
         this.descripcion = descripcion;
         this.quiereBartender = quiereBartender;
     }
+    //endregion
 
     //region   Getters
     public static int getIdClase() {
