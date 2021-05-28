@@ -1,8 +1,7 @@
-package com.utn.teamA;
+package com.utn.teamA.clases;
 
 import java.time.LocalDate;
 
-import com.utn.teamA.Persona;
 
 public class Empleado extends Persona {
     
@@ -15,7 +14,7 @@ public class Empleado extends Persona {
         this.tipoEmpleado = tipoEmpleado;
         this.sueldo = sueldo;
     }
-    
+
     public Empleado(){
 
     }

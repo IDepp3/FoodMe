@@ -1,4 +1,4 @@
-package com.utn.teamA.Modelo;
+package com.utn.teamA.clases;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -33,13 +33,27 @@ public class Reserva {
     private Double costoTotal;
     private boolean quiereBartender;
     private boolean quiereSushiman; // no es necesario porque nole preguntamos al cliente
-    //CREAR CONSTANTE IVA
-    //CREAR CONSTANTE RENTABILIDAD
+
 
     //region Constructor
     public Reserva() {
 
+    }
 
+    public Reserva(LocalDate fechaEvento, int idUsuario, String nombreCliente, int cantidadPersonasVegetariano,
+        int cantidadPersonasClasico, int cantidadPersonasVegano, int cantidadPersonasDiabetico, ArrayList menus,
+        String descripcion, boolean quiereBartender) {
+
+        this.fechaEvento = fechaEvento;
+        this.idUsuario = idUsuario;
+        this.nombreCliente = nombreCliente;
+        this.cantidadPersonasVegetariano = cantidadPersonasVegetariano;
+        this.cantidadPersonasClasico = cantidadPersonasClasico;
+        this.cantidadPersonasVegano = cantidadPersonasVegano;
+        this.cantidadPersonasDiabetico = cantidadPersonasDiabetico;
+        this.menus = menus;
+        this.descripcion = descripcion;
+        this.quiereBartender = quiereBartender;
     }
 
     //region   Getters

@@ -1,0 +1,43 @@
+[33maece3c1[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{0}: checkout: moving from dev to main
+[33m8730055[m[33m ([m[1;31morigin/Anto[m[33m, [m[1;32mdev[m[33m, [m[1;32mAnto[m[33m)[m HEAD@{1}: checkout: moving from Anto to dev
+[33m8730055[m[33m ([m[1;31morigin/Anto[m[33m, [m[1;32mdev[m[33m, [m[1;32mAnto[m[33m)[m HEAD@{2}: checkout: moving from dev to Anto
+[33m694ec55[m HEAD@{3}: checkout: moving from main to dev
+[33maece3c1[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{4}: checkout: moving from dev to main
+[33m694ec55[m HEAD@{5}: checkout: moving from Anto to dev
+[33m8730055[m[33m ([m[1;31morigin/Anto[m[33m, [m[1;32mdev[m[33m, [m[1;32mAnto[m[33m)[m HEAD@{6}: pull: Merge made by the 'recursive' strategy.
+[33m835f6e8[m HEAD@{7}: commit: Clase Factura: cree la clase con atributos y metodos basicos. (anto)
+[33md066783[m HEAD@{8}: reset: moving to HEAD~1
+[33m8b74a9b[m HEAD@{9}: reset: moving to HEAD
+[33m8b74a9b[m HEAD@{10}: commit: Clase Empresa: Cree el metodo, Iniciar Sistema, que por ahora suplanta el Loguin
+[33md066783[m HEAD@{11}: commit: Clase Empresa: Cree el metodo, Iniciar Sistema, que por ahora suplanta el Loguin
+[33mfbca8ed[m HEAD@{12}: commit: Clase Empresa: Creee la estructura basica, atributos y metodos por defecto.(Anto)
+[33m3b34cc2[m HEAD@{13}: checkout: moving from dev to Anto
+[33m694ec55[m HEAD@{14}: pull: Merge made by the 'recursive' strategy.
+[33m3b34cc2[m HEAD@{15}: checkout: moving from Anto to dev
+[33m3b34cc2[m HEAD@{16}: checkout: moving from dev to Anto
+[33m5e56764[m HEAD@{17}: pull: Merge made by the 'recursive' strategy.
+[33meaea348[m HEAD@{18}: checkout: moving from Anto to dev
+[33m3b34cc2[m HEAD@{19}: commit: Clase reserva: metodos basicos
+[33m9e7ac23[m[33m ([m[1;32mReservas[m[33m)[m HEAD@{20}: checkout: moving from Reservas to Anto
+[33m9e7ac23[m[33m ([m[1;32mReservas[m[33m)[m HEAD@{21}: checkout: moving from dev to Reservas
+[33meaea348[m HEAD@{22}: pull: Fast-forward
+[33m3178883[m HEAD@{23}: checkout: moving from Reservas to dev
+[33m9e7ac23[m[33m ([m[1;32mReservas[m[33m)[m HEAD@{24}: commit: Antonela Reservas cambios en variables
+[33m771616a[m HEAD@{25}: commit: Antonela Cree la clase Reserva
+[33m3178883[m HEAD@{26}: checkout: moving from clases to Reservas
+[33m3178883[m HEAD@{27}: merge dev: Fast-forward
+[33m4e5590d[m HEAD@{28}: checkout: moving from dev to clases
+[33m3178883[m HEAD@{29}: pull: Fast-forward
+[33m4e5590d[m HEAD@{30}: checkout: moving from clases to dev
+[33m4e5590d[m HEAD@{31}: merge dev: Fast-forward
+[33m37f6d51[m HEAD@{32}: checkout: moving from dev to clases
+[33m4e5590d[m HEAD@{33}: commit (merge): saludo de anto con solucion de conflictos
+[33m37f6d51[m HEAD@{34}: merge clases: Fast-forward
+[33maece3c1[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{35}: checkout: moving from clases to dev
+[33m37f6d51[m HEAD@{36}: commit: saludo de anto
+[33maece3c1[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{37}: checkout: moving from dev to clases
+[33maece3c1[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{38}: checkout: moving from clases to dev
+[33maece3c1[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{39}: checkout: moving from main to clases
+[33maece3c1[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{40}: checkout: moving from dev to main
+[33maece3c1[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{41}: checkout: moving from main to dev
+[33maece3c1[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{42}: clone: from https://github.com/IDepp3/FoodMe.git
