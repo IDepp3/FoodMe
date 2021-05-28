@@ -156,10 +156,10 @@ public abstract class Persona extends Usuario {
     //endregion
 
     //region To String
-
+    // Si usamos usuario ahi si vamos a tener que poner  "Super.toString +" en el return
     @Override
     public String toString() {
-        return "Persona{" +
+        return  "Persona{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +

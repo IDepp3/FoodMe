@@ -1,8 +1,7 @@
-package com.utn.teamA.app;
+package com.utn.teamA.App;
 
 
 import com.utn.teamA.clases.Cliente;
-import com.utn.teamA.clases.Empleado;
 import com.utn.teamA.clases.Persona;
 import com.utn.teamA.clases.Usuario;
 

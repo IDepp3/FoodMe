@@ -73,7 +73,8 @@ public class Cliente extends Persona {
     //region To String
     @Override
     public String toString() {
-        return "Cliente{" +
+        return super.toString() +
+                "Cliente{" +
                 "reservas=" + reservas +
                 '}';
     }

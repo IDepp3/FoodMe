@@ -100,7 +100,7 @@ public class Empleado extends Persona {
     //region To String
     @Override
     public String toString() {
-        return " Empleado | Sueldo: " + sueldo + " Tipo empleado: " + tipoEmpleado;
+        return super.toString() + " Empleado | Sueldo: " + sueldo + " Tipo empleado: " + tipoEmpleado;
     }
     //endregion
 
