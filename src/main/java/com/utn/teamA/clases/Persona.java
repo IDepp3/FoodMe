@@ -7,7 +7,7 @@ import java.time.LocalDate;
  * Registra los datos de las personas
  * Cada vez que se intancia la clase se genera el id de la persona.
  *
- * @Marco
+ * @marco
  */
 
 public abstract class Persona extends Usuario {
