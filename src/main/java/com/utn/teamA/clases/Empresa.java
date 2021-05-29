@@ -218,12 +218,237 @@ public class Empresa {
     // region Menu Administrador
     // TODO crear vistas del administrador A trabajar: Marco
     // TODO administrar empleados A trabajar: Antonela
-    public void getMenuAdministrador() {
 
+    // region MENU ADMINISTRADOR
+
+    private void getMenuAdministrador() {
+       
+        Scanner entradaEscanner = new Scanner(System.in);
+        boolean respuesta = true;
+        
+        while (respuesta){
+            System.out.println("MENU ADMINISTRADOR");
+            System.out.println("");
+            System.out.println("1- Gestion de Personal");
+            System.out.println("2- Gestion de Reservas");
+            System.out.println("3- Gestion de Ventas");
+            System.out.println("4- Gestion de Stock");
+            System.out.println("0- Salir");
+            int seleccion;
+            try{
+                seleccion = entradaEscanner.nextInt();
+
+
+                switch(seleccion){
+
+                    case 0:
+                            respuesta = false;
+                    break;
+                    case 1:
+                        System.out.println("GESTION DE PERSONAL");
+                        getMenuGestionPersonal();
+                    break;
+                    case 2:
+                        System.out.println("GESTION DE RESERVAS");
+                        getMenuGestionReservas();
+                    break;
+                    case 3: 
+                        System.out.println("GESTION DE VENTAS");
+                        getMenuGestionVentas();
+                    break;
+                    case 4:
+                        System.out.println("GESTION DE STOCK");
+                        getMenuGestionStock();
+                    break;
+                    default:
+
+                    break;
+                }
+
+            }catch(InputMismatchException e){
+
+            }
+        }
     }
     // endregion
 
-    // region MENU CLIENTE
+     /* MENU PARA AÑADIR, ELIMINAR Y BUSCAR UN EMPLEADO.*/
+
+    private void getMenuGestionPersonal(){
+        Scanner entradaEscanner = new Scanner(System.in);
+        boolean resp = true;
+    
+        while (resp){
+
+            System.out.println("MENU GESTION DE PERSONAL");
+            System.out.println("");
+            System.out.println("1- Dar de alta un empleado");
+            System.out.println("2- Dar de baja un empleado");
+            System.out.println("3- Buscar un empleado");
+            System.out.println("0- Salir");
+            int seleccion;
+
+            try{
+                seleccion = entradaEscanner.nextInt();
+                switch(seleccion){
+                    case 0:
+                    resp = false;
+                    break;
+                    case 1:
+                        System.out.println("ACA DAMOS DE ALTA UN EMPLEADO.");
+                    break;
+                    case 2:
+                        System.out.println("ACA DAMOS DE BAJA UN EMPLEADO.");
+                    break;
+                    case 3:
+                    System.out.println("ACA BUSCAMOS UN EMPLEADO.");
+                    break;
+                    default:
+
+                    break;
+
+
+                }
+            }catch(InputMismatchException e){
+
+            }
+        }
+
+
+    }
+
+    private void getMenuGestionReservas(){
+        
+            Scanner entradaEscanner = new Scanner(System.in);
+            boolean resp = true;
+        
+            while (resp){
+    
+                System.out.println("MENU GESTION DE RESERVAS");
+                System.out.println("");
+                System.out.println("1- Dar de alta una reserva");
+                System.out.println("2- Dar de baja una reserva");
+                System.out.println("3- Buscar una reserva");
+                System.out.println("0- Salir");
+                int seleccion;
+    
+                try{
+                    seleccion = entradaEscanner.nextInt();
+                    switch(seleccion){
+                        case 0:
+                        resp = false;
+                        break;
+                        case 1:
+                            System.out.println("ACA DAMOS DE ALTA UNA RESERVA.");
+                        break;
+                        case 2:
+                            System.out.println("ACA DAMOS DE BAJA UNA RESERVA.");
+                        break;
+                        case 3:
+                        System.out.println("ACA BUSCAMOS UNA RESERVA");
+                        break;
+                        default:
+    
+                        break;
+    
+    
+                    }
+                }catch(InputMismatchException e){
+    
+                }
+            }
+    
+    
+        }
+    
+    private void getMenuGestionVentas(){
+            Scanner entradaEscanner = new Scanner(System.in);
+            boolean resp = true;
+        
+            while (resp){
+    
+                System.out.println("MENU GESTION DE VENTAS");
+                System.out.println("");
+                System.out.println("1- Dar de alta una venta");
+                System.out.println("2- Dar de baja una venta");
+                System.out.println("3- Buscar una venta");
+                System.out.println("0- Salir");
+                int seleccion;
+    
+                try{
+                    seleccion = entradaEscanner.nextInt();
+                    switch(seleccion){
+                        case 0:
+                        resp = false;
+                        break;
+                        case 1:
+                            System.out.println("ACA DAMOS DE ALTA UNA VENTA.");
+                        break;
+                        case 2:
+                            System.out.println("ACA DAMOS DE BAJA UNA VENTA.");
+                        break;
+                        case 3:
+                        System.out.println("ACA BUSCAMOS UNA VENTA.");
+                        break;
+                        default:
+    
+                        break;
+    
+    
+                    }
+                }catch(InputMismatchException e){
+    
+                }
+            }
+    
+    
+        }
+    
+    private void getMenuGestionStock(){
+            Scanner entradaEscanner = new Scanner(System.in);
+            boolean resp = true;
+        
+            while (resp){
+    
+                System.out.println("MENU GESTION DE STOCK");
+                System.out.println("");
+                System.out.println("1- Dar de alta un articulo");
+                System.out.println("2- Dar de baja un articulo");
+                System.out.println("3- Buscar un articulo");
+                System.out.println("0- Salir");
+                int seleccion;
+    
+                try{
+                    seleccion = entradaEscanner.nextInt();
+                    switch(seleccion){
+                        case 0:
+                        resp = false;
+                        break;
+                        case 1:
+                            System.out.println("ACA DAMOS DE ALTA UN ARTICULO.");
+                        break;
+                        case 2:
+                            System.out.println("ACA DAMOS DE BAJA UN ARTICULO");
+                        break;
+                        case 3:
+                        System.out.println("ACA BUSCAMOS UN ARTICULO");
+                        break;
+                        default:
+    
+                        break;
+    
+    
+                    }
+                }catch(InputMismatchException e){
+    
+                }
+            }
+    
+    
+        }
+    
+    
+        // region MENU CLIENTE
 
     private void getMenuCliente() {
         boolean resp = true;
