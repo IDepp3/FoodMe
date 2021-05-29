@@ -6,10 +6,10 @@ public interface ObtenerDatos<T> {
 
     // region Metodos
 
-    T obtenerRegistro(Object llave);
+    T obtenerRegistro(T t);
     List<T> obtenerRegistros();
     boolean actualizarRegistro(T t);
-    boolean borrarRegistro(Object llave);
+    boolean borrarRegistro(T t);
     boolean agregarRegistro(T t);
 
     // endregion

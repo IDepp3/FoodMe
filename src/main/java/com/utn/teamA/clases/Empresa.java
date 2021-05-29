@@ -10,6 +10,8 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+import com.utn.teamA.ConexionDatos.AccesoClientes;
+
 /**
  * Clase Empresa
  */
@@ -26,8 +28,14 @@ public class Empresa {
     private List<Reserva> listaReservas;
     private List<Menu> listaMenus;
     private List<Empleado> listaEmpleados;
+    private List<Cliente> clientes;
     // private List<Venta>listaHistorialVentas;
 
+    private Cliente cliente;
+
+    private AccesoClientes accesoClientes;
+
+    private Scanner scanner;
     // region Constructor
 
     /**
@@ -35,7 +43,10 @@ public class Empresa {
      *
      */
     public Empresa() {
-
+        this.cliente        = null;
+        this.accesoClientes = new AccesoClientes();
+        this.clientes       = this.accesoClientes.obtenerRegistros();
+        this.scanner        = new Scanner(System.in);
     }
 
     /**
@@ -57,6 +68,10 @@ public class Empresa {
         listaReservas = new ArrayList<Reserva>();
         listaEmpleados = new ArrayList<Empleado>();
         listaMenus = new ArrayList<Menu>();
+
+        this.cliente        = null;
+        this.accesoClientes = new AccesoClientes();
+        this.clientes       = this.accesoClientes.obtenerRegistros();
     }
 
     /**
@@ -84,6 +99,10 @@ public class Empresa {
         this.listaReservas = listaReservas;
         this.listaMenus = listaMenus;
         this.listaEmpleados = listaEmpleados;
+
+        this.cliente        = null;
+        this.accesoClientes = new AccesoClientes();
+        this.clientes       = this.accesoClientes.obtenerRegistros();
     }
     // endregion
 
@@ -206,7 +225,12 @@ public class Empresa {
                     getMenuAdministrador();
                     break;
                 case 2:
-                    getMenuCliente();
+                    this.cliente = new Cliente("Joaquin","Alvarez");
+                    this.cliente = this.accesoClientes.obtenerRegistro(this.cliente);
+                    if(this.cliente != null){
+                        getMenuCliente();
+                    }else
+                        System.out.println("El cliente no existe");
                     break;
                 case 0:
                     // guardar datos en archivos JSON?
@@ -488,6 +512,7 @@ public class Empresa {
         boolean resp = true;
         Scanner entradaEscaner = new Scanner(System.in);
         while (resp) {
+            System.out.println("Bienvenido " + this.cliente.getNombre() + " " + this.cliente.getApellido());
             System.out.println("MENU PRINCIPAL");
             System.out.println();
             System.out.println("1- Ver menus");
@@ -509,7 +534,6 @@ public class Empresa {
                         System.out.println("REALIZAR RESERVA");
                         break;
                     case 3:
-                        System.out.println("INFORMACION PERSONAL CON LA OPCION DE REALIZAR ALGUN CAMBIO EN SU PERFIL");
                         menuInformacionPersonal();
                         break;
                     default:
@@ -541,13 +565,13 @@ public class Empresa {
                         resp = false;
                         break;
                     case 1:
-                        System.out.println("MUESTRA LA INFORMACION PERSONAL ACTUAL");
+                        System.out.println(this.cliente);
                         break;
                     case 2:
                         menuModificarDatos();
                         break;
                     case 3:
-                        System.out.println("HISTORIAL PERSONAL DE COMPRAS");
+                        verHistorialCompras();
                         break;
                     case 4:
                         System.out.println("LISTA CON COMPRAS PENDIENTES AL DIA DE LA FECHA");
@@ -587,7 +611,9 @@ public class Empresa {
                         System.out.println("MODIFICAR PASS");
                         break;
                     case 2:
-                        System.out.println("MODIFICAR TELEFONO");
+                        String telefono = control(ingresaString());
+                        this.cliente.setTelefono(telefono);
+                        this.accesoClientes.actualizarRegistro(this.cliente);
                         break;
                     case 3:
                         System.out.println("MODIFICAR DIRECCION");
@@ -602,9 +628,50 @@ public class Empresa {
             } catch (InputMismatchException e) {
 
             }
+            this.clientes = accesoClientes.obtenerRegistros();
         }
     }
 
     // endregion
 
+    // region METODOS CLIENTES
+
+    private void verHistorialCompras(){
+        if(this.cliente.getReservas() == null)
+            System.out.println("Todavia no tenes reservas hechas");
+        else{
+            this.listaReservas = this.cliente.getReservas();
+            for(Reserva r : this.listaReservas){
+                System.out.println(r);
+            }
+        }
+    }
+
+    // endregion
+
+    // region Control de ingresos por teclado
+        private String control(String string){
+            boolean resp = true;
+            String cadena = string;
+            System.out.println("Telefono dentro de control" + cadena);
+            while(resp){
+                if(cadena.equals("")){
+                    cadena = ingresaString();
+                }else{
+                    resp = false;
+                }
+
+            }
+
+            return cadena;
+        }
+    // endregion
+
+    // region Ingresos por teclado
+        private String ingresaString(){
+            System.out.print("Ingresa numero de telefono : ");
+            String string = this.scanner.next();
+            return (string.trim().equals("")) ? "" : string;
+        }
+    // endregion
 }

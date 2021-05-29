@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.utn.teamA.ConexionDatos.testCliente;
+
 /**
  * Clase Cliente
  *
@@ -74,6 +76,18 @@ public class Cliente extends Persona {
     } */
     //endregion
 
+    // region Getters && Setters
+
+    public List<Reserva> getReservas() {
+        return reservas;
+    }
+
+    public void setReservas(List<Reserva> reservas) {
+        this.reservas = reservas;
+    }
+
+    // endregion
+
     //region To String
     @Override
     public String toString() {
@@ -83,6 +97,31 @@ public class Cliente extends Persona {
                 '}';
     }
     //endregion
+
+    // region equals
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj)
+            return true;
+        
+        if(obj instanceof Cliente){
+            Cliente c = (Cliente)obj;
+            if(this.getId().equals(c.getId()))
+                return true;
+        }
+
+        return false;
+    }
+
+    public boolean esIgual(Cliente cliente){
+        if(this == cliente)
+            return true;
+        
+        if(this.getNombre().equals(cliente.getNombre()) && this.getApellido().equals(cliente.getApellido()))
+            return true;
+
+        return false;
+    }
 
     //region Mostrar
 
