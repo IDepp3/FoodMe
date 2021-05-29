@@ -1,5 +1,8 @@
 package com.utn.teamA.clases;
 
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -222,11 +225,11 @@ public class Empresa {
     // region MENU ADMINISTRADOR
 
     private void getMenuAdministrador() {
-       
+
         Scanner entradaEscanner = new Scanner(System.in);
         boolean respuesta = true;
-        
-        while (respuesta){
+
+        while (respuesta) {
             System.out.println("MENU ADMINISTRADOR");
             System.out.println("");
             System.out.println("1- Gestion de Personal");
@@ -235,50 +238,52 @@ public class Empresa {
             System.out.println("4- Gestion de Stock");
             System.out.println("0- Salir");
             int seleccion;
-            try{
+            try {
                 seleccion = entradaEscanner.nextInt();
 
-
-                switch(seleccion){
+                switch (seleccion) {
 
                     case 0:
-                            respuesta = false;
-                    break;
+                        respuesta = false;
+                        break;
                     case 1:
                         System.out.println("GESTION DE PERSONAL");
                         getMenuGestionPersonal();
-                    break;
+                        break;
                     case 2:
                         System.out.println("GESTION DE RESERVAS");
                         getMenuGestionReservas();
-                    break;
-                    case 3: 
+                        break;
+                    case 3:
                         System.out.println("GESTION DE VENTAS");
                         getMenuGestionVentas();
-                    break;
+                        break;
                     case 4:
                         System.out.println("GESTION DE STOCK");
                         getMenuGestionStock();
-                    break;
+                        break;
                     default:
 
-                    break;
+                        break;
                 }
 
-            }catch(InputMismatchException e){
+            } catch (InputMismatchException e) {
 
             }
         }
     }
     // endregion
 
-     /* MENU PARA AÑADIR, ELIMINAR Y BUSCAR UN EMPLEADO.*/
+    /* MENU PARA AÑADIR, ELIMINAR Y BUSCAR UN EMPLEADO. */
 
-    private void getMenuGestionPersonal(){
+    private void getMenuGestionPersonal() {
         Scanner entradaEscanner = new Scanner(System.in);
         boolean resp = true;
-    
-        while (resp){
+        Empleado f = null;
+        int opcion = 0;
+        int op = 0;
+
+        while (resp) {
 
             System.out.println("MENU GESTION DE PERSONAL");
             System.out.println("");
@@ -288,167 +293,196 @@ public class Empresa {
             System.out.println("0- Salir");
             int seleccion;
 
-            try{
+            try {
                 seleccion = entradaEscanner.nextInt();
-                switch(seleccion){
+                switch (seleccion) {
                     case 0:
-                    resp = false;
-                    break;
+                        resp = false;
+                        break;
                     case 1:
-                        System.out.println("ACA DAMOS DE ALTA UN EMPLEADO.");
-                    break;
+                        System.out.println("\nIngrese un ID al empleado: ");
+                        int id = entradaEscanner.nextInt();
+                        System.out.print("\nIngrese el nombre del empleado: ");
+                        String nombre = entradaEscanner.next();
+                        System.out.print("\nIngrese el apellido del empleado: ");
+                        String apellido = entradaEscanner.next();
+                        System.out.print("\nIngrese el nacimiento del empleado: dd/MM/yyyy ");
+                        String fecha = entradaEscanner.next();
+                        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                        Date testDate = null;
+                        String date = fecha;
+                        testDate = df.parse(date);
+                        System.out.print("\nIngrese el numero de telefono: ");
+                        String telefono = entradaEscanner.next();
+                        System.out.print("\nIngrese la direccion: ");
+                        String direccion = entradaEscanner.next();
+                        entradaEscanner.next();
+                        System.out.print("\nIngrese dni del empleado: ");
+                        String dni = entradaEscanner.next();
+                        System.out.println("\nIngrese el email del empleado: ");
+                        String email = entradaEscanner.next();
+                        System.out.print("\nIngrese tipo del empleado");
+                        System.out.print("\n 4 - MOZO | 5 - BARTENDER | 6 - SUSHIMAN");
+                        op = entradaEscanner.nextInt();
+                        TipoEmpleado tipo = null;
+                        switch (op) {
+                            case 4:
+                                tipo = TipoEmpleado.MOZO;
+                                break;
+                            case 5:
+                                tipo = TipoEmpleado.BARTENDER;
+                                break;
+                        }
+                        System.out.print("\nIngrese sueldo del empleado: ");
+                        int sueldo = entradaEscanner.nextInt();
+
+                        f = new Empleado(id, nombre, apellido, fecha, telefono, direccion, dni, email,tipo,sueldo);
+                        System.out.println(f.toString());
+                        break;
+
                     case 2:
                         System.out.println("ACA DAMOS DE BAJA UN EMPLEADO.");
-                    break;
+                        break;
                     case 3:
-                    System.out.println("ACA BUSCAMOS UN EMPLEADO.");
-                    break;
+                        System.out.println("ACA BUSCAMOS UN EMPLEADO.");
+                        break;
                     default:
 
-                    break;
-
+                        break;
 
                 }
-            }catch(InputMismatchException e){
+            } catch (InputMismatchException | ParseException e) {
 
             }
         }
-
 
     }
 
-    private void getMenuGestionReservas(){
-        
-            Scanner entradaEscanner = new Scanner(System.in);
-            boolean resp = true;
-        
-            while (resp){
-    
-                System.out.println("MENU GESTION DE RESERVAS");
-                System.out.println("");
-                System.out.println("1- Dar de alta una reserva");
-                System.out.println("2- Dar de baja una reserva");
-                System.out.println("3- Buscar una reserva");
-                System.out.println("0- Salir");
-                int seleccion;
-    
-                try{
-                    seleccion = entradaEscanner.nextInt();
-                    switch(seleccion){
-                        case 0:
+    private void getMenuGestionReservas() {
+
+        Scanner entradaEscanner = new Scanner(System.in);
+        boolean resp = true;
+
+        while (resp) {
+
+            System.out.println("MENU GESTION DE RESERVAS");
+            System.out.println("");
+            System.out.println("1- Dar de alta una reserva");
+            System.out.println("2- Dar de baja una reserva");
+            System.out.println("3- Buscar una reserva");
+            System.out.println("0- Salir");
+            int seleccion;
+
+            try {
+                seleccion = entradaEscanner.nextInt();
+                switch (seleccion) {
+                    case 0:
                         resp = false;
                         break;
-                        case 1:
-                            System.out.println("ACA DAMOS DE ALTA UNA RESERVA.");
+                    case 1:
+                        System.out.println("ACA DAMOS DE ALTA UNA RESERVA.");
                         break;
-                        case 2:
-                            System.out.println("ACA DAMOS DE BAJA UNA RESERVA.");
+                    case 2:
+                        System.out.println("ACA DAMOS DE BAJA UNA RESERVA.");
                         break;
-                        case 3:
+                    case 3:
                         System.out.println("ACA BUSCAMOS UNA RESERVA");
                         break;
-                        default:
-    
+                    default:
+
                         break;
-    
-    
-                    }
-                }catch(InputMismatchException e){
-    
+
                 }
+            } catch (InputMismatchException e) {
+
             }
-    
-    
         }
-    
-    private void getMenuGestionVentas(){
-            Scanner entradaEscanner = new Scanner(System.in);
-            boolean resp = true;
-        
-            while (resp){
-    
-                System.out.println("MENU GESTION DE VENTAS");
-                System.out.println("");
-                System.out.println("1- Dar de alta una venta");
-                System.out.println("2- Dar de baja una venta");
-                System.out.println("3- Buscar una venta");
-                System.out.println("0- Salir");
-                int seleccion;
-    
-                try{
-                    seleccion = entradaEscanner.nextInt();
-                    switch(seleccion){
-                        case 0:
+
+    }
+
+    private void getMenuGestionVentas() {
+        Scanner entradaEscanner = new Scanner(System.in);
+        boolean resp = true;
+
+        while (resp) {
+
+            System.out.println("MENU GESTION DE VENTAS");
+            System.out.println("");
+            System.out.println("1- Dar de alta una venta");
+            System.out.println("2- Dar de baja una venta");
+            System.out.println("3- Buscar una venta");
+            System.out.println("0- Salir");
+            int seleccion;
+
+            try {
+                seleccion = entradaEscanner.nextInt();
+                switch (seleccion) {
+                    case 0:
                         resp = false;
                         break;
-                        case 1:
-                            System.out.println("ACA DAMOS DE ALTA UNA VENTA.");
+                    case 1:
+                        System.out.println("ACA DAMOS DE ALTA UNA VENTA.");
                         break;
-                        case 2:
-                            System.out.println("ACA DAMOS DE BAJA UNA VENTA.");
+                    case 2:
+                        System.out.println("ACA DAMOS DE BAJA UNA VENTA.");
                         break;
-                        case 3:
+                    case 3:
                         System.out.println("ACA BUSCAMOS UNA VENTA.");
                         break;
-                        default:
-    
+                    default:
+
                         break;
-    
-    
-                    }
-                }catch(InputMismatchException e){
-    
+
                 }
+            } catch (InputMismatchException e) {
+
             }
-    
-    
         }
-    
-    private void getMenuGestionStock(){
-            Scanner entradaEscanner = new Scanner(System.in);
-            boolean resp = true;
-        
-            while (resp){
-    
-                System.out.println("MENU GESTION DE STOCK");
-                System.out.println("");
-                System.out.println("1- Dar de alta un articulo");
-                System.out.println("2- Dar de baja un articulo");
-                System.out.println("3- Buscar un articulo");
-                System.out.println("0- Salir");
-                int seleccion;
-    
-                try{
-                    seleccion = entradaEscanner.nextInt();
-                    switch(seleccion){
-                        case 0:
+
+    }
+
+    private void getMenuGestionStock() {
+        Scanner entradaEscanner = new Scanner(System.in);
+        boolean resp = true;
+
+        while (resp) {
+
+            System.out.println("MENU GESTION DE STOCK");
+            System.out.println("");
+            System.out.println("1- Dar de alta un articulo");
+            System.out.println("2- Dar de baja un articulo");
+            System.out.println("3- Buscar un articulo");
+            System.out.println("0- Salir");
+            int seleccion;
+
+            try {
+                seleccion = entradaEscanner.nextInt();
+                switch (seleccion) {
+                    case 0:
                         resp = false;
                         break;
-                        case 1:
-                            System.out.println("ACA DAMOS DE ALTA UN ARTICULO.");
+                    case 1:
+                        System.out.println("ACA DAMOS DE ALTA UN ARTICULO.");
                         break;
-                        case 2:
-                            System.out.println("ACA DAMOS DE BAJA UN ARTICULO");
+                    case 2:
+                        System.out.println("ACA DAMOS DE BAJA UN ARTICULO");
                         break;
-                        case 3:
+                    case 3:
                         System.out.println("ACA BUSCAMOS UN ARTICULO");
                         break;
-                        default:
-    
+                    default:
+
                         break;
-    
-    
-                    }
-                }catch(InputMismatchException e){
-    
+
                 }
+            } catch (InputMismatchException e) {
+
             }
-    
-    
         }
-    
-    
-        // region MENU CLIENTE
+
+    }
+
+    // region MENU CLIENTE
 
     private void getMenuCliente() {
         boolean resp = true;

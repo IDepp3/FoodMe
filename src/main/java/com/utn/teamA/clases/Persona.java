@@ -15,7 +15,7 @@ public abstract class Persona extends Usuario {
     private int id;
     private String nombre;
     private String apellido;
-    private LocalDate fechaNacimiento;
+    private String fechaNacimiento;
     private String telefono;
     private String direccion;
     private String dni;
@@ -41,7 +41,7 @@ public abstract class Persona extends Usuario {
      * @param dni
      * @param email
      */
-    public Persona( String nombre, String apellido, LocalDate fechaNacimiento, String telefono, String direccion, String dni,
+    public Persona( String nombre, String apellido, String fechaNacimiento, String telefono, String direccion, String dni,
             String email) {
         this.id = getId();
         this.nombre = nombre;
@@ -66,7 +66,7 @@ public abstract class Persona extends Usuario {
      * @param dni
      * @param email
      */
-    public Persona(String username, String password, LocalDate fechaRegistro,String nombre, String apellido, LocalDate fechaNacimiento,
+    public Persona(String username, String password, LocalDate fechaRegistro,String nombre, String apellido, String fechaNacimiento,
                    String telefono, String direccion, String dni,
                    String email){
         super( username, password, fechaRegistro);
@@ -109,11 +109,11 @@ public abstract class Persona extends Usuario {
         this.apellido = apellido;
     }
 
-    public LocalDate getFechaNacimiento() {
+    public String getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(LocalDate fechaNacimiento) {
+    public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
