@@ -23,6 +23,10 @@ public class Empleado extends Persona {
 
     }
 
+    public Empleado(String nombre, String apellido){
+        super(nombre, apellido);
+    }
+
     /**
      * Constructor Empleado
      * @param tipoEmpleado

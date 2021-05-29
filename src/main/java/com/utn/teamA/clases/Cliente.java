@@ -32,6 +32,10 @@ public class Cliente extends Persona {
         reservas = lasReservas;
     }
 
+    public Cliente(String nombre, String apellido){
+        super(nombre, apellido);
+    }
+
     /**
      * Constructor Cliente + Persona
      * @param nombre
@@ -43,11 +47,11 @@ public class Cliente extends Persona {
      * @param email
      */
 
-    public Cliente(String nombre, String apellido, LocalDate fechaNacimiento, String telefono, String direccion,
+    /* public Cliente(String nombre, String apellido, LocalDate fechaNacimiento, String telefono, String direccion,
                     String dni,String email,List<Reserva> lasReservas){
         super(nombre,apellido,fechaNacimiento,telefono,direccion,dni,email );
         reservas = lasReservas;
-    }
+    } */
 
     /**
      * Constructor Cliente + Persona + Usuario para el Loguin
@@ -63,11 +67,11 @@ public class Cliente extends Persona {
      * @param email
      * @param lasReservas
      */
-    public Cliente(String username, String password, LocalDate fechaRegistro,String nombre, String apellido, LocalDate fechaNacimiento,
+    /* public Cliente(String username, String password, LocalDate fechaRegistro,String nombre, String apellido, LocalDate fechaNacimiento,
                    String telefono, String direccion, String dni, String email,List<Reserva> lasReservas){
         super(username, password, fechaRegistro, nombre,  apellido,  fechaNacimiento, telefono, direccion,  dni, email );
         reservas = lasReservas;
-    }
+    } */
     //endregion
 
     //region To String

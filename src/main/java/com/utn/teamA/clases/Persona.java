@@ -27,7 +27,13 @@ public abstract class Persona extends Usuario {
      * Constructor Vacio
      */
     public Persona(){
-        this.id = getId();
+        this.id = idClass++;
+    }
+
+    public Persona(String nombre, String apellido){
+        this.id = idClass++;
+        this.nombre   = nombre;
+        this.apellido = apellido;
     }
 
     /**
@@ -43,7 +49,7 @@ public abstract class Persona extends Usuario {
      */
     public Persona( String nombre, String apellido, String fechaNacimiento, String telefono, String direccion, String dni,
             String email) {
-        this.id = getId();
+        this.id = idClass++;
         this.nombre = nombre;
         this.apellido = apellido;
         this.fechaNacimiento = fechaNacimiento;
@@ -70,7 +76,7 @@ public abstract class Persona extends Usuario {
                    String telefono, String direccion, String dni,
                    String email){
         super( username, password, fechaRegistro);
-        this.id = getId();
+        this.id = idClass++;
         this.nombre = nombre;
         this.apellido = apellido;
         this.fechaNacimiento = fechaNacimiento;
@@ -176,12 +182,6 @@ public abstract class Persona extends Usuario {
 
     //region Mostrar
     public abstract void mostrar();
-    //endregion
-
-    //region Get Id
-    public int getIdClass(){
-        return id = idClass + 1;
-    }
     //endregion
 
 
