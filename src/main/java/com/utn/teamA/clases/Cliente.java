@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.utn.teamA.ConexionDatos.testCliente;
+
 
 /**
  * Clase Cliente
@@ -49,11 +49,11 @@ public class Cliente extends Persona {
      * @param email
      */
 
-    /* public Cliente(String nombre, String apellido, LocalDate fechaNacimiento, String telefono, String direccion,
+     public Cliente(String nombre, String apellido, LocalDate fechaNacimiento, String telefono, String direccion,
                     String dni,String email,List<Reserva> lasReservas){
         super(nombre,apellido,fechaNacimiento,telefono,direccion,dni,email );
         reservas = lasReservas;
-    } */
+    }
 
     /**
      * Constructor Cliente + Persona + Usuario para el Loguin
@@ -69,11 +69,13 @@ public class Cliente extends Persona {
      * @param email
      * @param lasReservas
      */
-    /* public Cliente(String username, String password, LocalDate fechaRegistro,String nombre, String apellido, LocalDate fechaNacimiento,
+    public Cliente(String username, String password, LocalDate fechaRegistro,String nombre, String apellido, LocalDate fechaNacimiento,
                    String telefono, String direccion, String dni, String email,List<Reserva> lasReservas){
         super(username, password, fechaRegistro, nombre,  apellido,  fechaNacimiento, telefono, direccion,  dni, email );
         reservas = lasReservas;
-    } */
+    }
+    //endregion
+
     //endregion
 
     // region Getters && Setters
@@ -98,7 +100,7 @@ public class Cliente extends Persona {
     }
     //endregion
 
-    // region equals
+    //region Equals
     @Override
     public boolean equals(Object obj) {
         if(this == obj)
@@ -122,6 +124,7 @@ public class Cliente extends Persona {
 
         return false;
     }
+    //endregion
 
     //region Mostrar
 
