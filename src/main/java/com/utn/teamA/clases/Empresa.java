@@ -225,9 +225,9 @@ public class Empresa {
                     getMenuAdministrador();
                     break;
                 case 2:
-                    this.cliente = new Cliente("Joaquin","Alvarez");
-                    
-                    this.cliente = this.accesoClientes.obtenerRegistro(this.cliente);
+                    this.accesoClientes.agregarRegistro(new Cliente("Horacio","Guarani"));
+                    this.clientes = this.accesoClientes.obtenerRegistros();
+                    this.cliente = this.clientes.get(0);
                     if(this.cliente != null){
                         getMenuCliente();
                     }else
@@ -606,7 +606,9 @@ public class Empresa {
                         resp = false;
                         break;
                     case 1:
-                        System.out.println("MODIFICAR PASS");
+                        String pass = control(ingresaString("Ingresa nueva contraseña : "));
+                        this.cliente.setPassword(pass);
+                        this.accesoClientes.actualizarRegistro(this.cliente);
                         break;
                     case 2:
                         String telefono = control(ingresaString("Ingresa nuevo numero de telefono : "));
@@ -615,9 +617,14 @@ public class Empresa {
                         break;
                     case 3:
                         String direccion = control(ingresaString("Ingresa nueva direccion : "));
+                        this.cliente.setDireccion(direccion);
+                        this.accesoClientes.actualizarRegistro(this.cliente);
                         break;
                     case 4:
                         System.out.println("MODIFICAR EMAIL");
+                        String email = control(ingresaString("Ingresa nuevo email : "));
+                        this.cliente.setEmail(email);
+                        this.accesoClientes.actualizarRegistro(this.cliente);
                         break;
                     default:
 
