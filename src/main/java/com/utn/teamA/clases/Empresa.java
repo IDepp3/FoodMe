@@ -324,8 +324,6 @@ public class Empresa {
                         resp = false;
                         break;
                     case 1:
-                        System.out.println("\nIngrese un ID al empleado: ");
-                        int id = entradaEscanner.nextInt();
                         System.out.print("\nIngrese el nombre del empleado: ");
                         String nombre = entradaEscanner.next();
                         System.out.print("\nIngrese el apellido del empleado: ");
