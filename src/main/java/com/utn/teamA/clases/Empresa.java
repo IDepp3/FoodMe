@@ -360,7 +360,7 @@ public class Empresa {
                         System.out.print("\nIngrese sueldo del empleado: ");
                         int sueldo = entradaEscanner.nextInt();
 
-                        f = new Empleado(id, nombre, apellido, fecha, telefono, direccion, dni, email,tipo,sueldo);
+                        f = new Empleado(id, nombre, apellido, LocalDate.parse(fecha), telefono, direccion, dni, email,tipo,sueldo);
                         System.out.println(f.toString());
                         break;
 

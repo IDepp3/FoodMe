@@ -1,6 +1,7 @@
 package com.utn.teamA.clases;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -50,7 +51,7 @@ public class Empleado extends Persona {
      * @param tipoEmpleado
      * @param sueldo
      */
-    public Empleado(int id, String nombre, String apellido, String fechaNacimiento, String telefono,
+    public Empleado(int id, String nombre, String apellido, LocalDate fechaNacimiento, String telefono,
             String direccion, String dni, String email, TipoEmpleado tipoEmpleado, double sueldo) {
         super( nombre, apellido, fechaNacimiento, telefono, direccion, dni, email);
         this.tipoEmpleado = tipoEmpleado;
@@ -71,7 +72,7 @@ public class Empleado extends Persona {
      * @param email
      * @param lasReservas
      */
-    public Empleado(String username, String password, LocalDate fechaRegistro, String nombre, String apellido, String fechaNacimiento,
+    public Empleado(String username, String password, LocalDate fechaRegistro, String nombre, String apellido, LocalDate fechaNacimiento,
                    String telefono, String direccion, String dni, String email, List<Reserva> lasReservas){
         super(username, password, fechaRegistro, nombre,  apellido,  fechaNacimiento, telefono, direccion,  dni, email );
         this.tipoEmpleado = tipoEmpleado;
@@ -105,7 +106,7 @@ public class Empleado extends Persona {
     @Override
     public String toString() {
         return " Empleado: " + " ID: " + super.getId() + " Nombre: " + super.getNombre() + " Apellido: "
-				+ super.getApellido() + " Nacimiento: " + super.getFechaNacimiento() + " Telefono: "
+				+ super.getApellido() + " Nacimiento: " + super.getFechaNacimiento().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + " Telefono: "
 				+ super.getTelefono() + " Direccion: " + super.getDireccion() + " Dni: " + super.getDni() + " Email: "
 				+ super.getEmail() + " Tipo: " + this.tipoEmpleado + " Sueldo: " + this.sueldo;
     }
