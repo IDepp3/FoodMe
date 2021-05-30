@@ -1,21 +1,22 @@
 package com.utn.teamA.clases;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 /**
  * Clase Abstracta Persona
  * Registra los datos de las personas
  * Cada vez que se intancia la clase se genera el id de la persona.
  *
- * @Marco
+ * @marco
  */
 
 public abstract class Persona extends Usuario {
-    private static int idClass =1;
-    private int id;
+    //private static int idClass =1;
+    private String id;
     private String nombre;
     private String apellido;
-    private LocalDate fechaNacimiento;
+    private String fechaNacimiento;
     private String telefono;
     private String direccion;
     private String dni;
@@ -27,7 +28,13 @@ public abstract class Persona extends Usuario {
      * Constructor Vacio
      */
     public Persona(){
-        this.id = getId();
+        this.id = UUID.randomUUID().toString().substring(0, 10).replace("-", "g");
+    }
+
+    public Persona(String nombre, String apellido){
+        this.id = UUID.randomUUID().toString().substring(0, 10).replace("-", "g");
+        this.nombre   = nombre;
+        this.apellido = apellido;
     }
 
     /**
@@ -41,9 +48,9 @@ public abstract class Persona extends Usuario {
      * @param dni
      * @param email
      */
-    public Persona( String nombre, String apellido, LocalDate fechaNacimiento, String telefono, String direccion, String dni,
+    public Persona( String nombre, String apellido, String fechaNacimiento, String telefono, String direccion, String dni,
             String email) {
-        this.id = getId();
+        this.id = UUID.randomUUID().toString().substring(0, 10).replace("-", "g");
         this.nombre = nombre;
         this.apellido = apellido;
         this.fechaNacimiento = fechaNacimiento;
@@ -66,11 +73,11 @@ public abstract class Persona extends Usuario {
      * @param dni
      * @param email
      */
-    public Persona(String username, String password, LocalDate fechaRegistro,String nombre, String apellido, LocalDate fechaNacimiento,
+    public Persona(String username, String password, LocalDate fechaRegistro,String nombre, String apellido, String fechaNacimiento,
                    String telefono, String direccion, String dni,
                    String email){
         super( username, password, fechaRegistro);
-        this.id = getId();
+        this.id = UUID.randomUUID().toString().substring(0, 10).replace("-", "g");
         this.nombre = nombre;
         this.apellido = apellido;
         this.fechaNacimiento = fechaNacimiento;
@@ -85,11 +92,11 @@ public abstract class Persona extends Usuario {
 
     //region Getters
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -109,11 +116,11 @@ public abstract class Persona extends Usuario {
         this.apellido = apellido;
     }
 
-    public LocalDate getFechaNacimiento() {
+    public String getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(LocalDate fechaNacimiento) {
+    public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
@@ -176,12 +183,6 @@ public abstract class Persona extends Usuario {
 
     //region Mostrar
     public abstract void mostrar();
-    //endregion
-
-    //region Get Id
-    public int getIdClass(){
-        return id = idClass + 1;
-    }
     //endregion
 
 

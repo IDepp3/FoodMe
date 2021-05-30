@@ -31,6 +31,7 @@ public abstract class Usuario{
      * @param fechaRegistro
      */
     public Usuario( String username, String password, LocalDate fechaRegistro) {
+
         this.username = username;
         this.password = password;
         this.fechaRegistro = LocalDate.now();

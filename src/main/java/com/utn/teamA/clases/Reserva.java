@@ -11,7 +11,6 @@ import java.util.Objects;
 *   La clase registra  una reserva
  *   Chequea dias disponibles  para tal.
  *
-* *  @Antonela
  */
 
 public class Reserva {
@@ -58,9 +57,10 @@ public class Reserva {
      * @param descripcion
      * @param quiereBartender
      */
-    public Reserva(LocalDate fechaEvento, int idUsuario, String nombreCliente, int cantidadPersonasVegetariano,
-        int cantidadPersonasClasico, int cantidadPersonasVegano, int cantidadPersonasDiabetico, ArrayList menus,
+    public Reserva(LocalDate fechaEvento, int idUsuario, String nombreCliente,  int cantidadPersonasVegetariano,
+    int cantidadPersonasClasico, int cantidadPersonasVegano, int cantidadPersonasDiabetico, ArrayList menus,
         String descripcion, boolean quiereBartender) {
+
 
         this.fechaEvento = fechaEvento;
         this.idUsuario = idUsuario;
