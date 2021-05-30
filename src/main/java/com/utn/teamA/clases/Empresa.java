@@ -226,6 +226,7 @@ public class Empresa {
                     break;
                 case 2:
                     this.cliente = new Cliente("Joaquin","Alvarez");
+                    
                     this.cliente = this.accesoClientes.obtenerRegistro(this.cliente);
                     if(this.cliente != null){
                         getMenuCliente();
@@ -510,7 +511,6 @@ public class Empresa {
 
     private void getMenuCliente() {
         boolean resp = true;
-        Scanner entradaEscaner = new Scanner(System.in);
         while (resp) {
             System.out.println("Bienvenido " + this.cliente.getNombre() + " " + this.cliente.getApellido());
             System.out.println("MENU PRINCIPAL");
@@ -521,7 +521,7 @@ public class Empresa {
             System.out.println("0- Salir");
             int opcion;
             try {
-                opcion = entradaEscaner.nextInt();
+                opcion = this.scanner.nextInt();
 
                 switch (opcion) {
                     case 0:
@@ -548,7 +548,6 @@ public class Empresa {
 
     private void menuInformacionPersonal() {
         boolean resp = true;
-        Scanner entradaEscaner = new Scanner(System.in);
         while (resp) {
             System.out.println("INFORMACION PERSONAL");
             System.out.println();
@@ -559,7 +558,7 @@ public class Empresa {
             System.out.println("0- Salir");
             int opcion;
             try {
-                opcion = entradaEscaner.nextInt();
+                opcion = this.scanner.nextInt();
                 switch (opcion) {
                     case 0:
                         resp = false;
@@ -591,7 +590,6 @@ public class Empresa {
     // TODO archivos modificar info personal cliente A Trabajar: Joaquin
     public void menuModificarDatos() {
         boolean resp = true;
-        Scanner entradaScanner = new Scanner(System.in);
         while (resp) {
             System.out.println("MODIFICAR INFORMACION PERSONAL");
             System.out.println();
@@ -602,7 +600,7 @@ public class Empresa {
             System.out.println("0- Salir");
             int opc;
             try {
-                opc = entradaScanner.nextInt();
+                opc = this.scanner.nextInt();
                 switch (opc) {
                     case 0:
                         resp = false;
@@ -611,12 +609,12 @@ public class Empresa {
                         System.out.println("MODIFICAR PASS");
                         break;
                     case 2:
-                        String telefono = control(ingresaString());
+                        String telefono = control(ingresaString("Ingresa nuevo numero de telefono : "));
                         this.cliente.setTelefono(telefono);
                         this.accesoClientes.actualizarRegistro(this.cliente);
                         break;
                     case 3:
-                        System.out.println("MODIFICAR DIRECCION");
+                        String direccion = control(ingresaString("Ingresa nueva direccion : "));
                         break;
                     case 4:
                         System.out.println("MODIFICAR EMAIL");
@@ -653,10 +651,9 @@ public class Empresa {
         private String control(String string){
             boolean resp = true;
             String cadena = string;
-            System.out.println("Telefono dentro de control" + cadena);
             while(resp){
                 if(cadena.equals("")){
-                    cadena = ingresaString();
+                    cadena = ingresaString("Ingresa numero de telefono valido : ");
                 }else{
                     resp = false;
                 }
@@ -668,8 +665,8 @@ public class Empresa {
     // endregion
 
     // region Ingresos por teclado
-        private String ingresaString(){
-            System.out.print("Ingresa numero de telefono : ");
+        private String ingresaString(String mensaje){
+            System.out.print(mensaje);
             String string = this.scanner.next();
             return (string.trim().equals("")) ? "" : string;
         }
