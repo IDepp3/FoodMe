@@ -12,6 +12,8 @@ import com.utn.teamA.ConexionDatos.AccesoClientes;
 import javax.swing.*;
 
 /**
+ *
+ *
  * Clase Empresa
  */
 
@@ -108,10 +110,19 @@ public class Empresa {
 
     // region Getters
 
+    /**
+     * Getter del String Nombre
+     * @return @String
+     *
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     *
+     * @return @String
+     */
     public String getDireccion() {
         return direccion;
     }
@@ -202,7 +213,7 @@ public class Empresa {
 
     // endregion
 
-    // region Iniciar Sistema
+    // region Menu Principal
 
     /**
      * iniciarSistema() Deberia cargar los archivos en los listas y mediante un menu
@@ -253,7 +264,6 @@ public class Empresa {
     // TODO crear vistas del administrador A trabajar: Marco
     // TODO administrar empleados A trabajar: Antonela
 
-    // region MENU ADMINISTRADOR
 
     private void getMenuAdministrador() {
 
@@ -303,10 +313,8 @@ public class Empresa {
                 getMenuAdministrador();
             }
         }
-    // endregion
 
-    /* MENU PARA AÑADIR, ELIMINAR Y BUSCAR UN EMPLEADO. */
-
+    //region Gestion de Personal
     private void getMenuGestionPersonal() {
         Scanner entradaEscanner = new Scanner(System.in);
         String resp = new String("si");
@@ -346,7 +354,9 @@ public class Empresa {
         }
 
     }
-    public void darAltaUnEmpleado() {
+
+    // region ABM Personal
+    public  void darAltaUnEmpleado() {
         Scanner entradaEscanner2 = new Scanner(System.in);
         Empleado empleado = null;
         int ope = 1;
@@ -422,7 +432,7 @@ public class Empresa {
                 }
 
             }
-            //empleado = new Empleado(nombre, apellido, fecha, telefono, direccion,dni, email,tipo,sueldo);
+            empleado = new Empleado(nombre, apellido, fecha, telefono, direccion,dni, email,tipo,sueldo);
             System.out.println("Se agrego exitosamente el empleado");
             }catch (DateTimeException e ) {
             System.out.println("Formato incorrecta. ReintenteDATE");
@@ -433,8 +443,12 @@ public class Empresa {
             }
 
         }
+    public void darDeBaja(){};
+    public void buscarEmpleado(){};
+    //endregion
+    //endregion
 
-
+    //region Gestion Reservas
     private void getMenuGestionReservas() {
 
         Scanner entradaEscanner = new Scanner(System.in);
@@ -477,6 +491,11 @@ public class Empresa {
 
     }
 
+    //region ABM
+    //endregion
+    //endregion
+
+    //region Ventas
     private void getMenuGestionVentas() {
         Scanner entradaEscanner = new Scanner(System.in);
         boolean resp = true;
@@ -518,6 +537,14 @@ public class Empresa {
 
     }
 
+    //region Ver Historial
+    //endregion
+    //region ABM
+    //endregion
+
+    //endregion
+
+    //region Stock
     private void getMenuGestionStock() {
         Scanner entradaEscanner = new Scanner(System.in);
         boolean resp = true;
@@ -559,8 +586,17 @@ public class Empresa {
 
     }
 
-    // region MENU CLIENTE
+    //region ABM
 
+    //endregion
+    //region Ver Stock
+    //endregion
+
+    //endregion
+
+    //endregion
+
+    //region Menu Cliente
     private void getMenuCliente() {
         boolean resp = true;
         Scanner entradaEscaner = new Scanner(System.in);
@@ -640,7 +676,6 @@ public class Empresa {
             }
         }
     }
-
     // TODO archivos modificar info personal cliente A Trabajar: Joaquin
     public void menuModificarDatos() {
         boolean resp = true;
@@ -684,10 +719,6 @@ public class Empresa {
             this.clientes = accesoClientes.obtenerRegistros();
         }
     }
-
-    // endregion
-
-    // region METODOS CLIENTES
 
     private void verHistorialCompras(){
         if(this.cliente.getReservas() == null)
