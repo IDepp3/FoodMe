@@ -1,6 +1,8 @@
 package com.utn.teamA.App;
 
+import com.utn.teamA.ConexionDatos.AccesoEmpleados;
 import com.utn.teamA.clases.Cliente;
+import com.utn.teamA.clases.Empleado;
 import com.utn.teamA.clases.Empresa;
 import com.utn.teamA.clases.Persona;
 import com.utn.teamA.clases.Usuario;
@@ -20,7 +22,16 @@ public class App {
          * unoUsuario.mostrar(); unoPersona.mostrar()
          */
         // TODO Clase Menu y Tipo A trabajar: Jose
-         new Empresa().iniciarSistema();
+        // new Empresa().iniciarSistema();
+
+        AccesoEmpleados ae = new AccesoEmpleados();
+
+        Empleado a = new Empleado("Marcos","Solari");
+
+        //ae.agregarRegistro(a);
+
+       ae.obtenerRegistro(a);
+
     }
 
 }
