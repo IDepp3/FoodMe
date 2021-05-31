@@ -22,15 +22,15 @@ public class App {
          * unoUsuario.mostrar(); unoPersona.mostrar()
          */
         // TODO Clase Menu y Tipo A trabajar: Jose
-        // new Empresa().iniciarSistema();
+         new Empresa().iniciarSistema();
 
-        AccesoEmpleados ae = new AccesoEmpleados();
+        // AccesoEmpleados ae = new AccesoEmpleados();
 
-        Empleado a = new Empleado("Marcos","Solari");
+        // Empleado a = new Empleado("Marcos","Solari");
 
         //ae.agregarRegistro(a);
 
-       ae.obtenerRegistro(a);
+       // ae.obtenerRegistro(a);
 
     }
 
