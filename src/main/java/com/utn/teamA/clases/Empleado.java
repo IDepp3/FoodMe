@@ -39,8 +39,7 @@ public class Empleado extends Persona {
     }
 
     /**
-     * Constructor Empleado completo + Persona
-     * @param id
+     * Constructor empleado + persona
      * @param nombre
      * @param apellido
      * @param fechaNacimiento
@@ -48,38 +47,15 @@ public class Empleado extends Persona {
      * @param direccion
      * @param dni
      * @param email
-     * @param tipoEmpleado
+     * @param tipo
      * @param sueldo
      */
-    public Empleado(int id, String nombre, String apellido, LocalDate fechaNacimiento, String telefono,
-            String direccion, String dni, String email, TipoEmpleado tipoEmpleado, double sueldo) {
-        super( nombre, apellido, fechaNacimiento, telefono, direccion, dni, email);
+    public Empleado( String nombre, String apellido, LocalDate fechaNacimiento,
+                   String telefono, String direccion, String dni, String email, TipoEmpleado tipo , Double sueldo){
+        super( nombre,  apellido,  fechaNacimiento, telefono, direccion,  dni, email );
         this.tipoEmpleado = tipoEmpleado;
         this.sueldo = sueldo;
     }
-
-    /**
-     * Constructor completo Empleado + Persona + Usuario para el Loguin
-     * @param username
-     * @param password
-     * @param fechaRegistro
-     * @param nombre
-     * @param apellido
-     * @param fechaNacimiento
-     * @param telefono
-     * @param direccion
-     * @param dni
-     * @param email
-     * @param lasReservas
-     */
-    public Empleado(String username, String password, LocalDate fechaRegistro, String nombre, String apellido, LocalDate fechaNacimiento,
-                   String telefono, String direccion, String dni, String email, List<Reserva> lasReservas){
-        super(username, password, fechaRegistro, nombre,  apellido,  fechaNacimiento, telefono, direccion,  dni, email );
-        this.tipoEmpleado = tipoEmpleado;
-        this.sueldo = sueldo;
-    }
-
-
     //endregion
 
     //region Getters
@@ -92,7 +68,7 @@ public class Empleado extends Persona {
     }
     //endregion
 
-    //region setter
+    //region Setter
     public void setTipoEmpleado(TipoEmpleado tipoEmpleado) {
         this.tipoEmpleado = tipoEmpleado;
     }
