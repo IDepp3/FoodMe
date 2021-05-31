@@ -10,7 +10,10 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-import com.utn.teamA.ConexionDatos.AccesoClientes;
+import com.utn.teamA.clases.*;
+
+import com.utn.teamA.ConexionDatos.*;
+
 
 /**
  * Clase Empresa
@@ -32,7 +35,9 @@ public class Empresa {
     // private List<Venta>listaHistorialVentas;
 
     private Cliente cliente;
+    private Empleado empleado;
 
+    private AccesoEmpleados accesoEmpleados;
     private AccesoClientes accesoClientes;
 
     private Scanner scanner;
@@ -44,7 +49,10 @@ public class Empresa {
      */
     public Empresa() {
         this.cliente        = null;
+        this.empleado   = null;
         this.accesoClientes = new AccesoClientes();
+        this.accesoEmpleados = new AccesoEmpleados();
+        this.listaEmpleados = this.accesoEmpleados.obtenerRegistros();
         this.clientes       = this.accesoClientes.obtenerRegistros();
         this.scanner        = new Scanner(System.in);
     }
@@ -72,6 +80,9 @@ public class Empresa {
         this.cliente        = null;
         this.accesoClientes = new AccesoClientes();
         this.clientes       = this.accesoClientes.obtenerRegistros();
+        this.empleado       = null;
+        this.accesoEmpleados = new AccesoEmpleados();
+        this.listaEmpleados = this.accesoEmpleados.obtenerRegistros();
     }
 
     /**
@@ -103,6 +114,9 @@ public class Empresa {
         this.cliente        = null;
         this.accesoClientes = new AccesoClientes();
         this.clientes       = this.accesoClientes.obtenerRegistros();
+        this.empleado       = null;
+        this.accesoEmpleados = new AccesoEmpleados();
+        this.listaEmpleados = this.accesoEmpleados.obtenerRegistros();
     }
     // endregion
 
@@ -363,6 +377,7 @@ public class Empresa {
 
                         f = new Empleado(id, nombre, apellido, fecha, telefono, direccion, dni, email,tipo,sueldo);
                         System.out.println(f.toString());
+                        accesoEmpleados.agregarRegistro(f);
                         break;
 
                     case 2:
