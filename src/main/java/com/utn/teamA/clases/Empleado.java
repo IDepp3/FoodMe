@@ -111,6 +111,16 @@ public class Empleado extends Persona {
     }
     //endregion
 
+    public boolean esIgual(Empleado empleado){
+        if(this == empleado)
+            return true;
+        
+        if(this.getNombre().equals(empleado.getNombre()) && this.getApellido().equals(empleado.getApellido()))
+            return true;
+
+        return false;
+    }
+
     //region Mostrar
     @Override
     public void mostrar() {
