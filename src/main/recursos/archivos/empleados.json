@@ -4,5 +4,17 @@
     "id": "d38e33f5g5",
     "nombre": "Marcos",
     "apellido": "Solari"
+  },
+  {
+    "tipoEmpleado": "BARTENDER",
+    "sueldo": 1500.0,
+    "id": "192f1d89ga",
+    "nombre": "Marcos",
+    "apellido": "ffdfs",
+    "fechaNacimiento": "28/03/1996",
+    "telefono": "54547845",
+    "direccion": "sicilia",
+    "dni": "5847512",
+    "email": "saadas@gmail.com"
   }
 ]

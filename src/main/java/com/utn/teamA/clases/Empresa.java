@@ -385,6 +385,12 @@ public class Empresa {
                         break;
                     case 3:
                         System.out.println("ACA BUSCAMOS UN EMPLEADO.");
+                        Empleado g = new Empleado("Marcelo","Solari");
+
+                        g = accesoEmpleados.obtenerRegistro(g);
+
+                        System.out.println(g);
+
                         break;
                     default:
 
