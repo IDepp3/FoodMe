@@ -121,6 +121,20 @@ public class Empleado extends Persona {
         return false;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj)
+            return true;
+        
+        if(obj instanceof Empleado){
+            Empleado e = (Empleado)obj;
+            if(this.getNombre().equals(e.getNombre()) && (this.getApellido().equals(e.getApellido())));
+                return true;
+        }
+
+        return false;
+    }
+
     //region Mostrar
     @Override
     public void mostrar() {

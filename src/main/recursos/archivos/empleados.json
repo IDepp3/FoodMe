@@ -1,20 +1,14 @@
 [
   {
-    "sueldo": 0.0,
-    "id": "d38e33f5g5",
-    "nombre": "Marcos",
-    "apellido": "Solari"
-  },
-  {
-    "tipoEmpleado": "BARTENDER",
+    "tipoEmpleado": "MOZO",
     "sueldo": 1500.0,
-    "id": "192f1d89ga",
+    "id": "3ef55e9dgc",
     "nombre": "Marcos",
-    "apellido": "ffdfs",
+    "apellido": "Solari",
     "fechaNacimiento": "28/03/1996",
-    "telefono": "54547845",
-    "direccion": "sicilia",
-    "dni": "5847512",
-    "email": "saadas@gmail.com"
+    "telefono": "4857462",
+    "direccion": "sicid",
+    "dni": "39587463",
+    "email": "markos@gmail.com"
   }
 ]

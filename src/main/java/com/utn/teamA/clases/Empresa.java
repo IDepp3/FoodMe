@@ -329,6 +329,7 @@ public class Empresa {
             System.out.println("1- Dar de alta un empleado");
             System.out.println("2- Dar de baja un empleado");
             System.out.println("3- Buscar un empleado");
+            System.out.println("4- Listar los empleados");
             System.out.println("0- Salir");
             int seleccion;
 
@@ -382,16 +383,24 @@ public class Empresa {
 
                     case 2:
                         System.out.println("ACA DAMOS DE BAJA UN EMPLEADO.");
+                        Empleado h = new Empleado("Marcos","Solari");
+                        boolean a = accesoEmpleados.borrarRegistro(h);
+                        if(a == true){
+                           System.out.println("El empleado fue dado de baja."); 
+                                                }else{
+                                                    System.out.println("El empleado no ha podido darse de baja.");
+                                                }
+
                         break;
                     case 3:
-                        System.out.println("ACA BUSCAMOS UN EMPLEADO.");
-                        Empleado g = new Empleado("Marcelo","Solari");
+                        System.out.println("\nACA BUSCAMOS UN EMPLEADO.");
+                        Empleado g = new Empleado("Marcos","Solari");
 
                         g = accesoEmpleados.obtenerRegistro(g);
-
-                        System.out.println(g);
-
                         break;
+                    case 4:
+                        System.out.println("\nACA LISTAMOS LOS EMPLEADOS");
+
                     default:
 
                         break;

@@ -35,10 +35,13 @@ public class AccesoEmpleados implements ObtenerDatos<Empleado>{
         while(!resp && i < empleados.size()){
             if(empleados.get(i).esIgual(t)){
                 empleado = empleados.get(i);
+                System.out.println("\nSe encontro un empleado: " + empleado);
                 resp = true;
             }
             i++;
+            
         }
+        
         return empleado;
     }
 
@@ -49,7 +52,7 @@ public class AccesoEmpleados implements ObtenerDatos<Empleado>{
         try {
             reader = new BufferedReader(new FileReader(this.url));
             // TODO a investigar recordar descomentar linea y comentar arregloALista();
-            //clientes = Arrays.asList(this.json.fromJson(reader, Cliente[].class));
+            //empleados = Arrays.asList(this.json.fromJson(reader, Empleado[].class));
             arregloALista(this.json.fromJson(reader, Empleado[].class), empleados);
             reader.close();
         } catch (FileNotFoundException e) {
