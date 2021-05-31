@@ -11,7 +11,7 @@ public class Ingrediente {
     private double precio;
 
     //TODO atributo prooveedor tiene que ser tipo Proveedor
-    private String proveedor;
+    private String proveedor = "---";
 
     //region constructores
     public Ingrediente() {
@@ -74,27 +74,37 @@ public class Ingrediente {
 
     @Override
     public String toString() {
-        return "Ingrediente{" +
-                "id='" + id + '\'' +
-                ", nombre='" + nombre + '\'' +
-                ", descripcion='" + descripcion + '\'' +
-                ", precio=" + precio +
-                ", proveedor='" + proveedor + '\'' +
-                '}';
+        return Color.ANSI_BLUE + "\n\t INGREDIENTE\n" +
+                Color.ANSI_CYAN + "Nombre:" + Color.ANSI_GREEN + nombre + '\n' +
+                Color.ANSI_CYAN + "Descripcion: " + Color.ANSI_GREEN + descripcion + '\n' +
+                Color.ANSI_CYAN + "Precio: " + Color.ANSI_GREEN + precio + '\n' +
+                Color.ANSI_CYAN + "Proveedor: " + Color.ANSI_GREEN + proveedor +
+                Color.ANSI_RESET + '\n';
     }
 
     public void crear(){
 
         Scanner teclado = new Scanner(System.in);
 
-        System.out.println("Ingrese nombre:");
-        this.nombre =  teclado.nextLine();
+        System.out.println(
+                Color.ANSI_BLUE +
+                "\n\n" +
+                " ----------------------------------------------------\n" +
+                "| \t\t N U E V O    I N G R E D I E N T E \t\t |\n" +
+                " ----------------------------------------------------" +
+                " \n\n" +
+                Color.ANSI_RESET);
 
-        System.out.println("Ingrese Descripcion:");
-        this.descripcion =  teclado.nextLine();
+        System.out.println(Color.ANSI_CYAN + "Ingrese nombre:" + Color.ANSI_RESET);
+        this.nombre =  Helpers.nextLine();
 
-        System.out.println("Ingrese precio:");
-        this.precio =  Helpers.nextDouble();
+        System.out.println(Color.ANSI_CYAN + "Ingrese Descripcion:" + Color.ANSI_RESET);
+        this.descripcion =  Helpers.nextLine();
+
+        System.out.println(Color.ANSI_CYAN + "Ingrese precio:" + Color.ANSI_RESET);
+        this.precio =  Helpers.validarDouble();
+
+        System.out.println( this );
 
     }
 }

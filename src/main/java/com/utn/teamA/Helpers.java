@@ -8,7 +8,25 @@ public class Helpers {
 
     public static String nextLine(){
         Scanner teclado = new Scanner(System.in);
-        return teclado.nextLine();
+        boolean esTextoVacio = false;
+        String texto = "";
+
+        do{
+            texto = teclado.nextLine();
+            if( texto.length() == 0){
+                esTextoVacio = true;
+                System.out.println(
+                    Color.ANSI_RED +
+                    "\n\t EL CAMPO NO PUEDE QUEDAR VACIO \n" +
+                    Color.ANSI_CYAN +
+                    "\nIngrese un dato:"
+                );
+            } else {
+                esTextoVacio = false;
+            }
+        }while(esTextoVacio);
+
+        return texto;
     }
 
     public static char charAt0(){
@@ -16,43 +34,47 @@ public class Helpers {
         return teclado.next().charAt(0);
     }
 
-    public static double nextDouble(){
 
+
+    public static double validarDouble() {
         Scanner teclado = new Scanner(System.in);
-        Double numero = 0.0;
-
-        try {
-            numero = teclado.nextDouble();
-        }catch (InputMismatchException e){
-            numero = 0.0;
-            System.out.println("El numero ingresado no es valido");
-        }
-
-        return numero;
-    }
-
-    private boolean isDouble(String numero) {
-        try {
-            Double.parseDouble(numero);
-            return true;
-        } catch (NumberFormatException nfe){
-            return false;
-        }
-    }
-
-    public Double validarDouble() {
-        Scanner leer = new Scanner(System.in);
         boolean esDouble = false;
-        double num = -1;
+        double num = 0;
         do {
-            String cadena = leer.nextLine();
+            String cadena = teclado.nextLine();
             try {
                 num = Double.parseDouble(cadena);
                 esDouble = true;
             } catch (NumberFormatException nfe) {
-                System.out.println("Escriba un numero");
+                System.out.println(
+                    Color.ANSI_RED +
+                    "\n\t [[ " + cadena + " ]] NO ES UN DATO VALIDO \n" +
+                    Color.ANSI_CYAN +
+                    "\nIngrese un numero:"
+                );
             }
         } while (!esDouble);
+        return num;
+    }
+
+    public static int validarInt() {
+        Scanner teclado = new Scanner(System.in);
+        boolean esInt = false;
+        int num = 0;
+        do {
+            String cadena = teclado.nextLine();
+            try {
+                num = Integer.parseInt(cadena);
+                esInt = true;
+            } catch (NumberFormatException nfe) {
+                System.out.println(
+                        Color.ANSI_RED +
+                                "\n\t [[ " + cadena + " ]] NO ES UN DATO VALIDO \n" +
+                                Color.ANSI_CYAN +
+                                "\nIngrese un numero:"
+                );
+            }
+        } while (!esInt);
         return num;
     }
 
