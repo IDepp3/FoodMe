@@ -16,7 +16,7 @@ public abstract class Persona extends Usuario {
     private String id;
     private String nombre;
     private String apellido;
-    private String fechaNacimiento;
+    private LocalDate fechaNacimiento;
     private String telefono;
     private String direccion;
     private String dni;
@@ -48,7 +48,7 @@ public abstract class Persona extends Usuario {
      * @param dni
      * @param email
      */
-    public Persona( String nombre, String apellido, String fechaNacimiento, String telefono, String direccion, String dni,
+    public Persona( String nombre, String apellido, LocalDate fechaNacimiento, String telefono, String direccion, String dni,
             String email) {
         this.id = UUID.randomUUID().toString().substring(0, 10).replace("-", "g");
         this.nombre = nombre;
@@ -73,7 +73,7 @@ public abstract class Persona extends Usuario {
      * @param dni
      * @param email
      */
-    public Persona(String username, String password, LocalDate fechaRegistro,String nombre, String apellido, String fechaNacimiento,
+    public Persona(String username, String password, LocalDate fechaRegistro,String nombre, String apellido, LocalDate fechaNacimiento,
                    String telefono, String direccion, String dni,
                    String email){
         super( username, password, fechaRegistro);
@@ -116,11 +116,11 @@ public abstract class Persona extends Usuario {
         this.apellido = apellido;
     }
 
-    public String getFechaNacimiento() {
+    public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(String fechaNacimiento) {
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 

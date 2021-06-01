@@ -1,26 +1,18 @@
 [
   {
     "tipoEmpleado": "MOZO",
-    "sueldo": 1500.0,
-    "id": "3ef55e9dgc",
+    "sueldo": 1500,
+    "id": "b5f38a76gf",
     "nombre": "Marcos",
     "apellido": "Solari",
-    "fechaNacimiento": "28/03/1996",
-    "telefono": "4857462",
-    "direccion": "sicid",
-    "dni": "39587463",
+    "fechaNacimiento": {
+      "year": 1996,
+      "month": 11,
+      "day": 20
+    },
+    "telefono": "4823659",
+    "direccion": "sicilia",
+    "dni": "38745826",
     "email": "markos@gmail.com"
-  },
-  {
-    "tipoEmpleado": "MOZO",
-    "sueldo": 1500.0,
-    "id": "c16276dagb",
-    "nombre": "Federico",
-    "apellido": "Alvarez",
-    "fechaNacimiento": "24/05/1990",
-    "telefono": "4523698",
-    "direccion": "Gascon",
-    "dni": "39591546",
-    "email": "jajsa@gmail.com"
   }
 ]

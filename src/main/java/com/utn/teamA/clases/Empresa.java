@@ -228,6 +228,7 @@ public class Empresa {
         @SuppressWarnings("resource") // el scanner no se cerro close.
         Scanner entradaEscaner = new Scanner(System.in);
         String seguir = "si";
+        try{
         while (seguir.equals("si")) {
             System.out.println("1- Administrador");
             System.out.println("2- Cliente");
@@ -252,8 +253,14 @@ public class Empresa {
                     System.out.println("Gracias por utilizar el sistema.\n Que tenga un buen dia!!!");
                     seguir = "no";
                     break;
+                    default:
+                    System.out.println("Numero incorrect. Reintente nuevamente: ");
             }
         }
+    }catch (Exception e){
+        System.out.println("Ingreso un tipo de dato incorrecto. Solo Numeros");
+        iniciarSistema();
+    }
     }
     // endregion
 
@@ -266,9 +273,9 @@ public class Empresa {
     private void getMenuAdministrador() {
 
         Scanner entradaEscanner = new Scanner(System.in);
-        boolean respuesta = true;
-
-        while (respuesta) {
+        String respuesta = new String("si");
+        try{
+        while (respuesta.equals("si")) {
             System.out.println("MENU ADMINISTRADOR");
             System.out.println("");
             System.out.println("1- Gestion de Personal");
@@ -277,13 +284,13 @@ public class Empresa {
             System.out.println("4- Gestion de Stock");
             System.out.println("0- Salir");
             int seleccion;
-            try {
+            
                 seleccion = entradaEscanner.nextInt();
 
                 switch (seleccion) {
 
                     case 0:
-                        respuesta = false;
+                        respuesta = "no";
                         break;
                     case 1:
                         System.out.println("GESTION DE PERSONAL");
@@ -306,9 +313,10 @@ public class Empresa {
                         break;
                 }
 
-            } catch (InputMismatchException e) {
-
-            }
+        } 
+        }catch (InputMismatchException e) {
+            System.out.println("Ingreso un tipo de dato incorrecto. Solo Numeros");
+            getMenuAdministrador();
         }
     }
     // endregion
@@ -344,12 +352,13 @@ public class Empresa {
                         String nombre = entradaEscanner.next();
                         System.out.print("\nIngrese el apellido del empleado: ");
                         String apellido = entradaEscanner.next();
-                        System.out.print("\nIngrese el nacimiento del empleado: dd/MM/yyyy ");
+                       /* System.out.print("\nIngrese el nacimiento del empleado: dd/MM/yyyy ");
                         String fecha = entradaEscanner.next();
                         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
                         Date testDate = null;
                         String date = fecha;
-                        testDate = df.parse(date);
+                        testDate = df.parse(date);*/
+                        LocalDate fecha = LocalDate.of(1996, 11, 20);
                         System.out.print("\nIngrese el numero de telefono: ");
                         String telefono = entradaEscanner.next();
                         System.out.print("\nIngrese la direccion: ");
@@ -392,7 +401,6 @@ public class Empresa {
                     case 3:
                         System.out.println("\nACA BUSCAMOS UN EMPLEADO.");
                         Empleado g = new Empleado("Marcos","Solari");
-
                         g = accesoEmpleados.obtenerRegistro(g);
                         break;
                     case 4:
@@ -405,7 +413,7 @@ public class Empresa {
                         break;
 
                 }
-            } catch (InputMismatchException | ParseException e) {
+            } catch (InputMismatchException e) {
 
             }
         }

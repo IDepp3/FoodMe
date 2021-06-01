@@ -50,7 +50,7 @@ public class Empleado extends Persona {
      * @param tipoEmpleado
      * @param sueldo
      */
-    public Empleado(String nombre, String apellido, String fechaNacimiento, String telefono,
+    public Empleado(String nombre, String apellido, LocalDate fechaNacimiento, String telefono,
             String direccion, String dni, String email, TipoEmpleado tipoEmpleado, int sueldo) {
         super( nombre, apellido, fechaNacimiento, telefono, direccion, dni, email);
         this.tipoEmpleado = tipoEmpleado;
@@ -71,7 +71,7 @@ public class Empleado extends Persona {
      * @param email
      * @param lasReservas
      */
-    public Empleado(String username, String password, LocalDate fechaRegistro, String nombre, String apellido, String fechaNacimiento,
+    public Empleado(String username, String password, LocalDate fechaRegistro, String nombre, String apellido, LocalDate fechaNacimiento,
                    String telefono, String direccion, String dni, String email, List<Reserva> lasReservas){
         super(username, password, fechaRegistro, nombre,  apellido,  fechaNacimiento, telefono, direccion,  dni, email );
         this.tipoEmpleado = tipoEmpleado;
