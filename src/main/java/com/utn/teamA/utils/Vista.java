@@ -5,6 +5,7 @@ public class Vista {
     
     // region metodos reutilizables
 
+    // TODO ver posible mejora
     public static void cartel(String mensaje){
         int cantidad = mensaje.length() + 16;
         System.out.println(Color.ANSI_BLUE);

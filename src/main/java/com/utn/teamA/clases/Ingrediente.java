@@ -3,6 +3,9 @@ package com.utn.teamA.clases;
 import java.util.Scanner;
 import java.util.UUID;
 
+import com.utn.teamA.helpers.Color;
+import com.utn.teamA.helpers.Helpers;
+
 public class Ingrediente {
 
     private String id;
