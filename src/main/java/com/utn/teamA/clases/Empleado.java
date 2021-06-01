@@ -74,8 +74,7 @@ public class Empleado extends Persona {
     public Empleado(String username, String password, LocalDate fechaRegistro, String nombre, String apellido, LocalDate fechaNacimiento,
                    String telefono, String direccion, String dni, String email, List<Reserva> lasReservas){
         super(username, password, fechaRegistro, nombre,  apellido,  fechaNacimiento, telefono, direccion,  dni, email );
-        this.tipoEmpleado = tipoEmpleado;
-        this.sueldo = sueldo;
+        
     }
 
 

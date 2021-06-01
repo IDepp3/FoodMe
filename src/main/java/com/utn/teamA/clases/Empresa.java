@@ -14,6 +14,7 @@ import com.utn.teamA.clases.*;
 
 import com.utn.teamA.ConexionDatos.*;
 
+import com.utn.teamA.clases.Cliente;
 
 /**
  * Clase Empresa
