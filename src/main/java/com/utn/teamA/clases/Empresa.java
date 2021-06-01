@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.utn.teamA.clases.*;
-
+import com.utn.teamA.helpers.Helpers;
+import com.utn.teamA.helpers.Vista;
 import com.utn.teamA.ConexionDatos.*;
-
 
 /**
  * Clase Empresa
@@ -48,13 +48,13 @@ public class Empresa {
      *
      */
     public Empresa() {
-        this.cliente        = null;
-        this.empleado   = null;
+        this.cliente = null;
+        this.empleado = null;
         this.accesoClientes = new AccesoClientes();
         this.accesoEmpleados = new AccesoEmpleados();
         this.listaEmpleados = this.accesoEmpleados.obtenerRegistros();
-        this.clientes       = this.accesoClientes.obtenerRegistros();
-        this.scanner        = new Scanner(System.in);
+        this.clientes = this.accesoClientes.obtenerRegistros();
+        this.scanner = new Scanner(System.in);
     }
 
     /**
@@ -77,10 +77,10 @@ public class Empresa {
         listaEmpleados = new ArrayList<Empleado>();
         listaMenus = new ArrayList<Menu>();
 
-        this.cliente        = null;
+        this.cliente = null;
         this.accesoClientes = new AccesoClientes();
-        this.clientes       = this.accesoClientes.obtenerRegistros();
-        this.empleado       = null;
+        this.clientes = this.accesoClientes.obtenerRegistros();
+        this.empleado = null;
         this.accesoEmpleados = new AccesoEmpleados();
         this.listaEmpleados = this.accesoEmpleados.obtenerRegistros();
     }
@@ -111,10 +111,10 @@ public class Empresa {
         this.listaMenus = listaMenus;
         this.listaEmpleados = listaEmpleados;
 
-        this.cliente        = null;
+        this.cliente = null;
         this.accesoClientes = new AccesoClientes();
-        this.clientes       = this.accesoClientes.obtenerRegistros();
-        this.empleado       = null;
+        this.clientes = this.accesoClientes.obtenerRegistros();
+        this.empleado = null;
         this.accesoEmpleados = new AccesoEmpleados();
         this.listaEmpleados = this.accesoEmpleados.obtenerRegistros();
     }
@@ -239,12 +239,12 @@ public class Empresa {
                     getMenuAdministrador();
                     break;
                 case 2:
-                    this.accesoClientes.agregarRegistro(new Cliente("Horacio","Guarani"));
+                    this.accesoClientes.agregarRegistro(new Cliente("Horacio", "Guarani"));
                     this.clientes = this.accesoClientes.obtenerRegistros();
                     this.cliente = this.clientes.get(0);
-                    if(this.cliente != null){
+                    if (this.cliente != null) {
                         getMenuCliente();
-                    }else
+                    } else
                         System.out.println("El cliente no existe");
                     break;
                 case 0:
@@ -375,7 +375,7 @@ public class Empresa {
                         System.out.print("\nIngrese sueldo del empleado: ");
                         int sueldo = entradaEscanner.nextInt();
 
-                        f = new Empleado(id, nombre, apellido, fecha, telefono, direccion, dni, email,tipo,sueldo);
+                        f = new Empleado(id, nombre, apellido, fecha, telefono, direccion, dni, email, tipo, sueldo);
                         System.out.println(f.toString());
                         accesoEmpleados.agregarRegistro(f);
                         break;
@@ -526,128 +526,101 @@ public class Empresa {
 
     private void getMenuCliente() {
         boolean resp = true;
+        int opcion;
         while (resp) {
-            System.out.println("Bienvenido " + this.cliente.getNombre() + " " + this.cliente.getApellido());
-            System.out.println("MENU PRINCIPAL");
-            System.out.println();
-            System.out.println("1- Ver menus");
-            System.out.println("2- Hacer reserva");
-            System.out.println("3- Informacion personal");
-            System.out.println("0- Salir");
-            int opcion;
-            try {
-                opcion = this.scanner.nextInt();
+            Vista.cartel("Menu Principal");
+            //Vista.cabeceraMenu("Menu Principal");
+            Vista.menuPrincipal();
+            opcion = Helpers.validarInt();
 
-                switch (opcion) {
-                    case 0:
-                        resp = false;
-                        break;
-                    case 1:
-                        System.out.println("VISTA DE LOS MENUS DISPONIBLES");
-                        break;
-                    case 2:
-                        System.out.println("REALIZAR RESERVA");
-                        break;
-                    case 3:
-                        menuInformacionPersonal();
-                        break;
-                    default:
-
-                        break;
-                }
-            } catch (InputMismatchException e) {
-
+            switch (opcion) {
+                case 0:
+                    resp = false;
+                    break;
+                case 1:
+                    System.out.println("VISTA DE LOS MENUS DISPONIBLES");
+                    break;
+                case 2:
+                    System.out.println("REALIZAR RESERVA");
+                    break;
+                case 3:
+                    menuInformacionPersonal();
+                    break;
+                default:
+                    Vista.opcionIncorrecta(opcion);
+                    break;
             }
         }
     }
 
     private void menuInformacionPersonal() {
         boolean resp = true;
+        int opcion;
         while (resp) {
-            System.out.println("INFORMACION PERSONAL");
-            System.out.println();
-            System.out.println("1- Ver informacion personal");
-            System.out.println("2- Modificar informacion");
-            System.out.println("3- Historial de compras");
-            System.out.println("4- Reservas pendientes");
-            System.out.println("0- Salir");
-            int opcion;
-            try {
-                opcion = this.scanner.nextInt();
-                switch (opcion) {
-                    case 0:
-                        resp = false;
-                        break;
-                    case 1:
-                        System.out.println(this.cliente);
-                        break;
-                    case 2:
-                        menuModificarDatos();
-                        break;
-                    case 3:
-                        verHistorialCompras();
-                        break;
-                    case 4:
-                        System.out.println("LISTA CON COMPRAS PENDIENTES AL DIA DE LA FECHA");
-                        System.out.println(
-                                "Si es existe algun pedido se le puede dar la opcion que modifique algo de la reserva realizada");
-                        break;
-                    default:
+            Vista.cartel("Informacion Personal");
+            //Vista.cabeceraMenu("Informacion Personal");
+            Vista.informacionPersonal();
+            opcion = Helpers.validarInt();
 
-                        break;
-                }
-            } catch (InputMismatchException e) {
-
+            switch (opcion) {
+                case 0:
+                    resp = false;
+                    break;
+                case 1:
+                    System.out.println(this.cliente);
+                    break;
+                case 2:
+                    menuModificarDatos();
+                    break;
+                case 3:
+                    verHistorialCompras();
+                    break;
+                case 4:
+                    System.out.println("LISTA CON COMPRAS PENDIENTES AL DIA DE LA FECHA");
+                    System.out.println(
+                            "Si es existe algun pedido se le puede dar la opcion que modifique algo de la reserva realizada");
+                    break;
+                default:
+                    Vista.opcionIncorrecta(opcion);
+                    break;
             }
+
         }
     }
 
-    // TODO archivos modificar info personal cliente A Trabajar: Joaquin
     public void menuModificarDatos() {
         boolean resp = true;
+        int opcion;
+        String aux;
         while (resp) {
-            System.out.println("MODIFICAR INFORMACION PERSONAL");
-            System.out.println();
-            System.out.println("1- Modificar contraseña");
-            System.out.println("2- Modificar telefono");
-            System.out.println("3- Modificar direccion");
-            System.out.println("4- Modificar email");
-            System.out.println("0- Salir");
-            int opc;
-            try {
-                opc = this.scanner.nextInt();
-                switch (opc) {
-                    case 0:
-                        resp = false;
-                        break;
-                    case 1:
-                        String pass = control(ingresaString("Ingresa nueva contraseña : "));
-                        this.cliente.setPassword(pass);
-                        this.accesoClientes.actualizarRegistro(this.cliente);
-                        break;
-                    case 2:
-                        String telefono = control(ingresaString("Ingresa nuevo numero de telefono : "));
-                        this.cliente.setTelefono(telefono);
-                        this.accesoClientes.actualizarRegistro(this.cliente);
-                        break;
-                    case 3:
-                        String direccion = control(ingresaString("Ingresa nueva direccion : "));
-                        this.cliente.setDireccion(direccion);
-                        this.accesoClientes.actualizarRegistro(this.cliente);
-                        break;
-                    case 4:
-                        System.out.println("MODIFICAR EMAIL");
-                        String email = control(ingresaString("Ingresa nuevo email : "));
-                        this.cliente.setEmail(email);
-                        this.accesoClientes.actualizarRegistro(this.cliente);
-                        break;
-                    default:
+            Vista.cartel("Modificar datos");
+            Vista.modificarInformacionPersonal();
+            opcion = Helpers.validarInt();
 
-                        break;
-                }
-            } catch (InputMismatchException e) {
-
+            switch (opcion) {
+                case 0:
+                    resp = false;
+                    break;
+                case 1:
+                    aux = Helpers.nextLine();
+                    this.cliente.setPassword(aux);
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    Vista.cartel("Ingrese fecha formato dd/mm/aaaa");
+                    break;
+                case 4:
+                    Vista.cartel("Ingrese numero de celular sin 0 ni 15");
+                    aux = Helpers.validarTelefono();
+                    this.cliente.setTelefono(aux);
+                    Vista.opcionCorrecta("Telefono modificado correctamente");
+                    break;
+                default:
+                    Vista.opcionIncorrecta(opcion);
+                    break;
             }
+            this.accesoClientes.actualizarRegistro(this.cliente);
             this.clientes = accesoClientes.obtenerRegistros();
         }
     }
@@ -656,12 +629,12 @@ public class Empresa {
 
     // region METODOS CLIENTES
 
-    private void verHistorialCompras(){
-        if(this.cliente.getReservas() == null)
+    private void verHistorialCompras() {
+        if (this.cliente.getReservas() == null)
             System.out.println("Todavia no tenes reservas hechas");
-        else{
+        else {
             this.listaReservas = this.cliente.getReservas();
-            for(Reserva r : this.listaReservas){
+            for (Reserva r : this.listaReservas) {
                 System.out.println(r);
             }
         }
@@ -669,28 +642,4 @@ public class Empresa {
 
     // endregion
 
-    // region Control de ingresos por teclado
-        private String control(String string){
-            boolean resp = true;
-            String cadena = string;
-            while(resp){
-                if(cadena.equals("")){
-                    cadena = ingresaString("Ingresa numero de telefono valido : ");
-                }else{
-                    resp = false;
-                }
-
-            }
-
-            return cadena;
-        }
-    // endregion
-
-    // region Ingresos por teclado
-        private String ingresaString(String mensaje){
-            System.out.print(mensaje);
-            String string = this.scanner.next();
-            return (string.trim().equals("")) ? "" : string;
-        }
-    // endregion
 }

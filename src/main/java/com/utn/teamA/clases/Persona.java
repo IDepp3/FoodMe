@@ -12,7 +12,7 @@ import java.util.UUID;
  */
 
 public abstract class Persona extends Usuario {
-    //private static int idClass =1;
+    
     private String id;
     private String nombre;
     private String apellido;
