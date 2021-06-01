@@ -340,8 +340,6 @@ public class Empresa {
                         resp = false;
                         break;
                     case 1:
-                        System.out.println("\nIngrese un ID al empleado: ");
-                        int id = entradaEscanner.nextInt();
                         System.out.print("\nIngrese el nombre del empleado: ");
                         String nombre = entradaEscanner.next();
                         System.out.print("\nIngrese el apellido del empleado: ");
@@ -376,21 +374,20 @@ public class Empresa {
                         System.out.print("\nIngrese sueldo del empleado: ");
                         int sueldo = entradaEscanner.nextInt();
 
-                        f = new Empleado(id, nombre, apellido, fecha, telefono, direccion, dni, email,tipo,sueldo);
+                        f = new Empleado(nombre, apellido, fecha, telefono, direccion, dni, email,tipo,sueldo);
                         System.out.println(f.toString());
                         accesoEmpleados.agregarRegistro(f);
                         break;
 
                     case 2:
-                        System.out.println("ACA DAMOS DE BAJA UN EMPLEADO.");
+                        System.out.println("DAMOS DE BAJA UN EMPLEADO.");
                         Empleado h = new Empleado("Marcos","Solari");
                         boolean a = accesoEmpleados.borrarRegistro(h);
                         if(a == true){
                            System.out.println("El empleado fue dado de baja."); 
-                                                }else{
-                                                    System.out.println("El empleado no ha podido darse de baja.");
-                                                }
-
+                        }else{
+                            System.out.println("El empleado no ha podido darse de baja.");
+                        }
                         break;
                     case 3:
                         System.out.println("\nACA BUSCAMOS UN EMPLEADO.");
@@ -400,7 +397,9 @@ public class Empresa {
                         break;
                     case 4:
                         System.out.println("\nACA LISTAMOS LOS EMPLEADOS");
-
+                        List<Empleado> listaEmpleado = null;
+                        listaEmpleado = accesoEmpleados.obtenerRegistros();
+                        System.out.println(listaEmpleado);
                     default:
 
                         break;

@@ -12,7 +12,7 @@ import java.util.List;
 public class Empleado extends Persona {
     
     private TipoEmpleado tipoEmpleado;
-    private double sueldo;
+    private int sueldo;
 
     //region Constructores
 
@@ -32,7 +32,7 @@ public class Empleado extends Persona {
      * @param tipoEmpleado
      * @param sueldo
      */
-    public Empleado(TipoEmpleado tipoEmpleado, double sueldo){
+    public Empleado(TipoEmpleado tipoEmpleado, int sueldo){
         this.tipoEmpleado = tipoEmpleado;
         this.sueldo = sueldo;
     }
@@ -50,8 +50,8 @@ public class Empleado extends Persona {
      * @param tipoEmpleado
      * @param sueldo
      */
-    public Empleado(int id, String nombre, String apellido, String fechaNacimiento, String telefono,
-            String direccion, String dni, String email, TipoEmpleado tipoEmpleado, double sueldo) {
+    public Empleado(String nombre, String apellido, String fechaNacimiento, String telefono,
+            String direccion, String dni, String email, TipoEmpleado tipoEmpleado, int sueldo) {
         super( nombre, apellido, fechaNacimiento, telefono, direccion, dni, email);
         this.tipoEmpleado = tipoEmpleado;
         this.sueldo = sueldo;
@@ -86,7 +86,7 @@ public class Empleado extends Persona {
         return tipoEmpleado;
     }
 
-    public double getSueldo() {
+    public int getSueldo() {
         return sueldo;
     }
     //endregion
@@ -96,7 +96,7 @@ public class Empleado extends Persona {
         this.tipoEmpleado = tipoEmpleado;
     }
 
-    public void setSueldo(double sueldo) {
+    public void setSueldo(int sueldo) {
         this.sueldo = sueldo;
     }
     //endregion
@@ -104,10 +104,10 @@ public class Empleado extends Persona {
     //region To String
     @Override
     public String toString() {
-        return " Empleado: " + " ID: " + super.getId() + " Nombre: " + super.getNombre() + " Apellido: "
-				+ super.getApellido() + " Nacimiento: " + super.getFechaNacimiento() + " Telefono: "
-				+ super.getTelefono() + " Direccion: " + super.getDireccion() + " Dni: " + super.getDni() + " Email: "
-				+ super.getEmail() + " Tipo: " + this.tipoEmpleado + " Sueldo: " + this.sueldo;
+        return  "[Empleado |ID: " + super.getId() + " |Nombre: " + super.getNombre() + " |Apellido: "
+				+ super.getApellido() + " |Nacimiento: " + super.getFechaNacimiento() + " |Telefono: "
+				+ super.getTelefono() + " |Direccion: " + super.getDireccion() + " |Dni: " + super.getDni() + " |Email: "
+				+ super.getEmail() + " |Tipo: " + this.tipoEmpleado + " |Sueldo: " + this.sueldo + "]";
     }
     //endregion
 
