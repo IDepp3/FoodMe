@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.utn.teamA.clases.*;
-import com.utn.teamA.helpers.Helpers;
-import com.utn.teamA.helpers.Vista;
+import com.utn.teamA.utils.Helpers;
+import com.utn.teamA.utils.Vista;
 import com.utn.teamA.ConexionDatos.*;
 
 /**
@@ -528,7 +528,7 @@ public class Empresa {
         boolean resp = true;
         int opcion;
         while (resp) {
-            Vista.cartel("Menu Principal");
+            Vista.titulo("Menu Principal");
             //Vista.cabeceraMenu("Menu Principal");
             Vista.menuPrincipal();
             opcion = Helpers.validarInt();
@@ -557,7 +557,7 @@ public class Empresa {
         boolean resp = true;
         int opcion;
         while (resp) {
-            Vista.cartel("Informacion Personal");
+            Vista.titulo("Informacion Personal");
             //Vista.cabeceraMenu("Informacion Personal");
             Vista.informacionPersonal();
             opcion = Helpers.validarInt();
@@ -593,7 +593,7 @@ public class Empresa {
         int opcion;
         String aux;
         while (resp) {
-            Vista.cartel("Modificar datos");
+            Vista.titulo("Modificar datos");
             Vista.modificarInformacionPersonal();
             opcion = Helpers.validarInt();
 
@@ -608,10 +608,10 @@ public class Empresa {
                 case 2:
                     break;
                 case 3:
-                    Vista.cartel("Ingrese fecha formato dd/mm/aaaa");
+                    Vista.titulo("Ingrese fecha formato dd/mm/aaaa");
                     break;
                 case 4:
-                    Vista.cartel("Ingrese numero de celular sin 0 ni 15");
+                    Vista.titulo("Ingrese numero de celular sin 0 ni 15");
                     aux = Helpers.validarTelefono();
                     this.cliente.setTelefono(aux);
                     Vista.opcionCorrecta("Telefono modificado correctamente");

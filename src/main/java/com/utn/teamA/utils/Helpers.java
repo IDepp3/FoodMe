@@ -1,4 +1,4 @@
-package com.utn.teamA.helpers;
+package com.utn.teamA.utils;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

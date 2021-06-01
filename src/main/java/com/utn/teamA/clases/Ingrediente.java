@@ -3,8 +3,8 @@ package com.utn.teamA.clases;
 import java.util.Scanner;
 import java.util.UUID;
 
-import com.utn.teamA.helpers.Color;
-import com.utn.teamA.helpers.Helpers;
+import com.utn.teamA.utils.Color;
+import com.utn.teamA.utils.Helpers;
 
 public class Ingrediente {
 

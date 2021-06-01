@@ -1,4 +1,4 @@
-package com.utn.teamA.helpers;
+package com.utn.teamA.utils;
 
 public class Vista {
 
@@ -6,7 +6,7 @@ public class Vista {
     // region metodos reutilizables
 
     // TODO ver posible mejora
-    public static void cartel(String mensaje){
+    public static void titulo(String mensaje){
         int cantidad = mensaje.length() + 16;
         System.out.println(Color.ANSI_BLUE);
         for(int i = 0; i < cantidad; i++){

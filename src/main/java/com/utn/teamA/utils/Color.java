@@ -1,4 +1,4 @@
-package com.utn.teamA.helpers;
+package com.utn.teamA.utils;
 
 public final class Color {
     public static final String ANSI_BLACK = "\u001B[30m";

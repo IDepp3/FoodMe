@@ -1,7 +1,7 @@
 package com.utn.teamA.App;
 
 import com.utn.teamA.clases.Empresa;
-import com.utn.teamA.helpers.Helpers;
+import com.utn.teamA.utils.Helpers;
 
 public class App {
 
