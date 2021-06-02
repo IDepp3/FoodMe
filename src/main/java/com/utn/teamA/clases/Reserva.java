@@ -1,8 +1,11 @@
 package com.utn.teamA.clases;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
 * Clase Reserva
@@ -15,24 +18,17 @@ import java.util.Objects;
 
 public class Reserva {
 
-    private static int idClase = 1;
-    private int orderId;
-    private LocalDate fechaReserva; // Lo puedo hacer String
-    private LocalDate fechaEvento; // Lo puedo hacer String
-    private int idUsuario;
-    private String nombreCliente;
-    private boolean status;
-    private int cantidadPersonasVegetariano;
-    private int cantidadPersonasClasico;
-    private int cantidadPersonasVegano;
-    private int cantidadPersonasDiabetico;
-    private int cantidadPersonasTotal;
-    private ArrayList menus;
+    private static final long serialVersionUID = 123456L;
+    private String id;
+    private LocalDate fechaReserva;
+    private LocalDate fechaEvento;
+    private Usuario cliente;
+    private List<Menu> menus = new ArrayList();
     private String descripcion;
     private Double costoTotal;
     private boolean quiereBartender;
-    private boolean quiereSushiman; // no es necesario porque nole preguntamos al cliente
-
+    private boolean status;
+    private int cantidadPersonasTotal;
 
     //region Constructor
 
@@ -40,48 +36,38 @@ public class Reserva {
      * Constructor vacio
      */
     public Reserva() {
-
+        this.id =  UUID.randomUUID().toString().substring(0, 10).replace("-", "g");
+        this.fechaReserva = LocalDate.now();
+        status=true;
     }
 
     /**
      * Constructor completo
      *
      * @param fechaEvento
-     * @param idUsuario
-     * @param nombreCliente
-     * @param cantidadPersonasVegetariano
-     * @param cantidadPersonasClasico
-     * @param cantidadPersonasVegano
-     * @param cantidadPersonasDiabetico
+     * @param cliente
      * @param menus
      * @param descripcion
      * @param quiereBartender
      */
-    public Reserva(LocalDate fechaEvento, int idUsuario, String nombreCliente,  int cantidadPersonasVegetariano,
-    int cantidadPersonasClasico, int cantidadPersonasVegano, int cantidadPersonasDiabetico, ArrayList menus,
+    public Reserva(LocalDate fechaEvento, Usuario cliente, List<Menu> menus,
         String descripcion, boolean quiereBartender) {
-
-
+        this.id =  UUID.randomUUID().toString().substring(0, 10).replace("-", "g");
+        this.fechaReserva = LocalDate.now();
         this.fechaEvento = fechaEvento;
-        this.idUsuario = idUsuario;
-        this.nombreCliente = nombreCliente;
-        this.cantidadPersonasVegetariano = cantidadPersonasVegetariano;
-        this.cantidadPersonasClasico = cantidadPersonasClasico;
-        this.cantidadPersonasVegano = cantidadPersonasVegano;
-        this.cantidadPersonasDiabetico = cantidadPersonasDiabetico;
+        this.cliente = cliente;
         this.menus = menus;
         this.descripcion = descripcion;
         this.quiereBartender = quiereBartender;
+        this.cantidadPersonasTotal = calcularCantPerTotal();
+        this.status = true;
     }
     //endregion
 
     //region   Getters
-    public static int getIdClase() {
-        return idClase;
-    }
 
-    public int getOrderId() {
-        return orderId;
+    public String getId() {
+        return id;
     }
 
     public LocalDate getFechaReserva() {
@@ -92,39 +78,14 @@ public class Reserva {
         return fechaEvento;
     }
 
-    public int getIdUsuario() {
-        return idUsuario;
-    }
-
-    public String getNombreCliente() {
-        return nombreCliente;
-    }
-
     public boolean isStatus() {
         return status;
-    }
-
-    public int getCantidadPersonasVegetariano() {
-        return cantidadPersonasVegetariano;
-    }
-
-    public int getCantidadPersonasClasico() {
-        return cantidadPersonasClasico;
-    }
-
-    public int getCantidadPersonasVegano() {
-        return cantidadPersonasVegano;
-    }
-
-    public int getCantidadPersonasDiabetico() {
-        return cantidadPersonasDiabetico;
     }
 
     public int getCantidadPersonasTotal() {
         return cantidadPersonasTotal;
     }
-
-    public ArrayList getMenus() {
+    public List getMenus() {
         return menus;
     }
 
@@ -140,19 +101,18 @@ public class Reserva {
         return quiereBartender;
     }
 
-    public boolean isQuiereSushiman() {
-        return quiereSushiman;
-    }
-    //endregion
+
+    public Usuario getCliente() { return cliente;    }
+
+    public static long getSerialVersionUID() { return serialVersionUID;    }
+
+//endregion
 
     //region Setters
 
-    public static void setIdClase(int idClase) {
-        Reserva.idClase = idClase;
-    }
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
+    public void setId(String orderId) {
+        this.id = orderId;
     }
 
     public void setFechaReserva(LocalDate fechaReserva) {
@@ -163,36 +123,12 @@ public class Reserva {
         this.fechaEvento = fechaEvento;
     }
 
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
-    public void setNombreCliente(String nombreCliente) {
-        this.nombreCliente = nombreCliente;
+    public void setCliente(Usuario cliente) {
+        this.cliente = cliente;
     }
 
     public void setStatus(boolean status) {
         this.status = status;
-    }
-
-    public void setCantidadPersonasVegetariano(int cantidadPersonasVegetariano) {
-        this.cantidadPersonasVegetariano = cantidadPersonasVegetariano;
-    }
-
-    public void setCantidadPersonasClasico(int cantidadPersonasClasico) {
-        this.cantidadPersonasClasico = cantidadPersonasClasico;
-    }
-
-    public void setCantidadPersonasVegano(int cantidadPersonasVegano) {
-        this.cantidadPersonasVegano = cantidadPersonasVegano;
-    }
-
-    public void setCantidadPersonasDiabetico(int cantidadPersonasDiabetico) {
-        this.cantidadPersonasDiabetico = cantidadPersonasDiabetico;
-    }
-
-    public void setCantidadPersonasTotal(int cantidadPersonasTotal) {
-        this.cantidadPersonasTotal = cantidadPersonasTotal;
     }
 
     public void setMenus(ArrayList menus) {
@@ -203,17 +139,21 @@ public class Reserva {
         this.descripcion = descripcion;
     }
 
-    public void setCostoTotal(Double costoTotal) {
-        this.costoTotal = costoTotal;
-    }
-
     public void setQuiereBartender(boolean quiereBartender) {
         this.quiereBartender = quiereBartender;
     }
 
-    public void setQuiereSushiman(boolean quiereSushiman) {
-        this.quiereSushiman = quiereSushiman;
+
+    public void setMenus(List<Menu> menus) { this.menus = menus;
     }
+
+    public void setCostoTotal(Double costoTotal) { this.costoTotal = costoTotal;
+    }
+
+    public void setCantidadPersonasTotal(int cantidadPersonasTotal) {
+        this.cantidadPersonasTotal = cantidadPersonasTotal;
+    }
+
 
     //endregion
 
@@ -222,22 +162,15 @@ public class Reserva {
     @Override
     public String toString() {
         return "Reserva{" +
-                "orderId=" + orderId +
-                ", fechaReserva=" + fechaReserva +
-                ", fechaEvento=" + fechaEvento +
-                ", idUsuario=" + idUsuario +
-                ", nombreCliente='" + nombreCliente + '\'' +
+                " Id=" + id +
+                ", fechaReserva=" + fechaReserva.toString() +
+                ", fechaEvento=" + fechaEvento.toString() +
+                ", Cliente=" + cliente.toString()+
                 ", status=" + status +
-                ", cantidadPersonasVegetariano=" + cantidadPersonasVegetariano +
-                ", cantidadPersonasClasico=" + cantidadPersonasClasico +
-                ", cantidadPersonasVegano=" + cantidadPersonasVegano +
-                ", cantidadPersonasDiabetico=" + cantidadPersonasDiabetico +
-                ", cantidadPersonasTotal=" + cantidadPersonasTotal +
-                ", menus=" + menus +
+                ", menus=" + menus.toString() +
                 ", descripcion='" + descripcion + '\'' +
                 ", costoTotal=" + costoTotal +
                 ", quiereBartender=" + quiereBartender +
-                ", quiereSushiman=" + quiereSushiman +
                 '}';
     }
     public void mostrar(){
@@ -253,16 +186,43 @@ public class Reserva {
         if (this == o) return true;
         if (!(o instanceof Reserva)) return false;
         Reserva reserva = (Reserva) o;
-        return getOrderId() == reserva.getOrderId() && getIdUsuario() == reserva.getIdUsuario() && isStatus() == reserva.isStatus() && getCantidadPersonasVegetariano() == reserva.getCantidadPersonasVegetariano() && getCantidadPersonasClasico() == reserva.getCantidadPersonasClasico() && getCantidadPersonasVegano() == reserva.getCantidadPersonasVegano() && getCantidadPersonasDiabetico() == reserva.getCantidadPersonasDiabetico() && getCantidadPersonasTotal() == reserva.getCantidadPersonasTotal() && isQuiereBartender() == reserva.isQuiereBartender() && isQuiereSushiman() == reserva.isQuiereSushiman() && Objects.equals(getFechaReserva(), reserva.getFechaReserva()) && Objects.equals(getFechaEvento(), reserva.getFechaEvento()) && getNombreCliente().equals(reserva.getNombreCliente()) && getMenus().equals(reserva.getMenus()) && getDescripcion().equals(reserva.getDescripcion()) && getCostoTotal().equals(reserva.getCostoTotal());
+        return getId().equals(reserva.getId());
     }
 
     @Override
     public int hashCode() {
-        return ( 31  * Objects.hash(getOrderId(), getFechaReserva(), getFechaEvento(), getIdUsuario(), getNombreCliente(), isStatus(), getCantidadPersonasVegetariano(), getCantidadPersonasClasico(), getCantidadPersonasVegano(), getCantidadPersonasDiabetico(), getCantidadPersonasTotal(), getMenus(), getDescripcion(), getCostoTotal(), isQuiereBartender(), isQuiereSushiman()));
+        return ( 31  * Objects.hash(getId()));
     }
 
 
+    public boolean esIgual(Reserva reserva){
+        if(this == reserva)
+            return true;
+
+        if(this.getId().equals(reserva.getId()))
+            return true;
+
+        return false;
+    }
 
 
     //endregion
+
+    //region Calcular Cantidad de personas que tiene el Cliente en Total
+    public int calcularCantPerTotal(){
+        int total = 0;
+        for (Menu m: this.menus) {
+
+            total = total+ m.getCantReservas();
+        }
+        return total;
+    }
+    //endregion
+
+    //region Calcular Costo de la Reserva
+
+    public void calcularCosto(){}
+
+    //endregion
+
 }

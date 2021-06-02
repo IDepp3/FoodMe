@@ -171,7 +171,7 @@ public abstract class Persona extends Usuario {
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
-                ", fechaNacimiento=" + fechaNacimiento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) +
+                ", fechaNacimiento=" + fechaNacimiento.toString() +
                 ", telefono='" + telefono + '\'' +
                 ", direccion='" + direccion + '\'' +
                 ", dni='" + dni + '\'' +

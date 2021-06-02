@@ -71,7 +71,7 @@ public abstract class Usuario{
 
     @Override
     public String toString() {
-        return " User | Fecha registro: " + fechaRegistro + " Password: " + password + " Username: " + username;
+        return " User | Fecha registro: " + fechaRegistro.toString() + " Password: " + password + " Username: " + username;
     }
     //endregion
 
