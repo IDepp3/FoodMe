@@ -2,6 +2,8 @@ package com.utn.teamA.utils;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Helpers {
 
@@ -93,5 +95,25 @@ public class Helpers {
         }while(resp);
         return cadena;
     }
+
+    public static boolean validarEmail(String email) {
+
+        Pattern pattern = Pattern.compile(
+                "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+
+        Matcher mather = pattern.matcher(email);
+
+        boolean resp = mather.find();
+
+        if (resp == true) {
+            System.out.println("Email ingresado es valido");
+        } else {
+            System.out.println("El email ingresado no es valido");
+        }
+
+        return resp;
+
+    }
+
 
 }
