@@ -7,8 +7,6 @@ public class App {
 
     public static void main(String[] args) {
 
-
-        // TODO Clase Menu y Tipo A trabajar: Jose
         new Empresa().iniciarSistema();
     }
 

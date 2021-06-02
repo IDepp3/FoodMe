@@ -10,6 +10,7 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+import com.utn.teamA.ConexionDatos.AccesoClientes;
 import com.utn.teamA.utils.Helpers;
 import com.utn.teamA.utils.Vista;
 
@@ -29,7 +30,12 @@ public class Empresa {
     private List<Reserva> listaReservas;
     private List<Menu> listaMenus;
     private List<Empleado> listaEmpleados;
+    private List<Cliente> clientes;
     // private List<Venta>listaHistorialVentas;
+
+    private Cliente cliente;
+
+    private AccesoClientes accesoClientes;
 
     // region Constructor
 
@@ -38,7 +44,9 @@ public class Empresa {
      *
      */
     public Empresa() {
-
+        this.cliente        = null;
+        this.accesoClientes = new AccesoClientes();
+        this.clientes       = this.accesoClientes.obtenerRegistros();
     }
 
     /**
@@ -209,6 +217,7 @@ public class Empresa {
                     getMenuAdministrador();
                     break;
                 case 2:
+                    this.cliente = this.accesoClientes.obtenerRegistro(new Cliente("Horacio", "Guarani"));
                     getMenuCliente();
                     break;
                 case 0:
@@ -518,84 +527,72 @@ public class Empresa {
 
     private void menuInformacionPersonal() {
         boolean resp = true;
-        Scanner entradaEscaner = new Scanner(System.in);
+        int opcion;
         while (resp) {
-            System.out.println("INFORMACION PERSONAL");
-            System.out.println();
-            System.out.println("1- Ver informacion personal");
-            System.out.println("2- Modificar informacion");
-            System.out.println("3- Historial de compras");
-            System.out.println("4- Reservas pendientes");
-            System.out.println("0- Salir");
-            int opcion;
-            try {
-                opcion = entradaEscaner.nextInt();
-                switch (opcion) {
-                    case 0:
-                        resp = false;
-                        break;
-                    case 1:
-                        System.out.println("MUESTRA LA INFORMACION PERSONAL ACTUAL");
-                        break;
-                    case 2:
-                        menuModificarDatos();
-                        break;
-                    case 3:
-                        System.out.println("HISTORIAL PERSONAL DE COMPRAS");
-                        break;
-                    case 4:
-                        System.out.println("LISTA CON COMPRAS PENDIENTES AL DIA DE LA FECHA");
-                        System.out.println(
-                                "Si es existe algun pedido se le puede dar la opcion que modifique algo de la reserva realizada");
-                        break;
-                    default:
+            Vista.titulo("Informacion Personal");
+            Vista.informacionPersonal();
+            opcion = Helpers.validarInt();
 
-                        break;
-                }
-            } catch (InputMismatchException e) {
-
+            switch (opcion) {
+                case 0:
+                    resp = false;
+                    break;
+                case 1:
+                    System.out.println(this.cliente);
+                    break;
+                case 2:
+                    menuModificarDatos();
+                    break;
+                case 3:
+                    //verHistorialCompras();
+                    break;
+                case 4:
+                    System.out.println("LISTA CON COMPRAS PENDIENTES AL DIA DE LA FECHA");
+                    System.out.println(
+                            "Si es existe algun pedido se le puede dar la opcion que modifique algo de la reserva realizada");
+                    break;
+                default:
+                    Vista.opcionIncorrecta(opcion);
+                    break;
             }
+
         }
     }
 
-    // TODO archivos modificar info personal cliente A Trabajar: Joaquin
     public void menuModificarDatos() {
         boolean resp = true;
-        Scanner entradaScanner = new Scanner(System.in);
+        int opcion;
+        String aux;
         while (resp) {
-            System.out.println("MODIFICAR INFORMACION PERSONAL");
-            System.out.println();
-            System.out.println("1- Modificar contraseña");
-            System.out.println("2- Modificar telefono");
-            System.out.println("3- Modificar direccion");
-            System.out.println("4- Modificar email");
-            System.out.println("0- Salir");
-            int opc;
-            try {
-                opc = entradaScanner.nextInt();
-                switch (opc) {
-                    case 0:
-                        resp = false;
-                        break;
-                    case 1:
-                        System.out.println("MODIFICAR PASS");
-                        break;
-                    case 2:
-                        System.out.println("MODIFICAR TELEFONO");
-                        break;
-                    case 3:
-                        System.out.println("MODIFICAR DIRECCION");
-                        break;
-                    case 4:
-                        System.out.println("MODIFICAR EMAIL");
-                        break;
-                    default:
+            Vista.titulo("Modificar datos");
+            Vista.modificarInformacionPersonal();
+            opcion = Helpers.validarInt();
 
-                        break;
-                }
-            } catch (InputMismatchException e) {
-
+            switch (opcion) {
+                case 0:
+                    resp = false;
+                    break;
+                case 1:
+                    aux = Helpers.nextLine();
+                    this.cliente.setPassword(aux);
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    Vista.titulo("Ingrese fecha formato dd/mm/aaaa");
+                    break;
+                case 4:
+                    Vista.titulo("Ingrese numero de celular sin 0 ni 15");
+                    aux = Helpers.validarTelefono();
+                    this.cliente.setTelefono(aux);
+                    Vista.opcionCorrecta("Telefono modificado correctamente");
+                    break;
+                default:
+                    Vista.opcionIncorrecta(opcion);
+                    break;
             }
+            this.accesoClientes.actualizarRegistro(this.cliente);
+            this.clientes = accesoClientes.obtenerRegistros();
         }
     }
 
