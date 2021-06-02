@@ -10,6 +10,9 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+import com.utn.teamA.utils.Helpers;
+import com.utn.teamA.utils.Vista;
+
 /**
  * Clase Empresa
  */
@@ -487,38 +490,28 @@ public class Empresa {
 
     private void getMenuCliente() {
         boolean resp = true;
-        Scanner entradaEscaner = new Scanner(System.in);
+        int opcion;
         while (resp) {
-            System.out.println("MENU PRINCIPAL");
-            System.out.println();
-            System.out.println("1- Ver menus");
-            System.out.println("2- Hacer reserva");
-            System.out.println("3- Informacion personal");
-            System.out.println("0- Salir");
-            int opcion;
-            try {
-                opcion = entradaEscaner.nextInt();
+            Vista.titulo("Menu Principal");
+            Vista.menuPrincipal();
+            opcion = Helpers.validarInt();
 
-                switch (opcion) {
-                    case 0:
-                        resp = false;
-                        break;
-                    case 1:
-                        System.out.println("VISTA DE LOS MENUS DISPONIBLES");
-                        break;
-                    case 2:
-                        System.out.println("REALIZAR RESERVA");
-                        break;
-                    case 3:
-                        System.out.println("INFORMACION PERSONAL CON LA OPCION DE REALIZAR ALGUN CAMBIO EN SU PERFIL");
-                        menuInformacionPersonal();
-                        break;
-                    default:
-
-                        break;
-                }
-            } catch (InputMismatchException e) {
-
+            switch (opcion) {
+                case 0:
+                    resp = false;
+                    break;
+                case 1:
+                    System.out.println("VISTA DE LOS MENUS DISPONIBLES");
+                    break;
+                case 2:
+                    System.out.println("REALIZAR RESERVA");
+                    break;
+                case 3:
+                    menuInformacionPersonal();
+                    break;
+                default:
+                    Vista.opcionIncorrecta(opcion);
+                    break;
             }
         }
     }
