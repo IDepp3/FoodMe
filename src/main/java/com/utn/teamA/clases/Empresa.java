@@ -270,7 +270,7 @@ public class Empresa {
 
     private void getMenuAdministrador() {
 
-        Scanner entradaEscanner = new Scanner(System.in);
+        String entradaEscanner = new Scanner(System.in);
         String respuesta = new String("si");
         try {
             while (respuesta.equals("si")) {
@@ -357,21 +357,29 @@ public class Empresa {
                     String telefono = entradaEscanner.next();
                     System.out.print("\nIngrese la direccion: ");
                     String direccion = entradaEscanner.next();
-                    entradaEscanner.next();
-                    System.out.print("\nIngrese dni del empleado: ");
-                    String dni = entradaEscanner.next();
-                    boolean respu = false;
-                    String email ="";
-                    while(respu == false){
+                    String dni = "";
 
-                        System.out.println("\nIngrese el email del empleado: ");
-                            email = entradaEscanner.nextLine();
-            
-                            respu = Helpers.validarEmail(email);
-            
+                    boolean respuesta = false;
+                    while (respuesta == false) {
+
+                        System.out.print("\nIngrese dni del empleado: ");
+                        dni = entradaEscanner.next();
+
+                        respuesta = Helpers.validarDni(dni);
+
                     }
 
-                
+                    boolean respu = false;
+                    String email = "";
+                    while (respu == false) {
+
+                        System.out.println("\nIngrese el email del empleado: ");
+                        email = entradaEscanner.nextLine();
+
+                        respu = Helpers.validarEmail(email);
+
+                    }
+
                     System.out.print("\nIngrese tipo del empleado");
                     System.out.print("\n 4 - MOZO | 5 - BARTENDER | 6 - SUSHIMAN");
                     op = entradaEscanner.nextInt();
@@ -388,7 +396,6 @@ public class Empresa {
                     int sueldo = entradaEscanner.nextInt();
 
                     f = new Empleado(nombre, apellido, fecha, telefono, direccion, dni, email, tipo, sueldo);
-                    System.out.println(f.toString());
                     accesoEmpleados.agregarRegistro(f);
                     break;
 

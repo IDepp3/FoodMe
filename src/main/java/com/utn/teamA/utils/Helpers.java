@@ -115,5 +115,19 @@ public class Helpers {
 
     }
 
+    public static boolean validarDni(String dni) {
+
+        Pattern pattern = Pattern.compile("[0-9]{7,8}[A-Z a-z]");
+        Matcher mather = pattern.matcher(dni);
+
+        boolean resp = mather.find();
+
+        if (resp == true) {
+            System.out.println("El dni ingresado es valido");
+        } else {
+            System.out.println("El dni es incorrecto");
+        }
+        return resp;
+    }
 
 }
