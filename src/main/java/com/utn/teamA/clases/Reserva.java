@@ -208,7 +208,7 @@ public class Reserva {
 
     //endregion
 
-    //region Calcular Cantidad de personas que tiene el Cliente en Total
+    //region Calcular Cantidad de personas que tiene la Lista de reservas en Total
     public int calcularCantPerTotal(){
         int total = 0;
         for (Menu m: this.menus) {
