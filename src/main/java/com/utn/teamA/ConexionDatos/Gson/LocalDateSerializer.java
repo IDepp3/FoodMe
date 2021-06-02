@@ -1,4 +1,4 @@
-package com.utn.teamA.validaciones.Gson;
+package com.utn.teamA.ConexionDatos.Gson;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonPrimitive;

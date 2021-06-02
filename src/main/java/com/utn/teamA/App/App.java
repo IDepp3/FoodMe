@@ -12,28 +12,6 @@ import java.util.List;
 public class App {
 
     public static void main(String[] args) {
-/*
-LocalDate fecha = LocalDate.now();
-System.out.println(fecha.toString());
-Cliente cliente = new Cliente();
-cliente.setFechaNacimiento(LocalDate.now());
-DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-
-Menu menu = new Menu();
-Menu menu1 = new Menu();
-        List<Menu>menus = new ArrayList<>();
-        menus.add(menu);
-        menus.add(menu1);
-String descripcion = "sadbhjdas";
-boolean quiereBartender = true;
-
-   Reserva reserva = new Reserva(fecha, cliente, menus, descripcion, quiereBartender);
-    reserva.mostrar();
-
-        AccesoClientes archReservas;
-        AccesoReservas archReserva = new AccesoReservas();
-        boolean a = archReserva.agregarRegistro(reserva);
 
         /*
          * System.out.println("Bienvenidos a FOODME"); Usuario unoUsuario = new
