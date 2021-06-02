@@ -117,7 +117,7 @@ public class Helpers {
 
     public static boolean validarDni(String dni) {
 
-        Pattern pattern = Pattern.compile("[0-9]{7,8}[A-Z a-z]");
+        Pattern pattern = Pattern.compile("[0-9]{7,8}");
         Matcher mather = pattern.matcher(dni);
 
         boolean resp = mather.find();
@@ -127,6 +127,22 @@ public class Helpers {
         } else {
             System.out.println("El dni es incorrecto");
         }
+        return resp;
+    }
+
+    public static boolean validarTel(String telefono){
+
+        Pattern pattern = Pattern.compile("^\\d{10}$");
+        Matcher mather = pattern.matcher(telefono);
+
+        boolean resp = mather.find();
+
+        if (resp == true){
+            System.out.println("El telefono ingresado es valido");
+        }else {
+            System.out.println("El telefono es invalido.");
+        }
+
         return resp;
     }
 

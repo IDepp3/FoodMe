@@ -295,15 +295,15 @@ public class Empresa {
                         getMenuGestionPersonal();
                         break;
                     case 2:
-                        System.out.println("GESTION DE RESERVAS");
+                        Vista.titulo("GESTION DE RESERVAS");
                         getMenuGestionReservas();
                         break;
                     case 3:
-                        System.out.println("GESTION DE VENTAS");
+                        Vista.titulo("GESTION DE VENTAS");
                         getMenuGestionVentas();
                         break;
                     case 4:
-                        System.out.println("GESTION DE STOCK");
+                        Vista.titulo("GESTION DE STOCK");
                         getMenuGestionStock();
                         break;
                     default:
@@ -353,26 +353,40 @@ public class Empresa {
                     int anio = entradaEscanner.nextInt();
 
                     LocalDate fecha = LocalDate.of(anio, mes, dia);
-                    System.out.print("\nIngrese el numero de telefono: ");
-                    String telefono = entradaEscanner.next();
-                    System.out.print("\nIngrese la direccion: ");
-                    String direccion = entradaEscanner.next();
-                    String dni = "";
+
+                    String telefono = "";
 
                     boolean respuesta = false;
                     while (respuesta == false) {
 
+                        System.out.print("\nIngrese numero de celular sin 0 ni 15");
+                        telefono = entradaEscanner.next();
+                        // Validamos el dni que nos da el cliente.
+                        respuesta = Helpers.validarTel(telefono);
+
+                    }
+                    
+                    
+                    System.out.print("\nIngrese la direccion: ");
+                    String direccion = entradaEscanner.next();
+
+                    String dni = "";
+
+                    boolean respuest = false;
+                    while (respuest == false) {
+
                         System.out.print("\nIngrese dni del empleado: ");
                         dni = entradaEscanner.next();
-
-                        respuesta = Helpers.validarDni(dni);
+                        // Validamos el dni que nos da el cliente.
+                        respuest = Helpers.validarDni(dni);
 
                     }
 
-                    boolean respu = false;
                     String email = "";
-                    while (respu == false) {
 
+                    boolean respu = false;
+                    while (respu == false) {
+                        // Validamos el email que nos da el cliente.
                         System.out.println("\nIngrese el email del empleado: ");
                         email = entradaEscanner.nextLine();
 
@@ -436,8 +450,7 @@ public class Empresa {
 
         while (resp) {
 
-            System.out.println("MENU GESTION DE RESERVAS");
-            System.out.println("");
+            
             System.out.println("1- Dar de alta una reserva");
             System.out.println("2- Dar de baja una reserva");
             System.out.println("3- Buscar una reserva");
@@ -477,8 +490,7 @@ public class Empresa {
 
         while (resp) {
 
-            System.out.println("MENU GESTION DE VENTAS");
-            System.out.println("");
+            
             System.out.println("1- Dar de alta una venta");
             System.out.println("2- Dar de baja una venta");
             System.out.println("3- Buscar una venta");
@@ -518,8 +530,7 @@ public class Empresa {
 
         while (resp) {
 
-            System.out.println("MENU GESTION DE STOCK");
-            System.out.println("");
+            
             System.out.println("1- Dar de alta un articulo");
             System.out.println("2- Dar de baja un articulo");
             System.out.println("3- Buscar un articulo");
