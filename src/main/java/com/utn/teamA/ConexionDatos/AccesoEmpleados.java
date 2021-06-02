@@ -6,85 +6,76 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonSerializer;
 import com.utn.teamA.ConexionDatos.interfaces.ObtenerDatos;
-import com.utn.teamA.clases.Cliente;
+import com.utn.teamA.clases.Empleado;
 
-public class AccesoClientes implements ObtenerDatos<Cliente>{
-
-    // region Atributos
-
-    private final String url = "src\\main\\recursos\\archivos\\clientes.json";
+public class AccesoEmpleados implements ObtenerDatos<Empleado>{
+    
+    private final String url = "src\\main\\recursos\\archivos\\empleados.json";
     private Gson json;
 
-    // endregion
-
-    // region Constructores
-
-    public AccesoClientes(){
+    
+    public AccesoEmpleados(){
         this.json = new GsonBuilder().setPrettyPrinting().create();
     }
 
-    // endregion
-
-    // region Implementacion Metodos Interfaz
-
     @Override
-    public Cliente obtenerRegistro(Cliente t) {
-        Cliente cliente = null;
-        List<Cliente> clientes = obtenerRegistros();
+    public Empleado obtenerRegistro(Empleado t) {
+        Empleado empleado = null;
+        List<Empleado> empleados = obtenerRegistros();
         boolean resp = false;
         int i = 0;
 
-        while(!resp && i < clientes.size()){
-            if(clientes.get(i).esIgual(t)){
-                cliente = clientes.get(i);
+        while(!resp && i < empleados.size()){
+            if(empleados.get(i).esIgual(t)){
+                empleado = empleados.get(i);
+                System.out.println("\nSe encontro un empleado: " + empleado);
                 resp = true;
             }
             i++;
+            
         }
-        return cliente;
+        
+        return empleado;
     }
 
     @Override
-    public List<Cliente> obtenerRegistros() {
-        List<Cliente> clientes = new ArrayList<>();
+    public List<Empleado> obtenerRegistros() {
+        List<Empleado> empleados = new ArrayList<>();
         BufferedReader reader;
         try {
             reader = new BufferedReader(new FileReader(this.url));
             // TODO a investigar recordar descomentar linea y comentar arregloALista();
-            //clientes = Arrays.asList(this.json.fromJson(reader, Cliente[].class));
-            arregloALista(this.json.fromJson(reader, Cliente[].class), clientes);
+            //empleados = Arrays.asList(this.json.fromJson(reader, Empleado[].class));
+            arregloALista(this.json.fromJson(reader, Empleado[].class), empleados);
             reader.close();
         } catch (FileNotFoundException e) {
             crearFichero(); 
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-        return clientes;
+        return empleados;
     }
 
     @Override
-    public boolean actualizarRegistro(Cliente t) {
+    public boolean actualizarRegistro(Empleado t) {
         boolean resp = false;
         boolean actualizado = false;
-        List<Cliente> clientes = obtenerRegistros();
+        List<Empleado> empleados = obtenerRegistros();
         int i = 0;
 
-        while(!resp && i < clientes.size()){
-            if(clientes.get(i).equals(t)){
-                clientes.remove(i);
-                clientes.add(i, t);
+        while(!resp && i < empleados.size()){
+            if(empleados.get(i).equals(t)){
+                empleados.remove(i);
+                empleados.add(i, t);
                 resp = true;
-                if(guardarInformacion(clientes))
+                if(guardarInformacion(empleados))
                     actualizado = true;
             }
             i++;
@@ -94,15 +85,15 @@ public class AccesoClientes implements ObtenerDatos<Cliente>{
     }
 
     @Override
-    public boolean borrarRegistro(Cliente t) {
+    public boolean borrarRegistro(Empleado t) {
         boolean resp = false;
-        List<Cliente> clientes = obtenerRegistros();
+        List<Empleado> empleados = obtenerRegistros();
         int i = 0;
         
-        while(!resp && i < clientes.size()){
-            if(clientes.get(i).equals(t)){
-                clientes.remove(i);
-                if(guardarInformacion(clientes))
+        while(!resp && i < empleados.size()){
+            if(empleados.get(i).equals(t)){
+                empleados.remove(i);
+                if(guardarInformacion(empleados))
                     resp = true;
             }
             i++;
@@ -112,13 +103,13 @@ public class AccesoClientes implements ObtenerDatos<Cliente>{
     }
 
     @Override
-    public boolean agregarRegistro(Cliente t) {
+    public boolean agregarRegistro(Empleado t) {
         boolean resp = false;
-        List<Cliente> clientes = obtenerRegistros();
+        List<Empleado> empleados = obtenerRegistros();
 
-        if(!existeRegistro(clientes, t)){
-            clientes.add(t);
-            if(guardarInformacion(clientes))
+        if(!existeRegistro(empleados, t)){
+            empleados.add(t);
+            if(guardarInformacion(empleados))
                 resp = true;
         }
         return resp;
@@ -128,13 +119,13 @@ public class AccesoClientes implements ObtenerDatos<Cliente>{
 
     // region Metodos propios
 
-    public boolean guardarInformacion(List<Cliente> clientes){
+    public boolean guardarInformacion(List<Empleado> empleados){
         boolean resp = false;
         BufferedWriter writer;
 
         try {
             writer = new BufferedWriter(new FileWriter(this.url));
-            this.json.toJson(clientes.toArray(), Cliente[].class, writer);
+            this.json.toJson(empleados.toArray(), Empleado[].class, writer);
             writer.close();
             resp = true;
         } catch (IOException e) {
@@ -144,12 +135,12 @@ public class AccesoClientes implements ObtenerDatos<Cliente>{
         return resp;
     }
 
-    private boolean existeRegistro(List<Cliente> clientes, Cliente cliente){
+    private boolean existeRegistro(List<Empleado> empleados, Empleado empleado){
         boolean resp = false;
         int i = 0;
 
-        while(!resp && i < clientes.size()){
-            if(clientes.get(i).esIgual(cliente))
+        while(!resp && i < empleados.size()){
+            if(empleados.get(i).esIgual(empleado))
                 resp = true;
             i++;
         }
@@ -157,10 +148,10 @@ public class AccesoClientes implements ObtenerDatos<Cliente>{
         return resp;
     }
 
-    public void arregloALista(Cliente[] arreglo, List<Cliente> clientes){
+    public void arregloALista(Empleado[] arreglo, List<Empleado> empleados){
         if(arreglo != null){
-            for(Cliente c : arreglo){
-                clientes.add(c);
+            for(Empleado c : arreglo){
+                empleados.add(c);
             }
         }
     }
@@ -176,7 +167,8 @@ public class AccesoClientes implements ObtenerDatos<Cliente>{
         }
     }
 
-    // endregion
+
+
 
 
 }
