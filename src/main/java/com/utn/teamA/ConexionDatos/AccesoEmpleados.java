@@ -13,6 +13,7 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.utn.teamA.ConexionDatos.interfaces.ObtenerDatos;
+import com.utn.teamA.clases.Cliente;
 import com.utn.teamA.clases.Empleado;
 
 public class AccesoEmpleados implements ObtenerDatos<Empleado>{
@@ -33,7 +34,7 @@ public class AccesoEmpleados implements ObtenerDatos<Empleado>{
         int i = 0;
 
         while(!resp && i < empleados.size()){
-            if(empleados.get(i).esIgual(t)){
+            if(empleados.get(i).equals(t)){
                 empleado = empleados.get(i);
                 System.out.println("\nSe encontro un empleado: " + empleado);
                 resp = true;
@@ -140,7 +141,7 @@ public class AccesoEmpleados implements ObtenerDatos<Empleado>{
         int i = 0;
 
         while(!resp && i < empleados.size()){
-            if(empleados.get(i).esIgual(empleado))
+            if(empleados.get(i).equals(empleado))
                 resp = true;
             i++;
         }
@@ -155,6 +156,7 @@ public class AccesoEmpleados implements ObtenerDatos<Empleado>{
             }
         }
     }
+
 
     private void crearFichero(){
         FileWriter writer;

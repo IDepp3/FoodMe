@@ -3,6 +3,7 @@ package com.utn.teamA.clases;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Clase Empleado
@@ -87,6 +88,25 @@ public class Empleado extends Persona {
 				+ super.getEmail() + " Tipo: " + this.tipoEmpleado + " Sueldo: " + this.sueldo;
     }
     //endregion
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj)
+            return true;
+
+        if(obj instanceof Empleado) {
+            Empleado c = (Empleado) obj;
+            if (this.getId().equals(c.getId()))
+                return true;
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getTipoEmpleado(), getSueldo());
+    }
 
     //region Mostrar
     @Override

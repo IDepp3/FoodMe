@@ -53,7 +53,7 @@ public class Empresa {
 
         this.accesoClientes = new AccesoClientes();
         this.accesoEmpleados = new AccesoEmpleados();
-        this.accesoReservas.obtenerRegistros();
+        this.accesoReservas = new AccesoReservas();
 
         this.listaEmpleados = this.accesoEmpleados.obtenerRegistros();
        this.listaClientes = this.accesoClientes.obtenerRegistros();
@@ -272,15 +272,16 @@ public class Empresa {
                 System.out.println("1- Administrador");
                 System.out.println("2- Cliente");
                 System.out.println("0- Salir");
-                Integer opcion;
+                int opcion=0;
                 opcion = entradaEscaner.nextInt();
                 switch (opcion) {
                     case 1:
                         getMenuAdministrador();
                         break;
                     case 2:
-                        this.cliente = new Cliente("Joaquin", "Alvarez");
-                        this.cliente = this.accesoClientes.obtenerRegistro(this.cliente);
+                        this.accesoClientes.agregarRegistro(new Cliente("Horacio", "Guarani"));
+                        this.listaClientes = this.accesoClientes.obtenerRegistros();
+                        this.cliente = this.listaClientes.get(0);
                         if (this.cliente != null) {
                             getMenuCliente();
                         } else
@@ -306,7 +307,7 @@ public class Empresa {
     }
     // endregion
 
-    // region Menu Administrador
+    //region Menu Administrador
     // TODO crear vistas del administrador A trabajar: Marco
     // TODO administrar empleados A trabajar: Antonela
 
@@ -363,6 +364,7 @@ public class Empresa {
             getMenuAdministrador();
         }
     }
+
 
     //region Gestion de Personal
     private void getMenuGestionPersonal() {
@@ -494,6 +496,7 @@ public class Empresa {
                         Scanner u = new Scanner(System.in);
                         sueldo = u.nextDouble();
                         System.out.println(sueldo);
+                        respu = false;
                     }
 
 
@@ -528,6 +531,7 @@ public class Empresa {
 
     //endregion
 
+    //endregion
 
     //region Gestion Reservas
     private void getMenuGestionReservas() {
