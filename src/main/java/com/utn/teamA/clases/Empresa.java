@@ -422,11 +422,11 @@ public class Empresa {
         System.out.print("\nIngrese el apellido del empleado: ");
         String apellido = entradaEscanner.next();
         System.out.print("\nIngrese el nacimiento del empleado: dd/MM/yyyy ");
-        System.out.println("Ingrese dia");
+        System.out.println("\nIngrese dia");
         int dia = entradaEscanner.nextInt();
-        System.out.println("Ingrese mes");
+        System.out.println("\nIngrese mes");
         int mes = entradaEscanner.nextInt();
-        System.out.println("Ingrese año");
+        System.out.println("\nIngrese año");
         int anio = entradaEscanner.nextInt();
 
         LocalDate fecha = LocalDate.of(anio, mes, dia);
@@ -442,10 +442,7 @@ public class Empresa {
             respuesta = Helpers.validarTel(telefono);
 
         }
-                    
-        System.out.print("\nIngrese la direccion: ");
-        String direccion = entradaEscanner.next();
-
+            
         String dni = "";
 
         System.out.print("\nIngrese el numero de telefono: ");
