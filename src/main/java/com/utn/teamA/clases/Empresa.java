@@ -415,70 +415,67 @@ public class Empresa {
         int ope = 1;
         TipoEmpleado tipo = null;
         double sueldo = 0;
-        System.out.println("Dar de Alta a un Empleado");
+        System.out.println("DAR ALTA EMPLEADO");
+        System.out.println("");
+        System.out.print("\nIngrese el nombre del empleado: ");
+        String nombre = entradaEscanner.next();
+        System.out.print("\nIngrese el apellido del empleado: ");
+        String apellido = entradaEscanner.next();
+        System.out.print("\nIngrese el nacimiento del empleado: dd/MM/yyyy ");
+        System.out.println("Ingrese dia");
+        int dia = entradaEscanner.nextInt();
+        System.out.println("Ingrese mes");
+        int mes = entradaEscanner.nextInt();
+        System.out.println("Ingrese año");
+        int anio = entradaEscanner.nextInt();
 
-                    System.out.print("\nIngrese el nombre del empleado: ");
-                    String nombre = entradaEscanner.next();
-                    System.out.print("\nIngrese el apellido del empleado: ");
-                    String apellido = entradaEscanner.next();
-                    System.out.print("\nIngrese el nacimiento del empleado: dd/MM/yyyy ");
-                    System.out.println("Ingrese dia");
-                    int dia = entradaEscanner.nextInt();
-                    System.out.println("Ingrese mes");
-                    int mes = entradaEscanner.nextInt();
-                    System.out.println("Ingrese año");
-                    int anio = entradaEscanner.nextInt();
+        LocalDate fecha = LocalDate.of(anio, mes, dia);
 
-                    LocalDate fecha = LocalDate.of(anio, mes, dia);
+        String telefono = "";
 
-                    String telefono = "";
+        boolean respuesta = false;
+        while (respuesta == false) {
 
-                    boolean respuesta = false;
-                    while (respuesta == false) {
+            System.out.print("\nIngrese numero de celular sin 0 ni 15");
+            telefono = entradaEscanner.next();
+            // Validamos el dni que nos da el cliente.
+            respuesta = Helpers.validarTel(telefono);
 
-                        System.out.print("\nIngrese numero de celular sin 0 ni 15");
-                        telefono = entradaEscanner.next();
-                        // Validamos el dni que nos da el cliente.
-                        respuesta = Helpers.validarTel(telefono);
-
-                    }
+        }
                     
-                    
-                    System.out.print("\nIngrese la direccion: ");
-                    String direccion = entradaEscanner.next();
+        System.out.print("\nIngrese la direccion: ");
+        String direccion = entradaEscanner.next();
 
-                    String dni = "";
+        String dni = "";
 
-                    boolean respuest = false;
+        System.out.print("\nIngrese el numero de telefono: ");
+        telefono = entradaEscanner.next();
 
+        System.out.print("\nIngrese la direccion: ");
+        direccion = entradaEscanner.next();
+        entradaEscanner.next();
+        boolean respuest = false;
+        System.out.print("\nIngrese dni del empleado: ");
+        dni = entradaEscanner.next();
 
-                    System.out.print("\nIngrese el numero de telefono: ");
-                    telefono = entradaEscanner.next();
+        // Validamos el dni que nos da el cliente.
+        respuest = Helpers.validarDni(dni);
 
-                    System.out.print("\nIngrese la direccion: ");
-                    direccion = entradaEscanner.next();
-                    entradaEscanner.next();
+        String email = "";
 
-                        System.out.print("\nIngrese dni del empleado: ");
-                        dni = entradaEscanner.next();
-                        // Validamos el dni que nos da el cliente.
-                        respuest = Helpers.validarDni(dni);
+        boolean respu = true;
+        while (respu == true) {
+            // Validamos el email que nos da el cliente.
+            System.out.println("\nIngrese el email del empleado: ");
+            email = entradaEscanner.next();
 
-                    String email = "";
-
-                    boolean respu = false;
-                    while (respu == false) {
-                        // Validamos el email que nos da el cliente.
-                        System.out.println("\nIngrese el email del empleado: ");
-                        email = entradaEscanner.next();
-
-                        System.out.println("\nIngrese tipo del empleado");
-                        System.out.println("\n 4 - MOZO | 5 - BARTENDER | 6 - SUSHIMAN");
-                        Scanner en = new Scanner(System.in);
-                        int op = 0;
-                        op = en.nextInt();
-                        tipo = null;
-                        switch (op) {
+            System.out.println("\nIngrese tipo del empleado");
+            System.out.println("\n 4 - MOZO | 5 - BARTENDER | 6 - SUSHIMAN");
+            Scanner en = new Scanner(System.in);
+            int op = 0;
+            op = en.nextInt();
+            tipo = null;
+            switch (op) {
                             case 4:
                                 tipo = TipoEmpleado.MOZO;
                                 break;
@@ -490,13 +487,15 @@ public class Empresa {
                                 break;
                             default:
                                 System.out.println("Opcion incorrecta");
-                        }
+            }
 
-                        System.out.println("Ingrese sueldo del empleado: ");
-                        Scanner u = new Scanner(System.in);
-                        sueldo = u.nextDouble();
-                        System.out.println(sueldo);
-                        respu = false;
+            System.out.println("Ingrese sueldo del empleado: ");
+            Scanner u = new Scanner(System.in);
+            sueldo = u.nextDouble();
+            System.out.println(sueldo);
+
+            respu = false;
+
                     }
 
 
