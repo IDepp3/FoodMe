@@ -22,7 +22,7 @@ public class AccesoClientes implements ObtenerDatos<Cliente>{
 
     // region Atributos
 
-    private final String url = "src\\main\\recursos\\archivos\\clientes.json";
+    private final String url = "src/main/recursos/archivos/clientes.json";
     private Gson json;
 
     // endregion
@@ -101,7 +101,7 @@ public class AccesoClientes implements ObtenerDatos<Cliente>{
         
         while(!resp && i < clientes.size()){
             if(clientes.get(i).equals(t)){
-                clientes.remove(i);
+                clientes.get(i).setEstado(false);;
                 if(guardarInformacion(clientes))
                     resp = true;
             }

@@ -17,7 +17,10 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
 
     // region Atributos
 
-    private final String url = "src\main\recursos\archivos\reservas.json";
+
+
+    private final String url = "src/main/recursos/archivos/reservas.json";
+
     private Gson json;
 
     // endregion
