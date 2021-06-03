@@ -101,7 +101,7 @@ public class AccesoClientes implements ObtenerDatos<Cliente>{
         
         while(!resp && i < clientes.size()){
             if(clientes.get(i).equals(t)){
-                clientes.remove(i);
+                clientes.get(i).setEstado(false);;
                 if(guardarInformacion(clientes))
                     resp = true;
             }
