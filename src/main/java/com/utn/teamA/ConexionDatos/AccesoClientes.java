@@ -22,7 +22,7 @@ public class AccesoClientes implements ObtenerDatos<Cliente>{
 
     // region Atributos
 
-    private final String url = "src\\main\\recursos\\archivos\\clientes.json";
+    private final String url = "src/main/recursos/archivos/clientes.json";
     private Gson json;
 
     // endregion
