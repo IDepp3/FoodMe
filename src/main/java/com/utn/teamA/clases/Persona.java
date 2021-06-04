@@ -32,6 +32,7 @@ public abstract class Persona extends Usuario {
     public Persona(){
         fechaNacimiento = LocalDate.now();
         this.id = UUID.randomUUID().toString().substring(0, 10).replace("-", "g");
+        this.estado = true;
     }
 
     public Persona(String nombre, String apellido){
@@ -39,6 +40,7 @@ public abstract class Persona extends Usuario {
         this.nombre   = nombre;
         this.apellido = apellido;
         LocalDate.now();
+        this.estado = true;
     }
 
     /**

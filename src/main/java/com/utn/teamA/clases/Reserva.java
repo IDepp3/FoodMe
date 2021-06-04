@@ -1,5 +1,7 @@
 package com.utn.teamA.clases;
 
+import com.google.gson.Gson;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -18,11 +20,12 @@ import java.util.UUID;
 
 public class Reserva {
 
+
     private static final long serialVersionUID = 123456L;
     private String id;
     private LocalDate fechaReserva;
     private LocalDate fechaEvento;
-    private Persona cliente;
+    private  String idCliente; //
     private List<Menu> menus = new ArrayList();
     private String descripcion;
     private Double costoTotal;
@@ -46,17 +49,17 @@ public class Reserva {
      * Constructor completo
      *
      * @param fechaEvento
-     * @param cliente
+     * @param idCliente
      * @param menus
      * @param descripcion
      * @param quiereBartender
      */
-    public Reserva(LocalDate fechaEvento, Persona cliente, List<Menu> menus,
+    public Reserva(LocalDate fechaEvento, String idCliente, List<Menu> menus,
         String descripcion, boolean quiereBartender) {
         this.id =  UUID.randomUUID().toString().substring(0, 10).replace("-", "g");
         this.fechaReserva = LocalDate.now();
         this.fechaEvento = fechaEvento;
-        this.cliente = cliente;
+        this.idCliente = idCliente;
         this.menus = menus;
         this.descripcion = descripcion;
         this.quiereBartender = quiereBartender;
@@ -103,7 +106,7 @@ public class Reserva {
     }
 
 
-    public Persona getCliente() { return cliente;    }
+    public String getCliente() { return idCliente;    }
 
     public static long getSerialVersionUID() { return serialVersionUID;    }
 
@@ -124,8 +127,8 @@ public class Reserva {
         this.fechaEvento = fechaEvento;
     }
 
-    public void setCliente(Persona cliente) {
-        this.cliente = cliente;
+    public void setCliente(String idCliente) {
+        this.idCliente = idCliente;
     }
 
     public void setStatus(boolean status) {
@@ -166,7 +169,7 @@ public class Reserva {
                 " Id=" + id +
                 ", fechaReserva=" + fechaReserva.toString() +
                 ", fechaEvento=" + fechaEvento.toString() +
-                ", Cliente=" + cliente.toString()+
+                ", Cliente=" + idCliente+
                 ", status=" + status +
                 ", menus=" + menus.toString() +
                 ", descripcion='" + descripcion + '\'' +
