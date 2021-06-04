@@ -72,7 +72,7 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
             arregloALista(this.json.fromJson(reader, Reserva[].class), reservas);
             reader.close();
         } catch (FileNotFoundException e) {
-            //crearFichero();
+            crearFichero();
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
