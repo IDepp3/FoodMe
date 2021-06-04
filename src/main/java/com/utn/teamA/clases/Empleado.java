@@ -103,11 +103,6 @@ public class Empleado extends Persona {
         return false;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getTipoEmpleado(), getSueldo());
-    }
-
     //region Mostrar
     @Override
     public void mostrar() {

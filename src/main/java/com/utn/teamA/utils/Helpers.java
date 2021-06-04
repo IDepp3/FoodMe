@@ -117,7 +117,7 @@ public class Helpers {
 
     public static boolean validarDni(String dni) {
 
-        Pattern pattern = Pattern.compile("[0-9]{7,8}");
+        Pattern pattern = Pattern.compile("^[0-9]{7,8}$");
         Matcher mather = pattern.matcher(dni);
 
         boolean resp = mather.find();

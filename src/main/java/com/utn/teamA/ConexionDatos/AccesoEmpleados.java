@@ -93,7 +93,7 @@ public class AccesoEmpleados implements ObtenerDatos<Empleado>{
         
         while(!resp && i < empleados.size()){
             if(empleados.get(i).equals(t)){
-                empleados.remove(i);
+                empleados.get(i).setEstado(false);
                 if(guardarInformacion(empleados))
                     resp = true;
             }
