@@ -22,13 +22,14 @@ public class Reserva {
     private String id;
     private LocalDate fechaReserva;
     private LocalDate fechaEvento;
-    private Usuario cliente;
+    private Persona cliente;
     private List<Menu> menus = new ArrayList();
     private String descripcion;
     private Double costoTotal;
     private boolean quiereBartender;
     private boolean status;
     private int cantidadPersonasTotal;
+
 
     //region Constructor
 
@@ -50,7 +51,7 @@ public class Reserva {
      * @param descripcion
      * @param quiereBartender
      */
-    public Reserva(LocalDate fechaEvento, Usuario cliente, List<Menu> menus,
+    public Reserva(LocalDate fechaEvento, Persona cliente, List<Menu> menus,
         String descripcion, boolean quiereBartender) {
         this.id =  UUID.randomUUID().toString().substring(0, 10).replace("-", "g");
         this.fechaReserva = LocalDate.now();
@@ -102,7 +103,7 @@ public class Reserva {
     }
 
 
-    public Usuario getCliente() { return cliente;    }
+    public Persona getCliente() { return cliente;    }
 
     public static long getSerialVersionUID() { return serialVersionUID;    }
 
@@ -123,7 +124,7 @@ public class Reserva {
         this.fechaEvento = fechaEvento;
     }
 
-    public void setCliente(Usuario cliente) {
+    public void setCliente(Persona cliente) {
         this.cliente = cliente;
     }
 

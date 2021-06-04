@@ -638,23 +638,18 @@ public class Empresa {
                         } else {
                             quierebartender = false;
                         }
-                        System.out.println("Se ha grabado:" + quierebartender);
                         break;
                     default:
                         System.out.println("Dato incorrecto. Reintente");
 
                 }
-                System.out.println("a");
+
                 Reserva reserva = new Reserva(fecha, cliente, menus, descripcion, quierebartender);
-                accesoReservas.obtenerRegistro(reserva);
 
+               // accesoReservas.agregarRegistro(reserva);
 
-/*
-                System.out.println("B");
                 reserva.mostrar();
-                System.out.println("C");
                 boolean a = accesoReservas.agregarRegistro(reserva);
-*/
                 resp = false;
             }
         } catch (DateTimeException e) {
@@ -679,7 +674,6 @@ public class Empresa {
         try {
             while (resp) {
                 System.out.println("SELECCIONAR MENU");
-                System.out.println("");
                 System.out.print("\n 1- Menu Clasico");
                 System.out.print("\n 2- Menu vegano");
                 System.out.print("\n 3- Menu Vegetariano");

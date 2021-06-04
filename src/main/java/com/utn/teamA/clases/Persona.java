@@ -30,6 +30,7 @@ public abstract class Persona extends Usuario {
      * Constructor Vacio
      */
     public Persona(){
+        fechaNacimiento = LocalDate.now();
         this.id = UUID.randomUUID().toString().substring(0, 10).replace("-", "g");
     }
 
@@ -37,6 +38,7 @@ public abstract class Persona extends Usuario {
         this.id = UUID.randomUUID().toString().substring(0, 10).replace("-", "g");
         this.nombre   = nombre;
         this.apellido = apellido;
+        LocalDate.now();
     }
 
     /**

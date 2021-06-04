@@ -1,13 +1,7 @@
 package com.utn.teamA.App;
 
-import com.utn.teamA.ConexionDatos.AccesoClientes;
-import com.utn.teamA.ConexionDatos.AccesoReservas;
-import com.utn.teamA.clases.*;
+import com.utn.teamA.clases.Empresa;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 
 public class App {
 
