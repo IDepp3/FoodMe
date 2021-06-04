@@ -52,8 +52,8 @@ public class Empleado extends Persona {
      * @param sueldo
      */
     public Empleado( String nombre, String apellido, LocalDate fechaNacimiento,
-                   String telefono, String direccion, String dni, String email, TipoEmpleado tipo , Double sueldo){
-        super( nombre,  apellido,  fechaNacimiento, telefono, direccion,  dni, email );
+                   String telefono, String direccion, String dni, String email, TipoEmpleado tipo , Double sueldo,boolean estado){
+        super( nombre,  apellido,  fechaNacimiento, telefono, direccion,  dni, email, estado);
         this.tipoEmpleado = tipoEmpleado;
         this.sueldo = sueldo;
     }
@@ -97,7 +97,7 @@ public class Empleado extends Persona {
 
         if(obj instanceof Empleado) {
             Empleado c = (Empleado) obj;
-            if (this.getId().equals(c.getId()))
+            if (this.getDni().equals(c.getDni()))
                 return true;
         }
         return false;
