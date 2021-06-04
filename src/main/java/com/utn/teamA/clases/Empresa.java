@@ -9,6 +9,7 @@ import com.utn.teamA.ConexionDatos.AccesoEmpleados;
 import com.utn.teamA.ConexionDatos.AccesoReservas;
 import com.utn.teamA.utils.Helpers;
 import com.utn.teamA.utils.Vista;
+import com.utn.teamA.clases.Empleado;
 
 
 /**
@@ -337,7 +338,7 @@ public class Empresa {
                         resp= false;
                         break;
                     case 1:
-                        System.out.println("GESTION DE PERSONAL");
+                        
                         getMenuGestionPersonal();
                         break;
                     case 2:
@@ -394,7 +395,7 @@ public class Empresa {
                         System.out.println("ACA DAMOS DE BAJA UN EMPLEADO.");
                         break;
                     case 3:
-                        System.out.println("ACA BUSCAMOS UN EMPLEADO.");
+                        buscarEmpleado();
                         break;
                     default:
                         System.out.println("Ingreso un dato incorrecto. reintente.");
@@ -412,7 +413,6 @@ public class Empresa {
     public void darAltaUnEmpleado() {
         Scanner entradaEscanner = new Scanner(System.in);
         Empleado empleado = null;
-        int ope = 1;
         TipoEmpleado tipo = null;
         double sueldo = 0;
         System.out.println("DAR ALTA EMPLEADO");
@@ -422,14 +422,18 @@ public class Empresa {
         System.out.print("\nIngrese el apellido del empleado: ");
         String apellido = entradaEscanner.next();
         System.out.print("\nIngrese el nacimiento del empleado: dd/MM/yyyy ");
-        System.out.println("\nIngrese dia");
-        int dia = entradaEscanner.nextInt();
-        System.out.println("\nIngrese mes");
-        int mes = entradaEscanner.nextInt();
-        System.out.println("\nIngrese año");
-        int anio = entradaEscanner.nextInt();
+        int dia, mes, anio;
+        LocalDate fecha = null;
 
-        LocalDate fecha = LocalDate.of(anio, mes, dia);
+       
+        System.out.println("Ingrese el dia: ");
+        dia = entradaEscanner.nextInt();
+        System.out.println("Ingrese el mes: ");
+        mes = entradaEscanner.nextInt();
+        System.out.println("Ingrese el año");
+        anio = entradaEscanner.nextInt();
+        fecha = LocalDate.of(anio,mes,dia);
+               
 
         String telefono = "";
 
@@ -444,10 +448,7 @@ public class Empresa {
         }
             
         String dni = "";
-
-        System.out.print("\nIngrese el numero de telefono: ");
-        telefono = entradaEscanner.next();
-
+        
         System.out.print("\nIngrese la direccion: ");
         direccion = entradaEscanner.next();
         entradaEscanner.next();
@@ -459,12 +460,13 @@ public class Empresa {
         respuest = Helpers.validarDni(dni);
 
         String email = "";
-
+        boolean estado = true;
         boolean respu = true;
         while (respu == true) {
             // Validamos el email que nos da el cliente.
             System.out.println("\nIngrese el email del empleado: ");
             email = entradaEscanner.next();
+        
 
             System.out.println("\nIngrese tipo del empleado");
             System.out.println("\n 4 - MOZO | 5 - BARTENDER | 6 - SUSHIMAN");
@@ -487,17 +489,14 @@ public class Empresa {
             }
 
             System.out.println("Ingrese sueldo del empleado: ");
-            Scanner u = new Scanner(System.in);
-            sueldo = u.nextDouble();
-            System.out.println(sueldo);
-
+            
+            sueldo = entradaEscanner.nextDouble();
+        
             respu = false;
-
-                    }
-
-
-            empleado = new Empleado(nombre, apellido, fecha, telefono, direccion, dni, email, tipo, sueldo);
+        }
+            empleado = new Empleado(nombre, apellido, fecha, telefono, direccion, dni, email, tipo, sueldo, estado);
             System.out.println("Se agrego exitosamente el empleado");
+            accesoEmpleados.agregarRegistro(empleado);
 
     }
 
@@ -506,16 +505,29 @@ public class Empresa {
         Empleado h = new Empleado("Marcos", "Solari");
         boolean a = accesoEmpleados.borrarRegistro(h);
         if (a == true) {
-            System.out.println("El empleado fue dado de baja.");
+            h.setEstado(false);
+            h.toString();
         } else {
             System.out.println("El empleado no ha podido darse de baja.");
         }
     }
 
     public void buscarEmpleado() {
+
+        Scanner escanner = new Scanner(System.in);
         System.out.println("\nACA BUSCAMOS UN EMPLEADO.");
-        Empleado g = new Empleado("Marcos", "Solari");
+        System.out.println("Ingrese el dni del empleado a buscar: ");
+        String dni = "";
+        dni = escanner.next();
+        Empleado g = new Empleado();
+        Empleado e = new Empleado();
+        if(g.getDni().equals(dni)){
         g = accesoEmpleados.obtenerRegistro(g);
+        System.out.println("Cliente encontrado");
+        System.out.println(g);
+        }else{
+            System.out.println("El dni no existe.");
+        }
     }
 
     public void listarEmpleados(){
