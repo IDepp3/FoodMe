@@ -57,7 +57,7 @@ public class Empresa {
         this.accesoReservas = new AccesoReservas();
 
         this.listaEmpleados = this.accesoEmpleados.obtenerRegistros();
-       this.listaClientes = this.accesoClientes.obtenerRegistros();
+        this.listaClientes = this.accesoClientes.obtenerRegistros();
         this.listaReservas =  this.accesoReservas.obtenerRegistros();
 
     }
@@ -608,7 +608,6 @@ public class Empresa {
         boolean resp = true;
 
         LocalDate fecha = null;
-        LocalDate fechaTentativa = null;
         List<Menu> menus = new ArrayList<>();
         String descripcion = new String("");
         boolean quierebartender = false;
@@ -621,26 +620,7 @@ public class Empresa {
                 System.out.println("");
                 switch (ope) {
                     case 1:
-                        boolean fechaDisponible1 = true;
-                        String si = new String("s");
-                        while((si.equals("s"))) {
-                            System.out.print("1- Ingrese fecha del evento: dd/mm/yyyy ");
-                            String f = entradaEscanner2.next();
-                            entradaEscanner2.nextLine();
-                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                            fechaTentativa = LocalDate.parse(f, formatter);
-                            fechaDisponible1 =verificarFechaDeReservaDisponible(fechaTentativa);
-                            if(fechaDisponible1){
-                                System.out.println("Fecha disponible?");
-                                fecha = fechaTentativa;
-                            }else {
-                                System.out.println("Fecha No Disponible");
-
-                            }
-
-                            System.out.println("Dese seguir buscando fechas? s/n");
-                            si = entradaEscanner2.next();
-                        }//todo Antonela me da error
+                         fecha=elegirFechaDeEvento();
                     case 2:
                         System.out.print("\nIngrese el Cliente en el sistema: ");
                         System.out.println("");
@@ -814,6 +794,7 @@ public class Empresa {
 
 
     }
+
     public Reserva buscarUnaReserva(){
 
         Reserva reserva = new Reserva();
@@ -865,6 +846,7 @@ public class Empresa {
         return reserva;
 
     }
+
     public void listarReservas() {
 
         List<Reserva> reservas = accesoReservas.obtenerRegistros();
@@ -880,6 +862,7 @@ public class Empresa {
             }
         }
     }
+
     public Reserva buscarUnaReservaPorID(String id){
         Reserva reserva = null;
         try {
@@ -901,28 +884,43 @@ public class Empresa {
 
         return  reserva;
     }
+
     public Reserva buscarUnaReservaPorFecha(String fecha){
 
         return  reserva;
     } //TODO Antonela
+
     public Reserva buscarUnaReservaPorCliente(String cliente){
 
         return  reserva;
     } //TODO Antonla
+
     public void modificarUnaReserva(){} //TODO  Antonela
-    public boolean verificarFechaDeReservaDisponible(LocalDate fechaRes) {
 
-        List<Reserva> reservas = accesoReservas.obtenerRegistros();
-        for (Reserva r : reservas) {
-            if ((r != null) && (r.getFechaEvento().isEqual(fechaRes))) {
+    public LocalDate elegirFechaDeEvento(){
 
-                return false;
+        Scanner entradaEscanner2 = new Scanner(System.in);
+        LocalDate fechaTentativa = null;
+        LocalDate fecha = null;
+        String f = new String("");
+        String si = new String("s");
+        while(si.equals("s")) {
+            System.out.print("1- Ingrese fecha del evento: dd/mm/yyyy ");
+            f = entradaEscanner2.next();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            fechaTentativa = LocalDate.parse(f, formatter);
+            if(accesoReservas.verificarFechaDeEventoDisponible(fechaTentativa)){
+                System.out.println("Fecha disponible?");
+                 return fecha = fechaTentativa;
+            }else{
+                System.out.println("Fecha No Disponible");
 
             }
-
+            System.out.println("Dese seguir buscando fechas? s/n");
+            si = entradaEscanner2.next();
         }
-        System.out.println("fecha r");
-        return true;
+        return fecha;
+
     }
 
 

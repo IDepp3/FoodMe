@@ -21,7 +21,6 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
     // region Atributos
 
 
-
     private final String url = "src/main/recursos/archivos/reservas.json";
 
     private Gson json;
@@ -30,11 +29,11 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
 
     // region Constructores
 
-    public AccesoReservas()throws JsonParseException {
+    public AccesoReservas() throws JsonParseException {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(LocalDate.class, new LocalDateSerializer());
         gsonBuilder.registerTypeAdapter(LocalDate.class, new LocalDateDeserializer());
-       this.json = gsonBuilder.setPrettyPrinting().serializeNulls().create();
+        this.json = gsonBuilder.setPrettyPrinting().serializeNulls().create();
 
     }
 
@@ -148,7 +147,7 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
             resp = true;
         } catch (IOException e) {
             System.out.println("Algo salio mal y no se guardo la informacion");
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
 
@@ -187,12 +186,29 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
         }
     }
 
-    public void mostrar(Reserva reserva){
+    public void mostrar(Reserva reserva) {
         System.out.println(json.toJson(reserva));
     }
 
     // endregion
+
+    public boolean verificarFechaDeEventoDisponible(LocalDate fechaRes) {
+
+        List<Reserva> reservas = obtenerRegistros();
+        boolean fechaDisponible = true;
+        if (!reservas.isEmpty()) {
+            for (Reserva r : reservas) {
+                if ((r.isStatus()) && (r != null) && (r.getFechaEvento().isEqual(fechaRes))) {
+                    return fechaDisponible = false;
+                }
+            }
+        }
+        return fechaDisponible;
+    }
+
+
 }
+
 
 
 
