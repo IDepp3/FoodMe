@@ -14,6 +14,8 @@ import java.util.UUID;
 
 public abstract class Persona extends Usuario {
 
+    // region ATRIBUTOS
+
     private String id;
     private String nombre;
     private String apellido;
@@ -22,6 +24,8 @@ public abstract class Persona extends Usuario {
     private String direccion;
     private String dni;
     private boolean estado;
+
+    // endregion
 
     //region Constructores
 
@@ -169,7 +173,7 @@ public abstract class Persona extends Usuario {
 
     //region To String
     // Si usamos usuario ahi si vamos a tener que poner  "Super.toString +" en el return
-    @Override
+    /* @Override
     public String toString() {
         return  "Persona{" +
                 "id=" + id +
@@ -180,6 +184,11 @@ public abstract class Persona extends Usuario {
                 ", direccion='" + direccion + '\'' +
                 ", dni='" + dni + '\'' +
                 '}';
+    } */
+
+    @Override
+    public String toString() {
+        return "ID : " + this.id + "\nNombre : " + this.nombre + "\nApellido : " + this.apellido + "\nFecha Nacimiento : " + this.fechaNacimiento + "\nTelefono : " + this.telefono + "\nDireccion : " + this.direccion + "\nDNI : " + this.dni + "\nEstado : " + this.estado + super.toString();
     }
 
 

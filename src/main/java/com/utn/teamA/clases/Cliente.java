@@ -97,12 +97,17 @@ public class Cliente extends Persona {
     // endregion
 
     //region To String
-    @Override
+    /* @Override
     public String toString() {
         return super.toString() +
                 "Cliente{" +
                 "reservas=" + reservas +
                 '}';
+    } */
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
     //endregion
 
@@ -121,11 +126,12 @@ public class Cliente extends Persona {
         return false;
     }
 
+
     public boolean existeCliente(Cliente cliente){
         if(this == cliente)
             return true;
         
-        if(this.getEmail().equals(cliente.getEmail()) && this.getUsername().equals(cliente.getUsername()))
+        if(this.getUsername().equals(cliente.getUsername()) && this.getPassword().equals(cliente.getPassword()))
             return true;
 
         return false;

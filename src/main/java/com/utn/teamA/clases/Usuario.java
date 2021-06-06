@@ -100,9 +100,14 @@ public abstract class Usuario{
 
     //region To String
 
-    @Override
+    /* @Override
     public String toString() {
         return " User | Fecha registro: " + fechaRegistro.toString() + " Password: " + password + " Username: " + username;
+    } */
+
+    @Override
+    public String toString() {
+        return "\nNombre Usuario : " + this.username + "\nEmail : " + this.email + "\nFecha Registro : " + this.fechaRegistro + "\nTipo de Usuario : " + this.tipoUsuario;
     }
     //endregion
 
