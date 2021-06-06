@@ -53,6 +53,22 @@ public class AccesoClientes implements ObtenerDatos<Cliente>{
         }
         return cliente;
     }
+    //Perdon hice esto para buscar por dni en la reserva
+    public Cliente obtenerRegistro(String id) {
+        Cliente cliente = null;
+        List<Cliente> clientes = obtenerRegistros();
+        boolean resp = false;
+        int i = 0;
+
+        while(!resp && i < clientes.size()){
+            if(clientes.get(i).getDni().equals(id)){
+                cliente = clientes.get(i);
+                resp = true;
+            }
+            i++;
+        }
+        return cliente;
+    }
 
     @Override
     public List<Cliente> obtenerRegistros() {
