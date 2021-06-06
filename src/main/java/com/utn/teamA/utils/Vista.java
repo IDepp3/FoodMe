@@ -68,9 +68,21 @@ public class Vista {
 
     // endregion
 
-    // vistas cliente
+    // region VISTAS
+
+    // region VISTAS MENU PRINCIPAL
 
     public static void menuPrincipal(){
+        System.out.println(Color.ANSI_GREEN + " 1 " + Color.ANSI_RESET + "Login");
+        System.out.println(Color.ANSI_GREEN + " 2 " + Color.ANSI_RESET + "Registro");
+        System.out.println(Color.ANSI_RED + " 0 " + Color.ANSI_RESET + "Salir");
+        System.out.print(Color.ANSI_GREEN + " : " + Color.ANSI_RESET);
+    }
+    // endregion
+
+    // region vistas cliente
+
+    public static void menuPrincipalUsuario(){
         System.out.println(Color.ANSI_GREEN + " 1 " + Color.ANSI_RESET + "Ver menus");
         System.out.println(Color.ANSI_GREEN + " 2 " + Color.ANSI_RESET + "Hacer reserva");
         System.out.println(Color.ANSI_GREEN + " 3 " + Color.ANSI_RESET + "Informacion personal");
@@ -110,5 +122,5 @@ public class Vista {
 
     // endregion
 
-
+    // endregion
 }
