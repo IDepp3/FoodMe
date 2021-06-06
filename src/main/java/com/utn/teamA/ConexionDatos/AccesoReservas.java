@@ -145,7 +145,7 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
             boolean resp = false;
             int i = 0;
             while (!resp && i < reservas.size()) {
-                if (reservas.get(i).getCliente().equals(cliente.getId())) {
+                if (reservas.get(i).getIdCliente().equals(cliente.getId())) {
                     reservasCliente.add(reservas.get(i));
                     resp = true;
                 }
@@ -259,7 +259,7 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
         int i = 0;
 
         while (!resp & i < reservas.size()) {
-            if (reservas.get(i).getCliente().equals(cliente.getId())) {
+            if (reservas.get(i).getIdCliente().equals(cliente.getId())) {
                 reservas.get(i).setStatus(false);
                 if (guardarInformacion(reservas)) {
                     reservAux.add(reservas.get(i));

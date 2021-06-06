@@ -4,10 +4,12 @@ import com.utn.teamA.ConexionDatos.AccesoClientes;
 import com.utn.teamA.ConexionDatos.AccesoEmpleados;
 import com.utn.teamA.ConexionDatos.AccesoReservas;
 import com.utn.teamA.Excepciones.FechaInvalidaException;
+import com.utn.teamA.utils.Color;
 import com.utn.teamA.utils.Helpers;
 import com.utn.teamA.utils.Vista;
 import org.jetbrains.annotations.NotNull;
 
+import java.nio.channels.ClosedChannelException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -272,9 +274,8 @@ public class Empresa {
         boolean resp = true;
         try {
             while (resp) {
-                System.out.println("1- Administrador");
-                System.out.println("2- Cliente");
-                System.out.println("0- Salir");
+                Vista.titulo("FOOD ME");
+                Vista.menuPrincipalFoodMe();
                 int opcion = 0;
                 opcion = entradaEscaner.nextInt();
                 switch (opcion) {
@@ -323,13 +324,8 @@ public class Empresa {
         try {
             while (resp) {
 
-                System.out.println("MENU ADMINISTRADOR");
-                System.out.println();
-                System.out.println("1- Gestion de Personal");
-                System.out.println("2- Gestion de Reservas");
-                System.out.println("3- Gestion de Ventas");
-                System.out.println("4- Gestion de Stock");
-                System.out.println("0- Salir");
+                Vista.titulo("MENU ADMINISTRADOR");
+                //Vista.menuAdministrador();
 
                 seleccion = entradaEscanner.nextInt();
 
@@ -551,12 +547,7 @@ public class Empresa {
 
         while (resp) {
 
-            System.out.println("1- Dar de alta una reserva");
-            System.out.println("2- Dar de baja una reserva");
-            System.out.println("3- Buscar una reserva");
-            System.out.println("4- Modificar una reserva");
-            System.out.println("5- Listar reservas");
-            System.out.println("0- Salir");
+            Vista.menuGestionReserva();
 
             int seleccion;
 
@@ -609,8 +600,11 @@ public class Empresa {
         Scanner entradaEscanner2 = new Scanner(System.in);
         int ope = 1;
         String seguir = "s";
-        Helpers helperReserva = new Helpers();
         LocalDate fecha;
+        Hora hora = new Hora();
+        StringBuilder horarioLlegada = null;
+        StringBuilder horarioInicio = null;
+        StringBuilder horarioFinaliza =null;
         List<Menu> menus;
         String descripcion;
         boolean quierebartender;
@@ -619,83 +613,73 @@ public class Empresa {
         String otro = "";
         try {
             while (seguir.equals("s")) {
-                Vista.titulo("DAR ALTA UNA RESERVA");
 
-                    System.out.println();
-                    fecha = elegirFechaDeEvento();
 
-                    System.out.println("Desea seguir cargando los datos?s/n");
-                    seguir = entradaEscanner2.nextLine();
-                    if (seguir.equals("n"))
-                        break;
 
-                try {
-
-                    boolean resp = true;
-                    int opt = 0;
-                    while (resp) {
-                        System.out.println("Ingrese el Cliente ");
-                        System.out.println("1- Buscar Cliente ");
-                        System.out.println("2- Dar Alta a Cliente ");
-                        System.out.println("0- Salir ");
-                        opt = entradaEscanner2.nextInt();
-
-                        switch (opt) {
-                            case 0:
-                                resp = false;
-                                break;
-                            case 1:
-                                System.out.println("1- Dar alta Cliente");
-                                //cliente = darAltaCliente();
-                                idCliente = cliente.getId();
-                                break;
-                            case 2:
-                                System.out.println("2- Buscar Cliente");
-                                //idCliente= buscarCliente(String dni).getDNI();
-                                break;
-                            default:
-                                System.out.println("Dato incorrecto. Reintente");
-                                break;
-                        }
-                    }
-
-                } catch (InputMismatchException e) {
-
-                } catch (Exception e) {
-
-                }
-                System.out.println("Desea seguir cargando  datos?s/n");
+                //Usuario ingresa fecha, valida que sea 48hs posterior al dia actual
+                fecha = elegirFechaDeEvento();
+                Vista.deseaSeguirCargandoDatos();
                 seguir = entradaEscanner2.nextLine();
-                if (seguir.equals("n"))
-                    break;
-                System.out.println("3- Seleccione los Menus ");
-                //MOSTRAR MENUS: traer archivo Lista de menus en
+                if (seguir.equals("n")) break;
+
+
+
+                //Usuario ingresa la hora y minutos en el que empieza el evento.
+                //calcula horarios de  llegada y finalizacion
+                System.out.println(Color.ANSI_BLUE + " 1 " + Color.ANSI_RESET + "Ingrese hora de inicio del Evento");
+                String aviso = """
+                           Acordate que nuestro servivio duraentre:  3.5-4 hs
+                           Llegamos entre: 3-4 hs antes
+                           Finalizamos: 3-4 hs despues 
+                                                      
+                                                      FOODME.CO
+                    """ ;
+                System.out.println(aviso);
+                hora.init();
+                horarioLlegada= hora.calcularLlegada(3);
+                horarioInicio = hora.setearHoraInicio();
+                horarioFinaliza = hora.calcularFinalizacion(4); //todo constante de horas de servicio
+
+                        
+                //Usuario ingrsa Cliente/ lo dirige al menu cliente en donde puede buscar
+                //al cliente o darlo de alta. se guarda el id del cliente
+                System.out.println(Color.ANSI_BLUE + " 2 " + Color.ANSI_RESET + "Seleccione el Cliente ");
+                idCliente = resrevaIngresarCliente();
+                Vista.deseaSeguirCargandoDatos();
+                seguir = entradaEscanner2.nextLine();
+                if (seguir.equals("n")) break;
+
+                //Usuario selecciona  Los tipo de Menu, cantidad de personas por menu e ingredientes
+                System.out.println(Color.ANSI_BLUE + " 3 " + Color.ANSI_RESET + "Seleccione los Menus ");
+                //traer lista de menus y sus ingredientes
                 menus = seleccionarMenus();
-
-                System.out.println("Desea seguir cargando datos?s/n");
+                Vista.deseaSeguirCargandoDatos();
                 seguir = entradaEscanner2.nextLine();
-                if (seguir.equals("n"))
-                    break;
+                if (seguir.equals("n")) break;
 
-                System.out.println("4- Ingrese descripcion");
+                //Usuario ingresa descripcion en la reserva. detalles preguntas de servicio etc.
+                System.out.println(Color.ANSI_BLUE + " 4- " + Color.ANSI_RESET + "Ingrese descripcion");
                 descripcion = entradaEscanner2.nextLine();
-                if (seguir.equals("n"))
-                    break;
-                System.out.println("Desea seguir cargando  datos?s/n");
+                if (seguir.equals("n")) break;
+                Vista.deseaSeguirCargandoDatos();
                 seguir = entradaEscanner2.nextLine();
-                if (seguir.equals("n"))
-                    break;
-                System.out.println("5- Quiere Bartender?s/n");
+                if (seguir.equals("n")) break;
+
+                //Usuario Ingresa si quiere bartender como servicio
+                System.out.println(Color.ANSI_BLUE + " 5- " + Color.ANSI_RESET + "Quiere Bartender?s/n");
                 String op = entradaEscanner2.nextLine();
                 quierebartender = op.equals("s");
-                System.out.println("Finalizo cargar su reserva. Aprete 's' para 'Guardar' o ''n para 'cancelar'");
+
+                Vista.opcionCorrecta("Finalizo cargar su reserva");
+                Vista.finalizarReserva();
                 seguir = entradaEscanner2.nextLine();
-                if (seguir.equals("n"))
-                    break;
-                Reserva reserva = new Reserva(fecha, idCliente, menus, descripcion, quierebartender);
+                if (seguir.equals("n")) break;
+
+                //El sistema inicializa el objeto y guarda en el archivo el json
+                Reserva reserva = new Reserva(fecha, horarioLlegada,horarioInicio,horarioFinaliza ,idCliente, menus, descripcion, quierebartender);
                 accesoReservas.mostrar(reserva);
                 boolean a = accesoReservas.agregarRegistro(reserva);
-                System.out.println("La reserva se cargo con exito");
+                Vista.opcionCorrecta("La reserva se cargo con exito");
                 seguir = "n";
             }
 
@@ -709,7 +693,45 @@ public class Empresa {
 
     }
 
-    public LocalDate elegirFechaDeEvento() {
+    private String resrevaIngresarCliente(){
+        Scanner entradaEscanner2 = new Scanner(System.in);
+        String idCliente = null;
+        try {
+
+            boolean resp = true;
+            int opt = 0;
+            while (resp) {
+                Vista.menuDarAltaReservaIngreseCliente();
+                opt = entradaEscanner2.nextInt();
+
+                switch (opt) {
+                    case 0:
+                        resp = false;
+                        break;
+                    case 1:
+                        //buscar cleinte
+
+                        //cliente = darAltaCliente();
+                        idCliente = cliente.getId();
+                        break;
+                    case 2:
+                        //idCliente= buscarCliente(String dni).getDNI();
+                        break;
+                    default:
+                        System.err.println("Dato incorrecto. Reintente");
+                        break;
+                }
+            }
+
+        } catch (InputMismatchException e) {
+
+        } catch (Exception e) {
+
+        }
+        return idCliente;
+    }
+
+    private LocalDate elegirFechaDeEvento() {
         LocalDate fechaTentativa = null;
         LocalDate fecha = null;
         Scanner entradaEscanner = new Scanner(System.in);
@@ -718,31 +740,31 @@ public class Empresa {
         while (si.equals("s")) {
             try {
 
-                System.out.print("1- Ingrese fecha del evento: dd/mm/yyyy ");
+                System.out.println(Color.ANSI_BLUE + " 1- " + Color.ANSI_RESET+ "Ingrese fecha del evento: dd/MM/yyyy");
                 f = entradaEscanner.next();
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 fechaTentativa = LocalDate.parse(f, formatter);
                 boolean fechaV = verificarFechaValida(fechaTentativa);
                 boolean fechaD = accesoReservas.verificarFechaDeEventoDisponible(fechaTentativa);
                 if (fechaV && fechaD) {
-                    System.out.println("Fecha disponible");
+                    Vista.opcionCorrecta("Fecha disponible");
                     fecha = fechaTentativa;
                 } else {
-                    System.out.println("Fecha No Disponible");
+                    System.err.println("Fecha No Disponible");
 
                 }
 
             } catch (FechaInvalidaException e) {
                 System.err.println(e.getMessage());
             }
-            System.out.println("Dese seguir buscando fechas? s/n");
+            Vista.deseaSeguirCargandoFechas();
             si = entradaEscanner.next();
         }
         return fecha;
 
     }
-    @NotNull
-    public boolean verificarFechaValida(@org.jetbrains.annotations.NotNull LocalDate fechaVali) throws FechaInvalidaException {
+
+    public boolean verificarFechaValida(LocalDate fechaVali) throws FechaInvalidaException {
 
         boolean fechaValida = false;
         if ((fechaVali.isAfter(LocalDate.now().plusDays(2)))) {
@@ -769,41 +791,36 @@ public class Empresa {
 
 
                 System.out.println("SELECCIONAR MENU");
-                System.out.print("\n 1- Menu Clasico");
-                System.out.print("\n 2- Menu vegano");
-                System.out.print("\n 3- Menu Vegetariano");
-                System.out.print("\n 4- Menu diabetico");
-                System.out.print("\n 0- Salir");
+                Vista.darAltaReservaSeleccionarMenu();
                 op = entrada.nextInt();
 
 
                 switch (op) {
                     case 0:
-                        System.out.println("0- SALIR");
                         resp = false;
                         break;
                     case 1:
-                        System.out.println("1- CLASICO");
+                        Vista.titulo("CLASICO");
                         Menu a = new Menu();
                         menus.add(modificarMenu(a));
                         break;
                     case 2:
-                        System.out.println("2- VEGANO");
+                        Vista.titulo("VEGANO");
                         Menu b = new Menu();
                         menus.add(modificarMenu(b));
                         break;
                     case 3:
-                        System.out.println("3- VEGETARIANO");
+                        Vista.titulo("VEGETARIANO");
                         Menu c = new Menu();
                         menus.add(modificarMenu(c));
                         break;
                     case 4:
-                        System.out.println("4- DIABETICO");
+                        Vista.titulo("DIABETICO");
                         Menu d = new Menu();
                         menus.add(modificarMenu(d));
                         break;
                     default:
-                        System.out.println("Dato Incorrecto. Reintente.");
+                        System.err.println("Dato Incorrecto. Reintente.");
                 }
             }
         } catch (InputMismatchException e) {
@@ -824,13 +841,10 @@ public class Empresa {
         try {
 
             while (resp) {
-                System.out.println("MENU");
-                System.out.println();
-                System.out.println("1- Cantidad de Personas");
-                System.out.println("2- Modificar Ingredientes");
-                System.out.println("3- Eliminar Ingrediente");
-                System.out.println("0- Salir");
-                //trear ingredientes
+
+
+                Vista.sleccionarMenuAltaReserva();
+                //trear ingredientes Todo trear Ingredientes al cargar una reserva
                 op = entrada.nextInt();
 
                 switch (op) {
@@ -838,16 +852,16 @@ public class Empresa {
                         resp = false;
                         break;
                     case 1:
-                        System.out.println("3 -Ingrese cantidad de Personas");
+                        System.out.println(Color.ANSI_BLUE + " 1- " + Color.ANSI_RESET + "Ingrese cantidad de Personas");
                         int cantidadPer = entrada.nextInt();
                         menu.setCantReservas(cantidadPer);
                         System.out.println("Cantidad = " + menu.getCantReservas());
                         break;
                     case 2:
-                        System.out.println("2- Eliminar Ingrediente");
+                        System.out.println(Color.ANSI_BLUE + " 2- " + Color.ANSI_RESET + "Eliminar ingrediente");
                         break;
                     case 3:
-                        System.out.print("1- Modificar algun ingrediente del menu? s/n");
+                        System.out.println(Color.ANSI_BLUE + " 3- " + Color.ANSI_RESET + "Modificar algun ingrediente del menu");
                         break;
                     default:
                 }
@@ -877,11 +891,8 @@ public class Empresa {
         try {
 
             while (resp == true) {
-                System.out.println("DAR BAJA RESERVAS");
-                System.out.println("1- Id");
-                System.out.println("2. Fecha");
-                System.out.println("3- Cliente");
-                System.out.println("0- Salir");
+
+                Vista.darBajaReservas();
                 op = scanner.nextInt();
 
                 switch (op) {
@@ -889,13 +900,13 @@ public class Empresa {
                         resp = false;
                         break;
                     case 1:
-                        System.out.println("ID");
+                        System.out.println(Color.ANSI_BLUE + " 1- " + Color.ANSI_RESET + "ID");
                         String idReserva = scanner.next();
                         darBajaUnareserva(idReserva);
                         reserva.mostrar();
                         break;
                     case 2:
-                        System.out.println("FECHA dd/MM/yyyy");
+                        System.out.println(Color.ANSI_BLUE + " 2 " + Color.ANSI_RESET + "FECHA dd/MM/yyyy");
                         String fecha = scanner.next();
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                         LocalDate fechaLD = LocalDate.parse(fecha, formatter);
@@ -903,27 +914,27 @@ public class Empresa {
                         reserva.mostrar();
                         break;
                     case 3:
-                        System.out.println("Cliente");
+                        System.out.println(Color.ANSI_BLUE + " 3 " + Color.ANSI_RESET + "CLIENTE");
                         Cliente cliente = null;//busCarCliente() //todo DNI,ID,Apellido, etc.
                         reservasCliente = //buscarReservasPorCliente(cliente);
                                 reservasCliente = darBajaTodasReservas(cliente);
                         mostrarListaReservasPorCliente(reservasCliente); //todo Crear una clase para las listas.
                         break;
                     default:
-                        System.out.println("Ingreso un dato incorrecto. Reintente");
+                        System.err.println("Ingreso un dato incorrecto. Reintente");
 
                 }
             }
         } catch (NullPointerException e) {
-            System.out.println("vacio");
+            System.err.println("Error");
             buscarUnaReserva();
 
         } catch (InputMismatchException e) {
-            System.out.println("Error");
+            System.err.println("Error");
             buscarUnaReserva();
 
         } catch (Exception e) {
-            System.out.println("Error");
+            System.err.println("Error");
             buscarUnaReserva();
 
         }
@@ -931,9 +942,9 @@ public class Empresa {
     }
 
     public Reserva darBajaUnareserva(Reserva reserva) {
-        System.out.println("DAR DE BAJA UNA RESERVA");
+
         if (reserva == null) {
-            System.out.println("No selecciono ninguna reserva. La puede buscar");
+            System.err.println("No selecciono ninguna reserva. La puede buscar");
         } else {
 
             try {
@@ -949,9 +960,9 @@ public class Empresa {
     }
 
     public Reserva darBajaUnareserva(String idReserva) {
-        System.out.println("DAR DE BAJA UNA RESERVA");
+
         if (reserva == null) {
-            System.out.println("No selecciono ninguna reserva. La puede buscar");
+            System.err.println("La reserva no existe");
         } else {
 
             try {
@@ -966,9 +977,9 @@ public class Empresa {
     }
 
     public Reserva darBajaUnareserva(LocalDate fechaReserva) {
-        System.out.println("DAR DE BAJA UNA RESERVA");
+
         if (reserva == null) {
-            System.out.println("No selecciono ninguna reserva. La puede buscar");
+            System.err.println("La reserva no existe");
         } else {
 
             try {
@@ -983,10 +994,10 @@ public class Empresa {
     }
 
     public List<Reserva> darBajaTodasReservas(Cliente idCliente) {
-        System.out.println("DAR DE BAJA UNA RESERVA");
+
         List<Reserva> reservas = new ArrayList<>();
         if (reserva == null) {
-            System.out.println("No selecciono ninguna reserva. La puede buscar");
+            System.err.println("La reserva no existe");
         } else {
 
             try {
@@ -1011,13 +1022,9 @@ public class Empresa {
 
             while (resp == true) {
 
-                System.out.println("MOFIFICAR RESERVA");
-                System.out.println("1- Fecha Evento");
-                System.out.println("2- Menus");
-                System.out.println("3- Descripcion");
-                System.out.println("4- Bartenders");
-                System.out.println("5- Status = que dar de baja! reveer");//TODO ver repeticion en codigo
-                System.out.println("0- Salir");
+
+                Vista.modificarReserva();
+
                 op = scanner.nextInt();
 
                 switch (op) {
