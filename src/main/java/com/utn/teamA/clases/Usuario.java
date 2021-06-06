@@ -14,6 +14,7 @@ public abstract class Usuario{
     private String username;
     private String password;
     private LocalDate fechaRegistro;
+    private TipoUsuario tipoUsuario;
 
     //region Constructores
 
@@ -30,11 +31,12 @@ public abstract class Usuario{
      * @param password
      * @param fechaRegistro
      */
-    public Usuario( String username, String password, LocalDate fechaRegistro) {
+    public Usuario( String username, String password, LocalDate fechaRegistro, TipoUsuario tipoUsuario) {
 
         this.username = username;
         this.password = password;
-        this.fechaRegistro = LocalDate.now();
+        this.fechaRegistro = fechaRegistro;
+        this.tipoUsuario   = tipoUsuario;
     }
     //endregion
 
@@ -49,6 +51,10 @@ public abstract class Usuario{
 
     public String getPassword() {
         return password;
+    }
+
+    public TipoUsuario getTipoUsuario(){
+        return this.tipoUsuario;
     }
     //endregion
 
@@ -65,6 +71,9 @@ public abstract class Usuario{
         this.fechaRegistro = fechaRegistro;
     }
 
+    public void setTipoUsuario(TipoUsuario tipoUsuario){
+        this.tipoUsuario = tipoUsuario;
+    }
     //endregion
 
     //region To String
