@@ -13,6 +13,7 @@ public abstract class Usuario{
     
     private String username;
     private String password;
+    private String email;
     private LocalDate fechaRegistro;
     private TipoUsuario tipoUsuario;
 
@@ -31,12 +32,18 @@ public abstract class Usuario{
      * @param password
      * @param fechaRegistro
      */
-    public Usuario( String username, String password, LocalDate fechaRegistro, TipoUsuario tipoUsuario) {
+    public Usuario( String username, String password, String email, LocalDate fechaRegistro, TipoUsuario tipoUsuario) {
 
         this.username = username;
         this.password = password;
         this.fechaRegistro = fechaRegistro;
         this.tipoUsuario   = tipoUsuario;
+    }
+
+    public Usuario(String username, String password, String email, LocalDate fechaRegistro){
+        this.username = username;
+        this.password = password;
+        this.fechaRegistro = fechaRegistro;
     }
     //endregion
 
@@ -56,6 +63,10 @@ public abstract class Usuario{
     public TipoUsuario getTipoUsuario(){
         return this.tipoUsuario;
     }
+
+    public String getEmail(){
+        return this.email;
+    }
     //endregion
 
     //region Setters
@@ -73,6 +84,10 @@ public abstract class Usuario{
 
     public void setTipoUsuario(TipoUsuario tipoUsuario){
         this.tipoUsuario = tipoUsuario;
+    }
+
+    public void setEmail(String email){
+        this.email = email;
     }
     //endregion
 

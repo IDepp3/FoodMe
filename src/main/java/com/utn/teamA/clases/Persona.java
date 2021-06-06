@@ -21,7 +21,6 @@ public abstract class Persona extends Usuario {
     private String telefono;
     private String direccion;
     private String dni;
-    private String email;
     private boolean estado;
 
     //region Constructores
@@ -52,7 +51,6 @@ public abstract class Persona extends Usuario {
      * @param telefono
      * @param direccion
      * @param dni
-     * @param email
      */
     public Persona( String nombre, String apellido, LocalDate fechaNacimiento, String telefono, String direccion, String dni,
             String email, boolean estado) {
@@ -63,7 +61,6 @@ public abstract class Persona extends Usuario {
         this.telefono = telefono;
         this.direccion = direccion;
         this.dni = dni;
-        this.email = email;
         this.estado = true;
     }
 
@@ -78,12 +75,11 @@ public abstract class Persona extends Usuario {
      * @param telefono
      * @param direccion
      * @param dni
-     * @param email
      */
     public Persona(String username, String password, LocalDate fechaRegistro,String nombre, String apellido, LocalDate fechaNacimiento,
                    String telefono, String direccion, String dni,
                    String email, boolean estado){
-        super( username, password, fechaRegistro);
+        super( username, password, email, fechaRegistro);
         this.id = UUID.randomUUID().toString().substring(0, 10).replace("-", "g");
         this.nombre = nombre;
         this.apellido = apellido;
@@ -91,11 +87,14 @@ public abstract class Persona extends Usuario {
         this.telefono = telefono;
         this.direccion = direccion;
         this.dni = dni;
-        this.email = email;
         this.estado = true;
     }
 
-
+    public Persona(String id, String username, String password, String email, LocalDate fechaRegistro, TipoUsuario tipoUsuario, boolean estado){
+        super(username, password, email, fechaRegistro, tipoUsuario);
+        this.id     = id;
+        this.estado = estado;
+    }
     //endregion
 
     //region Getters
@@ -168,14 +167,6 @@ public abstract class Persona extends Usuario {
         this.dni = dni;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     //endregion
 
     //region To String
@@ -190,7 +181,6 @@ public abstract class Persona extends Usuario {
                 ", telefono='" + telefono + '\'' +
                 ", direccion='" + direccion + '\'' +
                 ", dni='" + dni + '\'' +
-                ", email='" + email + '\'' +
                 '}';
     }
 
