@@ -1,6 +1,7 @@
 package com.utn.teamA;
 
 import java.util.List;
+import java.util.Scanner;
 import java.util.UUID;
 
 public class Menu {
@@ -96,5 +97,69 @@ public class Menu {
                 Color.ANSI_RESET + "\n";
     }
 
-    
+    public void crear(){
+
+        System.out.println(
+                Color.ANSI_BLUE +
+                        "\n\n" +
+                        " ----------------------------------------\n" +
+                        "| \t\t N U E V O    M E N U \t\t |\n" +
+                        " ----------------------------------------" +
+                        " \n\n" +
+                        Color.ANSI_RESET);
+
+        int opcion = 0;
+        boolean continuar = false;
+
+        do{
+
+            System.out.println(Color.ANSI_CYAN + "Ingrese tipo:" + Color.ANSI_RESET);
+            System.out.println(Color.ANSI_GREEN + " 1 " + Color.ANSI_RESET + " Vegano");
+            System.out.println(Color.ANSI_GREEN + " 2 " + Color.ANSI_RESET + " Vegetariano");
+            System.out.println(Color.ANSI_GREEN + " 3 " + Color.ANSI_RESET + " Diabetico");
+            System.out.println(Color.ANSI_GREEN + " 4 " + Color.ANSI_RESET + " Clasico");
+
+            opcion = Helpers.validarInt();
+            continuar = false;
+
+
+            switch (opcion){
+                case 1:
+                    this.tipo = TipoMenu.VEGANO;
+                    break;
+                case 2:
+                    this.tipo = TipoMenu.VEGETARIANO;
+                    break;
+                case 3:
+                    this.tipo = TipoMenu.DIABETICO;
+                    break;
+                case 4:
+                    this.tipo = TipoMenu.CLASICO;
+                    break;
+                default:
+                    continuar = true;
+                    System.out.println(
+                            Color.ANSI_RED +
+                                    "\n\t [[ " + opcion + " ]] NO ES UNA OPCION VALIDA \n" +
+                                    Color.ANSI_RESET
+                    );
+                    break;
+            }
+        }while (continuar);
+
+        System.out.println(Color.ANSI_CYAN + "Ingrese nombre:" + Color.ANSI_RESET);
+        this.nombre =  Helpers.nextLine();
+
+        System.out.println(Color.ANSI_CYAN + "Ingrese Descripcion:" + Color.ANSI_RESET);
+        this.descripcion =  Helpers.nextLine();
+
+        System.out.println(Color.ANSI_CYAN + "Ingrese Precio:" + Color.ANSI_RESET);
+        this.precio =  Helpers.validarDouble();
+
+
+        System.out.println( this );
+
+    }
+
+
 }
