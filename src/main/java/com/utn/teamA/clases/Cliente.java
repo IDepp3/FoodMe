@@ -34,8 +34,8 @@ public class Cliente extends Persona {
         reservas = lasReservas;
     }
 
-    public Cliente(String nombre, String apellido){
-        super(nombre, apellido);
+    public Cliente(String nombreUsuario, String password){
+        super(nombreUsuario, password);
     }
 
     /**
@@ -53,6 +53,12 @@ public class Cliente extends Persona {
                     String dni,String email,Boolean estado,List<Reserva> lasReservas){
         super(nombre,apellido,fechaNacimiento,telefono,direccion,dni,email,estado );
         reservas = lasReservas;
+    }
+    // constructor usado para el registro
+    
+    public Cliente(String id, String username, String password, String email, LocalDate fechaRegistro, TipoUsuario tipoUsuario, boolean estado){
+        super(id, username, password, email, fechaRegistro, tipoUsuario, estado);
+        this.reservas = null;
     }
 
     /**
@@ -115,11 +121,11 @@ public class Cliente extends Persona {
         return false;
     }
 
-    public boolean esIgual(Cliente cliente){
+    public boolean existeCliente(Cliente cliente){
         if(this == cliente)
             return true;
         
-        if(this.getNombre().equals(cliente.getNombre()) && this.getApellido().equals(cliente.getApellido()))
+        if(this.getEmail().equals(cliente.getEmail()) && this.getUsername().equals(cliente.getUsername()))
             return true;
 
         return false;

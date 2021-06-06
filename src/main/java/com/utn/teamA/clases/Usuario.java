@@ -32,18 +32,25 @@ public abstract class Usuario{
      * @param password
      * @param fechaRegistro
      */
-    public Usuario( String username, String password, String email, LocalDate fechaRegistro, TipoUsuario tipoUsuario) {
-
-        this.username = username;
-        this.password = password;
+    public Usuario( String username, String password, LocalDate fechaRegistro) {
+        this.username      = username;
+        this.password      = password;
         this.fechaRegistro = fechaRegistro;
-        this.tipoUsuario   = tipoUsuario;
     }
 
-    public Usuario(String username, String password, String email, LocalDate fechaRegistro){
+    // constructor usado para crear usuario
+    
+    public Usuario(String username, String password){
         this.username = username;
         this.password = password;
+    }
+
+    public Usuario(String username, String password, String email, LocalDate fechaRegistro, TipoUsuario tipoUsuario){
+        this.username      = username;
+        this.password      = password;
+        this.email         = email;
         this.fechaRegistro = fechaRegistro;
+        this.tipoUsuario   = tipoUsuario;
     }
     //endregion
 

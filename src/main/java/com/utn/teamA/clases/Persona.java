@@ -34,12 +34,8 @@ public abstract class Persona extends Usuario {
         this.estado = true;
     }
 
-    public Persona(String nombre, String apellido){
-        this.id = UUID.randomUUID().toString().substring(0, 10).replace("-", "g");
-        this.nombre   = nombre;
-        this.apellido = apellido;
-        LocalDate.now();
-        this.estado = true;
+    public Persona(String nombreUsuario, String password){
+        super(nombreUsuario, password);
     }
 
     /**
@@ -79,7 +75,7 @@ public abstract class Persona extends Usuario {
     public Persona(String username, String password, LocalDate fechaRegistro,String nombre, String apellido, LocalDate fechaNacimiento,
                    String telefono, String direccion, String dni,
                    String email, boolean estado){
-        super( username, password, email, fechaRegistro);
+        super( username, password, fechaRegistro);
         this.id = UUID.randomUUID().toString().substring(0, 10).replace("-", "g");
         this.nombre = nombre;
         this.apellido = apellido;
@@ -89,6 +85,8 @@ public abstract class Persona extends Usuario {
         this.dni = dni;
         this.estado = true;
     }
+
+    // constructor usado para el registro
 
     public Persona(String id, String username, String password, String email, LocalDate fechaRegistro, TipoUsuario tipoUsuario, boolean estado){
         super(username, password, email, fechaRegistro, tipoUsuario);
