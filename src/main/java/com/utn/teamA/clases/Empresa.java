@@ -298,8 +298,8 @@ public class Empresa {
                     break;
                 case 1:
                     Vista.titulo("Login");
-                    //this.cliente = loginUsuario();
-                    this.cliente = this.listaClientes.get(0);
+                    this.cliente = loginUsuario();
+                    //this.cliente = this.listaClientes.get(0);
                     if (this.cliente != null)
                         if (this.cliente.getTipoUsuario() == TipoUsuario.ADMINISTRADOR)
                             seleccionDeMenu();
@@ -329,7 +329,7 @@ public class Empresa {
 
     // endregion
 
-    // region USUARIO
+    // region LOGIN Y REGISTRO
 
     private Cliente loginUsuario() {
         Cliente c = new Cliente();
@@ -1104,7 +1104,7 @@ public class Empresa {
                     menuModificarDatos();
                     break;
                 case 3:
-                    // verHistorialCompras();
+                    this.cliente.listarReservas();
                     break;
                 case 4:
                     System.out.println("LISTA CON COMPRAS PENDIENTES AL DIA DE LA FECHA");
@@ -1121,6 +1121,8 @@ public class Empresa {
     public void menuModificarDatos() {
         boolean resp = true;
         int opc;
+        String aux = "";
+        LocalDate fecha;
         while (resp) {
             Vista.titulo("Modificacion de datos personales");
             Vista.modificarInformacionPersonal();
@@ -1130,29 +1132,42 @@ public class Empresa {
                     resp = false;
                     break;
                 case 1:
-                    System.out.println("MODIFICAR PASS");
+                    aux = Helpers.validaciones("nombre", Helpers.VALIDAR_NOMBRES, "Tiene que empezar con mayusculas y se pueden ingresar hasta 2 nombres");
+                    this.cliente.setNombre(aux);
                     break;
                 case 2:
-
-                    // String telefono = control(ingresaString());
-                    /*
-                     * this.cliente.setTelefono(telefono);
-                     * this.accesoClientes.actualizarRegistro(this.cliente);
-                     */
-
-                    // Todo Joaco tira eror la funcion
+                    aux = Helpers.validaciones("apellido", Helpers.VALIDAR_NOMBRES, "Tiene que empezar con mayusculas y se pueden ingresar hasta 2 nombres");
+                    this.cliente.setApellido(aux);
                     break;
-
                 case 3:
-                    System.out.println("MODIFICAR DIRECCION");
+                    fecha = Helpers.validarFecha();
+                    this.cliente.setFechaNacimiento(fecha);
                     break;
                 case 4:
-                    System.out.println("MODIFICAR EMAIL");
+                    aux = Helpers.validaciones("telefono", Helpers.VALIDAR_TELEFONO, "Coloque el numero sin 0 ni 15");
+                    this.cliente.setTelefono(aux);
+                    break;
+                case 5:
+                    Vista.ingreseDato("Ingrese una direccion");
+                    aux = Helpers.nextLine();
+                    break;
+                case 6:
+                    aux = Helpers.validaciones("DNI", Helpers.VALIDAR_DNI, "Ingrese un dni valido");
+                    this.cliente.setDni(aux);
+                    break;
+                case 7:
+                    aux = passwordIguales();
+                    this.cliente.setPassword(aux);
+                    break;
+                case 8:
+                    aux = Helpers.validaciones("email", Helpers.VALIDAR_EMAIL, "Ingrese un email valido");
+                    this.cliente.setEmail(aux);
                     break;
                 default:
                     Vista.opcionIncorrecta(opc);
                     break;
             }
+            this.accesoClientes.actualizarRegistro(this.cliente);
             this.listaClientes = accesoClientes.obtenerRegistros();
         }
     }

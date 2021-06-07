@@ -131,5 +131,14 @@ public class Cliente extends Persona {
     }
     //endregion
 
+    public void listarReservas(){
+        if(this.reservas != null){
+            for(Reserva r : this.reservas){
+                System.out.println(r);
+            }
+        }else{
+            System.out.println("Todavia no hay reservas realizadas");
+        }
+    }
 }
 
