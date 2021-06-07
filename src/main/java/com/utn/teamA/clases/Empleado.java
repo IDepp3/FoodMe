@@ -85,7 +85,7 @@ public class Empleado extends Persona {
         return " Empleado: " + " ID: " + super.getId() + " Nombre: " + super.getNombre() + " Apellido: "
 				+ super.getApellido() + " Nacimiento: " + super.getFechaNacimiento().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + " Telefono: "
 				+ super.getTelefono() + " Direccion: " + super.getDireccion() + " Dni: " + super.getDni() + " Email: "
-				+ super.getEmail() + " Tipo: " + this.tipoEmpleado + " Sueldo: " + this.sueldo;
+				+ super.getEmail() + " Tipo: " + this.tipoEmpleado.tipo + " Sueldo: " + this.sueldo;
     }
     //endregion
 

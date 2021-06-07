@@ -1,5 +1,6 @@
 package com.utn.teamA.clases;
 
+
 import java.time.DateTimeException;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -20,6 +21,10 @@ import com.utn.teamA.clases.Empleado;
 
 public class Empresa {
 
+    /**
+     *
+     */
+   
     private String nombre;
     private String direccion;
     private String CUIT;
@@ -368,15 +373,14 @@ public class Empresa {
     private void getMenuGestionPersonal() {
         Scanner entradaEscanner = new Scanner(System.in);
         boolean resp = true;
-        Empleado f = null;
-        int op = 0;
-        int opcion = 0;
+        
         try {
             while (resp) {
                
                 System.out.println("1- Dar de alta un empleado");
                 System.out.println("2- Dar de baja un empleado");
                 System.out.println("3- Buscar un empleado");
+                System.out.println("4- Lista empleados");
                 System.out.println("0- Salir");
                 int seleccion;
                 seleccion = entradaEscanner.nextInt();
@@ -393,6 +397,8 @@ public class Empresa {
                     case 3:
                         buscarEmpleado();
                         break;
+                    case 4:
+                        listarEmpleados();
                     default:
                         System.out.println("Ingreso un dato incorrecto. reintente.");
                 }
@@ -463,24 +469,30 @@ public class Empresa {
         System.out.print("\nIngrese la direccion: ");
         direccion = entradaEscanner.next();
         entradaEscanner.next();
-        boolean respuest = false;
+        boolean respuestaDNI = false;
 
-        while (respuest == false) {
+        while (respuestaDNI == false) {
             System.out.print("\nIngrese dni del empleado: ");
             dni = entradaEscanner.next();
-            if (respuest = Helpers.validarDni(dni)) {
-                respuest = true;
+            if (respuestaDNI = Helpers.validarDni(dni)) {
+                respuestaDNI = true;
             }
 
         }
 
         String email = "";
         boolean estado = true;
-        boolean respu = true;
-        while (respu == true) {
-            // Validamos el email que nos da el cliente.
-            System.out.println("\nIngrese el email del empleado: ");
+        boolean respuestaEmail = false;
+        
+        while (respuestaEmail == false) {
+            System.out.print("\nIngrese el email del empleado: ");
             email = entradaEscanner.next();
+            if (respuestaEmail = Helpers.validarEmail(email)){
+                respuestaEmail = true;
+            }
+
+        }
+
             System.out.println("\nIngrese tipo del empleado");
             System.out.println("\n 4 - MOZO | 5 - BARTENDER | 6 - SUSHIMAN");
             int op = 0;
@@ -503,9 +515,7 @@ public class Empresa {
 
             sueldo = entradaEscanner.nextDouble();
 
-            respu = false;
-        }
-        empleado = new Empleado(nombre, apellido, fecha, telefono, direccion, dni, email, tipo, sueldo, estado);
+        empleado = new Empleado(nombre, apellido, fecha, telefono, direccion, dni, email,tipo , sueldo, estado);
         System.out.println("Se agrego exitosamente el empleado");
         accesoEmpleados.agregarRegistro(empleado);
 
@@ -539,7 +549,7 @@ public class Empresa {
         g.setDni(dni);
         g = accesoEmpleados.obtenerRegistro(g);
         if (g != null) {
-            System.out.println(g);
+            System.out.println("");
         } else {
             System.out.println("El empleado no existe.");
         }
@@ -547,10 +557,10 @@ public class Empresa {
     }
 
     public void listarEmpleados() {
+        System.out.println("Hola");
         System.out.println("\nACA LISTAMOS LOS EMPLEADOS");
-        List<Empleado> listaEmpleado = null;
-        listaEmpleado = accesoEmpleados.obtenerRegistros();
-        System.out.println(listaEmpleado);
+        listaEmpleados = accesoEmpleados.obtenerRegistros();
+        System.out.println("Empleado: "+listaEmpleados);
     }
 
     // endregion
