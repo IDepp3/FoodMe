@@ -330,7 +330,6 @@ public class Empresa {
                 System.out.println("1- Gestion de Personal");
                 System.out.println("2- Gestion de Reservas");
                 System.out.println("3- Gestion de Ventas");
-                System.out.println("4- Gestion de Stock");
                 System.out.println("0- Salir");
 
                 seleccion = entradaEscanner.nextInt();
@@ -351,10 +350,6 @@ public class Empresa {
                     case 3:
                         Vista.titulo("GESTION DE VENTAS");
                         getMenuGestionVentas();
-                        break;
-                    case 4:
-                        Vista.titulo("GESTION DE STOCK");
-                        getMenuGestionStock();
                         break;
                     default:
                         System.out.println("Dato incorrecto. Reintente");
@@ -950,6 +945,8 @@ public class Empresa {
     private void getMenuGestionVentas() {
         Scanner entradaEscanner = new Scanner(System.in);
         boolean resp = true;
+        
+
 
         while (resp) {
 
@@ -967,6 +964,7 @@ public class Empresa {
                         break;
                     case 1:
                         System.out.println("ACA DAMOS DE ALTA UNA VENTA.");
+                
                         break;
                     case 2:
                         System.out.println("ACA DAMOS DE BAJA UNA VENTA.");
@@ -992,46 +990,6 @@ public class Empresa {
     // endregion
 
     // endregion
-
-    // region Stock
-    private void getMenuGestionStock() {
-        Scanner entradaEscanner = new Scanner(System.in);
-        boolean resp = true;
-
-        while (resp) {
-
-            System.out.println("1- Dar de alta un articulo");
-            System.out.println("2- Dar de baja un articulo");
-            System.out.println("3- Buscar un articulo");
-            System.out.println("0- Salir");
-            int seleccion;
-
-            try {
-                seleccion = entradaEscanner.nextInt();
-                switch (seleccion) {
-                    case 0:
-                        resp = false;
-                        break;
-                    case 1:
-                        System.out.println("ACA DAMOS DE ALTA UN ARTICULO.");
-                        break;
-                    case 2:
-                        System.out.println("ACA DAMOS DE BAJA UN ARTICULO");
-                        break;
-                    case 3:
-                        System.out.println("ACA BUSCAMOS UN ARTICULO");
-                        break;
-                    default:
-
-                        break;
-
-                }
-            } catch (InputMismatchException e) {
-                getMenuGestionStock();
-            }
-        }
-
-    }
 
     // region ABM
 
