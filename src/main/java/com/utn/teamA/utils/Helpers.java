@@ -178,9 +178,11 @@ public class Helpers {
             anio = Integer.parseInt(Helpers.validaciones("Dia", Helpers.VALIDAR_ENTEROS, "Ingrese solo numeros"));
             try{
                 fecha = LocalDate.of(anio, mes, dia);
+                resp = false;
             } catch(DateTimeException e){
                 Vista.opcionIncorrecta("La fecha ingresada es incorrecta intente nuevamente");
             }
+
         }
         return fecha;
     }
