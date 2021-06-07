@@ -11,12 +11,16 @@ import java.time.LocalDate;
 
 public abstract class Usuario{
     
+    // region ATRIBUTOS
+
     private String username;
     private String password;
     private String email;
     private LocalDate fechaRegistro;
     private TipoUsuario tipoUsuario;
 
+    // endregion
+    
     //region Constructores
 
     /**
@@ -32,18 +36,29 @@ public abstract class Usuario{
      * @param password
      * @param fechaRegistro
      */
-    public Usuario( String username, String password, LocalDate fechaRegistro) {
+    
+    /* public Usuario( String username, String password, LocalDate fechaRegistro) {
+        this.username      = username;
+        this.password      = password;
+        this.fechaRegistro = fechaRegistro;
+    } */
+
+    // constructor para que no se rompan cosas
+
+    public Usuario(String username, String password, LocalDate fechaRegistro){
         this.username      = username;
         this.password      = password;
         this.fechaRegistro = fechaRegistro;
     }
 
-    // constructor usado para crear usuario
+    // constructor usado para loguear un usuario 
     
     public Usuario(String username, String password){
         this.username = username;
         this.password = password;
     }
+
+    // constructor usado para crear un usuario
 
     public Usuario(String username, String password, String email, LocalDate fechaRegistro, TipoUsuario tipoUsuario){
         this.username      = username;
@@ -52,6 +67,7 @@ public abstract class Usuario{
         this.fechaRegistro = fechaRegistro;
         this.tipoUsuario   = tipoUsuario;
     }
+
     //endregion
 
     //region Getters
@@ -100,21 +116,10 @@ public abstract class Usuario{
 
     //region To String
 
-    /* @Override
-    public String toString() {
-        return " User | Fecha registro: " + fechaRegistro.toString() + " Password: " + password + " Username: " + username;
-    } */
-
     @Override
     public String toString() {
         return "\nNombre Usuario : " + this.username + "\nEmail : " + this.email + "\nFecha Registro : " + this.fechaRegistro + "\nTipo de Usuario : " + this.tipoUsuario;
     }
     //endregion
-
-    //region Mostrar
-    public abstract void mostrar();
-    //endregion
-    
-
 
 }

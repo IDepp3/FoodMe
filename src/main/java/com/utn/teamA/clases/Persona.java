@@ -188,15 +188,10 @@ public abstract class Persona extends Usuario {
 
     @Override
     public String toString() {
-        return "ID : " + this.id + "\nNombre : " + this.nombre + "\nApellido : " + this.apellido + "\nFecha Nacimiento : " + this.fechaNacimiento + "\nTelefono : " + this.telefono + "\nDireccion : " + this.direccion + "\nDNI : " + this.dni + "\nEstado : " + this.estado + super.toString();
+        return "ID : " + this.id + "\nNombre : " + this.nombre + "\nApellido : " + this.apellido + "\nFecha Nacimiento : " + this.fechaNacimiento + "\nTelefono : " + this.telefono + "\nDireccion : " + this.direccion + "\nDNI : " + this.dni + "\nEstado : " + ((this.estado) ? "Activo" : "Inactivo") + super.toString();
     }
 
 
     //endregion
-
-    //region Mostrar
-    public abstract void mostrar();
-    //endregion
-
 
 }

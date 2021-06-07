@@ -97,13 +97,6 @@ public class Cliente extends Persona {
     // endregion
 
     //region To String
-    /* @Override
-    public String toString() {
-        return super.toString() +
-                "Cliente{" +
-                "reservas=" + reservas +
-                '}';
-    } */
 
     @Override
     public String toString() {
@@ -137,15 +130,6 @@ public class Cliente extends Persona {
         return false;
     }
     //endregion
-
-    //region Mostrar
-
-    @Override
-    public void mostrar() {
-        System.out.println(toString());
-    }
-    //endregion
-
 
 }
 

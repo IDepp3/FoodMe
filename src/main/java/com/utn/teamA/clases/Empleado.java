@@ -108,11 +108,4 @@ public class Empleado extends Persona {
         return Objects.hash(getTipoEmpleado(), getSueldo());
     }
 
-    //region Mostrar
-    @Override
-    public void mostrar() {
-        System.out.println(toString());
-    }
-    //endregion
-
 }
