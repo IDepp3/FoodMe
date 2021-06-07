@@ -1,12 +1,41 @@
 package com.utn.teamA.utils;
 
+import java.io.Console;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.Base64;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.SecretKeySpec;
+
+import com.utn.teamA.clases.TipoUsuario;
+
 public class Helpers {
 
+    // region ATRIBUTOS
+
+    public static final String VALIDAR_NOMBRE_USUARIO = "^[a-zA-Z0-9]([._](?![._])|[a-zA-Z0-9]){6,18}[a-zA-Z0-9]$";
+    public static final String VALIDAR_PASSWORD = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])([A-Za-z\\d$@$!%*?&]|[^ ]){8,15}$";
+    public static final String VALIDAR_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
+    private static final String LLAVE_ENCRIPTACION = "proyectoFinalProgIII";
+    // endregion
+
+    public static String next(){
+        return new Scanner(System.in).nextLine().trim();
+    }
 
     public static String nextLine(){
         Scanner teclado = new Scanner(System.in);
@@ -146,4 +175,123 @@ public class Helpers {
         return resp;
     }
 
+    public static String validaciones(String campo, String validacion, String error){
+        boolean resp = true;
+        String ingreso = "";
+
+        while(resp){
+            System.out.print(Color.ANSI_GREEN + "Ingrese " + campo + " : " + Color.ANSI_RESET);
+            ingreso = Helpers.next();
+            if(ingreso.matches(validacion))
+                resp = false;
+            else
+                Vista.opcionIncorrecta(error, ingreso);
+        }
+        return ingreso;
+    }
+
+    public static String validarPassword(String mensaje){
+        Console c;
+        boolean resp = true;
+        String valor = "";
+        char[] password = null;
+        while(resp){
+            if((c = System.console()) != null){
+                Vista.ingreseDato("Ingrese password");
+                password = c.readPassword(); 
+            }
+            valor = String.valueOf(password);
+
+            if(valor.matches(Helpers.VALIDAR_PASSWORD))
+                resp = false;
+            else
+                Vista.opcionIncorrecta("Su contraseña debe ser como minimo de 8 caracteres maximo 15, 1 mayuscula, 1 minuscula, 1 digito, no espacios en blanco y al menos 1 caracter especial($@!%*?&)", valor);
+        }
+
+        return valor;
+    }
+
+    public static String ingresoPassword(){
+        Console c;
+        String valor = "";
+        char[] password = null;
+        if((c = System.console()) != null){
+            Vista.ingreseDato("Ingrese password");
+            password = c.readPassword();
+        }
+
+        valor = String.valueOf(password);
+
+        return valor;
+    }
+    private static SecretKeySpec crearClave(String llave){
+        SecretKeySpec secretKeySpec = null;
+        MessageDigest messageDigest = null;
+        byte[] cadena;
+
+        try {
+            cadena = llave.getBytes("UTF-8");
+            messageDigest = MessageDigest.getInstance("SHA-1");
+            cadena = messageDigest.digest(cadena);
+            cadena = Arrays.copyOf(cadena, 16);
+            secretKeySpec = new SecretKeySpec(cadena, "AES");
+
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        
+        return secretKeySpec;
+    }
+
+    public static String encriptarPassword(String pass){
+        String encriptada = "";
+        SecretKeySpec secretKeySpec = null;
+        Cipher cipher;
+        byte[] cadena, resultado;
+
+        try {
+            secretKeySpec = crearClave(LLAVE_ENCRIPTACION);
+            cipher = Cipher.getInstance("AES");
+            cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
+            cadena = pass.getBytes("UTF-8");
+            resultado = cipher.doFinal(cadena);
+            encriptada = Base64.getEncoder().encodeToString(resultado);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (NoSuchPaddingException e) {
+            e.printStackTrace();
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IllegalBlockSizeException e) {
+            e.printStackTrace();
+        } catch (BadPaddingException e) {
+            e.printStackTrace();
+        }
+
+        return encriptada;
+    }
+
+    public static String generarID(){
+        return UUID.randomUUID().toString().substring(0,10).replace("-", "T");
+    }
+
+    public static boolean estadoActivo(){
+        return true;
+    }
+
+    public static TipoUsuario tipoCliente(){
+        return TipoUsuario.CLIENTE;
+    }
+
+    public static TipoUsuario tipoAdministrador(){
+        return TipoUsuario.ADMINISTRADOR;
+    }
+
+    public static LocalDate fechaActual(){
+        return LocalDate.now();
+    }
 }
