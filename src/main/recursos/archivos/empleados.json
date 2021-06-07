@@ -13,5 +13,20 @@
     "direccion": "Constitucion",
     "dni": "24856975",
     "estado": true
+  },
+  {
+    "sueldo": 2500.0,
+    "id": "7aca3846g3",
+    "nombre": "Marcos",
+    "apellido": "Solari",
+    "fechaNacimiento": {
+      "year": 1996,
+      "month": 3,
+      "day": 28
+    },
+    "telefono": "2236874815",
+    "direccion": "Sicilia",
+    "dni": "39591305",
+    "estado": true
   }
 ]

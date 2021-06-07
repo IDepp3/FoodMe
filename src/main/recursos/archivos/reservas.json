@@ -1,0 +1,23 @@
+[
+  {
+    "id": "7444d8a3g4",
+    "fechaReserva": "7-jun.-2021",
+    "fechaEvento": "30-ago.-2021",
+    "idCliente": null,
+    "menus": [
+      {
+        "cantReservas": 30,
+        "a": null
+      },
+      {
+        "cantReservas": 0,
+        "a": null
+      }
+    ],
+    "descripcion": "",
+    "costoTotal": null,
+    "quiereBartender": true,
+    "status": true,
+    "cantidadPersonasTotal": 30
+  }
+]

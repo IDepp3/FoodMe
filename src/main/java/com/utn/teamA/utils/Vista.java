@@ -128,6 +128,7 @@ public class Vista {
         System.out.println(Color.ANSI_GREEN + " 1 " + Color.ANSI_RESET + "Dar de alta un empleado");
         System.out.println(Color.ANSI_GREEN + " 2 " + Color.ANSI_RESET + "Dar de baja un empleado");
         System.out.println(Color.ANSI_GREEN + " 3 " + Color.ANSI_RESET + "Buscar un empleado");
+        
         System.out.println(Color.ANSI_RED + " 0 " + Color.ANSI_RESET + "Volver");
         System.out.print(Color.ANSI_GREEN + " : " + Color.ANSI_RESET);
     }
@@ -170,7 +171,7 @@ public class Vista {
         System.out.println(Color.ANSI_GREEN + " 1 " + Color.ANSI_RESET + "Dar de alta un empleado");
         System.out.println(Color.ANSI_GREEN + " 2 " + Color.ANSI_RESET + "Dar de baja un empleado");
         System.out.println(Color.ANSI_GREEN + " 3 " + Color.ANSI_RESET + "Buscar un empleado");
-        System.out.println(Color.ANSI_GREEN + " 3 " + Color.ANSI_RESET + "Listar empleados");
+        System.out.println(Color.ANSI_GREEN + " 4 " + Color.ANSI_RESET + "Listar empleados");
         System.out.println(Color.ANSI_RED + " 0 " + Color.ANSI_RESET + "Volver");
         System.out.print(Color.ANSI_GREEN + " : " + Color.ANSI_RESET);
     }

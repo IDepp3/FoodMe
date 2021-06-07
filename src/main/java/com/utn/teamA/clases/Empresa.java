@@ -299,7 +299,7 @@ public class Empresa {
                 case 1:
                     Vista.titulo("Login");
                     this.cliente = loginUsuario();
-                    //this.cliente = this.listaClientes.get(0);
+                    this.cliente = this.listaClientes.get(0);
                     if (this.cliente != null)
                         if (this.cliente.getTipoUsuario() == TipoUsuario.ADMINISTRADOR)
                             seleccionDeMenu();
@@ -418,6 +418,7 @@ public class Empresa {
                     resp = false;
                     break;
                 case 1:
+                    Vista.titulo("GESTION DE PERSONAL");
                     getMenuGestionPersonal();
                     break;
                 case 2:
@@ -455,11 +456,13 @@ public class Empresa {
                     darAltaUnEmpleado();
                     break;
                 case 2:
-                    System.out.println("ACA DAMOS DE BAJA UN EMPLEADO.");
+                    darDeBaja();
                     break;
                 case 3:
                     buscarEmpleado();
                     break;
+                case 4:
+                    listarEmpleados();
                 default:
                     Vista.opcionIncorrecta(opcion);
             }
@@ -472,8 +475,7 @@ public class Empresa {
         Empleado empleado = null;
         TipoEmpleado tipo = null;
         double sueldo = 0;
-        System.out.println("DAR ALTA EMPLEADO");
-        System.out.println("");
+        
         System.out.print("\nIngrese el nombre del empleado: ");
         String nombre = entradaEscanner.next();
         System.out.print("\nIngrese el apellido del empleado: ");
@@ -556,7 +558,7 @@ public class Empresa {
 
     public void darDeBaja() {
         System.out.println("DAMOS DE BAJA UN EMPLEADO.");
-        Empleado h = new Empleado("Marcos", "Solari");
+        Empleado h = new Empleado();
         boolean a = accesoEmpleados.borrarRegistro(h);
         if (a == true) {
             h.setEstado(false);
@@ -574,7 +576,6 @@ public class Empresa {
         String dni = "";
         dni = escanner.next();
         Empleado g = new Empleado();
-        Empleado e = new Empleado();
         if (g.getDni().equals(dni)) {
             g = accesoEmpleados.obtenerRegistro(g);
             System.out.println("Cliente encontrado");
