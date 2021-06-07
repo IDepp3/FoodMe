@@ -2,7 +2,10 @@ package com.utn.teamA.ConexionDatos;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonParseException;
 import com.utn.teamA.ConexionDatos.interfaces.ObtenerDatos;
+import com.utn.teamA.clases.Cliente;
+import com.utn.teamA.clases.Persona;
 import com.utn.teamA.clases.Reserva;
 import com.utn.teamA.ConexionDatos.Gson.LocalDateDeserializer;
 import com.utn.teamA.ConexionDatos.Gson.LocalDateSerializer;
@@ -17,18 +20,21 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
 
     // region Atributos
 
+
+
     private final String url = "src/main/recursos/archivos/reservas.json";
+
     private Gson json;
 
     // endregion
 
     // region Constructores
 
-    public AccesoReservas() {
+    public AccesoReservas()throws JsonParseException {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(LocalDate.class, new LocalDateSerializer());
         gsonBuilder.registerTypeAdapter(LocalDate.class, new LocalDateDeserializer());
-        this.json = gsonBuilder.setPrettyPrinting().create();
+       this.json = gsonBuilder.setPrettyPrinting().serializeNulls().create();
 
     }
 
@@ -56,9 +62,10 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
 
     @Override
     public List<Reserva> obtenerRegistros() {
-        List<Reserva> reservas = new ArrayList<>();
+        List<Reserva> reservas = null;
         BufferedReader reader;
         try {
+            reservas = new ArrayList<>();
             reader = new BufferedReader(new FileReader(this.url));
             // TODO a investigar recordar descomentar linea y comentar arregloALista();
             //reserva = Arrays.asList(this.json.fromJson(reader, Reserva[].class));
@@ -113,9 +120,6 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
 
     @Override
     public boolean agregarRegistro(Reserva t) {
-        Gson gson = new Gson();
-        String jsonT = gson.toJson(t);
-        System.out.println(jsonT.toString());
 
         boolean resp = false;
         List<Reserva> reservas = obtenerRegistros();
@@ -144,6 +148,8 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
             resp = true;
         } catch (IOException e) {
             System.out.println("Algo salio mal y no se guardo la informacion");
+        }catch (Exception e){
+
         }
 
         return resp;
@@ -179,6 +185,10 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void mostrar(Reserva reserva){
+        System.out.println(json.toJson(reserva));
     }
 
     // endregion

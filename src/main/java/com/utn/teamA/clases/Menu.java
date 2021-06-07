@@ -3,6 +3,7 @@ package com.utn.teamA.clases;
 public class Menu {
 
     private int cantReservas;
+    private TipoEmpleado a;
 
     public Menu(){
     }
@@ -16,6 +17,14 @@ public class Menu {
 
     public void setCantReservas(int cantReservas) {
         this.cantReservas = cantReservas;
+    }
+
+    public TipoEmpleado getA() {
+        return a;
+    }
+
+    public void setA(TipoEmpleado a) {
+        this.a = a;
     }
 
     @Override

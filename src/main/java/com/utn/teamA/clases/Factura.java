@@ -16,6 +16,7 @@ public class Factura {
     private Double precioFinal;
     private Empresa empresa;
     private List<Menu> listaMenusSeleccionados = new ArrayList<Menu>();
+    
 
     //region Constructores
     /**
