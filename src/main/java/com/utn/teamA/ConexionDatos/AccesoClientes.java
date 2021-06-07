@@ -45,7 +45,7 @@ public class AccesoClientes implements ObtenerDatos<Cliente>{
         int i = 0;
 
         while(!resp && i < clientes.size()){
-            if(clientes.get(i).esIgual(t)){
+            if(clientes.get(i).equals(t)){
                 cliente = clientes.get(i);
                 resp = true;
             }
@@ -80,7 +80,7 @@ public class AccesoClientes implements ObtenerDatos<Cliente>{
         int i = 0;
 
         while(!resp && i < clientes.size()){
-            if(clientes.get(i).esIgual(t)){
+            if(clientes.get(i).equals(t)){
                 clientes.remove(i);
                 clientes.add(i, t);
                 resp = true;
@@ -149,7 +149,7 @@ public class AccesoClientes implements ObtenerDatos<Cliente>{
         int i = 0;
 
         while(!resp && i < clientes.size()){
-            if(clientes.get(i).esIgual(cliente))
+            if(clientes.get(i).existeCliente(cliente))
                 resp = true;
             i++;
         }

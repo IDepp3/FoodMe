@@ -34,8 +34,8 @@ public class Cliente extends Persona {
         reservas = lasReservas;
     }
 
-    public Cliente(String nombre, String apellido){
-        super(nombre, apellido);
+    public Cliente(String nombreUsuario, String password){
+        super(nombreUsuario, password);
     }
 
     /**
@@ -53,6 +53,12 @@ public class Cliente extends Persona {
                     String dni,String email,Boolean estado,List<Reserva> lasReservas){
         super(nombre,apellido,fechaNacimiento,telefono,direccion,dni,email,estado );
         reservas = lasReservas;
+    }
+    // constructor usado para el registro
+    
+    public Cliente(String id, String username, String password, String email, LocalDate fechaRegistro, TipoUsuario tipoUsuario, boolean estado){
+        super(id, username, password, email, fechaRegistro, tipoUsuario, estado);
+        this.reservas = null;
     }
 
     /**
@@ -91,12 +97,10 @@ public class Cliente extends Persona {
     // endregion
 
     //region To String
+
     @Override
     public String toString() {
-        return super.toString() +
-                "Cliente{" +
-                "reservas=" + reservas +
-                '}';
+        return super.toString();
     }
     //endregion
 
@@ -115,25 +119,30 @@ public class Cliente extends Persona {
         return false;
     }
 
-    public boolean esIgual(Cliente cliente){
+
+    public boolean existeCliente(Cliente cliente){
         if(this == cliente)
             return true;
         
-        if(this.getNombre().equals(cliente.getNombre()) && this.getApellido().equals(cliente.getApellido()))
+        if(this.getUsername().equals(cliente.getUsername()) && this.getPassword().equals(cliente.getPassword()))
             return true;
 
         return false;
     }
     //endregion
 
-    //region Mostrar
+    public void listarReservas(){
+        if(this.reservas != null){
+            for(Reserva r : this.reservas){
+                System.out.println(r);
+            }
+        }else{
+            System.out.println("Todavia no hay reservas realizadas");
+        }
+    }
 
     @Override
-    public void mostrar() {
-        System.out.println(toString());
+    void mostrar() {
     }
-    //endregion
-
-
 }
 

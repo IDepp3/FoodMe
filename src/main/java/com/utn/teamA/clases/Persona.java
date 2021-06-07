@@ -14,6 +14,8 @@ import java.util.UUID;
 
 public abstract class Persona extends Usuario {
 
+    // region ATRIBUTOS
+
     private String id;
     private String nombre;
     private String apellido;
@@ -21,8 +23,9 @@ public abstract class Persona extends Usuario {
     private String telefono;
     private String direccion;
     private String dni;
-    private String email;
     private boolean estado;
+
+    // endregion
 
     //region Constructores
 
@@ -35,12 +38,8 @@ public abstract class Persona extends Usuario {
         this.estado = true;
     }
 
-    public Persona(String nombre, String apellido){
-        this.id = UUID.randomUUID().toString().substring(0, 10).replace("-", "g");
-        this.nombre   = nombre;
-        this.apellido = apellido;
-        LocalDate.now();
-        this.estado = true;
+    public Persona(String nombreUsuario, String password){
+        super(nombreUsuario, password);
     }
 
     /**
@@ -52,7 +51,6 @@ public abstract class Persona extends Usuario {
      * @param telefono
      * @param direccion
      * @param dni
-     * @param email
      */
     public Persona( String nombre, String apellido, LocalDate fechaNacimiento, String telefono, String direccion, String dni,
             String email, boolean estado) {
@@ -63,7 +61,6 @@ public abstract class Persona extends Usuario {
         this.telefono = telefono;
         this.direccion = direccion;
         this.dni = dni;
-        this.email = email;
         this.estado = true;
     }
 
@@ -78,7 +75,6 @@ public abstract class Persona extends Usuario {
      * @param telefono
      * @param direccion
      * @param dni
-     * @param email
      */
     public Persona(String username, String password, LocalDate fechaRegistro,String nombre, String apellido, LocalDate fechaNacimiento,
                    String telefono, String direccion, String dni,
@@ -91,11 +87,16 @@ public abstract class Persona extends Usuario {
         this.telefono = telefono;
         this.direccion = direccion;
         this.dni = dni;
-        this.email = email;
         this.estado = true;
     }
 
+    // constructor usado para el registro
 
+    public Persona(String id, String username, String password, String email, LocalDate fechaRegistro, TipoUsuario tipoUsuario, boolean estado){
+        super(username, password, email, fechaRegistro, tipoUsuario);
+        this.id     = id;
+        this.estado = estado;
+    }
     //endregion
 
     //region Getters
@@ -168,19 +169,11 @@ public abstract class Persona extends Usuario {
         this.dni = dni;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     //endregion
 
     //region To String
     // Si usamos usuario ahi si vamos a tener que poner  "Super.toString +" en el return
-    @Override
+    /* @Override
     public String toString() {
         return  "Persona{" +
                 "id=" + id +
@@ -190,16 +183,16 @@ public abstract class Persona extends Usuario {
                 ", telefono='" + telefono + '\'' +
                 ", direccion='" + direccion + '\'' +
                 ", dni='" + dni + '\'' +
-                ", email='" + email + '\'' +
                 '}';
+    } */
+
+    @Override
+    public String toString() {
+        return "ID : " + this.id + "\nNombre : " + this.nombre + "\nApellido : " + this.apellido + "\nFecha Nacimiento : " + this.fechaNacimiento + "\nTelefono : " + this.telefono + "\nDireccion : " + this.direccion + "\nDNI : " + this.dni + "\nEstado : " + ((this.estado) ? "Activo" : "Inactivo") + super.toString();
     }
 
 
     //endregion
 
-    //region Mostrar
-    public abstract void mostrar();
-    //endregion
-
-
+    abstract void mostrar();
 }

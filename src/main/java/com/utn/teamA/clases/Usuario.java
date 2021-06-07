@@ -11,10 +11,16 @@ import java.time.LocalDate;
 
 public abstract class Usuario{
     
+    // region ATRIBUTOS
+
     private String username;
     private String password;
+    private String email;
     private LocalDate fechaRegistro;
+    private TipoUsuario tipoUsuario;
 
+    // endregion
+    
     //region Constructores
 
     /**
@@ -30,12 +36,38 @@ public abstract class Usuario{
      * @param password
      * @param fechaRegistro
      */
-    public Usuario( String username, String password, LocalDate fechaRegistro) {
+    
+    /* public Usuario( String username, String password, LocalDate fechaRegistro) {
+        this.username      = username;
+        this.password      = password;
+        this.fechaRegistro = fechaRegistro;
+    } */
 
+    // constructor para que no se rompan cosas
+
+    public Usuario(String username, String password, LocalDate fechaRegistro){
+        this.username      = username;
+        this.password      = password;
+        this.fechaRegistro = fechaRegistro;
+    }
+
+    // constructor usado para loguear un usuario 
+    
+    public Usuario(String username, String password){
         this.username = username;
         this.password = password;
-        this.fechaRegistro = LocalDate.now();
     }
+
+    // constructor usado para crear un usuario
+
+    public Usuario(String username, String password, String email, LocalDate fechaRegistro, TipoUsuario tipoUsuario){
+        this.username      = username;
+        this.password      = password;
+        this.email         = email;
+        this.fechaRegistro = fechaRegistro;
+        this.tipoUsuario   = tipoUsuario;
+    }
+
     //endregion
 
     //region Getters
@@ -49,6 +81,14 @@ public abstract class Usuario{
 
     public String getPassword() {
         return password;
+    }
+
+    public TipoUsuario getTipoUsuario(){
+        return this.tipoUsuario;
+    }
+
+    public String getEmail(){
+        return this.email;
     }
     //endregion
 
@@ -65,20 +105,21 @@ public abstract class Usuario{
         this.fechaRegistro = fechaRegistro;
     }
 
+    public void setTipoUsuario(TipoUsuario tipoUsuario){
+        this.tipoUsuario = tipoUsuario;
+    }
+
+    public void setEmail(String email){
+        this.email = email;
+    }
     //endregion
 
     //region To String
 
     @Override
     public String toString() {
-        return " User | Fecha registro: " + fechaRegistro.toString() + " Password: " + password + " Username: " + username;
+        return "\nNombre Usuario : " + this.username + "\nEmail : " + this.email + "\nFecha Registro : " + this.fechaRegistro + "\nTipo de Usuario : " + this.tipoUsuario;
     }
     //endregion
-
-    //region Mostrar
-    public abstract void mostrar();
-    //endregion
-    
-
 
 }
