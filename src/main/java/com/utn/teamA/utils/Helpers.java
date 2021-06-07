@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Base64;
@@ -28,44 +29,43 @@ public class Helpers {
 
     public static final String VALIDAR_NOMBRE_USUARIO = "^[a-zA-Z0-9]([._](?![._])|[a-zA-Z0-9]){6,18}[a-zA-Z0-9]$";
     public static final String VALIDAR_PASSWORD = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])([A-Za-z\\d$@$!%*?&]|[^ ]){8,15}$";
-    public static final String VALIDAR_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+    public static final String VALIDAR_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+    public static final String VALIDAR_NOMBRES = "^([A-Z]{1}[a-z]+[ ]?){1,2}$";
+    public static final String VALIDAR_ENTEROS = "^\\d{1,4}$";
+    public static final String VALIDAR_TELEFONO = "^\\d{10}$";
+    public static final String VALIDAR_DNI = "^[0-9]{7,8}$";
 
     private static final String LLAVE_ENCRIPTACION = "proyectoFinalProgIII";
     // endregion
 
-    public static String next(){
+    public static String next() {
         return new Scanner(System.in).nextLine().trim();
     }
 
-    public static String nextLine(){
+    public static String nextLine() {
         Scanner teclado = new Scanner(System.in);
         boolean esTextoVacio = false;
         String texto = "";
 
-        do{
+        do {
             texto = teclado.nextLine();
-            if( texto.length() == 0){
+            if (texto.length() == 0) {
                 esTextoVacio = true;
-                System.out.println(
-                    Color.ANSI_RED +
-                    "\n\t EL CAMPO NO PUEDE QUEDAR VACIO \n" +
-                    Color.ANSI_CYAN +
-                    "\nIngrese un dato:"
-                );
+                System.out.println(Color.ANSI_RED + "\n\t EL CAMPO NO PUEDE QUEDAR VACIO \n" + Color.ANSI_CYAN
+                        + "\nIngrese un dato:");
             } else {
                 esTextoVacio = false;
             }
-        }while(esTextoVacio);
+        } while (esTextoVacio);
 
         return texto;
     }
 
-    public static char charAt0(){
+    public static char charAt0() {
         Scanner teclado = new Scanner(System.in);
         return teclado.next().charAt(0);
     }
-
-
 
     public static double validarDouble() {
         Scanner teclado = new Scanner(System.in);
@@ -77,12 +77,8 @@ public class Helpers {
                 num = Double.parseDouble(cadena);
                 esDouble = true;
             } catch (NumberFormatException nfe) {
-                System.out.println(
-                    Color.ANSI_RED +
-                    "\n\t [[ " + cadena + " ]] NO ES UN DATO VALIDO \n" +
-                    Color.ANSI_CYAN +
-                    "\nIngrese un numero:"
-                );
+                System.out.println(Color.ANSI_RED + "\n\t [[ " + cadena + " ]] NO ES UN DATO VALIDO \n"
+                        + Color.ANSI_CYAN + "\nIngrese un numero:");
             }
         } while (!esDouble);
         return num;
@@ -98,30 +94,26 @@ public class Helpers {
                 num = Integer.parseInt(cadena);
                 esInt = true;
             } catch (NumberFormatException nfe) {
-                System.out.println(
-                        Color.ANSI_RED +
-                                "\n\t [[ " + cadena + " ]] NO ES UN DATO VALIDO \n" +
-                                Color.ANSI_CYAN +
-                                "\nIngrese un numero:"
-                );
+                System.out.println(Color.ANSI_RED + "\n\t [[ " + cadena + " ]] NO ES UN DATO VALIDO \n"
+                        + Color.ANSI_CYAN + "\nIngrese un numero:");
             }
             teclado.reset();
         } while (!esInt);
         return num;
     }
 
-    public static String validarTelefono(){
+    public static String validarTelefono() {
         Scanner teclado = new Scanner(System.in);
         boolean resp = true;
         String cadena;
-        do{
+        do {
             System.out.print(Color.ANSI_GREEN + "Ingrese numero de telefono : " + Color.ANSI_RESET);
             cadena = teclado.nextLine();
-            if(cadena.matches("^\\d{10}$"))
+            if (cadena.matches("^\\d{10}$"))
                 resp = false;
             else
                 Vista.opcionIncorrecta("El numero de telefono no es valido", cadena);
-        }while(resp);
+        } while (resp);
         return cadena;
     }
 
@@ -159,30 +151,48 @@ public class Helpers {
         return resp;
     }
 
-    public static boolean validarTel(String telefono){
+    public static boolean validarTel(String telefono) {
 
         Pattern pattern = Pattern.compile("^\\d{10}$");
         Matcher mather = pattern.matcher(telefono);
 
         boolean resp = mather.find();
 
-        if (resp == true){
-            
-        }else {
+        if (resp == true) {
+
+        } else {
             System.out.println("El telefono es invalido.");
         }
 
         return resp;
     }
 
-    public static String validaciones(String campo, String validacion, String error){
+    public static LocalDate validarFecha() {
+        boolean resp = true;
+        int dia, mes, anio;
+        LocalDate fecha = null;
+
+        while (resp) {
+            dia = Integer.parseInt(Helpers.validaciones("Dia", Helpers.VALIDAR_ENTEROS, "Ingrese solo numeros"));
+            mes = Integer.parseInt(Helpers.validaciones("Dia", Helpers.VALIDAR_ENTEROS, "Ingrese solo numeros"));
+            anio = Integer.parseInt(Helpers.validaciones("Dia", Helpers.VALIDAR_ENTEROS, "Ingrese solo numeros"));
+            try{
+                fecha = LocalDate.of(anio, mes, dia);
+            } catch(DateTimeException e){
+                Vista.opcionIncorrecta("La fecha ingresada es incorrecta intente nuevamente");
+            }
+        }
+        return fecha;
+    }
+
+    public static String validaciones(String campo, String validacion, String error) {
         boolean resp = true;
         String ingreso = "";
 
-        while(resp){
-            System.out.print(Color.ANSI_GREEN + "Ingrese " + campo + " : " + Color.ANSI_RESET);
+        while (resp) {
+            Vista.ingreseDato(campo);
             ingreso = Helpers.next();
-            if(ingreso.matches(validacion))
+            if (ingreso.matches(validacion))
                 resp = false;
             else
                 Vista.opcionIncorrecta(error, ingreso);
@@ -190,32 +200,34 @@ public class Helpers {
         return ingreso;
     }
 
-    public static String validarPassword(String mensaje){
+    public static String validarPassword(String mensaje) {
         Console c;
         boolean resp = true;
         String valor = "";
         char[] password = null;
-        while(resp){
-            if((c = System.console()) != null){
-                Vista.ingreseDato("Ingrese password");
-                password = c.readPassword(); 
+        while (resp) {
+            if ((c = System.console()) != null) {
+                Vista.ingreseDato(mensaje);
+                password = c.readPassword();
             }
             valor = String.valueOf(password);
 
-            if(valor.matches(Helpers.VALIDAR_PASSWORD))
+            if (valor.matches(Helpers.VALIDAR_PASSWORD))
                 resp = false;
             else
-                Vista.opcionIncorrecta("Su contraseña debe ser como minimo de 8 caracteres maximo 15, 1 mayuscula, 1 minuscula, 1 digito, no espacios en blanco y al menos 1 caracter especial($@!%*?&)", valor);
+                Vista.opcionIncorrecta(
+                        "Su contraseña debe ser como minimo de 8 caracteres maximo 15, 1 mayuscula, 1 minuscula, 1 digito, no espacios en blanco y al menos 1 caracter especial($@!%*?&)",
+                        valor);
         }
 
         return valor;
     }
 
-    public static String ingresoPassword(){
+    public static String ingresoPassword() {
         Console c;
         String valor = "";
         char[] password = null;
-        if((c = System.console()) != null){
+        if ((c = System.console()) != null) {
             Vista.ingreseDato("Ingrese password");
             password = c.readPassword();
         }
@@ -224,7 +236,8 @@ public class Helpers {
 
         return valor;
     }
-    private static SecretKeySpec crearClave(String llave){
+
+    private static SecretKeySpec crearClave(String llave) {
         SecretKeySpec secretKeySpec = null;
         MessageDigest messageDigest = null;
         byte[] cadena;
@@ -241,11 +254,11 @@ public class Helpers {
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        
+
         return secretKeySpec;
     }
 
-    public static String encriptarPassword(String pass){
+    public static String encriptarPassword(String pass) {
         String encriptada = "";
         SecretKeySpec secretKeySpec = null;
         Cipher cipher;
@@ -275,23 +288,23 @@ public class Helpers {
         return encriptada;
     }
 
-    public static String generarID(){
-        return UUID.randomUUID().toString().substring(0,10).replace("-", "T");
+    public static String generarID() {
+        return UUID.randomUUID().toString().substring(0, 10).replace("-", "T");
     }
 
-    public static boolean estadoActivo(){
+    public static boolean estadoActivo() {
         return true;
     }
 
-    public static TipoUsuario tipoCliente(){
+    public static TipoUsuario tipoCliente() {
         return TipoUsuario.CLIENTE;
     }
 
-    public static TipoUsuario tipoAdministrador(){
+    public static TipoUsuario tipoAdministrador() {
         return TipoUsuario.ADMINISTRADOR;
     }
 
-    public static LocalDate fechaActual(){
+    public static LocalDate fechaActual() {
         return LocalDate.now();
     }
 }
