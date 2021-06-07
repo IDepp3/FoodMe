@@ -336,7 +336,7 @@ public class Empresa {
                         resp = false;
                         break;
                     case 1:
-
+                        Vista.titulo("GESTION DE PERSONAL");
                         getMenuGestionPersonal();
                         break;
                     case 2:
@@ -373,8 +373,7 @@ public class Empresa {
         int opcion = 0;
         try {
             while (resp) {
-                System.out.println("MENU GESTION DE PERSONAL");
-                System.out.println("");
+               
                 System.out.println("1- Dar de alta un empleado");
                 System.out.println("2- Dar de baja un empleado");
                 System.out.println("3- Buscar un empleado");
@@ -586,17 +585,6 @@ public class Empresa {
                         break;
                     case 2:
                         System.out.println(" BAJA UNA RESERVA.");
-<<<<<<< HEAD
-                        // darBajaUnareserva();
-                        break;
-                    case 3:
-                        System.out.println(" BUSCAR UNA RESERVA");
-                        // buscarUnareserva();
-                        break;
-                    case 4:
-                        System.out.println("MODIFICAR UNA RESERVA");
-                        // modificarUnaReserva();
-=======
                         listarReservas();
                         darBajaUnareserva();
                         break;
@@ -613,7 +601,6 @@ public class Empresa {
                     case 5:
                         System.out.println("LISTAR RESERVAS");
                         listarReservas();
->>>>>>> 6c76d6ba3348b6c5299a3d598b34edfa6b8485b3
                         break;
                     default:
 
@@ -712,18 +699,11 @@ public class Empresa {
 
                 }
 
-<<<<<<< HEAD
-                /*
-                 * System.out.println("B"); reserva.mostrar(); System.out.println("C"); boolean
-                 * a = accesoReservas.agregarRegistro(reserva);
-                 */
-=======
                 Reserva reserva = new Reserva(fecha, idCliente, menus, descripcion, quierebartender);
 
                 accesoReservas.mostrar(reserva);
                 boolean a = true;
                 a= accesoReservas.agregarRegistro(reserva);
->>>>>>> 6c76d6ba3348b6c5299a3d598b34edfa6b8485b3
                 resp = false;
             }
         } catch (DateTimeException e) {
@@ -838,14 +818,6 @@ public class Empresa {
 
     }
 
-<<<<<<< HEAD
-    // darBajaUnareserva();
-
-    // modificarUnaReserva();
-
-    // endregion
-    // endregion
-=======
     public void darBajaUnareserva(){ //TODo
         System.out.println("DAR DE BAJA UNA RESERVA");
         System.out.println("Ingrese Id, fecha u Cliente");
@@ -963,7 +935,6 @@ public class Empresa {
         System.out.println("fecha r");
         return true;
     }
->>>>>>> 6c76d6ba3348b6c5299a3d598b34edfa6b8485b3
 
     // region Ventas
     private void getMenuGestionVentas() {
