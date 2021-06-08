@@ -71,6 +71,20 @@ public class Ingrediente {
 
     //endregion
 
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj)
+            return true;
+
+        if(obj instanceof Ingrediente){
+            Ingrediente c = (Ingrediente)obj;
+            if(this.getId().equals(c.getId()))
+                return true;
+        }
+
+        return false;
+    }
+
 
     @Override
     public String toString() {
