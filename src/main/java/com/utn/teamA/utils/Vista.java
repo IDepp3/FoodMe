@@ -107,7 +107,7 @@ public class Vista {
         System.out.println(Color.ANSI_RED + " 0 " + Color.ANSI_RESET + "Volver");
         System.out.print(Color.ANSI_GREEN + " : " + Color.ANSI_RESET);
     }
-/*
+
     public static void menuAdministrador(){
         System.out.println(Color.ANSI_GREEN + " 1 " + Color.ANSI_RESET + "Gestion de Personal");
         System.out.println(Color.ANSI_GREEN + " 2 " + Color.ANSI_RESET + "Gestion de Reservas");
@@ -116,8 +116,8 @@ public class Vista {
         System.out.println(Color.ANSI_RED + " 0 " + Color.ANSI_RESET + "Volver");
         System.out.print(Color.ANSI_GREEN + "  " + Color.ANSI_RESET);
     }
-    /*
- */
+
+
     public static void menuPrincipalFoodMe(){
         System.out.println(Color.ANSI_GREEN + " 1 " + Color.ANSI_RESET + "Administrador");
         System.out.println(Color.ANSI_GREEN + " 2 " + Color.ANSI_RESET + "Cliente");

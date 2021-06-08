@@ -16,6 +16,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.ExecutionException;
 
 public class AccesoReservas implements ObtenerDatos<Reserva> {
 
@@ -133,7 +134,7 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
      * <p>
      * El metodo trae el objeto que coincida en el archivo con la variable que le pasamos por parametro
      *
-     * @param cliente
+     * @param cliente variable
      * @return
      */
     public List<Reserva> obtenerRegistro(Cliente cliente) {
@@ -171,8 +172,11 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
             //reserva = Arrays.asList(this.json.fromJson(reader, Reserva[].class));
             arregloALista(this.json.fromJson(reader, Reserva[].class), reservas);
             reader.close();
+
         } catch (FileNotFoundException e) {
             crearFichero();
+        }catch (NullPointerException e){
+            e.getMessage();
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -203,75 +207,29 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
     @Override
     public boolean borrarRegistro(Reserva t) {
         boolean resp = false;
-        List<Reserva> reservas = obtenerRegistros();
         int i = 0;
 
-        while (!resp && i < reservas.size()) {
-            if (reservas.get(i).equals(t)) {
-                reservas.get(i).setStatus(false);
-                if (guardarInformacion(reservas))
-                    resp = true;
-            }
-            i++;
-        }
-
-        return resp;
-    }
-
-    public boolean borrarRegistro(String idReserva) {
-        boolean resp = false;
-        List<Reserva> reservas = obtenerRegistros();
-        int i = 0;
-
-        while (!resp && i < reservas.size()) {
-            if (reservas.get(i).getId().equals(idReserva)) {
-                reservas.get(i).setStatus(false);
-                if (guardarInformacion(reservas))
-                    resp = true;
-            }
-            i++;
-        }
-
-        return resp;
-    }
-
-    public boolean borrarRegistro(LocalDate fechaReserva) {
-        boolean resp = false;
-        List<Reserva> reservas = obtenerRegistros();
-        int i = 0;
-
-        while (!resp && i < reservas.size()) {
-            if (reservas.get(i).getFechaEvento().equals(fechaReserva)) {
-                reservas.get(i).setStatus(false);
-                if (guardarInformacion(reservas))
-                    resp = true;
-            }
-            i++;
-        }
-
-        return resp;
-    }
-
-    public List<Reserva> borrarRegistro(Cliente cliente) {
-        boolean resp = false;
-        List<Reserva> reservas = obtenerRegistros();
-        List<Reserva> reservAux = new ArrayList<>();
-        int i = 0;
-
-        while (!resp & i < reservas.size()) {
-            if (reservas.get(i).getIdCliente().equals(cliente.getId())) {
-                reservas.get(i).setStatus(false);
-                if (guardarInformacion(reservas)) {
-                    reservAux.add(reservas.get(i));
-                    continue;
+        try {
+            List<Reserva> reservas = obtenerRegistros();
+            while (!resp && i < reservas.size()) {
+                if (reservas.get(i).equals(t)) {
+                    reservas.get(i).setStatus(false);
+                    if (guardarInformacion(reservas))
+                        resp = true;
                 }
-
+                i++;
             }
-            i++;
+
+         }catch (NullPointerException e){
+            e.getMessage();
+         }catch (Exception e){
+
         }
 
-        return reservAux;
+        return resp;
     }
+
+
 
     // endregion
 
@@ -345,7 +303,6 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
     public void mostrar(Reserva reserva) {
         System.out.println(json.toJson(reserva));
     }
-
     public boolean verificarFechaDeEventoDisponible(LocalDate fechaRes) {
         boolean fechaDisponible = true;
 
@@ -363,7 +320,10 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
                     continue;
                 }
             }
-        } catch (Exception e) {//todo por que pasa esto
+        }catch (NullPointerException e){
+
+        }
+        catch (Exception e) {//todo por que pasa esto
 
 
         }
