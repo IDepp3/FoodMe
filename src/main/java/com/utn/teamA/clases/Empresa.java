@@ -1,29 +1,18 @@
 package com.utn.teamA.clases;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> alfa
 import java.time.DateTimeException;
 import java.time.LocalDate;
-<<<<<<< HEAD
-=======
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
->>>>>>> alfa
 
 import com.utn.teamA.ConexionDatos.AccesoClientes;
 import com.utn.teamA.ConexionDatos.AccesoEmpleados;
 import com.utn.teamA.ConexionDatos.AccesoReservas;
 import com.utn.teamA.utils.Helpers;
 import com.utn.teamA.utils.Vista;
-<<<<<<< HEAD
-import com.utn.teamA.clases.Empleado;
-=======
->>>>>>> alfa
 
 /**
  *
@@ -33,25 +22,14 @@ import com.utn.teamA.clases.Empleado;
 
 public class Empresa {
 
-<<<<<<< HEAD
-    /**
-     *
-     */
-   
-=======
     // region ATRIBUTOS
 
->>>>>>> alfa
     private String nombre;
     private String direccion;
     private String CUIT;
     private LocalDate nacimiento;
     private String localidad;
 
-<<<<<<< HEAD
-    private List<Usuario> listaUsuarios; // ToDo ver como ingresar con archivos una lista de usuarios
-=======
->>>>>>> alfa
     private List<Cliente> listaClientes;
     private List<Reserva> listaReservas = new ArrayList<>();
     private List<Menu> listaMenus;
@@ -275,50 +253,6 @@ public class Empresa {
     // region Menu Principal
 
     public void iniciarSistema() {
-
-<<<<<<< HEAD
-        @SuppressWarnings("resource") // el scanner no se cerro close.
-        Scanner entradaEscaner = new Scanner(System.in);
-        boolean resp = true;
-        try {
-            while (resp) {
-                System.out.println("1- Administrador");
-                System.out.println("2- Cliente");
-                System.out.println("0- Salir");
-                int opcion = 0;
-                opcion = entradaEscaner.nextInt();
-                switch (opcion) {
-                    case 1:
-                        getMenuAdministrador();
-                        break;
-                    case 2:
-                        this.accesoClientes.agregarRegistro(new Cliente("Horacio", "Guarani"));
-                        this.listaClientes = this.accesoClientes.obtenerRegistros();
-                        this.cliente = this.listaClientes.get(0);
-                        if (this.cliente != null) {
-=======
-        /*
-         * @SuppressWarnings("resource") // el scanner no se cerro close. Scanner
-         * entradaEscaner = new Scanner(System.in); boolean resp = true; try { while
-         * (resp) { System.out.println("1- Administrador");
-         * System.out.println("2- Cliente"); System.out.println("0- Salir"); int
-         * opcion=0; opcion = entradaEscaner.nextInt(); switch (opcion) { case 1:
-         * getMenuAdministrador(); break; case 2:
-         * this.accesoClientes.agregarRegistro(new Cliente("Horacio", "Guarani"));
-         * this.listaClientes = this.accesoClientes.obtenerRegistros(); this.cliente =
-         * this.listaClientes.get(0); if (this.cliente != null) { getMenuCliente(); }
-         * else System.out.println("El cliente no existe"); break; case 0: // guardar
-         * datos en archivos JSON? System.out.
-         * println("Gracias por utilizar el sistema.\n Que tenga un buen dia!!!"); resp
-         * = false; break; default: System.out.println("Numero incorrecto. Reintente");
-         * } } } catch(InputMismatchException e){
-         * System.out.println("Ingreso un tipo de dato incorrecto. Solo Numeros");
-         * iniciarSistema();
-         * 
-         * }catch (Exception e) {
-         * System.out.println("Ingreso un tipo de dato incorrecto. Solo Numeros");
-         * iniciarSistema(); }
-         */
         menuPrincipal();
     }
     // endregion
@@ -347,7 +281,6 @@ public class Empresa {
                         if (this.cliente.getTipoUsuario() == TipoUsuario.ADMINISTRADOR)
                             seleccionDeMenu();
                         else if (this.cliente.getTipoUsuario() == TipoUsuario.CLIENTE)
->>>>>>> alfa
                             getMenuCliente();
                         else
                             Vista.opcionIncorrecta("El usuario o contraseña es incorrecto");
@@ -365,35 +298,16 @@ public class Empresa {
                     Vista.opcionIncorrecta(opcion);
                     break;
             }
-<<<<<<< HEAD
-        } catch (InputMismatchException e) {
-            System.out.println("Ingreso un tipo de dato incorrecto. Solo Numeros");
-            iniciarSistema();
-
-        } catch (Exception e) {
-            System.out.println("Ingreso un tipo de dato incorrecto. Solo Numeros");
-            iniciarSistema();
-=======
             this.cliente = null;
             this.listaClientes = this.accesoClientes.obtenerRegistros();
->>>>>>> alfa
         }
         System.out.println("Gracias por usar la aplicacion");
     }
 
+
+
     // endregion
 
-<<<<<<< HEAD
-    // region Menu Administrador
-    // TODO crear vistas del administrador A trabajar: Marco
-    // TODO administrar empleados A trabajar: Antonela
-
-    private void getMenuAdministrador() {
-
-        Scanner entradaEscanner = new Scanner(System.in);
-        boolean resp = true;
-        int seleccion;
-=======
     // region LOGIN Y REGISTRO
 
     private Cliente loginUsuario() {
@@ -414,7 +328,6 @@ public class Empresa {
         }
         return c;
     }
->>>>>>> alfa
 
     private Cliente registroUsuario() {
         Cliente cliente;
@@ -425,17 +338,8 @@ public class Empresa {
         cliente = new Cliente(Helpers.generarID(), nombreUsuario, Helpers.encriptarPassword(password), email,
                 Helpers.fechaActual(), Helpers.tipoCliente(), Helpers.estadoActivo());
 
-<<<<<<< HEAD
-                System.out.println("MENU ADMINISTRADOR");
-                System.out.println("");
-                System.out.println("1- Gestion de Personal");
-                System.out.println("2- Gestion de Reservas");
-                System.out.println("3- Gestion de Ventas");
-                System.out.println("0- Salir");
-=======
         return cliente;
     }
->>>>>>> alfa
 
     private String passwordIguales() {
         boolean resp = true;
@@ -451,33 +355,6 @@ public class Empresa {
                 Vista.opcionCorrecta("Las contraseñas no coinciden");
         }
 
-<<<<<<< HEAD
-                    case 0:
-                        resp = false;
-                        break;
-                    case 1:
-                        Vista.titulo("GESTION DE PERSONAL");
-                        getMenuGestionPersonal();
-                        break;
-                    case 2:
-                        Vista.titulo("GESTION DE RESERVAS");
-                        getMenuGestionReservas();
-                        break;
-                    case 3:
-                        Vista.titulo("GESTION DE VENTAS");
-                        getMenuGestionVentas();
-                        break;
-                    default:
-                        System.out.println("Dato incorrecto. Reintente");
-                }
-            }
-        } catch (InputMismatchException e) {
-            System.out.println("Ingreso un tipo de dato incorrecto. Solo Numeros");
-            getMenuAdministrador();
-        } catch (Exception e) {
-            System.out.println("Ingreso un tipo de dato incorrecto. Solo Numeros");
-            getMenuAdministrador();
-=======
         return pass;
     }
 
@@ -537,45 +414,12 @@ public class Empresa {
                 default:
                     Vista.opcionIncorrecta(seleccion);
             }
->>>>>>> alfa
         }
     }
 
     // region Gestion de Personal
     private void getMenuGestionPersonal() {
         boolean resp = true;
-<<<<<<< HEAD
-        
-        try {
-            while (resp) {
-               
-                System.out.println("1- Dar de alta un empleado");
-                System.out.println("2- Dar de baja un empleado");
-                System.out.println("3- Buscar un empleado");
-                System.out.println("4- Lista empleados");
-                System.out.println("0- Salir");
-                int seleccion;
-                seleccion = entradaEscanner.nextInt();
-                switch (seleccion) {
-                    case 0:
-                        resp = false;
-                        break;
-                    case 1:
-                        darAltaUnEmpleado();
-                        break;
-                    case 2:
-                        darDeBaja();
-                        break;
-                    case 3:
-                        buscarEmpleado();
-                        break;
-                    case 4:
-                        listarEmpleados();
-                    default:
-                        System.out.println("Ingreso un dato incorrecto. reintente.");
-                }
-
-=======
         //Empleado f = null;
         int opcion;
         while (resp) {
@@ -595,9 +439,11 @@ public class Empresa {
                 case 3:
                     buscarEmpleado();
                     break;
+                case 4:
+                    listarEmpleados();
+                    break;
                 default:
                     Vista.opcionIncorrecta(opcion);
->>>>>>> alfa
             }
         }
     }
@@ -607,7 +453,6 @@ public class Empresa {
         Scanner entradaEscanner = new Scanner(System.in);
         Empleado empleado = null;
         TipoEmpleado tipo = null;
-        LocalDate fecha = null;
         double sueldo = 0;
         System.out.println("DAR ALTA EMPLEADO");
         System.out.println("");
@@ -615,34 +460,13 @@ public class Empresa {
         String nombre = entradaEscanner.next();
         System.out.print("\nIngrese el apellido del empleado: ");
         String apellido = entradaEscanner.next();
+        
+        // validacion de fecha
 
-        boolean respuesta = false;
-
+        System.out.print("\nIngrese el nacimiento del empleado: dd/MM/yyyy ");
         int dia, mes, anio;
+        LocalDate fecha = null;
 
-<<<<<<< HEAD
-
-        while (!respuesta){
-            try {
-                System.out.println("Ingrese la fecha del empleado: (yyyy/MM/dd) ");
-                System.out.println("Ingrese el dia: ");
-                dia = entradaEscanner.nextInt();
-                System.out.println("Ingrese el mes: ");
-                mes = entradaEscanner.nextInt();
-                System.out.println("Ingrese el año");
-                anio = entradaEscanner.nextInt();
-                fecha = LocalDate.of(anio, mes, dia);
-                respuesta = true;
-            } catch (DateTimeException e) {
-                System.out.println("Fecha invalida.");
-                System.out.println("Ingrese una fecha nuevamente: ");
-
-            } catch (InputMismatchException e) {
-                System.out.println("Ingreso incorrecto. Solo numeros");
-            }
-
-        }
-=======
         System.out.println("Ingrese el dia: ");
         dia = entradaEscanner.nextInt();
         System.out.println("Ingrese el mes: ");
@@ -650,14 +474,13 @@ public class Empresa {
         System.out.println("Ingrese el año");
         anio = entradaEscanner.nextInt();
         fecha = LocalDate.of(anio, mes, dia);
->>>>>>> alfa
 
         String telefono = "";
 
-        respuesta = false;
+        boolean respuesta = false;
         while (respuesta == false) {
 
-            System.out.print("\nIngrese numero de celular sin 0 ni 15: ");
+            System.out.print("\nIngrese numero de celular sin 0 ni 15");
             telefono = entradaEscanner.next();
             // Validamos el dni que nos da el cliente.
             respuesta = Helpers.validarTel(telefono);
@@ -669,42 +492,27 @@ public class Empresa {
         System.out.print("\nIngrese la direccion: ");
         direccion = entradaEscanner.next();
         entradaEscanner.next();
-        boolean respuestaDNI = false;
+        boolean respuest = false;
+        System.out.print("\nIngrese dni del empleado: ");
+        dni = entradaEscanner.next();
 
-        while (respuestaDNI == false) {
-            System.out.print("\nIngrese dni del empleado: ");
-            dni = entradaEscanner.next();
-            if (respuestaDNI = Helpers.validarDni(dni)) {
-                respuestaDNI = true;
-            }
-
-        }
+        // Validamos el dni que nos da el cliente.
+        respuest = Helpers.validarDni(dni);
 
         String email = "";
         boolean estado = true;
-<<<<<<< HEAD
-        boolean respuestaEmail = false;
-        
-        while (respuestaEmail == false) {
-            System.out.print("\nIngrese el email del empleado: ");
-            email = entradaEscanner.next();
-            if (respuestaEmail = Helpers.validarEmail(email)){
-                respuestaEmail = true;
-            }
-
-        }
-=======
         boolean respu = true;
         while (respu == true) {
             // Validamos el email que nos da el cliente.
             System.out.println("\nIngrese el email del empleado: ");
             email = entradaEscanner.next();
->>>>>>> alfa
 
             System.out.println("\nIngrese tipo del empleado");
             System.out.println("\n 4 - MOZO | 5 - BARTENDER | 6 - SUSHIMAN");
+            Scanner en = new Scanner(System.in);
             int op = 0;
-            op = entradaEscanner.nextInt();
+            op = en.nextInt();
+            tipo = null;
             switch (op) {
                 case 4:
                     tipo = TipoEmpleado.MOZO;
@@ -723,13 +531,9 @@ public class Empresa {
 
             sueldo = entradaEscanner.nextDouble();
 
-<<<<<<< HEAD
-        empleado = new Empleado(nombre, apellido, fecha, telefono, direccion, dni, email,tipo , sueldo, estado);
-=======
             respu = false;
         }
         empleado = new Empleado(nombre, apellido, fecha, telefono, direccion, dni, email, tipo, sueldo, estado);
->>>>>>> alfa
         System.out.println("Se agrego exitosamente el empleado");
         accesoEmpleados.agregarRegistro(empleado);
 
@@ -737,18 +541,13 @@ public class Empresa {
 
     public void darDeBaja() {
         System.out.println("DAMOS DE BAJA UN EMPLEADO.");
-        System.out.println("Ingrese el dni del empleado a buscar: ");
-        String dni = "";
-        Scanner entradaEscanner = new Scanner(System.in);
-        dni = entradaEscanner.next();
-        Empleado h = new Empleado();
-        h.setDni(dni);
-        boolean borradoLogico = accesoEmpleados.borrarRegistro(h);
-        System.out.println(borradoLogico);
-        if (accesoEmpleados.borrarRegistro(h)) {
-            System.out.println("El empleado con dni " + h.getDni() + " ahora esta inactivo.");
+        Empleado h = new Empleado("Marcos", "Solari");
+        boolean a = accesoEmpleados.borrarRegistro(h);
+        if (a == true) {
+            h.setEstado(false);
+            h.toString();
         } else {
-            System.out.println("El empleado no pudo ser dado de baja.");
+            System.out.println("El empleado no ha podido darse de baja.");
         }
     }
 
@@ -760,14 +559,6 @@ public class Empresa {
         String dni = "";
         dni = escanner.next();
         Empleado g = new Empleado();
-<<<<<<< HEAD
-        g.setDni(dni);
-        g = accesoEmpleados.obtenerRegistro(g);
-        if (g != null) {
-            System.out.println("");
-        } else {
-            System.out.println("El empleado no existe.");
-=======
         Empleado e = new Empleado();
         if (g.getDni().equals(dni)) {
             g = accesoEmpleados.obtenerRegistro(g);
@@ -775,19 +566,14 @@ public class Empresa {
             System.out.println(g);
         } else {
             System.out.println("El dni no existe.");
->>>>>>> alfa
         }
-
     }
 
     public void listarEmpleados() {
-<<<<<<< HEAD
-        System.out.println("Hola");
-=======
->>>>>>> alfa
         System.out.println("\nACA LISTAMOS LOS EMPLEADOS");
-        listaEmpleados = accesoEmpleados.obtenerRegistros();
-        System.out.println("Empleado: "+listaEmpleados);
+        List<Empleado> listaEmpleado = null;
+        listaEmpleado = accesoEmpleados.obtenerRegistros();
+        System.out.println(listaEmpleado);
     }
 
     // endregion
@@ -1177,51 +963,12 @@ public class Empresa {
         return true;
     }
 
-<<<<<<< HEAD
-=======
     // endregion
     // endregion
 
->>>>>>> alfa
     // region Ventas
     private void getMenuGestionVentas() {
         boolean resp = true;
-<<<<<<< HEAD
-        
-
-
-        while (resp) {
-
-            System.out.println("1- Dar de alta una venta");
-            System.out.println("2- Dar de baja una venta");
-            System.out.println("3- Buscar una venta");
-            System.out.println("0- Salir");
-            int seleccion;
-
-            try {
-                seleccion = entradaEscanner.nextInt();
-                switch (seleccion) {
-                    case 0:
-                        resp = false;
-                        break;
-                    case 1:
-                        System.out.println("ACA DAMOS DE ALTA UNA VENTA.");
-                
-                        break;
-                    case 2:
-                        System.out.println("ACA DAMOS DE BAJA UNA VENTA.");
-                        break;
-                    case 3:
-                        System.out.println("ACA BUSCAMOS UNA VENTA.");
-                        break;
-                    default:
-
-                        break;
-
-                }
-            } catch (InputMismatchException e) {
-                getMenuGestionVentas();
-=======
         int seleccion;
 
         while (resp) {
@@ -1244,7 +991,6 @@ public class Empresa {
                 default:
                     Vista.opcionIncorrecta(seleccion);
                     break;
->>>>>>> alfa
             }
         }
 
@@ -1254,8 +1000,6 @@ public class Empresa {
     // endregion
     // region ABM
     // endregion
-<<<<<<< HEAD
-=======
 
     // endregion
 
@@ -1286,9 +1030,8 @@ public class Empresa {
 
             }
         }
->>>>>>> alfa
 
-    // endregion
+    }
 
     // region ABM
 
@@ -1332,42 +1075,6 @@ public class Empresa {
         boolean resp = true;
         int opcion;
         while (resp) {
-<<<<<<< HEAD
-            System.out.println("INFORMACION PERSONAL");
-            System.out.println();
-            System.out.println("1- Ver informacion personal");
-            System.out.println("2- Modificar informacion");
-            System.out.println("3- Historial de compras");
-            System.out.println("4- Reservas pendientes");
-            System.out.println("0- Salir");
-            int opcion;
-            try {
-                opcion = entradaEscaner.nextInt();
-                switch (opcion) {
-                    case 0:
-                        resp = false;
-                        break;
-                    case 1:
-                        System.out.println(this.cliente);
-                        break;
-                    case 2:
-                        menuModificarDatos();
-                        break;
-                    case 3:
-                        // verHistorialCompras();
-                        break;
-                    case 4:
-                        System.out.println("LISTA CON COMPRAS PENDIENTES AL DIA DE LA FECHA");
-                        System.out.println(
-                                "Si es existe algun pedido se le puede dar la opcion que modifique algo de la reserva realizada");
-                        break;
-                    default:
-
-                        break;
-                }
-            } catch (InputMismatchException e) {
-                menuInformacionPersonal();
-=======
             Vista.titulo("Informacion Personal");
             Vista.informacionPersonal();
             opcion = Helpers.validarInt();
@@ -1392,61 +1099,16 @@ public class Empresa {
                 default:
                     Vista.opcionIncorrecta(opcion);
                     break;
->>>>>>> alfa
             }
         }
     }
 
-<<<<<<< HEAD
-    // TODO archivos modificar info personal cliente A Trabajar: Joaquin
-=======
->>>>>>> alfa
     public void menuModificarDatos() {
         boolean resp = true;
         int opc;
         String aux = "";
         LocalDate fecha;
         while (resp) {
-<<<<<<< HEAD
-            System.out.println("MODIFICAR INFORMACION PERSONAL");
-            System.out.println();
-            System.out.println("1- Modificar contraseña");
-            System.out.println("2- Modificar telefono");
-            System.out.println("3- Modificar direccion");
-            System.out.println("4- Modificar email");
-            System.out.println("0- Salir");
-            int opc;
-            try {
-                opc = entradaScanner.nextInt();
-                switch (opc) {
-                    case 0:
-                        resp = false;
-                        break;
-                    case 1:
-                        System.out.println("MODIFICAR PASS");
-                        break;
-                    case 2:
-                        /*
-                         * String telefono = control(ingresaString());
-                         * this.cliente.setTelefono(telefono);
-                         * this.accesoClientes.actualizarRegistro(this.cliente);
-                         */
-                        // Todo Joaco tira eror la funcion
-                        break;
-
-                    case 3:
-                        System.out.println("MODIFICAR DIRECCION");
-                        break;
-                    case 4:
-                        System.out.println("MODIFICAR EMAIL");
-                        break;
-                    default:
-
-                        break;
-                }
-            } catch (InputMismatchException e) {
-                menuModificarDatos();
-=======
             Vista.titulo("Modificacion de datos personales");
             Vista.modificarInformacionPersonal();
             opc = Helpers.validarInt();
@@ -1489,7 +1151,6 @@ public class Empresa {
                 default:
                     Vista.opcionIncorrecta(opc);
                     break;
->>>>>>> alfa
             }
             this.accesoClientes.actualizarRegistro(this.cliente);
             this.listaClientes = accesoClientes.obtenerRegistros();
@@ -1497,8 +1158,4 @@ public class Empresa {
     }
 
     // endregion
-<<<<<<< HEAD
-
-=======
->>>>>>> alfa
 }
