@@ -1016,7 +1016,7 @@ public class Empresa {
                     resp = false;
                     break;
                 case 1:
-                    System.out.println("ACA DAMOS DE ALTA UN CLIENTE.");
+                    darAltaUnCliente();
                     break;
                 case 2:
                     darDeBajaCliente();
@@ -1035,7 +1035,72 @@ public class Empresa {
 
     }
 
-    
+    public void darAltaUnCliente() {
+        Scanner entradaEscanner = new Scanner(System.in);
+        Cliente cliente = null;
+        List<Reserva>listaReservas = null;
+        System.out.println("DAR ALTA CLIENTE");
+        System.out.println("");
+        System.out.print("\nIngrese el nombre del cliente: ");
+        String nombre = entradaEscanner.next();
+        System.out.print("\nIngrese el apellido del cliente: ");
+        String apellido = entradaEscanner.next();
+        
+        // validacion de fecha
+
+        System.out.print("\nIngrese el nacimiento del cliente: dd/MM/yyyy ");
+        int dia, mes, anio;
+        LocalDate fecha = null;
+
+        System.out.println("Ingrese el dia: ");
+        dia = entradaEscanner.nextInt();
+        System.out.println("Ingrese el mes: ");
+        mes = entradaEscanner.nextInt();
+        System.out.println("Ingrese el año");
+        anio = entradaEscanner.nextInt();
+        fecha = LocalDate.of(anio, mes, dia);
+
+        String telefono = "";
+
+        boolean respuesta = false;
+        while (respuesta == false) {
+
+            System.out.print("\nIngrese numero de celular sin 0 ni 15");
+            telefono = entradaEscanner.next();
+            // Validamos el dni que nos da el cliente.
+            respuesta = Helpers.validarTel(telefono);
+
+        }
+
+        String dni = "";
+
+        System.out.print("\nIngrese la direccion: ");
+        direccion = entradaEscanner.next();
+        entradaEscanner.next();
+        boolean respuest = false;
+        System.out.print("\nIngrese dni del cliente: ");
+        dni = entradaEscanner.next();
+
+        // Validamos el dni que nos da el cliente.
+        respuest = Helpers.validarDni(dni);
+
+
+        String email = "";
+        boolean estado = true;
+        boolean respu = true;
+        while (respu == true) {
+            // Validamos el email que nos da el cliente.
+            System.out.println("\nIngrese el email del cliente: ");
+            email = entradaEscanner.next();
+
+            respu = false;
+
+        }
+        cliente = new Cliente(nombre, apellido, fecha, telefono, direccion, dni, email, estado, listaReservas);
+        System.out.println("Se agrego exitosamente el cliente");
+        accesoClientes.agregarRegistro(cliente);
+
+    }
 
 
     public void buscarCliente(){
@@ -1043,7 +1108,7 @@ public class Empresa {
         System.out.println("Ingrese el dni del cliente a buscar: ");
         String dni = "";
         dni = escanner.next();
-        Cliente g = new Empleado();
+        Cliente g = new Cliente();
         if (g.getDni().equals(dni)) {
             g = accesoClientes.obtenerRegistro(g);
             System.out.println("Cliente encontrado");
