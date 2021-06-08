@@ -409,7 +409,7 @@ public class Empresa {
                     break;
                 case 4:
                     Vista.titulo("GESTION DE VENTAS");
-                    getMenuGestionVentas();
+                    getMenuGestionClientes();
                     break;
                 default:
                     Vista.opcionIncorrecta(seleccion);
@@ -434,7 +434,7 @@ public class Empresa {
                     darAltaUnEmpleado();
                     break;
                 case 2:
-                    System.out.println("ACA DAMOS DE BAJA UN EMPLEADO.");
+                    darDeBaja();
                     break;
                 case 3:
                     buscarEmpleado();
@@ -1003,13 +1003,13 @@ public class Empresa {
 
     // endregion
 
-    // region Stock
+    // region Menu Cliente
     private void getMenuGestionClientes() {
         boolean resp = true;
         int seleccion;
         while (resp) {
             Vista.titulo("Gestion de Clientes");
-            Vista.menuGestionStocks();
+            Vista.menuGestionClientes();
             seleccion = Helpers.validarInt();
             switch (seleccion) {
                 case 0:
@@ -1019,11 +1019,13 @@ public class Empresa {
                     System.out.println("ACA DAMOS DE ALTA UN CLIENTE.");
                     break;
                 case 2:
-                    System.out.println("ACA DAMOS DE BAJA UN CLIENTE");
+                    darDeBajaCliente();
                     break;
                 case 3:
-                    System.out.println("ACA BUSCAMOS UN CLIENTE");
+                    buscarCliente();
                     break;
+                case 4:
+                    listarClientes();
                 default:
                     Vista.opcionIncorrecta(seleccion);
                     break;
@@ -1031,6 +1033,42 @@ public class Empresa {
             }
         }
 
+    }
+
+    
+
+
+    public void buscarCliente(){
+        Scanner escanner = new Scanner(System.in);
+        System.out.println("Ingrese el dni del cliente a buscar: ");
+        String dni = "";
+        dni = escanner.next();
+        Cliente g = new Empleado();
+        if (g.getDni().equals(dni)) {
+            g = accesoClientes.obtenerRegistro(g);
+            System.out.println("Cliente encontrado");
+            System.out.println(g);
+        } else {
+            System.out.println("El dni no existe.");
+        }
+    }
+
+    public void listarClientes() {
+        List<Cliente> listaClientes = null;
+        listaClientes = accesoClientes.obtenerRegistros();
+        System.out.println(listaClientes);
+    }
+
+
+    public void darDeBajaCliente() {
+        Cliente h = new Cliente();
+        boolean a = accesoClientes.borrarRegistro(h);
+        if (a == true) {
+            h.setEstado(false);
+            h.toString();
+        } else {
+            System.out.println("El cliente no ha podido darse de baja.");
+        }
     }
 
     // region ABM
