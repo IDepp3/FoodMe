@@ -112,10 +112,10 @@ public class Vista {
 
     // region STOCKS
 
-    public static void menuGestionStocks() {
-        System.out.println(Color.ANSI_GREEN + " 1 " + Color.ANSI_RESET + "Dar de alta un articulo");
-        System.out.println(Color.ANSI_GREEN + " 2 " + Color.ANSI_RESET + "Dar de baja un articulo");
-        System.out.println(Color.ANSI_GREEN + " 3 " + Color.ANSI_RESET + "Buscar un articulo");
+    public static void getMenuGestionClientes() {
+        System.out.println(Color.ANSI_GREEN + " 1 " + Color.ANSI_RESET + "Dar de alta un cliente");
+        System.out.println(Color.ANSI_GREEN + " 2 " + Color.ANSI_RESET + "Dar de baja un cliente");
+        System.out.println(Color.ANSI_GREEN + " 3 " + Color.ANSI_RESET + "Buscar un cliente");
         System.out.println(Color.ANSI_RED + " 0 " + Color.ANSI_RESET + "Volver");
         System.out.print(Color.ANSI_GREEN + " : " + Color.ANSI_RESET);
     }

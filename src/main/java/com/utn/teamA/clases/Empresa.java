@@ -404,12 +404,12 @@ public class Empresa {
                     getMenuGestionReservas();
                     break;
                 case 3:
-                    Vista.titulo("GESTION DE VENTAS");
+                    Vista.titulo("GESTION DE CLIENTES");
                     getMenuGestionVentas();
                     break;
                 case 4:
-                    Vista.titulo("GESTION DE STOCK");
-                    getMenuGestionStock();
+                    Vista.titulo("GESTION DE VENTAS");
+                    getMenuGestionVentas();
                     break;
                 default:
                     Vista.opcionIncorrecta(seleccion);
@@ -1004,11 +1004,11 @@ public class Empresa {
     // endregion
 
     // region Stock
-    private void getMenuGestionStock() {
+    private void getMenuGestionClientes() {
         boolean resp = true;
         int seleccion;
         while (resp) {
-            Vista.titulo("Gestion de Stocks");
+            Vista.titulo("Gestion de Clientes");
             Vista.menuGestionStocks();
             seleccion = Helpers.validarInt();
             switch (seleccion) {
@@ -1016,13 +1016,13 @@ public class Empresa {
                     resp = false;
                     break;
                 case 1:
-                    System.out.println("ACA DAMOS DE ALTA UN ARTICULO.");
+                    System.out.println("ACA DAMOS DE ALTA UN CLIENTE.");
                     break;
                 case 2:
-                    System.out.println("ACA DAMOS DE BAJA UN ARTICULO");
+                    System.out.println("ACA DAMOS DE BAJA UN CLIENTE");
                     break;
                 case 3:
-                    System.out.println("ACA BUSCAMOS UN ARTICULO");
+                    System.out.println("ACA BUSCAMOS UN CLIENTE");
                     break;
                 default:
                     Vista.opcionIncorrecta(seleccion);
