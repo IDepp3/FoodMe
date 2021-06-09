@@ -18,6 +18,11 @@ public class AccesoIngredientes {
 
 
 
+    /*
+    Gson con el metodo fromJson retorna un arreglo del tipo de dato indicado en uno de sus parametros,
+    y dado que con el metodo de java Arrays.asList(), cuando lo transformamos a lista, no nos deja manipular como tal,
+    entonces implementamos este metodo para obtener una lista que podamos manipular
+    * */
     public void arregloALista(Ingrediente[] arreglo, List<Ingrediente> ingredientes){
         if(arreglo != null){
             for(Ingrediente ing : arreglo){
@@ -26,6 +31,12 @@ public class AccesoIngredientes {
         }
     }
 
+    /*
+    * Creamos el BufferedReader
+    * Retorna una lista con los objetos del archivo o una lista vacia
+    * Crea el fichero en caso de que no exista
+    *
+    */
     public List<Ingrediente> obtenerRegistros() {
         List<Ingrediente> ingredientes = new ArrayList<>();
         BufferedReader reader;
