@@ -16,14 +16,20 @@ public class EmpresaAux {
         //ingredienteMenu();
         //platoMenu();
 
-        //listaDeIngredites.add(new Ingrediente("tomate","tomate",50,"proveedor"));
-        //listaDeIngredites.add(new Ingrediente("papa","papa",50,"proveedor"));
+        listaDeIngredites.add(new Ingrediente("tomate","tomate",50,"proveedor"));
+        listaDeIngredites.add(new Ingrediente("papa","papa",50,"proveedor"));
 
         //Plato plato1 = new Plato("Ensalada",listaDeIngredites,"ensalada",TipoPlato.ENTRADA);
         //System.out.println(plato1);
 
         //Menu menu1 = new Menu();
         //menu1.crear();
+
+        AccesoIngredientes accesoIngredientes = new AccesoIngredientes();
+
+        accesoIngredientes.guardarInformacion(listaDeIngredites);
+
+        listaDeIngredites = accesoIngredientes.obtenerRegistros();
 
     }
 
