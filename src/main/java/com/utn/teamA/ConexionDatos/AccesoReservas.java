@@ -6,17 +6,13 @@ import com.google.gson.JsonParseException;
 import com.utn.teamA.ConexionDatos.Gson.LocalDateDeserializer;
 import com.utn.teamA.ConexionDatos.Gson.LocalDateSerializer;
 import com.utn.teamA.ConexionDatos.interfaces.ObtenerDatos;
-import com.utn.teamA.Excepciones.FechaInvalidaException;
 import com.utn.teamA.clases.Cliente;
 import com.utn.teamA.clases.Reserva;
 
 import java.io.*;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-import java.util.concurrent.ExecutionException;
 
 public class AccesoReservas implements ObtenerDatos<Reserva> {
 
@@ -119,7 +115,8 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
                 i++;
             }
         } catch (NullPointerException e) {
-            System.out.println();
+
+
         } catch (Exception e) {
 
         }
@@ -153,7 +150,7 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
                 i++;
             }
         } catch (NullPointerException e) {
-            System.out.println();
+
         } catch (Exception e) {
 
         }
@@ -230,7 +227,6 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
     }
 
 
-
     // endregion
 
     // region Metodos propios
@@ -303,6 +299,7 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
     public void mostrar(Reserva reserva) {
         System.out.println(json.toJson(reserva));
     }
+
     public boolean verificarFechaDeEventoDisponible(LocalDate fechaRes) {
         boolean fechaDisponible = true;
 

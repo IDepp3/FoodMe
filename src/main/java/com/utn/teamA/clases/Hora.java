@@ -137,7 +137,7 @@ public class Hora {
     public StringBuilder calcularFinalizacion(int hsServicio){
 
         int horaInt = Integer.parseInt(getHoras().toString());
-        int horaFinalizaEvento = (horaInt - hsServicio);
+        int horaFinalizaEvento = (horaInt + hsServicio);
         String horaFinalizaE = String.valueOf(horaFinalizaEvento);
         StringBuilder horaFinaliza = new StringBuilder("");
         return horaFinaliza.append(horaFinalizaE).append(":").append(getMinutos());

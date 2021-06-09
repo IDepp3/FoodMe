@@ -1,14 +1,14 @@
-package com.utn.teamA.Excepciones;
+package com.utn.teamA.excepciones;
 
-public class FechaInvalidaException extends Exception {
-
+public class ClienteNotieneReservas extends Exception {
     String msg2;
     /**
      * Constructs an {@code IllegalAccessException} without a
      * detail message.
      */
-    public FechaInvalidaException () {
+    public ClienteNotieneReservas() {
         super();
+        this.msg2 = "No tiene reservas";
     }
 
     /**
@@ -16,7 +16,7 @@ public class FechaInvalidaException extends Exception {
      *
      * @param   s   the detail message.
      */
-    public FechaInvalidaException (String s) {
+    public ClienteNotieneReservas(String s) {
 
         super(s);
         msg2=s;
@@ -25,7 +25,8 @@ public class FechaInvalidaException extends Exception {
     @Override
     public String getMessage()
     {
-        return super.getMessage()+msg2;
+        return super.getMessage()+ " " + msg2;
     }
 }
+
 

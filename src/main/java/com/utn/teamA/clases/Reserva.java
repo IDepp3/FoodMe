@@ -31,6 +31,7 @@ public class Reserva {
     private boolean quiereBartender;
     private boolean status;
     private int cantidadPersonasTotal;
+    private double precioFinal;
 
 
     //region Constructor
@@ -67,6 +68,9 @@ public class Reserva {
         this.quiereBartender = quiereBartender;
         this.cantidadPersonasTotal = calcularCantPerTotal();
         this.status = true;
+
+
+
     }
     //endregion
 
@@ -128,8 +132,10 @@ public class Reserva {
         return cantidadPersonasTotal;
     }
 
-
-    //endregion
+    public double getPrecioFinal() {
+        return precioFinal;
+    }
+//endregion
 
     //region Setters
 
@@ -185,8 +191,10 @@ public class Reserva {
         this.cantidadPersonasTotal = cantidadPersonasTotal;
     }
 
-
-    //endregion
+    public void setPrecioFinal(double precioFinal) {
+        this.precioFinal = precioFinal;
+    }
+//endregion
 
     //region Mostrar
 
@@ -207,6 +215,7 @@ public class Reserva {
                 ", quiereBartender=" + quiereBartender +
                 ", status=" + status +
                 ", cantidadPersonasTotal=" + cantidadPersonasTotal +
+                ", precioFinal=" + precioFinal +
                 '}';
     }
 
@@ -250,7 +259,7 @@ public class Reserva {
         int total = 0;
         for (Menu m : this.menus) {
 
-            total = total + m.getCantReservas();
+            total = total + m.getCantPersonas();
         }
         return total;
     }
@@ -258,8 +267,44 @@ public class Reserva {
 
     //region Calcular Costo de la Reserva
 
-    public void calcularCosto() {
+    public double calcularCosto() {
+
+        double costo = 0;
+        double costoFinal = 0;
+        for(Menu x: this.menus){
+            costo = costo + x.calcularCostoTotal();
+        }
+        if(cantidadPersonasTotal>8){
+
+            if(quiereBartender){
+                costo = costo + TipoEmpleado.BARTENDER.sueldo;
+            }
+            costo = costo  + TipoEmpleado.MOZO.sueldo;
+
+        }else if(cantidadPersonasTotal>25){
+            if(quiereBartender){
+                costo = costo + TipoEmpleado.BARTENDER.sueldo;
+            }
+            costo = costo  + TipoEmpleado.MOZO.sueldo + TipoEmpleado.SUSHIMAN.sueldo;
+
+        }else if(cantidadPersonasTotal>40){
+            if(quiereBartender){
+                costo = costo + TipoEmpleado.BARTENDER.sueldo;
+            }
+            costo = costo  + (TipoEmpleado.MOZO.sueldo*2) + (TipoEmpleado.SUSHIMAN.sueldo);
+        }
+
+        return this.costoTotal ;
+
     }
+
+    public double calcularPrecionFinal(){
+        double IVA = 1.21;
+        double ganancia = 0.25;
+        double costo = calcularCosto();
+        return this.precioFinal= this.costoTotal * IVA / ganancia;
+    }
+
 
     //endregion
 

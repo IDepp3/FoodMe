@@ -72,8 +72,8 @@ public class Vista {
 
     public static void menuPrincipal(){
         System.out.println(Color.ANSI_GREEN + " 1 " + Color.ANSI_RESET + "Ver menus");
-        System.out.println(Color.ANSI_GREEN + " 2 " + Color.ANSI_RESET + "Hacer reserva");
-        System.out.println(Color.ANSI_GREEN + " 3 " + Color.ANSI_RESET + "Informacion personal");
+        System.out.println(Color.ANSI_GREEN + " 2 " + Color.ANSI_RESET + "Hacer Reserva");
+        System.out.println(Color.ANSI_GREEN + " 3 " + Color.ANSI_RESET + "Informacion ersonal");
         System.out.println(Color.ANSI_RED + " 0 " + Color.ANSI_RESET + "Salir");
         System.out.print(Color.ANSI_GREEN + " : " + Color.ANSI_RESET);
     }
@@ -103,7 +103,7 @@ public class Vista {
         System.out.println(Color.ANSI_GREEN + " 1 " + Color.ANSI_RESET + "Dar de alta un empleado");
         System.out.println(Color.ANSI_GREEN + " 2 " + Color.ANSI_RESET + "Dar de baja un empleado");
         System.out.println(Color.ANSI_GREEN + " 3 " + Color.ANSI_RESET + "Buscar un empleado");
-        System.out.println(Color.ANSI_GREEN + " 3 " + Color.ANSI_RESET + "Listar empleados");
+        System.out.println(Color.ANSI_GREEN + " 4 " + Color.ANSI_RESET + "Listar empleados");
         System.out.println(Color.ANSI_RED + " 0 " + Color.ANSI_RESET + "Volver");
         System.out.print(Color.ANSI_GREEN + " : " + Color.ANSI_RESET);
     }
@@ -112,7 +112,7 @@ public class Vista {
         System.out.println(Color.ANSI_GREEN + " 1 " + Color.ANSI_RESET + "Gestion de Personal");
         System.out.println(Color.ANSI_GREEN + " 2 " + Color.ANSI_RESET + "Gestion de Reservas");
         System.out.println(Color.ANSI_GREEN + " 3 " + Color.ANSI_RESET + "Gestion de Ventas");
-        System.out.println(Color.ANSI_GREEN + " 3 " + Color.ANSI_RESET + "Gestion de Stock");
+        System.out.println(Color.ANSI_GREEN + " 4 " + Color.ANSI_RESET + "Gestion de Stock");
         System.out.println(Color.ANSI_RED + " 0 " + Color.ANSI_RESET + "Volver");
         System.out.print(Color.ANSI_GREEN + "  " + Color.ANSI_RESET);
     }
@@ -128,9 +128,9 @@ public class Vista {
     public static void menuGestionReserva(){
         System.out.println(Color.ANSI_GREEN + " 1 " + Color.ANSI_RESET + "Dar de alta una Reserva");
         System.out.println(Color.ANSI_GREEN + " 2 " + Color.ANSI_RESET + "Dar de baja una Reserva");
-        System.out.println(Color.ANSI_GREEN + " 3 " + Color.ANSI_RESET + "Buscar una reserva");
-        System.out.println(Color.ANSI_GREEN + " 3 " + Color.ANSI_RESET + "Modificar una Reserva");
-        System.out.println(Color.ANSI_GREEN + " 3 " + Color.ANSI_RESET + "Listar Reservas");
+        System.out.println(Color.ANSI_GREEN + " 3 " + Color.ANSI_RESET + "Buscar una Reserva");
+        System.out.println(Color.ANSI_GREEN + " 4 " + Color.ANSI_RESET + "Modificar una Reserva");
+        System.out.println(Color.ANSI_GREEN + " 5 " + Color.ANSI_RESET + "Listar Reservas");
         System.out.println(Color.ANSI_RED + " 0 " + Color.ANSI_RESET + "Volver");
         System.out.print(Color.ANSI_GREEN + "  " + Color.ANSI_RESET);
     }
@@ -182,7 +182,8 @@ public class Vista {
 
 // System.out.println(Color.ANSI_BLUE + " 1 " + Color.ANSI_RESET + "Buscar Cliente");
 
-    public static void modificarReserva(){
+    public static void menuModificarReserva(){
+
         System.out.println(Color.ANSI_GREEN + " 1 " + Color.ANSI_RESET + "Fecha evento");
         System.out.println(Color.ANSI_GREEN + " 2 " + Color.ANSI_RESET + "Menus");
         System.out.println(Color.ANSI_GREEN + " 3 " + Color.ANSI_RESET + "Descripcion");
@@ -192,8 +193,14 @@ public class Vista {
         System.out.print(Color.ANSI_GREEN + "  " + Color.ANSI_RESET);
     }
 
-    public void insertarhora(){
+    public static void menuListarReservas(){
 
+        System.out.println(Color.ANSI_GREEN + " 1 " + Color.ANSI_RESET + "Todas las reservas");
+        System.out.println(Color.ANSI_GREEN + " 2 " + Color.ANSI_RESET + "Activas");
+        System.out.println(Color.ANSI_GREEN + " 3 " + Color.ANSI_RESET + "No Activas");
+        System.out.println(Color.ANSI_GREEN + " 4 " + Color.ANSI_RESET + "Por Cliente");
+        System.out.println(Color.ANSI_RED + " 0 " + Color.ANSI_RESET + "Volver");
+        System.out.print(Color.ANSI_GREEN + "  " + Color.ANSI_RESET);
     }
 
     // endregion
