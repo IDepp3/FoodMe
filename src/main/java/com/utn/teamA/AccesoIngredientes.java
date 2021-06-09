@@ -20,27 +20,27 @@ public class AccesoIngredientes {
 
     public void arregloALista(Ingrediente[] arreglo, List<Ingrediente> ingredientes){
         if(arreglo != null){
-            for(Ingrediente c : arreglo){
-                ingredientes.add(c);
+            for(Ingrediente ing : arreglo){
+                ingredientes.add(ing);
             }
         }
     }
 
     public List<Ingrediente> obtenerRegistros() {
-        List<Ingrediente> clientes = new ArrayList<>();
+        List<Ingrediente> ingredientes = new ArrayList<>();
         BufferedReader reader;
         try {
             reader = new BufferedReader(new FileReader(this.url));
             // TODO a investigar recordar descomentar linea y comentar arregloALista();
             //clientes = Arrays.asList(this.json.fromJson(reader, Cliente[].class));
-            arregloALista(this.json.fromJson(reader, Ingrediente[].class), clientes);
+            arregloALista(this.json.fromJson(reader, Ingrediente[].class), ingredientes);
             reader.close();
         } catch (FileNotFoundException e) {
             crearFichero();
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-        return clientes;
+        return ingredientes;
     }
 
     private void crearFichero(){

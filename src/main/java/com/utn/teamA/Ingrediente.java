@@ -77,8 +77,8 @@ public class Ingrediente {
             return true;
 
         if(obj instanceof Ingrediente){
-            Ingrediente c = (Ingrediente)obj;
-            if(this.getId().equals(c.getId()))
+            Ingrediente i = (Ingrediente)obj;
+            if(this.getId().equals(i.getId()))
                 return true;
         }
 
