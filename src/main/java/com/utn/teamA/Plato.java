@@ -88,6 +88,19 @@ public class Plato {
                 Color.ANSI_RESET + "\n";
     }
 
+    public boolean equals(Object obj) {
+        if(this == obj)
+            return true;
+
+        if(obj instanceof Plato){
+            Plato p = (Plato)obj;
+            if(this.getPlatoId().equals(p.getPlatoId()))
+                return true;
+        }
+
+        return false;
+    }
+
     public void crear(){
 
         Scanner teclado = new Scanner(System.in);
