@@ -103,18 +103,11 @@ public class Empleado extends Persona {
         return false;
     }
 
-<<<<<<< HEAD
     //region Mostrar
     @Override
     public void mostrar() {
         System.out.println(toString());
     }
     //endregion
-=======
-    @Override
-    public int hashCode() {
-        return Objects.hash(getTipoEmpleado(), getSueldo());
-    }
->>>>>>> alfa
 
 }

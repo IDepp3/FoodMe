@@ -1,6 +1,11 @@
 [
   {
     "id": "4bb46f90Te",
+    "fechaNacimiento": {
+      "year": 2021,
+      "month": 6,
+      "day": 9
+    },
     "estado": true,
     "username": "Administrador1",
     "password": "ahVPnXFhSscj1XL1jsrVCA\u003d\u003d",
@@ -11,5 +16,18 @@
       "day": 6
     },
     "tipoUsuario": "ADMINISTRADOR"
+  },
+  {
+    "id": "9a06a4b9T1",
+    "estado": true,
+    "username": "MarcosSolari",
+    "password": "zgV1xNBY2tCLU0U4O7RLLg\u003d\u003d",
+    "email": "markos@gmail.com",
+    "fechaRegistro": {
+      "year": 2021,
+      "month": 6,
+      "day": 9
+    },
+    "tipoUsuario": "CLIENTE"
   }
 ]
