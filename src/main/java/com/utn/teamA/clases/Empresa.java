@@ -522,7 +522,12 @@ public class Empresa  implements Serializable {
 
     public void darDeBaja() {
         System.out.println("DAMOS DE BAJA UN EMPLEADO.");
-        Empleado h = new Empleado("Marcos", "Solari");
+        System.out.println("Ingrese el dni del empleado: ");
+        Empleado h = new Empleado();
+        Scanner s = new Scanner(System.in);
+        String dni = s.next();
+        
+        h.setDni(dni);
         boolean a = accesoEmpleados.borrarRegistro(h);
         if (a == true) {
             h.setEstado(false);
@@ -540,8 +545,8 @@ public class Empresa  implements Serializable {
         String dni = "";
         dni = escanner.next();
         Empleado g = new Empleado();
-        Empleado e = new Empleado();
-        if (g.getDni().equals(dni)) {
+        g.setDni(dni);
+        if (accesoEmpleados.obtenerRegistro(g) != null){
             g = accesoEmpleados.obtenerRegistro(g);
             System.out.println("Cliente encontrado");
             System.out.println(g);
