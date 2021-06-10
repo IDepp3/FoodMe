@@ -530,6 +530,7 @@ public class Empresa  implements Serializable {
         h.setDni(dni);
         boolean a = accesoEmpleados.borrarRegistro(h);
         if (a == true) {
+            System.out.println("El empleado con dni" + dni + "fue dado de baja");
             h.setEstado(false);
             h.toString();
         } else {
