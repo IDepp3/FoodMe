@@ -203,14 +203,15 @@ public class Helpers {
     }
 
     public static String validarPassword(String mensaje) {
-        Console c;
+       // Console c;
+       Scanner c = new Scanner(System.in);
         boolean resp = true;
         String valor = "";
-        char[] password = null;
+        String password = "";
         while (resp) {
-            if ((c = System.console()) != null) {
+            if ((c != null)) {
                 Vista.ingreseDato(mensaje);
-                password = c.readPassword();
+                password = c.next();
             }
             valor = String.valueOf(password);
 

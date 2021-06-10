@@ -19,9 +19,27 @@
   },
   {
     "id": "9a06a4b9T1",
+    "fechaNacimiento": {
+      "year": 2021,
+      "month": 6,
+      "day": 9
+    },
     "estado": true,
     "username": "MarcosSolari",
     "password": "zgV1xNBY2tCLU0U4O7RLLg\u003d\u003d",
+    "email": "markos@gmail.com",
+    "fechaRegistro": {
+      "year": 2021,
+      "month": 6,
+      "day": 9
+    },
+    "tipoUsuario": "CLIENTE"
+  },
+  {
+    "id": "2281aadbTd",
+    "estado": true,
+    "username": "MarcosSolari",
+    "password": "S1PWfhZUi0lxLcoRx/AG7g\u003d\u003d",
     "email": "markos@gmail.com",
     "fechaRegistro": {
       "year": 2021,
