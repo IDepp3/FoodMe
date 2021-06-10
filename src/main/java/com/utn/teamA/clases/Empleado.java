@@ -13,7 +13,7 @@ import java.util.Objects;
 
 public class Empleado extends Persona {
     
-    private TipoEmpleado tipoEmpleado;
+    private String tipoEmpleado;
     private double sueldo;
 
     //region Constructores
@@ -30,11 +30,11 @@ public class Empleado extends Persona {
     }
 
     /**
-     * Constructor Empleado
-     * @param tipoEmpleado
+     *
+     * @param String
      * @param sueldo
      */
-    public Empleado(TipoEmpleado tipoEmpleado, double sueldo){
+    public Empleado(TipoEmpleado String, double sueldo){
         this.tipoEmpleado = tipoEmpleado;
         this.sueldo = sueldo;
     }
@@ -51,7 +51,7 @@ public class Empleado extends Persona {
      * @param tipo
      * @param sueldo
      */
-    public Empleado( String nombre, String apellido, LocalDate fechaNacimiento,
+    public Empleado( String nombre, String apellido, String fechaNacimiento,
                    String telefono, String direccion, String dni, String email, TipoEmpleado tipo , Double sueldo,boolean estado){
         super( nombre,  apellido,  fechaNacimiento, telefono, direccion,  dni, email, estado);
         this.tipoEmpleado = tipoEmpleado;
@@ -60,7 +60,7 @@ public class Empleado extends Persona {
     //endregion
 
     //region Getters
-    public TipoEmpleado getTipoEmpleado() {
+    public String getTipoEmpleado() {
         return tipoEmpleado;
     }
 
@@ -70,7 +70,7 @@ public class Empleado extends Persona {
     //endregion
 
     //region Setter
-    public void setTipoEmpleado(TipoEmpleado tipoEmpleado) {
+    public void setTipoEmpleado(String tipoEmpleado) {
         this.tipoEmpleado = tipoEmpleado;
     }
 
@@ -83,9 +83,9 @@ public class Empleado extends Persona {
     @Override
     public String toString() {
         return " Empleado: " + " ID: " + super.getId() + " Nombre: " + super.getNombre() + " Apellido: "
-				+ super.getApellido() + " Nacimiento: " + super.getFechaNacimiento().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + " Telefono: "
+				+ super.getApellido() + " Nacimiento: " + super.getFechaNacimiento() + " Telefono: "
 				+ super.getTelefono() + " Direccion: " + super.getDireccion() + " Dni: " + super.getDni() + " Email: "
-				+ super.getEmail() + " Tipo: " + this.tipoEmpleado.tipo + " Sueldo: " + this.sueldo;
+				+ super.getEmail() + " Tipo: " + this.tipoEmpleado + " Sueldo: " + this.sueldo;
     }
     //endregion
 
@@ -102,12 +102,5 @@ public class Empleado extends Persona {
         }
         return false;
     }
-
-    //region Mostrar
-    @Override
-    public void mostrar() {
-        System.out.println(toString());
-    }
-    //endregion
 
 }

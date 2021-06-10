@@ -1,7 +1,7 @@
 package com.utn.teamA.clases;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
+
+
 import java.util.List;
 
 
@@ -23,7 +23,7 @@ public class Cliente extends Persona {
      *
      */
     public Cliente(){
-
+    super();
     }
 
     /**
@@ -49,14 +49,14 @@ public class Cliente extends Persona {
      * @param email
      */
 
-     public Cliente(String nombre, String apellido, LocalDate fechaNacimiento, String telefono, String direccion,
+     public Cliente(String nombre, String apellido, String fechaNacimiento, String telefono, String direccion,
                     String dni,String email,Boolean estado,List<Reserva> lasReservas){
         super(nombre,apellido,fechaNacimiento,telefono,direccion,dni,email,estado );
         reservas = lasReservas;
     }
     // constructor usado para el registro
     
-    public Cliente(String id, String username, String password, String email, LocalDate fechaRegistro, TipoUsuario tipoUsuario, boolean estado){
+    public Cliente(String id, String username, String password, String email, String fechaRegistro, String tipoUsuario, boolean estado){
         super(id, username, password, email, fechaRegistro, tipoUsuario, estado);
         this.reservas = null;
     }
@@ -75,7 +75,7 @@ public class Cliente extends Persona {
      * @param email
      * @param lasReservas
      */
-    public Cliente(String username, String password, LocalDate fechaRegistro,String nombre, String apellido, LocalDate fechaNacimiento,
+    public Cliente(String username, String password, String fechaRegistro,String nombre, String apellido, String fechaNacimiento,
                    String telefono, String direccion, String dni, String email,boolean estado,List<Reserva> lasReservas){
         super(username, password, fechaRegistro, nombre,  apellido,  fechaNacimiento, telefono, direccion,  dni, email,estado );
         reservas = lasReservas;
@@ -141,8 +141,6 @@ public class Cliente extends Persona {
         }
     }
 
-    @Override
-    void mostrar() {
-    }
+
 }
 

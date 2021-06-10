@@ -1,5 +1,4 @@
 package com.utn.teamA.ConexionDatos;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -7,13 +6,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.utn.teamA.ConexionDatos.interfaces.ObtenerDatos;
-import com.utn.teamA.clases.Cliente;
+
 import com.utn.teamA.clases.Empleado;
 
 public class AccesoEmpleados implements ObtenerDatos<Empleado>{
@@ -23,7 +20,7 @@ public class AccesoEmpleados implements ObtenerDatos<Empleado>{
 
     
     public AccesoEmpleados(){
-        this.json = new GsonBuilder().setPrettyPrinting().create();
+        this.json = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
     }
 
     @Override

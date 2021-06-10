@@ -2,8 +2,6 @@ package com.utn.teamA.clases;
 
 import com.google.gson.Gson;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -23,8 +21,8 @@ public class Reserva {
 
     private static final long serialVersionUID = 123456L;
     private String id;
-    private LocalDate fechaReserva;
-    private LocalDate fechaEvento;
+    private String fechaReserva;
+    private String fechaEvento;
     private  String idCliente; //
     private List<Menu> menus = new ArrayList();
     private String descripcion;
@@ -40,8 +38,10 @@ public class Reserva {
      * Constructor vacio
      */
     public Reserva() {
+        this.fechaReserva = null;
+        this.fechaEvento= null;
         this.id =  UUID.randomUUID().toString().substring(0, 10).replace("-", "g");
-        this.fechaReserva = LocalDate.now();
+
         status=true;
     }
 
@@ -54,10 +54,10 @@ public class Reserva {
      * @param descripcion
      * @param quiereBartender
      */
-    public Reserva(LocalDate fechaEvento, String idCliente, List<Menu> menus,
+    public Reserva(String fechaEvento, String idCliente, List<Menu> menus,
         String descripcion, boolean quiereBartender) {
         this.id =  UUID.randomUUID().toString().substring(0, 10).replace("-", "g");
-        this.fechaReserva = LocalDate.now();
+        this.fechaReserva = null;
         this.fechaEvento = fechaEvento;
         this.idCliente = idCliente;
         this.menus = menus;
@@ -74,11 +74,11 @@ public class Reserva {
         return id;
     }
 
-    public LocalDate getFechaReserva() {
+    public String getFechaReserva() {
         return fechaReserva;
     }
 
-    public LocalDate getFechaEvento() {
+    public String getFechaEvento() {
         return fechaEvento;
     }
 
@@ -119,11 +119,11 @@ public class Reserva {
         this.id = orderId;
     }
 
-    public void setFechaReserva(LocalDate fechaReserva) {
+    public void setFechaReserva(String fechaReserva) {
         this.fechaReserva = fechaReserva;
     }
 
-    public void setFechaEvento(LocalDate fechaEvento) {
+    public void setFechaEvento(String fechaEvento) {
         this.fechaEvento = fechaEvento;
     }
 
@@ -167,8 +167,8 @@ public class Reserva {
     public String toString() {
         return "Reserva{" +
                 " Id=" + id +
-                ", fechaReserva=" + fechaReserva.toString() +
-                ", fechaEvento=" + fechaEvento.toString() +
+                ", fechaReserva=" + fechaReserva +
+                ", fechaEvento=" + fechaEvento +
                 ", Cliente=" + idCliente+
                 ", status=" + status +
                 ", menus=" + menus.toString() +

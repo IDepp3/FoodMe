@@ -30,7 +30,7 @@ public class AccesoClientes implements ObtenerDatos<Cliente>{
     // region Constructores
 
     public AccesoClientes(){
-        this.json = new GsonBuilder().setPrettyPrinting().create();
+        this.json = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
     }
 
     // endregion

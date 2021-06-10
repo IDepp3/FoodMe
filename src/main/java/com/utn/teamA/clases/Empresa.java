@@ -27,7 +27,7 @@ public class Empresa {
     private String nombre;
     private String direccion;
     private String CUIT;
-    private LocalDate nacimiento;
+    private String nacimiento;
     private String localidad;
 
     private List<Cliente> listaClientes;
@@ -75,7 +75,7 @@ public class Empresa {
      * @param unaLocalidad
      */
 
-    public Empresa(String elNombre, String laDireccion, String elCUIT, LocalDate elNacimiento, String unaLocalidad) {
+    public Empresa(String elNombre, String laDireccion, String elCUIT, String elNacimiento, String unaLocalidad) {
         nombre = elNombre;
         direccion = laDireccion;
         CUIT = elCUIT;
@@ -111,7 +111,7 @@ public class Empresa {
      * @param listaEmpleados
      */
 
-    public Empresa(String nombre, String direccion, String CUIT, LocalDate nacimiento, String localidad,
+    public Empresa(String nombre, String direccion, String CUIT, String nacimiento, String localidad,
             List<Usuario> listaUsuarios, List<Cliente> listaClientes, List<Reserva> listaReservas,
             List<Menu> listaMenus, List<Empleado> listaEmpleados) {
         this.nombre = nombre;
@@ -160,7 +160,7 @@ public class Empresa {
         return CUIT;
     }
 
-    public LocalDate getNacimiento() {
+    public String getNacimiento() {
         return nacimiento;
     }
 
@@ -196,7 +196,7 @@ public class Empresa {
         this.CUIT = CUIT;
     }
 
-    public void setNacimiento(LocalDate nacimiento) {
+    public void setNacimiento(String nacimiento) {
         this.nacimiento = nacimiento;
     }
 
@@ -278,9 +278,9 @@ public class Empresa {
                     this.cliente = loginUsuario();
                     //this.cliente = this.listaClientes.get(0);
                     if (this.cliente != null)
-                        if (this.cliente.getTipoUsuario() == TipoUsuario.ADMINISTRADOR)
+                        if (this.cliente.getTipoUsuario().equals(TipoUsuario.ADMINISTRADOR.tipo))
                             seleccionDeMenu();
-                        else if (this.cliente.getTipoUsuario() == TipoUsuario.CLIENTE)
+                        else if (this.cliente.getTipoUsuario().equals(TipoUsuario.CLIENTE.tipo))
                             getMenuCliente();
                         else
                             Vista.opcionIncorrecta("El usuario o contraseña es incorrecto");
@@ -335,10 +335,10 @@ public class Empresa {
                 "Error, comienza con numeros o letras y puede contener (._) minimo 8, maximo 20 caracteres");
         String password = passwordIguales();
         String email = Helpers.validaciones("email", Helpers.VALIDAR_EMAIL, "Ingrese email valido");
-        cliente = new Cliente(Helpers.generarID(), nombreUsuario, Helpers.encriptarPassword(password), email,
-                Helpers.fechaActual(), Helpers.tipoCliente(), Helpers.estadoActivo());
-
-        return cliente;
+       // cliente = new Cliente(Helpers.generarID(), nombreUsuario, Helpers.encriptarPassword(password), email,
+        //        Helpers.fechaActual(), Helpers.tipoCliente(), Helpers.estadoActivo());
+        Cliente cliente2 = new Cliente();
+        return cliente2;
     }
 
     private String passwordIguales() {
@@ -533,7 +533,8 @@ public class Empresa {
 
             respu = false;
         }
-        empleado = new Empleado(nombre, apellido, fecha, telefono, direccion, dni, email, tipo, sueldo, estado);
+        String fecha4= null;
+        empleado = new Empleado(nombre, apellido, fecha4, telefono, direccion, dni, email, tipo, sueldo, estado);
         System.out.println("Se agrego exitosamente el empleado");
         accesoEmpleados.agregarRegistro(empleado);
 
@@ -665,7 +666,7 @@ public class Empresa {
                             entradaEscanner2.nextLine();
                             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                             fechaTentativa = LocalDate.parse(f, formatter);
-                            fechaDisponible1 = verificarFechaDeReservaDisponible(fechaTentativa);
+                            fechaDisponible1 = verificarFechaDeReservaDisponible(f);
                             if (fechaDisponible1) {
                                 System.out.println("Fecha disponible?");
                                 fecha = fechaTentativa;
@@ -721,7 +722,8 @@ public class Empresa {
 
                 }
 
-                Reserva reserva = new Reserva(fecha, idCliente, menus, descripcion, quierebartender);
+                String fecha5 = null;
+                Reserva reserva = new Reserva(fecha5, idCliente, menus, descripcion, quierebartender);
 
                 accesoReservas.mostrar(reserva);
                 boolean a = true;
@@ -948,11 +950,11 @@ public class Empresa {
     public void modificarUnaReserva() {
     } // TODO Antonela
 
-    public boolean verificarFechaDeReservaDisponible(LocalDate fechaRes) {
+    public boolean verificarFechaDeReservaDisponible(String fechaRes) {
 
         List<Reserva> reservas = accesoReservas.obtenerRegistros();
         for (Reserva r : reservas) {
-            if ((r != null) && (r.getFechaEvento().isEqual(fechaRes))) {
+            if ((r != null) && (r.getFechaEvento().equals(fechaRes))) {
 
                 return false;
 
@@ -1094,9 +1096,11 @@ public class Empresa {
             email = entradaEscanner.next();
 
             respu = false;
+            String fecha3 = "12-12-12";
 
         }
-        cliente = new Cliente(nombre, apellido, fecha, telefono, direccion, dni, email, estado, listaReservas);
+        String fecha3=null;
+        cliente = new Cliente(nombre, apellido, fecha3, telefono, direccion, dni, email, estado, listaReservas);
         System.out.println("Se agrego exitosamente el cliente");
         accesoClientes.agregarRegistro(cliente);
 
@@ -1210,7 +1214,7 @@ public class Empresa {
         boolean resp = true;
         int opc;
         String aux = "";
-        LocalDate fecha;
+        //LocalDate fecha;
         while (resp) {
             Vista.titulo("Modificacion de datos personales");
             Vista.modificarInformacionPersonal();
@@ -1228,8 +1232,8 @@ public class Empresa {
                     this.cliente.setApellido(aux);
                     break;
                 case 3:
-                    fecha = Helpers.validarFecha();
-                    this.cliente.setFechaNacimiento(fecha);
+                    //fecha = Helpers.validarFecha();
+                    //this.cliente.setFechaNacimiento(fecha);
                     break;
                 case 4:
                     aux = Helpers.validaciones("telefono", Helpers.VALIDAR_TELEFONO, "Coloque el numero sin 0 ni 15");
