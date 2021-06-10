@@ -262,6 +262,7 @@ public class Empresa {
     public void menuPrincipal() {
         boolean resp = true;
         int opcion;
+        //System.out.println(listaClientes.get(0).getFechaRegistro().getClass());
         while (resp) {
             Vista.titulo("Empresa de Catering");
             Vista.menuPrincipal();
@@ -333,7 +334,7 @@ public class Empresa {
                 "Error, comienza con numeros o letras y puede contener (._) minimo 8, maximo 20 caracteres");
         String password = passwordIguales();
         String email = Helpers.validaciones("email", Helpers.VALIDAR_EMAIL, "Ingrese email valido");
-        cliente = new Cliente(Helpers.generarID(), nombreUsuario, Helpers.encriptarPassword(password), email,
+        cliente = new Cliente(Helpers.generarID(), nombreUsuario, password, email,
                 Helpers.fechaActual().toString(), Helpers.tipoCliente().toString(), Helpers.estadoActivo());
 
         return cliente;
@@ -345,7 +346,7 @@ public class Empresa {
         String confirmacion;
 
         while (resp) {
-            pass = Helpers.validaciones("password", Helpers.VALIDAR_PASSWORD, "Su contraseña debe ser como minimo de 8 caracteres maximo 15, 1 mayuscula, 1 minuscula, 1 digito, no espacios en blanco y al menos 1 caracter especial($@!%*?&)");
+            pass = Helpers.validaciones("password", Helpers.VALIDAR_NOMBRE_USUARIO, "Su contraseña debe ser como minimo de 8 caracteres maximo 15, 1 mayuscula, 1 minuscula, 1 digito, no espacios en blanco y al menos 1 caracter especial($@!%*?&)");
             Vista.ingreseDato("Reingrese password");
             confirmacion = Helpers.nextLine();
             if (pass.equals(confirmacion))
