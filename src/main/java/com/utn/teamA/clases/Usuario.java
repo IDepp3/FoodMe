@@ -37,13 +37,8 @@ public abstract class Usuario{
      * @param fechaRegistro
      */
     
-    /* public Usuario( String username, String password, LocalDate fechaRegistro) {
-        this.username      = username;
-        this.password      = password;
-        this.fechaRegistro = fechaRegistro;
-    } */
 
-    // constructor para que no se rompan cosas
+    // CONSTRUCTOR PARA QUE NO SE ROMPA
 
     public Usuario(String username, String password, LocalDate fechaRegistro){
         this.username      = username;
@@ -51,7 +46,7 @@ public abstract class Usuario{
         this.fechaRegistro = fechaRegistro;
     }
 
-    // constructor usado para loguear un usuario 
+    // CONSTRUCTOR USADO PARA LOGUEAR UN USUARIO 
     
     public Usuario(String username, String password){
         this.username = username;
