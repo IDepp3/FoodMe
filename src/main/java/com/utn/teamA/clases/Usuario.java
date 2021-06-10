@@ -16,8 +16,8 @@ public abstract class Usuario{
     private String username;
     private String password;
     private String email;
-    private LocalDate fechaRegistro;
-    private TipoUsuario tipoUsuario;
+    private String fechaRegistro;
+    private String tipoUsuario;
 
     // endregion
     
@@ -45,7 +45,7 @@ public abstract class Usuario{
 
     // constructor para que no se rompan cosas
 
-    public Usuario(String username, String password, LocalDate fechaRegistro){
+    public Usuario(String username, String password, String fechaRegistro){
         this.username      = username;
         this.password      = password;
         this.fechaRegistro = fechaRegistro;
@@ -60,7 +60,7 @@ public abstract class Usuario{
 
     // constructor usado para crear un usuario
 
-    public Usuario(String username, String password, String email, LocalDate fechaRegistro, TipoUsuario tipoUsuario){
+    public Usuario(String username, String password, String email, String fechaRegistro, String tipoUsuario){
         this.username      = username;
         this.password      = password;
         this.email         = email;
@@ -83,7 +83,7 @@ public abstract class Usuario{
         return password;
     }
 
-    public TipoUsuario getTipoUsuario(){
+    public String getTipoUsuario(){
         return this.tipoUsuario;
     }
 
@@ -97,15 +97,15 @@ public abstract class Usuario{
         this.password = password;
     }
 
-    public LocalDate getFechaRegistro() {
-        return fechaRegistro;
+    public String getFechaRegistro() {
+        return this.fechaRegistro;
     }
 
-    public void setFechaRegistro(LocalDate fechaRegistro) {
+    public void setFechaRegistro(String fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
 
-    public void setTipoUsuario(TipoUsuario tipoUsuario){
+    public void setTipoUsuario(String tipoUsuario){
         this.tipoUsuario = tipoUsuario;
     }
 

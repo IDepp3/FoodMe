@@ -19,7 +19,7 @@ public abstract class Persona extends Usuario {
     private String id;
     private String nombre;
     private String apellido;
-    private LocalDate fechaNacimiento;
+    private String fechaNacimiento;
     private String telefono;
     private String direccion;
     private String dni;
@@ -33,7 +33,7 @@ public abstract class Persona extends Usuario {
      * Constructor Vacio
      */
     public Persona(){
-        fechaNacimiento = LocalDate.now();
+        this.fechaNacimiento = LocalDate.now().toString();
         this.id = UUID.randomUUID().toString().substring(0, 10).replace("-", "g");
         this.estado = true;
     }
@@ -52,7 +52,7 @@ public abstract class Persona extends Usuario {
      * @param direccion
      * @param dni
      */
-    public Persona( String nombre, String apellido, LocalDate fechaNacimiento, String telefono, String direccion, String dni,
+    public Persona( String nombre, String apellido, String fechaNacimiento, String telefono, String direccion, String dni,
             String email, boolean estado) {
         this.id = UUID.randomUUID().toString().substring(0, 10).replace("-", "g");
         this.nombre = nombre;
@@ -76,7 +76,7 @@ public abstract class Persona extends Usuario {
      * @param direccion
      * @param dni
      */
-    public Persona(String username, String password, LocalDate fechaRegistro,String nombre, String apellido, LocalDate fechaNacimiento,
+    public Persona(String username, String password, String fechaRegistro,String nombre, String apellido, String fechaNacimiento,
                    String telefono, String direccion, String dni,
                    String email, boolean estado){
         super( username, password, fechaRegistro);
@@ -92,7 +92,7 @@ public abstract class Persona extends Usuario {
 
     // constructor usado para el registro
 
-    public Persona(String id, String username, String password, String email, LocalDate fechaRegistro, TipoUsuario tipoUsuario, boolean estado){
+    public Persona(String id, String username, String password, String email, String fechaRegistro, String tipoUsuario, boolean estado){
         super(username, password, email, fechaRegistro, tipoUsuario);
         this.id     = id;
         this.estado = estado;
@@ -125,11 +125,11 @@ public abstract class Persona extends Usuario {
         this.apellido = apellido;
     }
 
-    public LocalDate getFechaNacimiento() {
-        return fechaNacimiento;
+    public String getFechaNacimiento() {
+        return this.fechaNacimiento;
     }
 
-    public void setFechaNacimiento(LocalDate fechaNacimiento) {
+    public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 

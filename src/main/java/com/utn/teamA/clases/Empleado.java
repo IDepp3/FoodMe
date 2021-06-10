@@ -51,7 +51,7 @@ public class Empleado extends Persona {
      * @param tipo
      * @param sueldo
      */
-    public Empleado( String nombre, String apellido, LocalDate fechaNacimiento,
+    public Empleado( String nombre, String apellido, String fechaNacimiento,
                    String telefono, String direccion, String dni, String email, TipoEmpleado tipo , Double sueldo,boolean estado){
         super( nombre,  apellido,  fechaNacimiento, telefono, direccion,  dni, email, estado);
         this.tipoEmpleado = tipoEmpleado;
@@ -83,7 +83,7 @@ public class Empleado extends Persona {
     @Override
     public String toString() {
         return " Empleado: " + " ID: " + super.getId() + " Nombre: " + super.getNombre() + " Apellido: "
-				+ super.getApellido() + " Nacimiento: " + super.getFechaNacimiento().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + " Telefono: "
+				+ super.getApellido() + " Nacimiento: " + super.getFechaNacimiento() + " Telefono: "
 				+ super.getTelefono() + " Direccion: " + super.getDireccion() + " Dni: " + super.getDni() + " Email: "
 				+ super.getEmail() + " Tipo: " + this.tipoEmpleado.tipo + " Sueldo: " + this.sueldo;
     }
