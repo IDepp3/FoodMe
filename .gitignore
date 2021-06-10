@@ -1,5 +1,6 @@
 ## IDEA
 .idea
+FoodMe.iml
 
 ## VSCode
 .vscode
@@ -17,3 +18,11 @@ target
 
 ## JAVA EE
 webapp
+
+## RECURSOS
+
+<<<<<<< HEAD
+scr/main/registros/archivos/*.json
+=======
+src/main/recursos/archivos/*.json
+>>>>>>> devCopia
