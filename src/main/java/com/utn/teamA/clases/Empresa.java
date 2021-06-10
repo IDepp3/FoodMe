@@ -3,6 +3,7 @@ package com.utn.teamA.clases;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -461,11 +462,15 @@ public class Empresa {
         System.out.print("\nIngrese el apellido del empleado: ");
         String apellido = entradaEscanner.next();
         
-        // validacion de fecha
+        boolean respuestaFecha = false;
+        LocalDate fecha = null;
 
+        while(respuestaFecha == false){
+        // validacion de fecha
+        try{
         System.out.print("\nIngrese el nacimiento del empleado: dd/MM/yyyy ");
         int dia, mes, anio;
-        LocalDate fecha = null;
+        
 
         System.out.println("Ingrese el dia: ");
         dia = entradaEscanner.nextInt();
@@ -474,13 +479,17 @@ public class Empresa {
         System.out.println("Ingrese el año");
         anio = entradaEscanner.nextInt();
         fecha = LocalDate.of(anio, mes, dia);
-
+        respuestaFecha = true;
+    }catch(DateTimeException e){
+        System.out.println("La fecha ingresada es invalida");
+    }
+    }
         String telefono = "";
 
         boolean respuesta = false;
         while (respuesta == false) {
 
-            System.out.print("\nIngrese numero de celular sin 0 ni 15");
+            System.out.print("\nIngrese numero de celular sin 0 ni 15: ");
             telefono = entradaEscanner.next();
             // Validamos el dni que nos da el cliente.
             respuesta = Helpers.validarTel(telefono);
@@ -493,20 +502,24 @@ public class Empresa {
         direccion = entradaEscanner.next();
         entradaEscanner.next();
         boolean respuest = false;
+        boolean respuestaDni = false;
+        while (respuestaDni == false){
         System.out.print("\nIngrese dni del empleado: ");
         dni = entradaEscanner.next();
 
         // Validamos el dni que nos da el cliente.
-        respuest = Helpers.validarDni(dni);
-
+        
+        respuestaDni = Helpers.validarDni(dni);
+        }
         String email = "";
         boolean estado = true;
-        boolean respu = true;
-        while (respu == true) {
+        boolean respuestaEmail = false;
+        while (respuestaEmail == false) {
             // Validamos el email que nos da el cliente.
             System.out.println("\nIngrese el email del empleado: ");
             email = entradaEscanner.next();
-
+            respuestaEmail = Helpers.validarEmail(email);
+        }
             System.out.println("\nIngrese tipo del empleado");
             System.out.println("\n 4 - MOZO | 5 - BARTENDER | 6 - SUSHIMAN");
             Scanner en = new Scanner(System.in);
@@ -531,8 +544,8 @@ public class Empresa {
 
             sueldo = entradaEscanner.nextDouble();
 
-            respu = false;
-        }
+            
+        
         empleado = new Empleado(nombre, apellido, fecha.toString(), telefono, direccion, dni, email, tipo, sueldo, estado);
         System.out.println("Se agrego exitosamente el empleado");
         accesoEmpleados.agregarRegistro(empleado);
@@ -541,8 +554,12 @@ public class Empresa {
 
     public void darDeBaja() {
         System.out.println("DAMOS DE BAJA UN EMPLEADO.");
+        Scanner s = new Scanner(System.in);
         Empleado h = new Empleado();
         boolean a = accesoEmpleados.borrarRegistro(h);
+        System.out.println("Ingrese el dni del empleado: ");
+        String dni = s.next();
+        h.setDni(dni);
         if (a == true) {
             h.setEstado(false);
             h.toString();
