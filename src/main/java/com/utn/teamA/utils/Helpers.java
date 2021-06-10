@@ -144,7 +144,7 @@ public class Helpers {
         boolean resp = mather.find();
 
         if (resp == true) {
-            System.out.println("El dni ingresado es valido");
+            //System.out.println("El dni ingresado es valido");
         } else {
             System.out.println("El dni es incorrecto");
         }
@@ -203,15 +203,16 @@ public class Helpers {
     }
 
     public static String validarPassword(String mensaje) {
-        Console c;
+        Scanner c = new Scanner(System.in);
         boolean resp = true;
         String valor = "";
-        char[] password = null;
+        String password = null;
         while (resp) {
-            if ((c = System.console()) != null) {
-                Vista.ingreseDato(mensaje);
-                password = c.readPassword();
-            }
+
+         Vista.ingreseDato(mensaje);
+          password = c.next();
+
+
             valor = String.valueOf(password);
 
             if (valor.matches(Helpers.VALIDAR_PASSWORD))
