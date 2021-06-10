@@ -262,9 +262,6 @@ public class Empresa {
     public void menuPrincipal() {
         boolean resp = true;
         int opcion;
-        for(Cliente c : this.listaClientes){
-            System.out.println(c);
-        }
         while (resp) {
             Vista.titulo("Empresa de Catering");
             Vista.menuPrincipal();
@@ -276,11 +273,11 @@ public class Empresa {
                 case 1:
                     Vista.titulo("Login");
                     this.cliente = loginUsuario();
-                    //this.cliente = this.listaClientes.get(0);
+                    this.cliente = this.listaClientes.get(0);
                     if (this.cliente != null)
-                        if (this.cliente.getTipoUsuario() == TipoUsuario.ADMINISTRADOR)
+                        if (this.cliente.getTipoUsuario().equals(TipoUsuario.ADMINISTRADOR.toString()))
                             seleccionDeMenu();
-                        else if (this.cliente.getTipoUsuario() == TipoUsuario.CLIENTE)
+                        else if (this.cliente.getTipoUsuario().equals(TipoUsuario.CLIENTE.toString()) )
                             getMenuCliente();
                         else
                             Vista.opcionIncorrecta("El usuario o contraseña es incorrecto");
@@ -315,9 +312,10 @@ public class Empresa {
         boolean resp = true;
         int i = 0;
 
-        c.setUsername(Helpers.validaciones("nombre usuario", Helpers.VALIDAR_NOMBRE_USUARIO,
-                "Error, comienza con numeros o letras y puede contener (._) minimo 8, maximo 20 caracteres"));
-        c.setPassword(Helpers.encriptarPassword(Helpers.ingresoPassword()));
+        Vista.ingreseDato("Ingrese nombre de usuario");
+        c.setUsername(Helpers.nextLine());
+        Vista.ingreseDato("Ingrese password");
+        c.setPassword(Helpers.nextLine());
 
         while (resp && i < this.listaClientes.size()) {
             if (this.listaClientes.get(i).existeCliente(c)) {
@@ -331,12 +329,12 @@ public class Empresa {
 
     private Cliente registroUsuario() {
         Cliente cliente;
-        String nombreUsuario = Helpers.validaciones("nombre usuario", Helpers.VALIDAR_NOMBRE_USUARIO,
+        String nombreUsuario = Helpers.validaciones("Nombre usuario", Helpers.VALIDAR_NOMBRE_USUARIO,
                 "Error, comienza con numeros o letras y puede contener (._) minimo 8, maximo 20 caracteres");
         String password = passwordIguales();
         String email = Helpers.validaciones("email", Helpers.VALIDAR_EMAIL, "Ingrese email valido");
         cliente = new Cliente(Helpers.generarID(), nombreUsuario, Helpers.encriptarPassword(password), email,
-                Helpers.fechaActual(), Helpers.tipoCliente(), Helpers.estadoActivo());
+                Helpers.fechaActual().toString(), Helpers.tipoCliente().toString(), Helpers.estadoActivo());
 
         return cliente;
     }
@@ -347,12 +345,13 @@ public class Empresa {
         String confirmacion;
 
         while (resp) {
-            pass = Helpers.validarPassword("Ingrese password");
-            confirmacion = Helpers.validarPassword("Reingrese password");
+            pass = Helpers.validaciones("password", Helpers.VALIDAR_PASSWORD, "Su contraseña debe ser como minimo de 8 caracteres maximo 15, 1 mayuscula, 1 minuscula, 1 digito, no espacios en blanco y al menos 1 caracter especial($@!%*?&)");
+            Vista.ingreseDato("Reingrese password");
+            confirmacion = Helpers.nextLine();
             if (pass.equals(confirmacion))
                 resp = false;
             else
-                Vista.opcionCorrecta("Las contraseñas no coinciden");
+                Vista.opcionIncorrecta("Las contraseñas no coinciden");
         }
 
         return pass;
@@ -397,6 +396,7 @@ public class Empresa {
                     resp = false;
                     break;
                 case 1:
+                    Vista.titulo("GESTION DE PERSONAL");
                     getMenuGestionPersonal();
                     break;
                 case 2:
@@ -404,12 +404,12 @@ public class Empresa {
                     getMenuGestionReservas();
                     break;
                 case 3:
-                    Vista.titulo("GESTION DE CLIENTES");
+                    Vista.titulo("GESTION DE VENTAS");
                     getMenuGestionVentas();
                     break;
                 case 4:
-                    Vista.titulo("GESTION DE VENTAS");
-                    getMenuGestionClientes();
+                    Vista.titulo("GESTION DE STOCK");
+                    getMenuGestionStock();
                     break;
                 default:
                     Vista.opcionIncorrecta(seleccion);
@@ -454,8 +454,7 @@ public class Empresa {
         Empleado empleado = null;
         TipoEmpleado tipo = null;
         double sueldo = 0;
-        System.out.println("DAR ALTA EMPLEADO");
-        System.out.println("");
+        
         System.out.print("\nIngrese el nombre del empleado: ");
         String nombre = entradaEscanner.next();
         System.out.print("\nIngrese el apellido del empleado: ");
@@ -533,7 +532,7 @@ public class Empresa {
 
             respu = false;
         }
-        empleado = new Empleado(nombre, apellido, fecha, telefono, direccion, dni, email, tipo, sueldo, estado);
+        empleado = new Empleado(nombre, apellido, fecha.toString(), telefono, direccion, dni, email, tipo, sueldo, estado);
         System.out.println("Se agrego exitosamente el empleado");
         accesoEmpleados.agregarRegistro(empleado);
 
@@ -541,7 +540,7 @@ public class Empresa {
 
     public void darDeBaja() {
         System.out.println("DAMOS DE BAJA UN EMPLEADO.");
-        Empleado h = new Empleado("Marcos", "Solari");
+        Empleado h = new Empleado();
         boolean a = accesoEmpleados.borrarRegistro(h);
         if (a == true) {
             h.setEstado(false);
@@ -559,7 +558,6 @@ public class Empresa {
         String dni = "";
         dni = escanner.next();
         Empleado g = new Empleado();
-        Empleado e = new Empleado();
         if (g.getDni().equals(dni)) {
             g = accesoEmpleados.obtenerRegistro(g);
             System.out.println("Cliente encontrado");
@@ -1003,29 +1001,27 @@ public class Empresa {
 
     // endregion
 
-    // region Menu Cliente
-    private void getMenuGestionClientes() {
+    // region Stock
+    private void getMenuGestionStock() {
         boolean resp = true;
         int seleccion;
         while (resp) {
-            Vista.titulo("Gestion de Clientes");
-            Vista.menuGestionClientes();
+            Vista.titulo("Gestion de Stocks");
+            //Vista.menuGestionStocks();
             seleccion = Helpers.validarInt();
             switch (seleccion) {
                 case 0:
                     resp = false;
                     break;
                 case 1:
-                    darAltaUnCliente();
+                    System.out.println("ACA DAMOS DE ALTA UN ARTICULO.");
                     break;
                 case 2:
-                    darDeBajaCliente();
+                    System.out.println("ACA DAMOS DE BAJA UN ARTICULO");
                     break;
                 case 3:
-                    buscarCliente();
+                    System.out.println("ACA BUSCAMOS UN ARTICULO");
                     break;
-                case 4:
-                    listarClientes();
                 default:
                     Vista.opcionIncorrecta(seleccion);
                     break;
@@ -1034,6 +1030,18 @@ public class Empresa {
         }
 
     }
+
+    // region ABM
+
+    // endregion
+    // region Ver Stock
+    // endregion
+
+    // endregion
+
+    // endregion
+
+    // region Menu Cliente
 
     public void darAltaUnCliente() {
         Scanner entradaEscanner = new Scanner(System.in);
@@ -1096,7 +1104,7 @@ public class Empresa {
             respu = false;
 
         }
-        cliente = new Cliente(nombre, apellido, fecha, telefono, direccion, dni, email, estado, listaReservas);
+        cliente = new Cliente(nombre, apellido, fecha.toString(), telefono, direccion, dni, email, estado, listaReservas);
         System.out.println("Se agrego exitosamente el cliente");
         accesoClientes.agregarRegistro(cliente);
 
@@ -1135,18 +1143,7 @@ public class Empresa {
             System.out.println("El cliente no ha podido darse de baja.");
         }
     }
-
-    // region ABM
-
-    // endregion
-    // region Ver Stock
-    // endregion
-
-    // endregion
-
-    // endregion
-
-    // region Menu Cliente
+    
     private void getMenuCliente() {
         boolean resp = true;
         int opcion;
@@ -1229,7 +1226,7 @@ public class Empresa {
                     break;
                 case 3:
                     fecha = Helpers.validarFecha();
-                    this.cliente.setFechaNacimiento(fecha);
+                    this.cliente.setFechaNacimiento(fecha.toString());
                     break;
                 case 4:
                     aux = Helpers.validaciones("telefono", Helpers.VALIDAR_TELEFONO, "Coloque el numero sin 0 ni 15");

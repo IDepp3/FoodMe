@@ -51,7 +51,7 @@ public class Helpers {
             texto = teclado.nextLine();
             if (texto.length() == 0) {
                 esTextoVacio = true;
-                System.out.println(Color.ANSI_RED + "\n\t EL CAMPO NO PUEDE QUEDAR VACIO \n" + Color.ANSI_CYAN
+                System.out.print(Color.ANSI_RED + "\n\t EL CAMPO NO PUEDE QUEDAR VACIO \n" + Color.ANSI_CYAN
                         + "\nIngrese un dato:");
             } else {
                 esTextoVacio = false;
@@ -225,18 +225,16 @@ public class Helpers {
     }
 
     public static String ingresoPassword() {
-        Console c;
         String valor = "";
-        char[] password = null;
-        if ((c = System.console()) != null) {
-            Vista.ingreseDato("Ingrese password");
-            password = c.readPassword();
-        }
-
+        String password = null;
+        Vista.ingreseDato("Ingrese password");
+        password = Helpers.nextLine();
         valor = String.valueOf(password);
 
         return valor;
     }
+
+
 
     private static SecretKeySpec crearClave(String llave) {
         SecretKeySpec secretKeySpec = null;
