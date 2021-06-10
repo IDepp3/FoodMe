@@ -2,13 +2,15 @@ package com.utn.teamA.clases;
 
 public enum TipoUsuario {
     
-    ADMINISTRADOR("administrador"),
-    CLIENTE("cliente");
+    ADMINISTRADOR("administrador",1),
+    CLIENTE("cliente",2);
 
-    protected final String tipo;
+    public final String tipo;
+    public final int identificador;
 
-    private TipoUsuario(String tipo) {
+    private TipoUsuario(String tipo,int identificador) {
         this.tipo = tipo;
+        this.identificador=identificador;
 
     }
 }

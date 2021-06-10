@@ -21,4 +21,8 @@ webapp
 
 ## RECURSOS
 
+<<<<<<< HEAD
 scr/main/registros/archivos/*.json
+=======
+src/main/recursos/archivos/*.json
+>>>>>>> devCopia

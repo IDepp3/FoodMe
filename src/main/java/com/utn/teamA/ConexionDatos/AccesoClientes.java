@@ -6,17 +6,17 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonSerializer;
+import com.utn.teamA.ConexionDatos.Gson.LocalDateDeserializer;
+import com.utn.teamA.ConexionDatos.Gson.LocalDateSerializer;
 import com.utn.teamA.ConexionDatos.interfaces.ObtenerDatos;
 import com.utn.teamA.clases.Cliente;
+import com.utn.teamA.excepciones.ClienteNotieneReservas;
 
 public class AccesoClientes implements ObtenerDatos<Cliente>{
 
@@ -52,6 +52,39 @@ public class AccesoClientes implements ObtenerDatos<Cliente>{
             i++;
         }
         return cliente;
+    }
+
+    //Perdon hice esto para buscar por dni en la reserva
+    public Cliente obtenerRegistro(String dni){
+        Cliente cliente = null;
+        try {
+            List<Cliente> clientes = obtenerRegistros();
+            cliente = buscarCliente(clientes, dni);
+
+        }catch (ClienteNotieneReservas e){
+            System.err.println(e.getMessage());
+        }catch (NullPointerException e){
+
+        }
+
+        return cliente;
+    }
+    public Cliente buscarCliente( List<Cliente> clientes, String dni) throws ClienteNotieneReservas {
+        boolean resp = false;
+        int i = 0;
+        Cliente cliente = null;
+
+        while (!resp && i < clientes.size()) {
+            if (clientes.get(i).getDni().equals(dni)) {
+                cliente = clientes.get(i);
+                resp = true;
+            }
+            i++;
+        }
+        if(cliente!=null ){
+            return cliente;
+        }else throw new ClienteNotieneReservas();
+
     }
 
     @Override

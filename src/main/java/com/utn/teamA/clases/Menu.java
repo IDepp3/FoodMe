@@ -2,25 +2,35 @@ package com.utn.teamA.clases;
 
 public class Menu {
 
-    private int cantReservas;
+    private int cantPersonas;
+    private double precioPorUnidad; // se calcula segun los ingredientes
+    private double costoTotal;
     private TipoEmpleado a;
 
     public Menu(){
     }
-    public Menu(int cantReservas){
-        this.cantReservas = cantReservas;
+    public Menu(int cantPersonas){
+        this.cantPersonas = cantPersonas;
     }
 
-    public int getCantReservas() {
-        return cantReservas;
+    public int getCantPersonas() {
+        return cantPersonas;
     }
 
-    public void setCantReservas(int cantReservas) {
-        this.cantReservas = cantReservas;
+    public void setCantPersonas(int cantPersonas) {
+        this.cantPersonas = cantPersonas;
     }
 
     public TipoEmpleado getA() {
         return a;
+    }
+
+    public double getPrecioPorUnidad() {
+        return precioPorUnidad;
+    }
+
+    public double getCostoTotal() {
+        return costoTotal;
     }
 
     public void setA(TipoEmpleado a) {
@@ -30,7 +40,11 @@ public class Menu {
     @Override
     public String toString() {
         return "Menu{" +
-                "cantReservas=" + cantReservas +
+                "cantReservas=" + cantPersonas +
                 '}';
+    }
+
+    public double calcularCostoTotal(){
+        return precioPorUnidad*cantPersonas;
     }
 }

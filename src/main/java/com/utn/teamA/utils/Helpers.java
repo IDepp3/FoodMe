@@ -144,7 +144,7 @@ public class Helpers {
         boolean resp = mather.find();
 
         if (resp == true) {
-            System.out.println("El dni ingresado es valido");
+            //System.out.println("El dni ingresado es valido");
         } else {
             System.out.println("El dni es incorrecto");
         }
@@ -203,6 +203,7 @@ public class Helpers {
     }
 
     public static String validarPassword(String mensaje) {
+
        // Console c;
        Scanner c = new Scanner(System.in);
         boolean resp = true;
@@ -213,6 +214,7 @@ public class Helpers {
                 Vista.ingreseDato(mensaje);
                 password = c.next();
             }
+
             valor = String.valueOf(password);
 
             if (valor.matches(Helpers.VALIDAR_PASSWORD))
@@ -299,15 +301,22 @@ public class Helpers {
         return true;
     }
 
-    public static TipoUsuario tipoCliente() {
-        return TipoUsuario.CLIENTE;
+    public static String tipoCliente() {
+        return TipoUsuario.CLIENTE.tipo;
     }
 
-    public static TipoUsuario tipoAdministrador() {
-        return TipoUsuario.ADMINISTRADOR;
+    public static int tipoAdministradorI() {
+        return TipoUsuario.ADMINISTRADOR.identificador;
+    }
+    public static int tipoClienteI() {
+        return TipoUsuario.CLIENTE.identificador;
     }
 
-    public static LocalDate fechaActual() {
-        return LocalDate.now();
+    public static String tipoAdministrador() {
+        return TipoUsuario.ADMINISTRADOR.tipo;
+    }
+
+    public static String fechaActual() {
+        return LocalDate.now().toString();
     }
 }

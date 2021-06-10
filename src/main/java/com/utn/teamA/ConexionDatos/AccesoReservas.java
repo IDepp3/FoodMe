@@ -3,13 +3,11 @@ package com.utn.teamA.ConexionDatos;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParseException;
-import com.utn.teamA.ConexionDatos.interfaces.ObtenerDatos;
-import com.utn.teamA.clases.Cliente;
-import com.utn.teamA.clases.Persona;
-import com.utn.teamA.clases.Reserva;
 import com.utn.teamA.ConexionDatos.Gson.LocalDateDeserializer;
 import com.utn.teamA.ConexionDatos.Gson.LocalDateSerializer;
-
+import com.utn.teamA.ConexionDatos.interfaces.ObtenerDatos;
+import com.utn.teamA.clases.Cliente;
+import com.utn.teamA.clases.Reserva;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -21,7 +19,6 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
     // region Atributos
 
 
-
     private final String url = "src/main/recursos/archivos/reservas.json";
 
     private Gson json;
@@ -30,17 +27,18 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
 
     // region Constructores
 
-    public AccesoReservas()throws JsonParseException {
+    public AccesoReservas() throws JsonParseException {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(LocalDate.class, new LocalDateSerializer());
         gsonBuilder.registerTypeAdapter(LocalDate.class, new LocalDateDeserializer());
-       this.json = gsonBuilder.setPrettyPrinting().serializeNulls().create();
+        this.json = gsonBuilder.setPrettyPrinting().serializeNulls().create();
 
     }
 
     // endregion
 
     // region Implementacion Metodos Interfaz
+
 
     @Override
     public Reserva obtenerRegistro(Reserva t) {
@@ -59,6 +57,106 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
         return reserva;
     }
 
+    /**
+     * Obtener regitro por ID
+     * <p>
+     * Sobre carga de un metodo "Obtener registro". Poimorfismo
+     * <p>
+     * El metodo trae el objeto que coincida en el archivo con la variable que le pasamos por parametro
+     *
+     * @param id
+     * @return
+     */
+    public Reserva obtenerRegistro(String id) {
+        Reserva reserva = null;
+        try {
+
+            List<Reserva> reservas = obtenerRegistros();
+            boolean resp = false;
+            int i = 0;
+            while (!resp && i < reservas.size()) {
+                if (reservas.get(i).getId().equals(id)) {
+                    reserva = reservas.get(i);
+                    resp = true;
+                }
+                i++;
+            }
+        } catch (NullPointerException e) {
+            System.out.println();
+        } catch (Exception e) {
+
+        }
+
+        return reserva;
+    }
+
+    /**
+     * Obtener regitro por Fecha
+     * <p>
+     * Sobre carga de un metodo "Obtener registro". Poimorfismo
+     * <p>
+     * El metodo trae el objeto que coincida en el archivo con la variable que le pasamos por parametro
+     *
+     * @param fecha
+     * @return
+     */
+    public Reserva obtenerRegistro(LocalDate fecha) {
+        Reserva reserva = null;
+        try {
+
+            List<Reserva> reservas = obtenerRegistros();
+            boolean resp = false;
+            int i = 0;
+            while (!resp && i < reservas.size()) {
+                if (reservas.get(i).getFechaEvento().equals(fecha)) {
+                    reserva = reservas.get(i);
+                    resp = true;
+                }
+                i++;
+            }
+        } catch (NullPointerException e) {
+
+
+        } catch (Exception e) {
+
+        }
+
+        return reserva;
+    }
+
+    /**
+     * Obtener regitro por DNI
+     * <p>
+     * Sobre carga de un metodo "Obtener registro". Poimorfismo
+     * <p>
+     * El metodo trae el objeto que coincida en el archivo con la variable que le pasamos por parametro
+     *
+     * @param cliente variable
+     * @return
+     */
+    public List<Reserva> obtenerRegistro(Cliente cliente) {
+        List<Reserva> reservasCliente = new ArrayList<>();
+        Reserva reserva = null;
+        try {
+
+            List<Reserva> reservas = obtenerRegistros();
+            boolean resp = false;
+            int i = 0;
+            while (!resp && i < reservas.size()) {
+                if (reservas.get(i).getIdCliente().equals(cliente.getId())) {
+                    reservasCliente.add(reservas.get(i));
+                    resp = true;
+                }
+                i++;
+            }
+        } catch (NullPointerException e) {
+
+        } catch (Exception e) {
+
+        }
+
+        return reservasCliente;
+    }
 
     @Override
     public List<Reserva> obtenerRegistros() {
@@ -71,8 +169,11 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
             //reserva = Arrays.asList(this.json.fromJson(reader, Reserva[].class));
             arregloALista(this.json.fromJson(reader, Reserva[].class), reservas);
             reader.close();
+
         } catch (FileNotFoundException e) {
             crearFichero();
+        }catch (NullPointerException e){
+            e.getMessage();
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -103,20 +204,32 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
     @Override
     public boolean borrarRegistro(Reserva t) {
         boolean resp = false;
-        List<Reserva> reservas = obtenerRegistros();
         int i = 0;
 
-        while (!resp && i < reservas.size()) {
-            if (reservas.get(i).equals(t)) {
-                reservas.remove(i);
-                if (guardarInformacion(reservas))
-                    resp = true;
+        try {
+            List<Reserva> reservas = obtenerRegistros();
+            while (!resp && i < reservas.size()) {
+                if (reservas.get(i).equals(t)) {
+                    reservas.get(i).setStatus(false);
+                    if (guardarInformacion(reservas))
+                        resp = true;
+                }
+                i++;
             }
-            i++;
+
+         }catch (NullPointerException e){
+            e.getMessage();
+         }catch (Exception e){
+
         }
 
         return resp;
     }
+
+
+    // endregion
+
+    // region Metodos propios
 
     @Override
     public boolean agregarRegistro(Reserva t) {
@@ -133,10 +246,6 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
         return resp;
     }
 
-    // endregion
-
-    // region Metodos propios
-
     public boolean guardarInformacion(List<Reserva> reservas) {
         boolean resp = false;
         BufferedWriter writer;
@@ -148,7 +257,7 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
             resp = true;
         } catch (IOException e) {
             System.out.println("Algo salio mal y no se guardo la informacion");
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
 
@@ -187,12 +296,42 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
         }
     }
 
-    public void mostrar(Reserva reserva){
+    public void mostrar(Reserva reserva) {
         System.out.println(json.toJson(reserva));
     }
 
+    public boolean verificarFechaDeEventoDisponible(String fechaRes) {
+        boolean fechaDisponible = true;
+
+        try {
+
+            List<Reserva> reservas = obtenerRegistros();
+            if ((!reservas.isEmpty()) && (reservas != null) && (fechaDisponible == true)) { //todo Crear variable const que fechas de anticipacion de reserva costumizablepor el usuario en este caso lo seteamos a 48hs como minimo
+                for (Reserva r : reservas) {
+                    if ((r != null) && (r.isStatus()) && (r.getFechaEvento().equals(fechaRes))) {
+                        fechaDisponible = false;
+                        break;
+                    } else {
+
+                    }
+                    continue;
+                }
+            }
+        }catch (NullPointerException e){
+
+        }
+        catch (Exception e) {//todo por que pasa esto
+
+
+        }
+
+        return fechaDisponible;
+    }
     // endregion
+
+
 }
+
 
 
 

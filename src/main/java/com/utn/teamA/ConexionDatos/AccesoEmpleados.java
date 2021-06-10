@@ -15,7 +15,7 @@ import com.utn.teamA.clases.Empleado;
 
 public class AccesoEmpleados implements ObtenerDatos<Empleado>{
     
-    private final String url = "src\\main\\recursos\\archivos\\empleados.json";
+    private final String url = "src/main/recursos/archivos/empleados.json";
     private Gson json;
 
     
