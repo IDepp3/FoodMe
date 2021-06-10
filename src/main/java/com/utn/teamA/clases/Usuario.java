@@ -3,7 +3,7 @@ package com.utn.teamA.clases;
 import java.time.LocalDate;
 
 /**
- * Clase Abstracta Usuario
+ * CLASE ABSTRACTA USUARIO
  *
  *
  * @Marco
@@ -24,14 +24,14 @@ public abstract class Usuario{
     //region Constructores
 
     /**
-     * Constructor vacio
+     * CONSTRUCTOR VACIO
      */
     public Usuario(){
 
     }
 
     /**
-     * Constructor completo
+     * CONSTRUCTOR COMPLETO
      * @param username
      * @param password
      * @param fechaRegistro
@@ -53,7 +53,7 @@ public abstract class Usuario{
         this.password = password;
     }
 
-    // constructor usado para crear un usuario
+    // CONSTRUCTOR USADO PARA CREAR UN USUARIO
 
     public Usuario(String username, String password, String email, LocalDate fechaRegistro, TipoUsuario tipoUsuario){
         this.username      = username;
