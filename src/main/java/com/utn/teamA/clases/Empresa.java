@@ -14,13 +14,13 @@ import com.utn.teamA.excepciones.FechaInvalidaException;
 import com.utn.teamA.utils.Color;
 import com.utn.teamA.utils.Helpers;
 import com.utn.teamA.utils.Vista;
-import java.io.Serializable;
+
 
 /**
  * Clase Empresa
  */
 
-public class Empresa implements Serializable {
+public class Empresa {
 
     // region ATRIBUTOS
 

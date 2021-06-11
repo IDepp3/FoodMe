@@ -14,5 +14,21 @@
     "email": "admin@gmail.com",
     "fechaRegistro": "2021-06-10",
     "tipoUsuario": "administrador"
+  },
+  {
+    "reservas": null,
+    "id": "f9ac852cTe",
+    "nombre": null,
+    "apellido": null,
+    "fechaNacimiento": null,
+    "telefono": null,
+    "direccion": null,
+    "dni": null,
+    "estado": true,
+    "username": "AntoB.123",
+    "password": "34Csuhq6wb6EMGurvOLJUw\u003d\u003d",
+    "email": "anto@gmail.com",
+    "fechaRegistro": "2021-06-11",
+    "tipoUsuario": "cliente"
   }
 ]
