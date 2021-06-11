@@ -62,6 +62,25 @@ public class Helpers {
         return texto;
     }
 
+    public static int nextInt() {
+        Scanner teclado = new Scanner(System.in);
+        boolean esIntVacio = false;
+        int numero;
+
+        do {
+            numero = teclado.nextInt();
+            if (numero == 0) {
+                esIntVacio = true;
+                System.out.println(Color.ANSI_RED + "\n\t EL CAMPO NO PUEDE QUEDAR VACIO \n" + Color.ANSI_CYAN
+                        + "\nIngrese un dato:");
+            } else {
+                esIntVacio = false;
+            }
+        } while (esIntVacio);
+
+        return numero;
+    }
+
     public static char charAt0() {
         Scanner teclado = new Scanner(System.in);
         return teclado.next().charAt(0);

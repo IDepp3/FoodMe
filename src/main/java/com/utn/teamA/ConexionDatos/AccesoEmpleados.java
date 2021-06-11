@@ -33,7 +33,6 @@ public class AccesoEmpleados implements ObtenerDatos<Empleado>{
         while(!resp && i < empleados.size()){
             if(empleados.get(i).equals(t)){
                 empleado = empleados.get(i);
-                System.out.println("\nSe encontro un empleado: " + empleado);
                 resp = true;
             }
             i++;

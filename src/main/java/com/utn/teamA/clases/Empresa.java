@@ -1,6 +1,5 @@
 package com.utn.teamA.clases;
 
-
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -17,13 +16,11 @@ import com.utn.teamA.utils.Helpers;
 import com.utn.teamA.utils.Vista;
 import java.io.Serializable;
 
-
-
 /**
  * Clase Empresa
  */
 
-public class Empresa  implements Serializable {
+public class Empresa implements Serializable {
 
     // region ATRIBUTOS
 
@@ -48,7 +45,7 @@ public class Empresa  implements Serializable {
     private AccesoEmpleados accesoEmpleados;
     private AccesoReservas accesoReservas;
 
-    // endregion 
+    // endregion
 
     // region Constructor
 
@@ -115,8 +112,8 @@ public class Empresa  implements Serializable {
      */
 
     public Empresa(String nombre, String direccion, String CUIT, String nacimiento, String localidad,
-                   List<Usuario> listaUsuarios, List<Cliente> listaClientes, List<Reserva> listaReservas,
-                   List<Menu> listaMenus, List<Empleado> listaEmpleados) {
+            List<Usuario> listaUsuarios, List<Cliente> listaClientes, List<Reserva> listaReservas,
+            List<Menu> listaMenus, List<Empleado> listaEmpleados) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.CUIT = CUIT;
@@ -162,7 +159,6 @@ public class Empresa  implements Serializable {
     public String getDireccion() {
         return direccion;
     }
-
 
     // endregion
 
@@ -215,9 +211,8 @@ public class Empresa  implements Serializable {
     @Override
     public String toString() {
         return "Empresa{" + "nombre='" + nombre + '\'' + ", direccion='" + direccion + '\'' + ", CUIT='" + CUIT + '\''
-                + ", nacimiento=" + nacimiento + ", localidad='" + localidad
-                + ", listaReservas=" + listaReservas + ", listaMenus=" + listaMenus + ", listaEmpleados="
-                + listaEmpleados + '}';
+                + ", nacimiento=" + nacimiento + ", localidad='" + localidad + ", listaReservas=" + listaReservas
+                + ", listaMenus=" + listaMenus + ", listaEmpleados=" + listaEmpleados + '}';
     }
 
     public void mostrar() {
@@ -250,7 +245,7 @@ public class Empresa  implements Serializable {
                 case 1:
                     Vista.titulo("Login");
                     this.cliente = loginUsuario();
-                    //this.cliente = this.listaClientes.get(0);
+                    // this.cliente = this.listaClientes.get(0);
                     if (this.cliente != null)
                         if (this.cliente.getTipoUsuario().equals(TipoUsuario.ADMINISTRADOR.tipo))
                             seleccionDeMenu();
@@ -336,10 +331,8 @@ public class Empresa  implements Serializable {
         cliente = new Cliente(Helpers.generarID(), nombreUsuario, Helpers.encriptarPassword(password), email,
                 Helpers.fechaActual(), Helpers.tipoCliente(), Helpers.estadoActivo());
 
-
         return cliente;
     }
-
 
     private String passwordIguales() {
         boolean resp = true;
@@ -394,12 +387,12 @@ public class Empresa  implements Serializable {
         }
     }
 
-    //region Personal
+    // region Personal
 
     private void getMenuGestionPersonal() {
         boolean resp = true;
 
-        //Empleado f = null;
+        // Empleado f = null;
         int opcion;
         while (resp) {
             Vista.titulo("Gestion del Personal");
@@ -437,31 +430,37 @@ public class Empresa  implements Serializable {
         System.out.println("DAR ALTA EMPLEADO");
         System.out.println();
         System.out.print("\nIngrese el nombre del empleado: ");
-        String nombre = entradaEscanner.next();
+        String nombre = Helpers.nextLine();
         System.out.print("\nIngrese el apellido del empleado: ");
-        String apellido = entradaEscanner.next();
+        String apellido = Helpers.nextLine();
+
+        boolean respuestaFecha = false;
 
         // validacion de fecha
-
-        System.out.print("\nIngrese el nacimiento del empleado: dd/MM/yyyy ");
-        int dia, mes, anio;
         LocalDate fecha = null;
-
-        System.out.println("Ingrese el dia: ");
+            while(respuestaFecha == false){
+        try{
+        System.out.print("\nIngrese el nacimiento del empleado: <DD/MM/AAAA> ");
+        int dia, mes, anio;
+        System.out.println("\nIngrese el dia: ");
         dia = entradaEscanner.nextInt();
-        System.out.println("Ingrese el mes: ");
+        System.out.println("\nIngrese el mes: ");
         mes = entradaEscanner.nextInt();
-        System.out.println("Ingrese el año");
+        System.out.println("\nIngrese el año");
         anio = entradaEscanner.nextInt();
         fecha = LocalDate.of(anio, mes, dia);
-
+        respuestaFecha = true;
+    }catch(DateTimeException e){
+        System.out.println("\nLa fecha ingresada es incorrecta.");
+    }
+    }
         String telefono = "";
 
         boolean respuesta = false;
         while (respuesta == false) {
 
-            System.out.print("\nIngrese numero de celular sin 0 ni 15");
-            telefono = entradaEscanner.next();
+            System.out.print("\nIngrese numero de celular sin 0 ni 15: ");
+            telefono = Helpers.nextLine();
             // Validamos el dni que nos da el cliente.
             respuesta = Helpers.validarTel(telefono);
 
@@ -470,72 +469,86 @@ public class Empresa  implements Serializable {
         String dni = "";
 
         System.out.print("\nIngrese la direccion: ");
-        direccion = entradaEscanner.next();
-        entradaEscanner.next();
-        boolean respuest = false;
-        System.out.print("\nIngrese dni del empleado: ");
-        dni = entradaEscanner.next();
+        direccion = Helpers.nextLine();
 
-        // Validamos el dni que nos da el cliente.
-        respuest = Helpers.validarDni(dni);
+        boolean respuestaDni = false;
+
+        while (respuestaDni == false) {
+            System.out.print("\nIngrese dni del empleado: ");
+            dni = Helpers.nextLine();
+
+            // Validamos el dni que nos da el cliente.
+            respuestaDni = Helpers.validarDni(dni);
+        }
+
+        // Estado del Empleado
+        boolean estado = true;
+        boolean respuestaEmail = false;
 
         String email = "";
-        boolean estado = true;
-        boolean respu = true;
-        
-            // Validamos el email que nos da el cliente.
+
+        while (respuestaEmail == false) {
+
             System.out.println("\nIngrese el email del empleado: ");
-            email = entradaEscanner.next();
-        
-            System.out.println("\nIngrese tipo del empleado");
-            System.out.println("\n 4 - MOZO | 5 - BARTENDER | 6 - SUSHIMAN");
-            Scanner en = new Scanner(System.in);
-            int op = 0;
-            op = en.nextInt();
-            tipo = null;
-            switch (op) {
-                case 4:
-                    tipo = TipoEmpleado.MOZO.toString();
-                    break;
-                case 5:
-                    tipo = TipoEmpleado.BARTENDER.toString();
-                    break;
-                case 6:
-                    tipo = TipoEmpleado.SUSHIMAN.toString();
-                    break;
-                default:
-                    System.out.println("Opcion incorrecta");
-            }
+            email = Helpers.nextLine();
+            // Validamos el email que nos da el cliente.
+            respuestaEmail = Helpers.validarEmail(email);
+        }
 
-            System.out.println("Ingrese sueldo del empleado: ");
+        System.out.println("\nIngrese tipo del empleado");
+        System.out.println("\n 4 - MOZO | 5 - BARTENDER | 6 - SUSHIMAN");
+        Scanner en = new Scanner(System.in);
+        int op = 0;
+        op = en.nextInt();
+        tipo = null;
+        switch (op) {
+            case 4:
+                tipo = TipoEmpleado.MOZO.toString();
+                break;
+            case 5:
+                tipo = TipoEmpleado.BARTENDER.toString();
+                break;
+            case 6:
+                tipo = TipoEmpleado.SUSHIMAN.toString();
+                break;
+            default:
+                System.out.println("Opcion incorrecta");
+        }
 
-            sueldo = entradaEscanner.nextDouble();
+        System.out.println("\nIngrese sueldo del empleado: ");
 
-        
-        String fecha4 = null;
-        empleado = new Empleado(nombre, apellido, fecha.toString(), telefono, direccion, dni, email, tipo, sueldo, estado);
-        System.out.println("Se agrego exitosamente el empleado");
+        sueldo = entradaEscanner.nextDouble();
+
+        empleado = new Empleado(nombre, apellido, fecha.toString(), telefono, direccion, dni, email, tipo, sueldo,
+                estado);
+        System.out.println("\nEl empleado se agrego exitosamente");
         accesoEmpleados.agregarRegistro(empleado);
+        
 
     }
 
+    // Damos de baja un empleado, el cual buscamos por Dni, en caso
+    // de encontrarlo, su atributo estado pasara de Activo a Inactivo.
     public void darDeBaja() {
         System.out.println("DAMOS DE BAJA UN EMPLEADO.");
         System.out.println("Ingrese el dni del empleado: ");
         Empleado h = new Empleado();
         Scanner s = new Scanner(System.in);
         String dni = s.next();
-        
+
         h.setDni(dni);
         boolean a = accesoEmpleados.borrarRegistro(h);
         if (a == true) {
-            System.out.println("El empleado con dni" + dni + "fue dado de baja");
+            System.out.println("El empleado con dni " + dni + " fue dado de baja");
             h.setEstado(false);
             h.toString();
         } else {
-            System.out.println("El empleado no ha podido darse de baja.");
+            System.out.println("No hay empleados con el dni ingresado.");
         }
     }
+
+    // Buscamos un empleado mediante el Dni del mismo, en caso
+    // de encontrarlo dira que fue encontrado.
 
     public void buscarEmpleado() {
 
@@ -546,12 +559,17 @@ public class Empresa  implements Serializable {
         dni = escanner.next();
         Empleado g = new Empleado();
         g.setDni(dni);
-        if (accesoEmpleados.obtenerRegistro(g) != null){
+        if (accesoEmpleados.obtenerRegistro(g) != null) {
             g = accesoEmpleados.obtenerRegistro(g);
-            System.out.println("Cliente encontrado");
-            System.out.println(g);
+
+            System.out.println("\nCliente encontrado: " + "\nNombre: " + g.getNombre() + "\nApellido: "
+                    + g.getApellido() + "\nDni: " + g.getDni() + "\nTelefono: " + g.getTelefono()
+                    + "\nFecha Nacimiento: " + g.getFechaNacimiento() + "\nEmail: " + g.getEmail() + "\nTipo Empleado: "
+                    + g.getTipoEmpleado() + "\nSueldo: " + g.getSueldo() + "\nEstado: "
+                    + (g.getEstado() ? "Activo" : "Inactivo"));
+
         } else {
-            System.out.println("El dni no existe.");
+            System.out.println("No hay empleados con el dni ingresado.");
         }
     }
 
@@ -559,29 +577,25 @@ public class Empresa  implements Serializable {
         System.out.println("\nACA LISTAMOS LOS EMPLEADOS");
         List<Empleado> listaEmpleado = null;
         listaEmpleado = accesoEmpleados.obtenerRegistros();
-        System.out.println(listaEmpleado);
+        System.out.println(listaEmpleado.toString());
     }
 
     // endregion
 
     // endregion
 
-    //region Reservas
+    // region Reservas
 
     private void getMenuGestionReservas() {
 
         Scanner entradaEscanner = new Scanner(System.in);
         boolean resp = true;
 
-
         while (resp) {
-
 
             Vista.menuGestionReserva();
 
-
             int seleccion;
-
 
             try {
                 seleccion = entradaEscanner.nextInt();
@@ -612,7 +626,7 @@ public class Empresa  implements Serializable {
                         break;
                     default:
 
-                        System.out.println("ingreso un dato Incorrecto. Reintente");
+                        System.out.println("Ingreso un dato Incorrecto. Reintente");
 
                 }
             } catch (InputMismatchException e) {
@@ -623,8 +637,7 @@ public class Empresa  implements Serializable {
         }
     }
 
-
-    //region Alta
+    // region Alta
     public void dardeAltaUnaReserva() {
 
         Scanner entradaEscanner2 = new Scanner(System.in);
@@ -645,67 +658,76 @@ public class Empresa  implements Serializable {
 
         while (seguir.equals("s")) {
 
-
-            //Usuario ingresa fecha, valida que sea 48hs posterior al dia actual
+            // Usuario ingresa fecha, valida que sea 48hs posterior al dia actual
             String fechaAString = null;
             fecha = elegirFechaDeEvento();
             Vista.deseaSeguirCargandoDatos();
             seguir = entradaEscanner2.nextLine();
-            if (seguir.equals("n")) break;
+            if (seguir.equals("n"))
+                break;
 
-
-            //Usuario ingresa la hora y minutos en el que empieza el evento.
-            //calcula horarios de  llegada y finalizacion
+            // Usuario ingresa la hora y minutos en el que empieza el evento.
+            // calcula horarios de llegada y finalizacion
             System.out.println(Color.ANSI_BLUE + " 1 " + Color.ANSI_RESET + "Ingrese hora de inicio del Evento");
             String aviso = "Acordate que nuestro servivio duraentre:  3.5-4 hs ,Llegamos entre: 3-4 hs antes, Finalizamos: 3-4 hs despues ,FOODME.CO ";
             System.out.println(aviso);
             hora.init();
             horarioLlegada = hora.calcularLlegada(3);
             horarioInicio = hora.setearHoraInicio();
-            horarioFinaliza = hora.calcularFinalizacion(4); //todo constante de horas de servicio
+            horarioFinaliza = hora.calcularFinalizacion(4); // todo constante de horas de servicio
             Vista.deseaSeguirCargandoDatos();
             seguir = entradaEscanner2.nextLine();
-            if (seguir.equals("n")) break;
+            if (seguir.equals("n"))
+                break;
 
-            //Usuario ingrsa Cliente/ lo dirige al menu cliente en donde puede buscar
-            //al cliente o darlo de alta. se guarda el id del cliente
+            // Usuario ingrsa Cliente/ lo dirige al menu cliente en donde puede buscar
+            // al cliente o darlo de alta. se guarda el id del cliente
             System.out.println(Color.ANSI_BLUE + " 2 " + Color.ANSI_RESET + "Seleccione el Cliente ");
             idCliente = resrevaIngresarCliente();
             Vista.deseaSeguirCargandoDatos();
             seguir = entradaEscanner2.nextLine();
-            if (seguir.equals("n")) break;
+            if (seguir.equals("n"))
+                break;
 
-            //Usuario selecciona  Los tipo de Menu, cantidad de personas por menu e ingredientes
+            // Usuario selecciona Los tipo de Menu, cantidad de personas por menu e
+            // ingredientes
             System.out.println(Color.ANSI_BLUE + " 3 " + Color.ANSI_RESET + "Seleccione los Menus ");
-            //traer lista de menus y sus ingredientes
+            // traer lista de menus y sus ingredientes
             menus = seleccionarMenus();
             Vista.deseaSeguirCargandoDatos();
             seguir = entradaEscanner2.nextLine();
-            if (seguir.equals("n")) break;
+            if (seguir.equals("n"))
+                break;
 
-            //Usuario Ingresa si quiere bartender como servicio
+            // Usuario Ingresa si quiere bartender como servicio
             System.out.println(Color.ANSI_BLUE + " 5- " + Color.ANSI_RESET + "Quiere Bartender?s/n");
             String op = entradaEscanner2.nextLine();
             quierebartender = op.equals("s");
 
-            //Usuario ingresa descripcion en la reserva. detalles preguntas de servicio etc.
+            // Usuario ingresa descripcion en la reserva. detalles preguntas de servicio
+            // etc.
             System.out.println(Color.ANSI_BLUE + " 4- " + Color.ANSI_RESET + "Ingrese descripcion");
             descripcion = entradaEscanner2.nextLine();
-            if (seguir.equals("n")) break;
+            if (seguir.equals("n"))
+                break;
             Vista.deseaSeguirCargandoDatos();
             seguir = entradaEscanner2.nextLine();
-            if (seguir.equals("n")) break;
+            if (seguir.equals("n"))
+                break;
 
             Vista.opcionCorrecta("Finalizo cargar su reserva");
 
-            //El sistema inicializa el objeto
-            //Reserva reserva = new Reserva(fechaAString, horarioLlegada, horarioInicio, horarioFinaliza, idCliente, menus, descripcion, quierebartender);
+            // El sistema inicializa el objeto
+            // Reserva reserva = new Reserva(fechaAString, horarioLlegada, horarioInicio,
+            // horarioFinaliza, idCliente, menus, descripcion, quierebartender);
 
-            //Calcula costoTotal + servicio(mano de obra) en funcion a la cantidad de personas
+            // Calcula costoTotal + servicio(mano de obra) en funcion a la cantidad de
+            // personas
             reserva.setCostoTotal(100.0);
-            //reserva.setCosto(reserva.calcularCosto());//todo Antonela1
+            // reserva.setCosto(reserva.calcularCosto());//todo Antonela1
 
-            //Calcula Precio Final = a costo + IVA (si el cliente paga en efectivo) con una rentabilidad del 25%
+            // Calcula Precio Final = a costo + IVA (si el cliente paga en efectivo) con una
+            // rentabilidad del 25%
             reserva.calcularPrecionFinal();
 
             System.out.println("Costo:" + reserva.getCostoTotal());
@@ -713,9 +735,10 @@ public class Empresa  implements Serializable {
 
             Vista.finalizarReserva();
             seguir = entradaEscanner2.nextLine();
-            if (seguir.equals("n")) break;
+            if (seguir.equals("n"))
+                break;
 
-            //El sistema  guarda en el archivo en formato json
+            // El sistema guarda en el archivo en formato json
             accesoReservas.mostrar(reserva);
 
             boolean a = accesoReservas.agregarRegistro(reserva);
@@ -734,16 +757,16 @@ public class Empresa  implements Serializable {
             boolean resp = true;
             int opt = 0;
             while (resp) {
-                switch (opt){
+                switch (opt) {
                     case 0:
                         resp = false;
                         break;
                     case 1:
-                            //cliente = darAltaCliente();
-                            idCliente = cliente.getId();
-                            break;
+                        // cliente = darAltaCliente();
+                        idCliente = cliente.getId();
+                        break;
                     case 2:
-                        //idCliente= buscarCliente(String dni).getDNI();
+                        // idCliente= buscarCliente(String dni).getDNI();
                         break;
                     default:
                         System.err.println("Dato incorrecto. Reintente");
@@ -766,7 +789,8 @@ public class Empresa  implements Serializable {
         while (si.equals("s")) {
             try {
 
-                System.out.println(Color.ANSI_BLUE + " 1- " + Color.ANSI_RESET + "Ingrese fecha del evento: dd/MM/yyyy");
+                System.out
+                        .println(Color.ANSI_BLUE + " 1- " + Color.ANSI_RESET + "Ingrese fecha del evento: dd/MM/yyyy");
                 f = entradaEscanner.next();
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 fechaTentativa = LocalDate.parse(f, formatter);
@@ -813,14 +837,11 @@ public class Empresa  implements Serializable {
 
         try {
 
-
             while (resp) {
-
 
                 System.out.println("SELECCIONAR MENU");
                 Vista.darAltaReservaSeleccionarMenu();
                 op = entrada.nextInt();
-
 
                 switch (op) {
                     case 0:
@@ -870,17 +891,17 @@ public class Empresa  implements Serializable {
             while (resp) {
 
                 Vista.sleccionarMenuAltaReserva();
-                //trear ingredientes Todo trear Ingredientes al cargar una reserva
+                // trear ingredientes Todo trear Ingredientes al cargar una reserva
 
                 op = entrada.nextInt();
-
 
                 switch (op) {
                     case 0:
                         resp = false;
                         break;
                     case 1:
-                        System.out.println(Color.ANSI_BLUE + " 1- " + Color.ANSI_RESET + "Ingrese cantidad de Personas");
+                        System.out
+                                .println(Color.ANSI_BLUE + " 1- " + Color.ANSI_RESET + "Ingrese cantidad de Personas");
                         int cantidadPer = entrada.nextInt();
                         menu.setCantPersonas(cantidadPer);
                         System.out.println("Cantidad = " + menu.getCantPersonas());
@@ -889,7 +910,8 @@ public class Empresa  implements Serializable {
                         System.out.println(Color.ANSI_BLUE + " 2- " + Color.ANSI_RESET + "Eliminar ingrediente");
                         break;
                     case 3:
-                        System.out.println(Color.ANSI_BLUE + " 3- " + Color.ANSI_RESET + "Modificar algun ingrediente del menu");
+                        System.out.println(
+                                Color.ANSI_BLUE + " 3- " + Color.ANSI_RESET + "Modificar algun ingrediente del menu");
                         break;
                     default:
                 }
@@ -908,9 +930,9 @@ public class Empresa  implements Serializable {
 
     }
 
- //endregion
+    // endregion
 
-    //region Baja
+    // region Baja
 
     public void darBajaReservas() {
         List<Reserva> reservasCliente = new ArrayList<>();
@@ -932,18 +954,18 @@ public class Empresa  implements Serializable {
                     case 1:
                         System.out.println(Color.ANSI_BLUE + " 1- " + Color.ANSI_RESET + "ID");
                         String idReserva = scanner.next();
-                        reserva = buscarReserva(idReserva);//esto despues lo puedo borraar
-                        boolean reservaBajaId=darBajaReserva(reserva);
-                        reserva =buscarReserva(idReserva);//esto despues lo puedo borraar
+                        reserva = buscarReserva(idReserva);// esto despues lo puedo borraar
+                        boolean reservaBajaId = darBajaReserva(reserva);
+                        reserva = buscarReserva(idReserva);// esto despues lo puedo borraar
                         break;
                     case 2:
                         System.out.println(Color.ANSI_BLUE + " 2 " + Color.ANSI_RESET + "FECHA dd/MM/yyyy");
                         String fecha = scanner.next();
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                         LocalDate fechaLD = LocalDate.parse(fecha, formatter);
-                        reserva = buscarReserva(fechaLD);//esto despues lo puedo borraar
+                        reserva = buscarReserva(fechaLD);// esto despues lo puedo borraar
                         boolean reservaBajaFecha = darBajaReserva(reserva);
-                        reserva = buscarReserva(fechaLD);//esto despues lo puedo borraar
+                        reserva = buscarReserva(fechaLD);// esto despues lo puedo borraar
                         break;
                     default:
                         System.err.println("Ingreso un dato incorrecto. Reintente");
@@ -969,33 +991,31 @@ public class Empresa  implements Serializable {
     public boolean darBajaReserva(Reserva reserva) {
         boolean reservaEliminada = false;
         try {
-            if(reserva.isStatus()) {
+            if (reserva.isStatus()) {
                 reservaEliminada = accesoReservas.borrarRegistro(reserva);
-            }else{
+            } else {
                 System.out.println("Ya se encuentra cancelada");
             }
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
 
-        }catch (Exception e) {
+        } catch (Exception e) {
 
         }
 
         return reservaEliminada;
     }
 
-    //endregion
+    // endregion
 
-    //region Modificar
+    // region Modificar
 
     public void modificarReservas() {
 
         List<Reserva> reservaM = null;
 
-
         Scanner scanner = new Scanner(System.in);
         int op = 0;
         boolean resp = true;
-
 
         try {
 
@@ -1005,13 +1025,12 @@ public class Empresa  implements Serializable {
                 Vista.menuModificarReserva();
                 op = scanner.nextInt();
 
-
                 switch (op) {
                     case 0:
                         resp = false;
                     case 1:
 
-                        //Le pido al cliente que ingrese la fecha de su evento
+                        // Le pido al cliente que ingrese la fecha de su evento
                         System.out.println("Modificar Fecha Evento");
                         System.out.println("Ingrese fecha de evento actual:");
                         String fecha = scanner.next();
@@ -1023,7 +1042,7 @@ public class Empresa  implements Serializable {
                         Reserva resreva1 = buscarReserva(fechaVieja);
                         resreva1.mostrar();
 
-                        //Le pido al usuario que ingrese la fecha nueva
+                        // Le pido al usuario que ingrese la fecha nueva
                         System.out.println("Ingrese fecha nueva:");
                         String fechaNueva = scanner.next();
                         scanner.nextLine();
@@ -1031,38 +1050,37 @@ public class Empresa  implements Serializable {
                         DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                         LocalDate fechaNuevL = LocalDate.parse(fechaNueva, formatter2);
 
-
-                        //Busca la reserva en la lista, la modifica y  luego la vuelve a guardar en el archivo
-                        reservaM = modificarReservaFecha(reservaM, fecha,fechaNueva);
+                        // Busca la reserva en la lista, la modifica y luego la vuelve a guardar en el
+                        // archivo
+                        reservaM = modificarReservaFecha(reservaM, fecha, fechaNueva);
 
                         System.out.println("Se ha hecho la modificacion con exito!");
 
                         break;
                     case 2:
                         System.out.println("Modificar Menu");
-                        //Cambiar Tipo de Menu
-                        //Cambiar Cantidad de Personas en el Menu
-                        //Cambiar Platos de un Menu
-                        //Cambiar ingrediente de un plato de un Menu
+                        // Cambiar Tipo de Menu
+                        // Cambiar Cantidad de Personas en el Menu
+                        // Cambiar Platos de un Menu
+                        // Cambiar ingrediente de un plato de un Menu
                         break;
                     case 3:
                         System.out.println("Ingrese fecha de su evento");
                         String fecha2 = scanner.next();
                         scanner.nextLine();
                         DateTimeFormatter formatter3 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                        LocalDate fecha2L= LocalDate.parse(fecha2, formatter3);
+                        LocalDate fecha2L = LocalDate.parse(fecha2, formatter3);
 
-                        //Busca la reserva en la base de datos
+                        // Busca la reserva en la base de datos
                         Reserva reserva3 = buscarReserva(fecha2);
                         reserva3.mostrar();
 
-                        //Le pide al usuario que ingrese la descripcion nueva
+                        // Le pide al usuario que ingrese la descripcion nueva
                         System.out.println("Modificar descripcion");
                         String descripcionNueva = scanner.nextLine();
 
                         //
-                        reservaM = modificarReservaDescripcion(reservaM,reserva3.getFechaEvento(),descripcionNueva);
-
+                        reservaM = modificarReservaDescripcion(reservaM, reserva3.getFechaEvento(), descripcionNueva);
 
                         break;
                     default:
@@ -1073,48 +1091,43 @@ public class Empresa  implements Serializable {
 
         } catch (NullPointerException e) {
 
-
-
         } catch (InputMismatchException e) {
 
-
-
         } catch (Exception e) {
-
 
         }
     }
 
-    public List<Reserva> modificarReservaFecha(List<Reserva> reservas,String fechaVieja, String fechaNueva){
+    public List<Reserva> modificarReservaFecha(List<Reserva> reservas, String fechaVieja, String fechaNueva) {
         boolean resp = false;
         int i = 0;
         Reserva reserva = null;
-       try {
-           if (reservas != null) {
-               while (!resp && i < reservas.size()) {
-                   if (reservas.get(i).getFechaEvento().equals(fechaVieja)) {
-                       System.out.println(fechaNueva.toString());
-                       reservas.get(i).setFechaEvento(fechaNueva);
-                       System.out.println(reservas.get(i).getFechaEvento().toString());
-                       reserva=reservas.get(i);
-                       accesoReservas.guardarInformacion(reservas);
-                       reservas.get(i).mostrar();
-                       reserva.mostrar();
-                       resp = true;
-                   }
-                   i++;
-               }
+        try {
+            if (reservas != null) {
+                while (!resp && i < reservas.size()) {
+                    if (reservas.get(i).getFechaEvento().equals(fechaVieja)) {
+                        System.out.println(fechaNueva.toString());
+                        reservas.get(i).setFechaEvento(fechaNueva);
+                        System.out.println(reservas.get(i).getFechaEvento().toString());
+                        reserva = reservas.get(i);
+                        accesoReservas.guardarInformacion(reservas);
+                        reservas.get(i).mostrar();
+                        reserva.mostrar();
+                        resp = true;
+                    }
+                    i++;
+                }
 
-           }
-       }catch (NullPointerException e){
+            }
+        } catch (NullPointerException e) {
 
-       }catch (Exception e){
+        } catch (Exception e) {
 
-       }
-       return reservas;
+        }
+        return reservas;
     }
 
-    public List<Reserva> modificarReservaDescripcion(List<Reserva> reservas,String fechaVieja,String descricion){
+    public List<Reserva> modificarReservaDescripcion(List<Reserva> reservas, String fechaVieja, String descricion) {
         boolean resp = false;
         int i = 0;
         Reserva reserva = null;
@@ -1124,7 +1137,7 @@ public class Empresa  implements Serializable {
                     if (reservas.get(i).getFechaEvento().equals(fechaVieja)) {
 
                         reservas.get(i).setDescripcion(descricion);
-                        reserva=reservas.get(i);
+                        reserva = reservas.get(i);
                         accesoReservas.guardarInformacion(reservas);
                         reservas.get(i).mostrar();
                         resp = true;
@@ -1133,18 +1146,18 @@ public class Empresa  implements Serializable {
                 }
 
             }
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         return reservas;
     }
-    //endregion
+    // endregion
 
-    //region Buscar
+    // region Buscar
 
-    public void buscarReservas()  {
+    public void buscarReservas() {
         List<Reserva> reservasCliente = new ArrayList<>();
         Reserva reserva = null;
         Scanner scanner = new Scanner(System.in);
@@ -1154,15 +1167,13 @@ public class Empresa  implements Serializable {
 
             while (resp == true) {
 
-
                 System.out.println("BUSCAR UNA RESERVA");
                 System.out.println("1- Id");
                 System.out.println("2. Fecha");
                 System.out.println("3- Cliente");
                 System.out.println("0- Salir");
 
-
-                op=scanner.nextInt();
+                op = scanner.nextInt();
 
                 switch (op) {
 
@@ -1170,7 +1181,7 @@ public class Empresa  implements Serializable {
                         resp = false;
                         break;
                     case 1:
-                        reserva=null;
+                        reserva = null;
                         System.out.println("ID");
                         String idReserva = scanner.next();
                         scanner.nextLine();
@@ -1179,31 +1190,31 @@ public class Empresa  implements Serializable {
                         break;
                     case 2:
                         reserva = null;
-                        reserva=seleccionarfechaEvento(scanner);
+                        reserva = seleccionarfechaEvento(scanner);
                         reserva.mostrar();
                         break;
 
                     case 3:
                         System.out.println("Cliente");
-                       boolean dnivalido = false;
-                        reservasCliente=null;
-                        while(!dnivalido) {
+                        boolean dnivalido = false;
+                        reservasCliente = null;
+                        while (!dnivalido) {
                             System.out.println("Ingrese dni");
                             String dni = scanner.next();
                             scanner.nextLine();
-                           if(Helpers.validarDni(dni)){
-                               reservasCliente = buscarReservas(dni);
-                               dnivalido=true;
-                           }
+                            if (Helpers.validarDni(dni)) {
+                                reservasCliente = buscarReservas(dni);
+                                dnivalido = true;
+                            }
                         }
                         break;
                     default:
-                           System.out.println("Ingreso un dato incorrecto. Reintente");
+                        System.out.println("Ingreso un dato incorrecto. Reintente");
 
                 }
             }
 
-        }catch (DateTimeException e) {
+        } catch (DateTimeException e) {
             System.err.println("Fecha invalida");
             buscarReservas();
         } catch (NullPointerException e) {
@@ -1229,9 +1240,9 @@ public class Empresa  implements Serializable {
 
             reserva = accesoReservas.obtenerRegistro(id);
 
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
 
-        }catch (Exception e) {
+        } catch (Exception e) {
 
         }
 
@@ -1246,14 +1257,14 @@ public class Empresa  implements Serializable {
 
         } catch (NullPointerException e) {
 
-        }catch (Exception e) {
+        } catch (Exception e) {
 
         }
         return reserva;
     }
 
-    public Reserva seleccionarfechaEvento(Scanner scanner){
-        reserva=null;
+    public Reserva seleccionarfechaEvento(Scanner scanner) {
+        reserva = null;
 
         try {
             System.out.println("FECHA dd/MM/yyyy");
@@ -1263,10 +1274,9 @@ public class Empresa  implements Serializable {
             LocalDate fechaLD = LocalDate.parse(fecha, formatter);
 
             reserva = buscarReserva(fechaLD);
-        } catch (NullPointerException e){
+        } catch (NullPointerException e) {
 
-        }catch (Exception e){
-
+        } catch (Exception e) {
 
         }
 
@@ -1280,48 +1290,45 @@ public class Empresa  implements Serializable {
             Cliente clienteObj = accesoClientes.obtenerRegistro(cliente);
             reservasCliente = accesoReservas.obtenerRegistro(clienteObj);
 
-        } catch (NullPointerException e){
+        } catch (NullPointerException e) {
 
-        }catch(Exception e) {
+        } catch (Exception e) {
 
         }
         return reservasCliente;
     }
 
-    public List<Reserva> buscarReservas (String dni) {
+    public List<Reserva> buscarReservas(String dni) {
 
         List<Reserva> reservasCliente = new ArrayList<>();
 
         try {
 
-                Cliente clienteObj = accesoClientes.obtenerRegistro(dni);
-                reservasCliente = accesoReservas.obtenerRegistro(clienteObj);
+            Cliente clienteObj = accesoClientes.obtenerRegistro(dni);
+            reservasCliente = accesoReservas.obtenerRegistro(clienteObj);
 
+        } catch (NullPointerException e) {
 
-            } catch (NullPointerException e){
+        } catch (Exception e) {
 
-            }catch(Exception e) {
-
-            }
+        }
         return reservasCliente;
     }
 
-    //endregion
+    // endregion
 
-    //region Listar
+    // region Listar
     public void listarReservas() {
         List<Reserva> reservasL = new ArrayList<>();
         Scanner entradaEscanner = new Scanner(System.in);
         boolean resp = true;
 
-
         while (resp) {
 
             Vista.menuListarReservas();
 
-            reservasL= accesoReservas.obtenerRegistros();
+            reservasL = accesoReservas.obtenerRegistros();
             int seleccion;
-
 
             try {
                 seleccion = entradaEscanner.nextInt();
@@ -1341,7 +1348,7 @@ public class Empresa  implements Serializable {
                     case 3:
                         Vista.titulo(" Listar Reservas No Activas");
                         listarReservasNoActivas();
-                    break;
+                        break;
                     case 4:
                         boolean resp4 = false;
                         Vista.titulo("Listar reservas por cliente");
@@ -1360,7 +1367,6 @@ public class Empresa  implements Serializable {
                         break;
                     default:
                         System.out.println("Ingreso un dato Incorrecto. Reintente");
-
 
                 }
             } catch (InputMismatchException e) {
@@ -1383,50 +1389,50 @@ public class Empresa  implements Serializable {
             countReservas();
             reservas = accesoReservas.obtenerRegistros();
 
-            for (Reserva x: reservas) {
+            for (Reserva x : reservas) {
                 if (x != null) {
                     x.mostrar();
-                    resp=true;
+                    resp = true;
                 }
             }
 
-            if(!resp) System.out.println("No hay resrevas");
+            if (!resp)
+                System.out.println("No hay resrevas");
 
-        }catch (NullPointerException e) {
+        } catch (NullPointerException e) {
 
-        }catch (Exception e) {
+        } catch (Exception e) {
 
         }
     }
-
 
     public void listarReservasActivas() {
 
         List<Reserva> reservas = null;
         boolean resp = false;
         int i = 0;
-        int countA=0;
+        int countA = 0;
 
         try {
 
             reservas = accesoReservas.obtenerRegistros();
-            for (Reserva x: reservas) {
-                if ((x != null)&&(x.isStatus())) {
+            for (Reserva x : reservas) {
+                if ((x != null) && (x.isStatus())) {
                     x.mostrar();
                     countA++;
-                    resp=true;
+                    resp = true;
                 }
             }
 
-            if(!resp){
+            if (!resp) {
                 System.out.println("No hay reservas Activas");
             }
 
             System.out.println("Total: " + countA);
 
-        }catch (NullPointerException e) {
+        } catch (NullPointerException e) {
 
-        }catch (Exception e) {
+        } catch (Exception e) {
 
         }
 
@@ -1437,27 +1443,26 @@ public class Empresa  implements Serializable {
         List<Reserva> reservas = null;
         boolean resp = false;
         int i = 0;
-        int countD=0;
+        int countD = 0;
         try {
 
             reservas = accesoReservas.obtenerRegistros();
-            for (Reserva x: reservas) {
-                if ((x != null)&&(!x.isStatus())) {
+            for (Reserva x : reservas) {
+                if ((x != null) && (!x.isStatus())) {
                     x.mostrar();
                     countD++;
                     resp = true;
 
                 }
             }
-            if(!resp){
+            if (!resp) {
                 System.out.println("No hay reservas No Activas.");
             }
             System.out.println("Total: " + countD);
 
+        } catch (NullPointerException e) {
 
-        }catch (NullPointerException e) {
-
-        }catch (Exception e) {
+        } catch (Exception e) {
         }
     }
 
@@ -1473,37 +1478,36 @@ public class Empresa  implements Serializable {
         }
     }
 
-    public void countReservas(){
+    public void countReservas() {
         List<Reserva> reservas = null;
         boolean resp = false;
         int i = 0;
-        int countA=0;
-        int countD=0;
+        int countA = 0;
+        int countD = 0;
         try {
 
             reservas = accesoReservas.obtenerRegistros();
-            for (Reserva x: reservas) {
-                if ((x != null)&&(x.isStatus())) {
+            for (Reserva x : reservas) {
+                if ((x != null) && (x.isStatus())) {
                     x.mostrar();
                     countA++;
                 }
-                countD ++;
+                countD++;
             }
             System.out.println("Reservas Activas : " + countA);
             System.out.println("Reservas Inactivas : " + countD);
 
-        }catch (NullPointerException e) {
+        } catch (NullPointerException e) {
 
-        }catch (Exception e) {
+        } catch (Exception e) {
         }
     }
 
-
     // endregion
 
     // endregion
 
-    //region Ventas
+    // region Ventas
 
     private void getMenuGestionVentas() {
         boolean resp = true;
@@ -1535,10 +1539,10 @@ public class Empresa  implements Serializable {
 
     // endregion
 
-    // region  Stock
+    // region Stock
     // endregion
 
-    //endregion
+    // endregion
 
     // region Menu Cliente
     private void getMenuGestionClientes() {
@@ -1604,7 +1608,7 @@ public class Empresa  implements Serializable {
     public void darAltaUnCliente() {
         Scanner entradaEscanner = new Scanner(System.in);
         Cliente cliente = null;
-        List<Reserva>listaReservas = null;
+        List<Reserva> listaReservas = null;
         System.out.println("DAR ALTA CLIENTE");
         System.out.println("");
         System.out.print("\nIngrese el nombre del cliente: ");
@@ -1626,18 +1630,15 @@ public class Empresa  implements Serializable {
         anio = entradaEscanner.nextInt();
         fecha = LocalDate.of(anio, mes, dia);
 
-
-        //validacion telefono
+        // validacion telefono
         String telefono = "";
         int seleccion;
-
 
         System.out.print("\nIngrese numero de celular sin 0 ni 15");
         telefono = entradaEscanner.next();
 
         // Validamos el dni que nos da el cliente.
-        boolean  respuesta = Helpers.validarTel(telefono);
-
+        boolean respuesta = Helpers.validarTel(telefono);
 
         String dni = "";
 
@@ -1651,7 +1652,7 @@ public class Empresa  implements Serializable {
         // Validamos el dni que nos da el cliente.
         respuest = Helpers.validarDni(dni);
 
-        //validamos el estado
+        // validamos el estado
         String email = "";
         boolean estado = true;
         boolean respu = true;
@@ -1664,14 +1665,14 @@ public class Empresa  implements Serializable {
             String fecha3 = "12-12-12";
 
         }
-        String fecha3=null;
+        String fecha3 = null;
         cliente = new Cliente(nombre, apellido, fecha3, telefono, direccion, dni, email, estado, listaReservas);
         System.out.println("Se agrego exitosamente el cliente");
         accesoClientes.agregarRegistro(cliente);
 
     }
 
-    public void buscarCliente(){
+    public void buscarCliente() {
         Scanner escanner = new Scanner(System.in);
         System.out.println("Ingrese el dni del cliente a buscar: ");
         String dni = "";
@@ -1739,7 +1740,7 @@ public class Empresa  implements Serializable {
         boolean resp = true;
         int opc;
         String aux = "";
-        //LocalDate fecha;
+        // LocalDate fecha;
         while (resp) {
             Vista.titulo("Modificacion de datos personales");
             Vista.modificarInformacionPersonal();
@@ -1749,16 +1750,18 @@ public class Empresa  implements Serializable {
                     resp = false;
                     break;
                 case 1:
-                    aux = Helpers.validaciones("nombre", Helpers.VALIDAR_NOMBRES, "Tiene que empezar con mayusculas y se pueden ingresar hasta 2 nombres");
+                    aux = Helpers.validaciones("nombre", Helpers.VALIDAR_NOMBRES,
+                            "Tiene que empezar con mayusculas y se pueden ingresar hasta 2 nombres");
                     this.cliente.setNombre(aux);
                     break;
                 case 2:
-                    aux = Helpers.validaciones("apellido", Helpers.VALIDAR_NOMBRES, "Tiene que empezar con mayusculas y se pueden ingresar hasta 2 nombres");
+                    aux = Helpers.validaciones("apellido", Helpers.VALIDAR_NOMBRES,
+                            "Tiene que empezar con mayusculas y se pueden ingresar hasta 2 nombres");
                     this.cliente.setApellido(aux);
                     break;
                 case 3:
-                    //fecha = Helpers.validarFecha();
-                    //this.cliente.setFechaNacimiento(fecha);
+                    // fecha = Helpers.validarFecha();
+                    // this.cliente.setFechaNacimiento(fecha);
                     break;
                 case 4:
                     aux = Helpers.validaciones("telefono", Helpers.VALIDAR_TELEFONO, "Coloque el numero sin 0 ni 15");
@@ -1789,11 +1792,6 @@ public class Empresa  implements Serializable {
         }
     }
     // endregion
-
-
-
-
-
 
     // endregion
 }

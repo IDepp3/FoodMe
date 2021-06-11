@@ -1,7 +1,7 @@
 [
   {
     "reservas": null,
-    "id": "1a3af3b7T9",
+    "id": "51e290cbT9",
     "nombre": null,
     "apellido": null,
     "fechaNacimiento": null,
@@ -9,9 +9,9 @@
     "direccion": null,
     "dni": null,
     "estado": true,
-    "username": "Marcos123456",
-    "password": "iG4fv6OBGZFl1XotmT63kw\u003d\u003d",
-    "email": "markos@gmail.com",
+    "username": "Administrador",
+    "password": "HEUwKUQdnQHIPybEEsQkXQ\u003d\u003d",
+    "email": "admin@gmail.com",
     "fechaRegistro": "2021-06-10",
     "tipoUsuario": "administrador"
   }

@@ -80,18 +80,18 @@ public class Empleado extends Persona {
     //endregion
 
     //region To String
-   
+    
     /*public String toString() {
         return " Empleado: " + " ID: " + super.getId() + " Nombre: " + super.getNombre() + " Apellido: "
 				+ super.getApellido() + " Nacimiento: " + super.getFechaNacimiento() + " Telefono: "
 				+ super.getTelefono() + " Direccion: " + super.getDireccion() + " Dni: " + super.getDni() + " Email: "
 				+ super.getEmail() + " Tipo: " + this.tipoEmpleado + " Sueldo: " + this.sueldo;
-    }
-    //endregion*/
+    }*/
+    //endregion
 
     @Override
     public String toString() {
-        return super.toString() + "\nTipo Empleado : " + this.tipoEmpleado + "\nSueldo : " + this.sueldo;
+         return "\n" + super.toString() + "\nTipo Empleado : " + this.tipoEmpleado + "\nSueldo : " + this.sueldo + "\n-------------------";
     }
 
 
