@@ -440,8 +440,8 @@ public class Empresa implements Serializable {
         LocalDate fecha = null;
             while(respuestaFecha == false){
         try{
-        System.out.print("\nIngrese el nacimiento del empleado: <DD/MM/AAAA> ");
         int dia, mes, anio;
+        System.out.print("\nIngrese el nacimiento del empleado: <DD/MM/AAAA> ");
         System.out.println("\nIngrese el dia: ");
         dia = entradaEscanner.nextInt();
         System.out.println("\nIngrese el mes: ");
@@ -470,7 +470,7 @@ public class Empresa implements Serializable {
 
         System.out.print("\nIngrese la direccion: ");
         direccion = Helpers.nextLine();
-
+        
         boolean respuestaDni = false;
 
         while (respuestaDni == false) {
