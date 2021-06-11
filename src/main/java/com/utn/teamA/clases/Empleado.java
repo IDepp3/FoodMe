@@ -34,7 +34,7 @@ public class Empleado extends Persona {
      * @param String
      * @param sueldo
      */
-    public Empleado(TipoEmpleado String, double sueldo){
+    public Empleado(String tipoEmpleado, double sueldo){
         this.tipoEmpleado = tipoEmpleado;
         this.sueldo = sueldo;
     }
@@ -52,7 +52,7 @@ public class Empleado extends Persona {
      * @param sueldo
      */
     public Empleado( String nombre, String apellido, String fechaNacimiento,
-                   String telefono, String direccion, String dni, String email, TipoEmpleado tipo , Double sueldo,boolean estado){
+                   String telefono, String direccion, String dni, String email, String tipoEmpleado , Double sueldo,boolean estado){
         super( nombre,  apellido,  fechaNacimiento, telefono, direccion,  dni, email, estado);
         this.tipoEmpleado = tipoEmpleado;
         this.sueldo = sueldo;
@@ -80,14 +80,19 @@ public class Empleado extends Persona {
     //endregion
 
     //region To String
-    @Override
-    public String toString() {
+   
+    /*public String toString() {
         return " Empleado: " + " ID: " + super.getId() + " Nombre: " + super.getNombre() + " Apellido: "
 				+ super.getApellido() + " Nacimiento: " + super.getFechaNacimiento() + " Telefono: "
 				+ super.getTelefono() + " Direccion: " + super.getDireccion() + " Dni: " + super.getDni() + " Email: "
 				+ super.getEmail() + " Tipo: " + this.tipoEmpleado + " Sueldo: " + this.sueldo;
     }
-    //endregion
+    //endregion*/
+
+    @Override
+    public String toString() {
+        return super.toString() + "\nTipo Empleado : " + this.tipoEmpleado + "\nSueldo : " + this.sueldo;
+    }
 
 
     @Override

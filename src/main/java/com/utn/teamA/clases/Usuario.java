@@ -46,6 +46,10 @@ public abstract class Usuario{
         this.fechaRegistro = fechaRegistro;
     }
 
+    public Usuario(String email){
+        this.email = email;
+    }
+
     // CONSTRUCTOR USADO PARA LOGUEAR UN USUARIO 
     
     public Usuario(String username, String password){

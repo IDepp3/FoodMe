@@ -432,7 +432,7 @@ public class Empresa  implements Serializable {
     public void darAltaUnEmpleado() {
         Scanner entradaEscanner = new Scanner(System.in);
         Empleado empleado = null;
-        TipoEmpleado tipo = null;
+        String tipo = "";
         double sueldo = 0;
         System.out.println("DAR ALTA EMPLEADO");
         System.out.println();
@@ -482,11 +482,11 @@ public class Empresa  implements Serializable {
         String email = "";
         boolean estado = true;
         boolean respu = true;
-        while (respu == true) {
+        
             // Validamos el email que nos da el cliente.
             System.out.println("\nIngrese el email del empleado: ");
             email = entradaEscanner.next();
-
+        
             System.out.println("\nIngrese tipo del empleado");
             System.out.println("\n 4 - MOZO | 5 - BARTENDER | 6 - SUSHIMAN");
             Scanner en = new Scanner(System.in);
@@ -495,13 +495,13 @@ public class Empresa  implements Serializable {
             tipo = null;
             switch (op) {
                 case 4:
-                    tipo = TipoEmpleado.MOZO;
+                    tipo = TipoEmpleado.MOZO.toString();
                     break;
                 case 5:
-                    tipo = TipoEmpleado.BARTENDER;
+                    tipo = TipoEmpleado.BARTENDER.toString();
                     break;
                 case 6:
-                    tipo = TipoEmpleado.SUSHIMAN;
+                    tipo = TipoEmpleado.SUSHIMAN.toString();
                     break;
                 default:
                     System.out.println("Opcion incorrecta");
@@ -511,10 +511,9 @@ public class Empresa  implements Serializable {
 
             sueldo = entradaEscanner.nextDouble();
 
-            respu = false;
-        }
+        
         String fecha4 = null;
-        empleado = new Empleado(nombre, apellido, fecha4, telefono, direccion, dni, email, tipo, sueldo, estado);
+        empleado = new Empleado(nombre, apellido, fecha.toString(), telefono, direccion, dni, email, tipo, sueldo, estado);
         System.out.println("Se agrego exitosamente el empleado");
         accesoEmpleados.agregarRegistro(empleado);
 

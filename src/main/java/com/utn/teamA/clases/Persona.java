@@ -52,6 +52,7 @@ public abstract class Persona extends Usuario {
      */
     public Persona( String nombre, String apellido, String fechaNacimiento, String telefono, String direccion, String dni,
             String email, boolean estado) {
+        super(email);
         this.id = UUID.randomUUID().toString().substring(0, 10).replace("-", "g");
         this.nombre = nombre;
         this.apellido = apellido;
