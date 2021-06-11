@@ -19,10 +19,5 @@ target
 ## JAVA EE
 webapp
 
-## RECURSOS
-
-<<<<<<< HEAD
-scr/main/registros/archivos/*.json
-=======
+## ARCHIVOS JSON
 src/main/recursos/archivos/*.json
->>>>>>> devCopia
