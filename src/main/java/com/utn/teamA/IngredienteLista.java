@@ -6,9 +6,10 @@ import java.util.List;
 public class IngredienteLista {
 
     private List<Ingrediente> listaDeIngredites;
-    private IngredientePersistencia ingredientePersistencia = new IngredientePersistencia();
+    private IngredientePersistencia ingredientePersistencia;
 
     public IngredienteLista() {
+        ingredientePersistencia = new IngredientePersistencia();
         this.listaDeIngredites = ingredientePersistencia.obtenerRegistros();
     }
 
