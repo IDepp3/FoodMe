@@ -6,14 +6,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.utn.teamA.ConexionDatos.Gson.LocalDateDeserializer;
-import com.utn.teamA.ConexionDatos.Gson.LocalDateSerializer;
 import com.utn.teamA.ConexionDatos.interfaces.ObtenerDatos;
 import com.utn.teamA.clases.Cliente;
 import com.utn.teamA.excepciones.ClienteNotieneReservas;
@@ -46,6 +43,38 @@ public class AccesoClientes implements ObtenerDatos<Cliente>{
 
         while(!resp && i < clientes.size()){
             if(clientes.get(i).equals(t)){
+                cliente = clientes.get(i);
+                resp = true;
+            }
+            i++;
+        }
+        return cliente;
+    }
+
+    public Cliente obtenerRegistroUsuarioPassword(Cliente t){
+        Cliente cliente = null;
+        List<Cliente> clientes = obtenerRegistros();
+        boolean resp = false;
+        int i = 0;
+
+        while(!resp && i < clientes.size()){
+            if(clientes.get(i).getUsername().equals(t.getUsername()) && clientes.get(i).getPassword().equals(t.getPassword())){
+                cliente = clientes.get(i);
+                resp = true;
+            }
+            i++;
+        }
+        return cliente;
+    }
+
+    public Cliente obtenerRegistroXDni(Cliente t){
+        Cliente cliente = null;
+        List<Cliente> clientes = obtenerRegistros();
+        boolean resp = false;
+        int i = 0;
+
+        while(!resp && i < clientes.size()){
+            if(clientes.get(i).getDni().equals(t.getDni())){
                 cliente = clientes.get(i);
                 resp = true;
             }
@@ -93,8 +122,6 @@ public class AccesoClientes implements ObtenerDatos<Cliente>{
         BufferedReader reader;
         try {
             reader = new BufferedReader(new FileReader(this.url));
-            // TODO a investigar recordar descomentar linea y comentar arregloALista();
-            //clientes = Arrays.asList(this.json.fromJson(reader, Cliente[].class));
             arregloALista(this.json.fromJson(reader, Cliente[].class), clientes);
             reader.close();
         } catch (FileNotFoundException e) {
@@ -182,7 +209,7 @@ public class AccesoClientes implements ObtenerDatos<Cliente>{
         int i = 0;
 
         while(!resp && i < clientes.size()){
-            if(clientes.get(i).existeCliente(cliente))
+            if(clientes.get(i).existeUsuario(cliente))
                 resp = true;
             i++;
         }
