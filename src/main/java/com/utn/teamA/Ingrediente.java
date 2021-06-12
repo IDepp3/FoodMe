@@ -9,6 +9,7 @@ public class Ingrediente {
     private String nombre;
     private String descripcion;
     private double precio;
+    private boolean estado;
 
     //TODO atributo prooveedor tiene que ser tipo Proveedor
     private String proveedor = "---";
@@ -18,11 +19,12 @@ public class Ingrediente {
         this.id = UUID.randomUUID().toString();
     }
 
-    public Ingrediente(String nombre, String descripcion, double precio, String proveedor) {
+    public Ingrediente(String nombre, String descripcion, double precio,boolean estado, String proveedor) {
         this.id = UUID.randomUUID().toString();
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
+        this.estado = estado;
         this.proveedor = proveedor;
     }
     //endregion
@@ -67,6 +69,14 @@ public class Ingrediente {
 
     public void setProveedor(String proveedor) {
         this.proveedor = proveedor;
+    }
+
+    public void setEstado(boolean estado){
+        this.estado = estado;
+    }
+
+    public boolean getEstado(){
+        return this.estado;
     }
 
     //endregion

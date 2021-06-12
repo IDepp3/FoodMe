@@ -11,8 +11,18 @@ public class Plato {
     private List<Ingrediente> listaDeIngredites;
     private String descripcion;
     private TipoPlato tipo;
+    private boolean estado;
     //TODO el plato no tiene precio ???
     //private double precio;
+
+    public void setEstado(boolean estado){
+        this.estado = estado;
+    }
+
+    public boolean getEstado(){
+        return this.estado;
+    }
+
 
     //region constructores
 
@@ -20,7 +30,7 @@ public class Plato {
         this.platoId = UUID.randomUUID().toString();
     }
 
-    public Plato(String nombre, List<Ingrediente> listaDeIngredites, String descripcion, TipoPlato tipo) {
+    public Plato(String nombre, List<Ingrediente> listaDeIngredites, String descripcion, TipoPlato tipo, boolean estado) {
         this.platoId = UUID.randomUUID().toString();
         this.nombre = nombre;
         this.listaDeIngredites = listaDeIngredites;

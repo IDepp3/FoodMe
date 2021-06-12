@@ -14,6 +14,8 @@ public class Menu {
     private String descripcion;
     private List<Plato> listaDePlatos;
     private double precio;
+    private boolean estado;
+
 
     //endregion
 
@@ -22,13 +24,14 @@ public class Menu {
         this.id = UUID.randomUUID().toString();
     }
 
-    public Menu(TipoMenu tipo, String nombre, String descripcion, List<Plato> platos, double precio) {
+    public Menu(TipoMenu tipo, String nombre, String descripcion, List<Plato> platos, double precio, boolean estado) {
         this();
         this.tipo = tipo;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.listaDePlatos = platos;
         this.precio = precio;
+        this.estado = estado;
     }
     //endregion
 
@@ -80,6 +83,14 @@ public class Menu {
 
     public void setPrecio(double precio) {
         this.precio = precio;
+    }
+
+    public void setEstado(boolean estado){
+        this.estado = estado;
+    }
+
+    public boolean getEstado(){
+        return this.estado;
     }
 
 
