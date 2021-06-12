@@ -7,39 +7,36 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AccesoPlatos {
+public class MenuPersistencia {
 
-    private final String url = "src/main/recursos/archivos/platos.json";
+    private final String url = "src/main/recursos/archivos/menu.json";
     private Gson json;
 
-    public AccesoPlatos(){
+    public MenuPersistencia(){
         this.json = new GsonBuilder().setPrettyPrinting().create();
     }
 
-
-
-    public void arregloALista(Plato[] arreglo, List<Plato> platos){
+    public void arregloALista(Menu[] arreglo, List<Menu> menus){
         if(arreglo != null){
-            for(Plato p : arreglo){
-                platos.add(p);
+            for(Menu m : arreglo){
+                menus.add(m);
             }
         }
     }
 
-    public List<Plato> obtenerRegistros() {
-        List<Plato> platos = new ArrayList<>();
+    public List<Menu> obtenerRegistros() {
+        List<Menu> menus = new ArrayList<>();
         BufferedReader reader;
         try {
             reader = new BufferedReader(new FileReader(this.url));
-
-            arregloALista(this.json.fromJson(reader, Plato[].class), platos);
+            arregloALista(this.json.fromJson(reader, Menu[].class), menus);
             reader.close();
         } catch (FileNotFoundException e) {
             crearFichero();
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-        return platos;
+        return menus;
     }
 
     private void crearFichero(){
@@ -53,29 +50,29 @@ public class AccesoPlatos {
         }
     }
 
-    public Plato obtenerRegistro(Plato t) {
-        Plato plato = null;
-        List<Plato> platos = obtenerRegistros();
+    public Menu obtenerRegistro(Menu t) {
+        Menu menu = null;
+        List<Menu> menus = obtenerRegistros();
         boolean resp = false;
         int i = 0;
 
-        while(!resp && i < platos.size()){
-            if(platos.get(i).equals(t)){
-                plato = platos.get(i);
+        while(!resp && i < menus.size()){
+            if(menus.get(i).equals(t)){
+                menu = menus.get(i);
                 resp = true;
             }
             i++;
         }
-        return plato;
+        return menu;
     }
 
-    public boolean guardarInformacion(List<Plato> platos){
+    public boolean guardarInformacion(List<Menu> menus){
         boolean resp = false;
         BufferedWriter writer;
 
         try {
             writer = new BufferedWriter(new FileWriter(this.url));
-            this.json.toJson(platos.toArray(), Plato[].class, writer);
+            this.json.toJson(menus.toArray(), Menu[].class, writer);
             writer.close();
             resp = true;
         } catch (IOException e) {
@@ -85,18 +82,18 @@ public class AccesoPlatos {
         return resp;
     }
 
-    public boolean actualizarRegistro(Plato t) {
+    public boolean actualizarRegistro(Menu t) {
         boolean resp = false;
         boolean actualizado = false;
-        List<Plato> platos = obtenerRegistros();
+        List<Menu> menus = obtenerRegistros();
         int i = 0;
 
-        while(!resp && i < platos.size()){
-            if(platos.get(i).equals(t)){
-                platos.remove(i);
-                platos.add(i, t);
+        while(!resp && i < menus.size()){
+            if(menus.get(i).equals(t)){
+                menus.remove(i);
+                menus.add(i, t);
                 resp = true;
-                if(guardarInformacion(platos))
+                if(guardarInformacion(menus))
                     actualizado = true;
             }
             i++;
@@ -105,15 +102,16 @@ public class AccesoPlatos {
         return actualizado;
     }
 
-    public boolean borrarRegistro(Plato t) {
+
+    public boolean borrarRegistro(Menu t) {
         boolean resp = false;
-        List<Plato> platos = obtenerRegistros();
+        List<Menu> menus = obtenerRegistros();
         int i = 0;
 
-        while(!resp && i < platos.size()){
-            if(platos.get(i).equals(t)){
-                platos.remove(i);
-                if(guardarInformacion(platos))
+        while(!resp && i < menus.size()){
+            if(menus.get(i).equals(t)){
+                menus.remove(i);
+                if(guardarInformacion(menus))
                     resp = true;
             }
             i++;
@@ -122,12 +120,12 @@ public class AccesoPlatos {
         return resp;
     }
 
-    private boolean existeRegistro(List<Plato> platos, Plato plato){
+    private boolean existeRegistro(List<Menu> menus, Menu menu){
         boolean resp = false;
         int i = 0;
 
-        while(!resp && i < platos.size()){
-            if(platos.get(i).equals(plato))
+        while(!resp && i < menus.size()){
+            if(menus.get(i).equals(menu))
                 resp = true;
             i++;
         }
@@ -135,15 +133,17 @@ public class AccesoPlatos {
         return resp;
     }
 
-    public boolean agregarRegistro(Plato t) {
-        boolean resp = false;
-        List<Plato> platos = obtenerRegistros();
 
-        if(!existeRegistro(platos, t)){
-            platos.add(t);
-            if(guardarInformacion(platos))
+    public boolean agregarRegistro(Menu t) {
+        boolean resp = false;
+        List<Menu> menus = obtenerRegistros();
+
+        if(!existeRegistro(menus, t)){
+            menus.add(t);
+            if(guardarInformacion(menus))
                 resp = true;
         }
         return resp;
     }
+
 }

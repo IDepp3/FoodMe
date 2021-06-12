@@ -7,12 +7,12 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AccesoIngredientes {
+public class IngredientePersistencia {
 
     private final String url = "src/main/recursos/archivos/ingredietes.json";
     private Gson json;
 
-    public AccesoIngredientes(){
+    public IngredientePersistencia(){
         this.json = new GsonBuilder().setPrettyPrinting().create();
     }
 

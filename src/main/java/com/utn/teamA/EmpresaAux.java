@@ -2,7 +2,6 @@ package com.utn.teamA;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class EmpresaAux {
 
@@ -25,11 +24,11 @@ public class EmpresaAux {
         //Menu menu1 = new Menu();
         //menu1.crear();
 
-        AccesoIngredientes accesoIngredientes = new AccesoIngredientes();
+        IngredientePersistencia ingredientePersistencia = new IngredientePersistencia();
 
-        accesoIngredientes.guardarInformacion(listaDeIngredites);
+        ingredientePersistencia.guardarInformacion(listaDeIngredites);
 
-        listaDeIngredites = accesoIngredientes.obtenerRegistros();
+        listaDeIngredites = ingredientePersistencia.obtenerRegistros();
 
     }
 
