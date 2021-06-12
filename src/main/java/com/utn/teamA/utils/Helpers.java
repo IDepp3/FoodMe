@@ -163,7 +163,7 @@ public class Helpers {
         boolean resp = mather.find();
 
         if (resp == true) {
-            //System.out.println("El dni ingresado es valido");
+            // System.out.println("El dni ingresado es valido");
         } else {
             System.out.println("El dni es incorrecto");
         }
@@ -186,6 +186,22 @@ public class Helpers {
         return resp;
     }
 
+    public static boolean validarNombre(String nombre) {
+
+        Pattern pat = Pattern.compile("^([A-Z]{1} [a-z] +[ ] ?){1,2}$");
+        Matcher mat = pat.matcher(nombre);
+        boolean valido = mat.find();
+        if (valido == true) {
+            System.out.println("Nombre Válido");
+        } else {
+            System.out.println("Nombre inválido");
+        }
+        return valido;
+
+    }
+
+    
+
     public static LocalDate validarFecha() {
         boolean resp = true;
         int dia, mes, anio;
@@ -195,10 +211,10 @@ public class Helpers {
             dia = Integer.parseInt(Helpers.validaciones("Dia", Helpers.VALIDAR_ENTEROS, "Ingrese solo numeros"));
             mes = Integer.parseInt(Helpers.validaciones("Dia", Helpers.VALIDAR_ENTEROS, "Ingrese solo numeros"));
             anio = Integer.parseInt(Helpers.validaciones("Dia", Helpers.VALIDAR_ENTEROS, "Ingrese solo numeros"));
-            try{
+            try {
                 fecha = LocalDate.of(anio, mes, dia);
                 resp = false;
-            } catch(DateTimeException e){
+            } catch (DateTimeException e) {
                 Vista.opcionIncorrecta("La fecha ingresada es incorrecta intente nuevamente");
             }
 
@@ -221,45 +237,30 @@ public class Helpers {
         return ingreso;
     }
 
-    /* public static String validarPassword(String mensaje) {
-
-       // Console c;
-       Scanner c = new Scanner(System.in);
-        boolean resp = true;
-        String valor = "";
-        String password = "";
-        while (resp) {
-            if ((c != null)) {
-                Vista.ingreseDato(mensaje);
-                password = c.next();
-            }
-
-            valor = String.valueOf(password);
-
-            if (valor.matches(Helpers.VALIDAR_PASSWORD))
-                resp = false;
-            else
-                Vista.opcionIncorrecta(
-                        "Su contraseña debe ser como minimo de 8 caracteres maximo 15, 1 mayuscula, 1 minuscula, 1 digito, no espacios en blanco y al menos 1 caracter especial($@!%*?&)",
-                        valor);
-        }
-
-        return valor;
-    }
-
-    public static String ingresoPassword() {
-        Console c;
-        String valor = "";
-        char[] password = null;
-        if ((c = System.console()) != null) {
-            Vista.ingreseDato("Ingrese password");
-            password = c.readPassword();
-        }
-
-        valor = String.valueOf(password);
-
-        return valor;
-    } */
+    /*
+     * public static String validarPassword(String mensaje) {
+     * 
+     * // Console c; Scanner c = new Scanner(System.in); boolean resp = true; String
+     * valor = ""; String password = ""; while (resp) { if ((c != null)) {
+     * Vista.ingreseDato(mensaje); password = c.next(); }
+     * 
+     * valor = String.valueOf(password);
+     * 
+     * if (valor.matches(Helpers.VALIDAR_PASSWORD)) resp = false; else
+     * Vista.opcionIncorrecta(
+     * "Su contraseña debe ser como minimo de 8 caracteres maximo 15, 1 mayuscula, 1 minuscula, 1 digito, no espacios en blanco y al menos 1 caracter especial($@!%*?&)"
+     * , valor); }
+     * 
+     * return valor; }
+     * 
+     * public static String ingresoPassword() { Console c; String valor = ""; char[]
+     * password = null; if ((c = System.console()) != null) {
+     * Vista.ingreseDato("Ingrese password"); password = c.readPassword(); }
+     * 
+     * valor = String.valueOf(password);
+     * 
+     * return valor; }
+     */
 
     private static SecretKeySpec crearClave(String llave) {
         SecretKeySpec secretKeySpec = null;
@@ -327,6 +328,7 @@ public class Helpers {
     public static int tipoAdministradorI() {
         return TipoUsuario.ADMINISTRADOR.identificador;
     }
+
     public static int tipoClienteI() {
         return TipoUsuario.CLIENTE.identificador;
     }

@@ -396,8 +396,19 @@ public class Empresa implements Serializable {
         double sueldo = 0;
         System.out.println("DAR ALTA EMPLEADO");
         System.out.println();
-        System.out.print("\nIngrese el nombre del empleado: ");
-        String nombre = Helpers.nextLine();
+        boolean respuestaNombre = false;
+
+        String nombre = "";
+
+        while (respuestaNombre == false) {
+
+            System.out.println("\nIngrese el nombre del empleado: ");
+            nombre = Helpers.nextLine();
+            // Validamos el email que nos da el cliente.
+            respuestaNombre = Helpers.validarNombre(nombre);
+            
+        }
+
         System.out.print("\nIngrese el apellido del empleado: ");
         String apellido = Helpers.nextLine();
 
