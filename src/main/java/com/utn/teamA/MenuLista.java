@@ -22,9 +22,9 @@ public class MenuLista {
             System.out.println(
                     Color.ANSI_BLUE +
                             "\n\n" +
-                            " -----------------------------\n" +
+                            " -------------------------\n" +
                             "| \t\t M E N U  \t\t |\n" +
-                            " -----------------------------" +
+                            " -------------------------" +
                             " \n\n" +
                             Color.ANSI_RESET);
             System.out.println(Color.ANSI_YELLOW + "\t Ingrese una opcion:" + Color.ANSI_RESET);
