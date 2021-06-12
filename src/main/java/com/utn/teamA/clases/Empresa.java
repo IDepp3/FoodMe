@@ -359,8 +359,6 @@ public class Empresa implements Serializable {
 
     private void getMenuGestionPersonal() {
         boolean resp = true;
-
-        // Empleado f = null;
         int opcion;
         while (resp) {
             Vista.titulo("Gestion del Personal");
