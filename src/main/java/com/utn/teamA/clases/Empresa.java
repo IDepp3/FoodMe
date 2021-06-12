@@ -242,22 +242,26 @@ public class Empresa implements Serializable {
                 case 1:
                     Vista.titulo("Login");
                     this.cliente = loginUsuario();
-                    if (this.cliente != null)
+                    if (this.cliente != null){
                         if (this.cliente.getTipoUsuario().equals(TipoUsuario.ADMINISTRADOR.tipo))
                             getMenuAdministrador();
                         else if (this.cliente.getTipoUsuario().equals(TipoUsuario.CLIENTE.tipo))
                             getMenuCliente();
-                        else
-                            Vista.opcionIncorrecta("El usuario o contraseña es incorrecto");
+                    }else
+                        Vista.opcionIncorrecta("El usuario o contraseña es incorrecto");
                     break;
                 case 2:
                     Vista.titulo("Registrarse");
                     this.cliente = registroUsuario();
-                    if (this.accesoClientes.agregarRegistro(this.cliente))
-                        Vista.opcionCorrecta("Usuario creado correctamente");
-                    else {
-                        Vista.opcionIncorrecta("El usuario ya existe intente con otro email u otro nombre de usuario");
-                    }
+                    if(!existeUsuario(this.cliente)){
+
+                        if (this.accesoClientes.agregarRegistro(this.cliente))
+                            Vista.opcionCorrecta("Usuario creado correctamente");
+                        else 
+                            Vista.opcionIncorrecta("Algo salio mal al crear el usuario");
+               
+                    }else
+                        Vista.opcionIncorrecta("El usuario ya existe");
                     break;
                 default:
                     Vista.opcionIncorrecta(opcion);
@@ -276,51 +280,49 @@ public class Empresa implements Serializable {
 
     private Cliente loginUsuario() {
         Cliente c = new Cliente();
-        boolean resp = true;
-        int i = 0;
 
-        c.setUsername(Helpers.validaciones("nombre usuario", Helpers.VALIDAR_NOMBRE_USUARIO,
-                "Error, comienza con numeros o letras y puede contener (._) minimo 8, maximo 20 caracteres"));
-        c.setPassword(Helpers.encriptarPassword(Helpers.ingresoPassword()));
+        Vista.ingreseDato("Nombre de usuario");
+        c.setUsername(Helpers.nextLine());
+        Vista.ingreseDato("Password");
+        c.setPassword(Helpers.nextLine());
 
-        while (resp && i < this.listaClientes.size()) {
-            if (this.listaClientes.get(i).existeCliente(c)) {
-                c = this.listaClientes.get(i);
-                resp = false;
-            }
-            i++;
-        }
+        c = this.accesoClientes.obtenerRegistroUsuarioPassword(c);
+
         return c;
     }
 
     private Cliente registroUsuario() {
-
         Cliente cliente;
         String nombreUsuario = Helpers.validaciones("nombre usuario", Helpers.VALIDAR_NOMBRE_USUARIO,
                 "Error, comienza con numeros o letras y puede contener (._) minimo 8, maximo 20 caracteres");
         String password = passwordIguales();
         String email = Helpers.validaciones("email", Helpers.VALIDAR_EMAIL, "Ingrese email valido");
-        cliente = new Cliente(Helpers.generarID(), nombreUsuario, Helpers.encriptarPassword(password), email,
+        cliente = new Cliente(Helpers.generarID(), nombreUsuario, password, email,
                 Helpers.fechaActual(), Helpers.tipoCliente(), Helpers.estadoActivo());
 
         return cliente;
     }
 
     private String passwordIguales() {
-        boolean resp = true;
+        boolean resp = false;
         String pass = "";
         String confirmacion;
 
-        while (resp) {
-            pass = Helpers.validarPassword("Ingrese password");
-            confirmacion = Helpers.validarPassword("Reingrese password");
+        while (!resp) {
+            pass = Helpers.validaciones("Ingrese password", Helpers.VALIDAR_PASSWORD, "Su contraseña debe ser como minimo de 8 caracteres maximo 15, 1 mayuscula, 1 minuscula, 1 digito, no espacios en blanco y al menos 1 caracter especial($@!%*?&)");
+            confirmacion = Helpers.validaciones("Ingrese password", Helpers.VALIDAR_PASSWORD, "Su contraseña debe ser como minimo de 8 caracteres maximo 15, 1 mayuscula, 1 minuscula, 1 digito, no espacios en blanco y al menos 1 caracter especial($@!%*?&)");
             if (pass.equals(confirmacion))
-                resp = false;
+                resp = true;
             else
                 Vista.opcionCorrecta("Las contraseñas no coinciden");
         }
 
         return pass;
+    }
+
+    private boolean existeUsuario(Cliente c){
+
+        return false;
     }
 
     // endregion
