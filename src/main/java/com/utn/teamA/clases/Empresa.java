@@ -232,9 +232,6 @@ public class Empresa {
         boolean resp = true;
 
         int opcion;
-        for (Cliente c : this.listaClientes) {
-            System.out.println(c);
-        }
         while (resp) {
             Vista.titulo("Empresa de Catering");
             Vista.menuPrincipal();
@@ -246,57 +243,35 @@ public class Empresa {
                 case 1:
                     Vista.titulo("Login");
                     this.cliente = loginUsuario();
-                    // this.cliente = this.listaClientes.get(0);
-                    if (this.cliente != null)
+                    if (this.cliente != null){
                         if (this.cliente.getTipoUsuario().equals(TipoUsuario.ADMINISTRADOR.tipo))
-                            seleccionDeMenu();
+                            getMenuAdministrador();
                         else if (this.cliente.getTipoUsuario().equals(TipoUsuario.CLIENTE.tipo))
                             getMenuCliente();
-                        else
-                            Vista.opcionIncorrecta("El usuario o contraseña es incorrecto");
+                    }else
+                        Vista.opcionIncorrecta("El usuario o contraseña es incorrecto");
                     break;
                 case 2:
                     Vista.titulo("Registrarse");
                     this.cliente = registroUsuario();
-                    if (this.accesoClientes.agregarRegistro(this.cliente))
-                        Vista.opcionCorrecta("Usuario creado correctamente");
-                    else {
-                        Vista.opcionIncorrecta("El usuario ya existe intente con otro email u otro nombre de usuario");
-                    }
+                    System.out.println(this.accesoClientes.existeRegistro(this.accesoClientes.obtenerRegistros(), this.cliente));
+                    if(!this.accesoClientes.existeRegistro(this.accesoClientes.obtenerRegistros(), this.cliente)){
+
+                        if (this.accesoClientes.agregarRegistro(this.cliente))
+                            Vista.opcionCorrecta("Usuario creado correctamente");
+                        else 
+                            Vista.opcionIncorrecta("Algo salio mal al crear el usuario");
+               
+                    }else
+                        Vista.opcionIncorrecta("El usuario ya existe");
                     break;
                 default:
                     Vista.opcionIncorrecta(opcion);
                     break;
             }
             this.cliente = null;
-            this.listaClientes = this.accesoClientes.obtenerRegistros();
-
         }
         System.out.println("Gracias por usar la aplicacion");
-    }
-
-    private void seleccionDeMenu() {
-        boolean resp = true;
-        int opcion;
-        while (resp) {
-            Vista.titulo("Seleccion de vistas");
-            Vista.seleccionMenuAdmin();
-            opcion = Helpers.validarInt();
-            switch (opcion) {
-                case 0:
-                    resp = false;
-                    break;
-                case 1:
-                    getMenuAdministrador();
-                    break;
-                case 2:
-                    getMenuCliente();
-                    break;
-                default:
-                    Vista.opcionIncorrecta(opcion);
-                    break;
-            }
-        }
     }
 
     // endregion
@@ -305,48 +280,41 @@ public class Empresa {
 
     private Cliente loginUsuario() {
         Cliente c = new Cliente();
-        boolean resp = true;
-        int i = 0;
 
-        c.setUsername(Helpers.validaciones("nombre usuario", Helpers.VALIDAR_NOMBRE_USUARIO,
-                "Error, comienza con numeros o letras y puede contener (._) minimo 8, maximo 20 caracteres"));
-        c.setPassword(Helpers.encriptarPassword(Helpers.ingresoPassword()));
+        Vista.ingreseDato("Nombre de usuario");
+        c.setUsername(Helpers.nextLine());
+        Vista.ingreseDato("Password");
+        c.setPassword(Helpers.nextLine());
 
-        while (resp && i < this.listaClientes.size()) {
-            if (this.listaClientes.get(i).existeCliente(c)) {
-                c = this.listaClientes.get(i);
-                resp = false;
-            }
-            i++;
-        }
+        c = this.accesoClientes.obtenerRegistroUsuarioPassword(c);
+
         return c;
     }
 
     private Cliente registroUsuario() {
-
         Cliente cliente;
         String nombreUsuario = Helpers.validaciones("nombre usuario", Helpers.VALIDAR_NOMBRE_USUARIO,
                 "Error, comienza con numeros o letras y puede contener (._) minimo 8, maximo 20 caracteres");
         String password = passwordIguales();
         String email = Helpers.validaciones("email", Helpers.VALIDAR_EMAIL, "Ingrese email valido");
-        cliente = new Cliente(Helpers.generarID(), nombreUsuario, Helpers.encriptarPassword(password), email,
+        cliente = new Cliente(Helpers.generarID(), nombreUsuario, password, email,
                 Helpers.fechaActual(), Helpers.tipoCliente(), Helpers.estadoActivo());
 
         return cliente;
     }
 
     private String passwordIguales() {
-        boolean resp = true;
+        boolean resp = false;
         String pass = "";
         String confirmacion;
 
-        while (resp) {
-            pass = Helpers.validarPassword("Ingrese password");
-            confirmacion = Helpers.validarPassword("Reingrese password");
+        while (!resp) {
+            pass = Helpers.validaciones("Ingrese password", Helpers.VALIDAR_PASSWORD, "Su contraseña debe ser como minimo de 8 caracteres maximo 15, 1 mayuscula, 1 minuscula, 1 digito, no espacios en blanco y al menos 1 caracter especial($@!%*?&)");
+            confirmacion = Helpers.validaciones("Reingrese password", Helpers.VALIDAR_PASSWORD, "Su contraseña debe ser como minimo de 8 caracteres maximo 15, 1 mayuscula, 1 minuscula, 1 digito, no espacios en blanco y al menos 1 caracter especial($@!%*?&)");
             if (pass.equals(confirmacion))
-                resp = false;
+                resp = true;
             else
-                Vista.opcionCorrecta("Las contraseñas no coinciden");
+                Vista.opcionIncorrecta("Las contraseñas no coinciden");
         }
 
         return pass;
@@ -392,8 +360,6 @@ public class Empresa {
 
     private void getMenuGestionPersonal() {
         boolean resp = true;
-
-        // Empleado f = null;
         int opcion;
         while (resp) {
             Vista.titulo("Gestion del Personal");

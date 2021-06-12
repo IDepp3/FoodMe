@@ -207,8 +207,4 @@ public abstract class Persona extends Usuario {
         return super.toString() + "\nID : " + this.id + "\nNombre : " + this.nombre + "\nApellido : " + this.apellido + "\nFecha Nacimiento : " + this.fechaNacimiento + "\nTelefono : " + this.telefono + "\nDireccion : " + this.direccion + "\nDNI : " + this.dni + "\nEstado : " + ((this.estado) ? "Activo" : "Inactivo") ;
     }
 
-
-    public void mostrar(){
-        System.out.println(toString());
-    }
 }

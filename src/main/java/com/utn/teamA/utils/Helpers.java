@@ -222,7 +222,7 @@ public class Helpers {
         return ingreso;
     }
 
-    public static String validarPassword(String mensaje) {
+     public static String validarPassword(String mensaje) {
 
        // Console c;
        Scanner c = new Scanner(System.in);
@@ -249,11 +249,13 @@ public class Helpers {
     }
 
     public static String ingresoPassword() {
+
        Scanner entrada = new Scanner(System.in);
        Vista.ingreseDato("Ingrese password");
         String passwordString = entrada.next();
         return passwordString;
     }
+
 
     private static SecretKeySpec crearClave(String llave) {
         SecretKeySpec secretKeySpec = null;

@@ -34,13 +34,8 @@ public abstract class Usuario{
      * CONSTRUCTOR COMPLETO
      * @param username
      * @param password
-     * @param fechaRegistro
-     */
-    
-
-
-
-    public Usuario(String username, String password) {
+      */
+     public Usuario(String username, String password) {
         this.username = username;
         this.password = password;
     }
@@ -124,4 +119,15 @@ public abstract class Usuario{
     }
     //endregion
 
+    public boolean existeUsuario(Cliente t){
+        boolean resp = false;
+
+        if(this.username.equals(t.getUsername()) || this.password.equals(t.getPassword()))
+            resp = true;
+
+        return resp;
+    }
+    public void mostrar(){
+        System.out.println(toString());
+    }
 }

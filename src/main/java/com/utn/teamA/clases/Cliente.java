@@ -118,16 +118,6 @@ public class Cliente extends Persona {
         return false;
     }
 
-
-    public boolean existeCliente(Cliente cliente){
-        if(this == cliente)
-            return true;
-        
-        if(this.getUsername().equals(cliente.getUsername()) && this.getPassword().equals(cliente.getPassword()))
-            return true;
-
-        return false;
-    }
     //endregion
 
     public void listarReservas(){
