@@ -335,6 +335,7 @@ public class Empresa implements Serializable {
                     resp = false;
                     break;
                 case 1:
+                    Vista.titulo("GESTION DE PERSONAL");
                     getMenuGestionPersonal();
                     break;
                 case 2:
@@ -505,7 +506,7 @@ public class Empresa implements Serializable {
         h.setDni(dni);
         boolean a = accesoEmpleados.borrarRegistro(h);
         if (a == true) {
-            System.out.println("El empleado con dni " + dni + " fue dado de baja");
+            System.out.println("El empleado con dni: " + dni + " fue dado de baja.");
             h.setEstado(false);
             h.toString();
         } else {
