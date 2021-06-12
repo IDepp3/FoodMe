@@ -121,4 +121,12 @@ public abstract class Usuario{
     }
     //endregion
 
+    public boolean existeUsuario(Cliente t){
+        boolean resp = false;
+
+        if(this.username.equals(t.getUsername()) && this.password.equals(t.getPassword()))
+            resp = true;
+
+        return resp;
+    }
 }
