@@ -1,5 +1,7 @@
 package com.utn.teamA.clases;
 
+import com.utn.teamA.utils.Helpers;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -62,7 +64,7 @@ public class Reserva {
     public Reserva(String fechaEvento, String idCliente, List<Menu> menus,
         String descripcion, boolean quiereBartender) {
         this.id =  UUID.randomUUID().toString().substring(0, 10).replace("-", "g");
-        this.fechaReserva = null;
+        this.fechaReserva = Helpers.fechaActual();
         this.fechaEvento = fechaEvento;
         this.horarioLlegada =horarioLlegada;
         this.horarioInicio = horarioInicio;
@@ -76,6 +78,35 @@ public class Reserva {
 
 
 
+    }
+
+    public Reserva(String fechaEvento, String idCliente, StringBuilder horarioLlegada, StringBuilder horarioInicio, StringBuilder horarioFinaliza, List<Menu> menus, String descripcion, boolean quiereBartender) {
+
+        this.fechaEvento = fechaEvento;
+        this.idCliente = idCliente;
+        this.horarioLlegada = horarioLlegada;
+        this.horarioInicio = horarioInicio;
+        this.horarioFinaliza = horarioFinaliza;
+        this.menus = menus;
+        this.descripcion = descripcion;
+        this.quiereBartender = quiereBartender;
+    }
+
+    public Reserva(String id, String fechaReserva, String fechaEvento, String idCliente, StringBuilder horarioLlegada, StringBuilder horarioInicio, StringBuilder horarioFinaliza, List<Menu> menus, String descripcion, Double costoTotal, boolean quiereBartender, boolean status, int cantidadPersonasTotal, double precioFinal) {
+        this.id = id;
+        this.fechaReserva = fechaReserva;
+        this.fechaEvento = fechaEvento;
+        this.idCliente = idCliente;
+        this.horarioLlegada = horarioLlegada;
+        this.horarioInicio = horarioInicio;
+        this.horarioFinaliza = horarioFinaliza;
+        this.menus = menus;
+        this.descripcion = descripcion;
+        this.costoTotal = costoTotal;
+        this.quiereBartender = quiereBartender;
+        this.status = status;
+        this.cantidadPersonasTotal = cantidadPersonasTotal;
+        this.precioFinal = precioFinal;
     }
     //endregion
 

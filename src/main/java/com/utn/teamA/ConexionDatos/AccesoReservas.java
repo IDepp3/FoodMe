@@ -8,6 +8,7 @@ import com.utn.teamA.ConexionDatos.Gson.LocalDateSerializer;
 import com.utn.teamA.ConexionDatos.interfaces.ObtenerDatos;
 import com.utn.teamA.clases.Cliente;
 import com.utn.teamA.clases.Reserva;
+import com.utn.teamA.excepciones.FechaNoDisponible;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -300,7 +301,7 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
         System.out.println(json.toJson(reserva));
     }
 
-    public boolean verificarFechaDeEventoDisponible(String fechaRes) {
+    public boolean verificarFechaDeEventoDisponible(String fechaRes) throws FechaNoDisponible {
         boolean fechaDisponible = true;
 
         try {
@@ -320,12 +321,14 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
         }catch (NullPointerException e){
 
         }
-        catch (Exception e) {//todo por que pasa esto
+        catch (Exception e) {
 
 
         }
-
+        if(fechaDisponible){
         return fechaDisponible;
+        }else
+            throw new FechaNoDisponible("Fecha No disponible");
     }
     // endregion
 

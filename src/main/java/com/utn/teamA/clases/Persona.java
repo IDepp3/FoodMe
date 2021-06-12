@@ -75,10 +75,48 @@ public abstract class Persona extends Usuario {
      * @param direccion
      * @param dni
      */
-    public Persona(String username, String password, String fechaRegistro,String nombre, String apellido, String fechaNacimiento,
+    public Persona(String username, String password, String fechaRegistro, String tipoUsuario ,String nombre, String apellido, String fechaNacimiento,
                    String telefono, String direccion, String dni,
                    String email, boolean estado){
-        super( username, password, fechaRegistro);
+        super( username, password, fechaRegistro, tipoUsuario);
+        this.id = UUID.randomUUID().toString().substring(0, 10).replace("-", "g");
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.fechaNacimiento = fechaNacimiento;
+        this.telefono = telefono;
+        this.direccion = direccion;
+        this.dni = dni;
+        this.estado = estado;
+    }
+
+    // constructor usado para el registro
+
+    public Persona(String id, String username, String password, String email, String fechaRegistro, String tipoUsuario, boolean estado){
+        super(username, password, email, fechaRegistro, tipoUsuario);
+        this.id     = id;
+        this.estado = estado;
+    }
+
+
+   //constructor completo para traer los datos del Json
+
+    public Persona(String username, String password, String email, String fechaRegistro, String tipoUsuario, String id, String nombre, String apellido, String fechaNacimiento, String telefono, String direccion, String dni, boolean estado) {
+        super(username, password, email, fechaRegistro, tipoUsuario);
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.fechaNacimiento = fechaNacimiento;
+        this.telefono = telefono;
+        this.direccion = direccion;
+        this.dni = dni;
+        this.estado = estado;
+    }
+
+
+    //constructor para dar el alta como admin
+
+    public Persona(String username, String password, String email,String tipoUsuario ,String nombre, String apellido, String fechaNacimiento, String telefono, String direccion, String dni) {
+        super( username,  password,  email, tipoUsuario);
         this.id = UUID.randomUUID().toString().substring(0, 10).replace("-", "g");
         this.nombre = nombre;
         this.apellido = apellido;
@@ -89,14 +127,8 @@ public abstract class Persona extends Usuario {
         this.estado = true;
     }
 
-    // constructor usado para el registro
 
-    public Persona(String id, String username, String password, String email, String fechaRegistro, String tipoUsuario, boolean estado){
-        super(username, password, email, fechaRegistro, tipoUsuario);
-        this.id     = id;
-        this.estado = estado;
-    }
-    //endregion
+//endregion
 
     //region Getters
 
@@ -172,7 +204,7 @@ public abstract class Persona extends Usuario {
 
     @Override
     public String toString() {
-        return "\nID : " + this.id + "\nNombre : " + this.nombre + "\nApellido : " + this.apellido + "\nFecha Nacimiento : " + this.fechaNacimiento + "\nTelefono : " + this.telefono + "\nDireccion : " + this.direccion + "\nDNI : " + this.dni + "\nEstado : " + ((this.estado) ? "Activo" : "Inactivo") + super.toString();
+        return super.toString() + "\nID : " + this.id + "\nNombre : " + this.nombre + "\nApellido : " + this.apellido + "\nFecha Nacimiento : " + this.fechaNacimiento + "\nTelefono : " + this.telefono + "\nDireccion : " + this.direccion + "\nDNI : " + this.dni + "\nEstado : " + ((this.estado) ? "Activo" : "Inactivo") ;
     }
 
 

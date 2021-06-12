@@ -16,6 +16,7 @@ public class Cliente extends Persona {
 
     private List<Reserva> reservas;
 
+
     //region Constructores
 
     /**
@@ -61,26 +62,24 @@ public class Cliente extends Persona {
         this.reservas = null;
     }
 
-    /**
-     * Constructor Cliente + Persona + Usuario para el Loguin
-     * @param username
-     * @param password
-     * @param fechaRegistro
-     * @param nombre
-     * @param apellido
-     * @param fechaNacimiento
-     * @param telefono
-     * @param direccion
-     * @param dni
-     * @param email
-     * @param lasReservas
-     */
-    public Cliente(String username, String password, String fechaRegistro,String nombre, String apellido, String fechaNacimiento,
-                   String telefono, String direccion, String dni, String email,boolean estado,List<Reserva> lasReservas){
-        super(username, password, fechaRegistro, nombre,  apellido,  fechaNacimiento, telefono, direccion,  dni, email,estado );
-        reservas = lasReservas;
+
+    //constructor completo para traer el json (Anto)
+
+    public Cliente(String username, String password, String email, String fechaRegistro, String tipoUsuario, String id, String nombre, String apellido, String fechaNacimiento, String telefono, String direccion, String dni, boolean estado, List<Reserva> reservas) {
+        super(username, password, email, fechaRegistro, tipoUsuario, id, nombre, apellido, fechaNacimiento, telefono, direccion, dni, estado);
+        this.reservas = reservas;
     }
-    //endregion
+
+
+    //constructor para dar el el alta como admin (Anto)
+    public Cliente(String username, String password, String email, String nombre, String apellido, String fechaNacimiento, String telefono, String direccion, String dni) {
+        super(username, password, email,TipoUsuario.CLIENTE.tipo, nombre, apellido, fechaNacimiento, telefono, direccion, dni);
+        this.reservas = null;
+    }
+
+
+
+//endregion
 
     //endregion
 

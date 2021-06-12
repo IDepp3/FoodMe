@@ -1,16 +1,17 @@
 package com.utn.teamA.clases;
 
+import java.text.ParseException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
+
+import com.sun.source.tree.WhileLoopTree;
 import com.utn.teamA.ConexionDatos.AccesoClientes;
 import com.utn.teamA.ConexionDatos.AccesoEmpleados;
 import com.utn.teamA.ConexionDatos.AccesoReservas;
 import com.utn.teamA.excepciones.FechaInvalidaException;
+import com.utn.teamA.excepciones.FechaNoDisponible;
 import com.utn.teamA.utils.Color;
 import com.utn.teamA.utils.Helpers;
 import com.utn.teamA.utils.Vista;
@@ -643,7 +644,7 @@ public class Empresa {
         Scanner entradaEscanner2 = new Scanner(System.in);
         int ope = 1;
         String seguir = "s";
-        LocalDate fecha;
+        LocalDate fecha = null;
         Hora hora = new Hora();
         StringBuilder horarioLlegada = null;
         StringBuilder horarioInicio = null;
@@ -659,8 +660,15 @@ public class Empresa {
         while (seguir.equals("s")) {
 
             // Usuario ingresa fecha, valida que sea 48hs posterior al dia actual
-            String fechaAString = null;
-            fecha = elegirFechaDeEvento();
+            try {
+                fecha = elegirFechaDeEvento();
+                System.out.println(fecha.toString());
+            }catch (Exception e){
+                System.err.println("Fecha invalida");
+            }
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            String fecha3 = fecha.toString();
+
             Vista.deseaSeguirCargandoDatos();
             seguir = entradaEscanner2.nextLine();
             if (seguir.equals("n"))
@@ -669,7 +677,7 @@ public class Empresa {
             // Usuario ingresa la hora y minutos en el que empieza el evento.
             // calcula horarios de llegada y finalizacion
             System.out.println(Color.ANSI_BLUE + " 1 " + Color.ANSI_RESET + "Ingrese hora de inicio del Evento");
-            String aviso = "Acordate que nuestro servivio duraentre:  3.5-4 hs ,Llegamos entre: 3-4 hs antes, Finalizamos: 3-4 hs despues ,FOODME.CO ";
+            String aviso = "Acordate que nuestro servivio dura entre:  3.5-4 hs. Llegamos entre: 3-4 hs antes. Finalizamos: 3-4 hs despues ,FOODME.CO ";
             System.out.println(aviso);
             hora.init();
             horarioLlegada = hora.calcularLlegada(3);
@@ -680,10 +688,10 @@ public class Empresa {
             if (seguir.equals("n"))
                 break;
 
-            // Usuario ingrsa Cliente/ lo dirige al menu cliente en donde puede buscar
+            // Usuario ingresa Cliente/ lo dirige al menu cliente en donde puede buscar
             // al cliente o darlo de alta. se guarda el id del cliente
             System.out.println(Color.ANSI_BLUE + " 2 " + Color.ANSI_RESET + "Seleccione el Cliente ");
-            idCliente = resrevaIngresarCliente();
+            idCliente = reserevaIngresarCliente();
             Vista.deseaSeguirCargandoDatos();
             seguir = entradaEscanner2.nextLine();
             if (seguir.equals("n"))
@@ -717,6 +725,9 @@ public class Empresa {
 
             Vista.opcionCorrecta("Finalizo cargar su reserva");
 
+            Reserva reserva = new Reserva(fecha3,idCliente,horarioLlegada,horarioInicio,horarioFinaliza,menus,descripcion,quierebartender);
+            reserva.mostrar();
+
             // El sistema inicializa el objeto
             // Reserva reserva = new Reserva(fechaAString, horarioLlegada, horarioInicio,
             // horarioFinaliza, idCliente, menus, descripcion, quierebartender);
@@ -733,6 +744,8 @@ public class Empresa {
             System.out.println("Costo:" + reserva.getCostoTotal());
             System.out.println("Precio Final:" + reserva.getPrecioFinal());
 
+
+
             Vista.finalizarReserva();
             seguir = entradaEscanner2.nextLine();
             if (seguir.equals("n"))
@@ -744,29 +757,46 @@ public class Empresa {
             boolean a = accesoReservas.agregarRegistro(reserva);
 
             Vista.opcionCorrecta("La reserva se cargo con exito");
+
+
             seguir = "n";
         }
 
     }
 
-    private String resrevaIngresarCliente() {
+
+    private String reserevaIngresarCliente() {
         Scanner entradaEscanner2 = new Scanner(System.in);
         String idCliente = null;
+        String dni = null;
+        Cliente cliente2 = null;
+        System.out.println("1- Alta cliente");
+        System.out.println("1- Id cliente");
         try {
 
             boolean resp = true;
             int opt = 0;
+            opt=entradaEscanner2.nextInt();
+            entradaEscanner2.nextLine();
             while (resp) {
                 switch (opt) {
                     case 0:
                         resp = false;
                         break;
                     case 1:
-                        // cliente = darAltaCliente();
-                        idCliente = cliente.getId();
+                         Cliente cliente = darAltaUnCliente();
+                         cliente.mostrar();
+                         idCliente = cliente.getId();
                         break;
                     case 2:
-                        // idCliente= buscarCliente(String dni).getDNI();
+                        System.out.println("Buscar Cliente");
+
+                        while(!Helpers.validarDni(dni)) {
+                            System.out.println("Ingrese DNI");
+                        }
+                        cliente2 = accesoClientes.obtenerRegistro(dni);
+                        cliente2.mostrar();
+                        idCliente = cliente2.getId();
                         break;
                     default:
                         System.err.println("Dato incorrecto. Reintente");
@@ -780,35 +810,156 @@ public class Empresa {
         return idCliente;
     }
 
-    private LocalDate elegirFechaDeEvento() {
-        LocalDate fechaTentativa = null;
+    public static void main(String[] args) {
+        Empresa empresa = new Empresa();
+        Cliente cliente =empresa.darAltaUnCliente();
+        cliente.mostrar();
+    }
+
+    private boolean validarDia(String dia) {
+
+        if (dia.length() != 2) //Comprobamos que son dos caracteres
+
+            return false;
+
+        else { //Y que es un valor numérico, entre 0 y 31
+
+            try {
+
+                int dd = Integer.parseInt(dia);
+
+                return (dd > 0 && dd < 31);
+
+            }
+
+            catch(NumberFormatException e) {
+
+                return false; //No se ha tecleado un valor numérico
+
+            }
+
+        }
+
+    }
+
+    private boolean validarMes(String mes) {
+
+        if (mes.length() != 2)
+
+            return false;
+
+        else {
+
+            try {
+
+                int mm = Integer.parseInt(mes);
+
+                return (mm > 0 && mm < 13);
+
+            }catch(NumberFormatException e) {
+
+                return false;
+
+            }
+
+        }
+
+
+
+    }
+
+    private boolean validarAnio(String anio) {
+
+        if (anio.length() != 4)
+
+            return false;
+
+        else {
+
+            try {
+
+                int aaaa = Integer.parseInt(anio);
+
+                return (aaaa != 0); //Aquí depende de que fechas queremos aceptar
+
+            } catch(NumberFormatException e) {
+
+                return false;
+
+            }
+
+        }
+
+    }
+
+    private LocalDate elegirFechaDeEvento()  {
+
         LocalDate fecha = null;
         Scanner entradaEscanner = new Scanner(System.in);
         String f = "";
         String si = "s";
+        boolean validar = false;
+        boolean disponibilidad = false;
         while (si.equals("s")) {
             try {
+                String mes = null;
+                String anio = null;
+                String dia = null;
 
-                System.out
-                        .println(Color.ANSI_BLUE + " 1- " + Color.ANSI_RESET + "Ingrese fecha del evento: dd/MM/yyyy");
-                f = entradaEscanner.next();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                fechaTentativa = LocalDate.parse(f, formatter);
-                boolean fechaV = verificarFechaValida(fechaTentativa);
-                boolean fechaD = accesoReservas.verificarFechaDeEventoDisponible(f);
-                if (fechaD) {
-                    Vista.opcionCorrecta("Fecha disponible");
-                    fecha = fechaTentativa;
-                } else {
-                    System.err.println("Fecha No Disponible");
+                System.out.println(Color.ANSI_BLUE + " 1- " + Color.ANSI_RESET + "Ingrese fecha del evento: dd/MM/yyyy");
 
-                }
+                do {
+                    do {
+                        System.out.println("Dia: ");
+                        dia = entradaEscanner.next();
+                    } while (!validarDia(dia));
 
+                    do {
+                        System.out.println("Mes: ");
+                        mes = entradaEscanner.next();
+                    } while (!validarMes(mes));
+
+                    do {
+                        System.out.println("Año: ");
+                        anio = entradaEscanner.next();
+                        entradaEscanner.nextLine();
+                    } while (!validarAnio(anio));
+
+                    LocalDate fechatentativa = LocalDate.of(Integer.parseInt(anio), Integer.parseInt(mes), Integer.parseInt(dia));
+                    validar = verificarFechaValida(fechatentativa);
+
+                    disponibilidad = accesoReservas.verificarFechaDeEventoDisponible(fechatentativa.toString());
+
+                    if (disponibilidad) {
+                        Vista.opcionCorrecta("Fecha disponible");
+                        fecha = fechatentativa;
+                    } else {
+                        System.err.println("Fecha No Disponible");
+
+                    }
+
+                    Vista.deseaSeguirCargandoFechas();
+                    si = entradaEscanner.next();
+
+                } while (((!validar) && (!disponibilidad)) || (si.equals("s")));
+
+            }catch (FechaNoDisponible e){
+                System.err.println("fecha no disponible");
+                Vista.deseaSeguirCargandoFechas();
+                si = entradaEscanner.next();
             } catch (FechaInvalidaException e) {
-                System.err.println(e.getMessage());
+                System.err.println("Fecha Invalida");
+                Vista.deseaSeguirCargandoFechas();
+                si = entradaEscanner.next();
+
+
+            }catch (NullPointerException e){
+                System.err.println("No hay registros aun");
             }
-            Vista.deseaSeguirCargandoFechas();
-            si = entradaEscanner.next();
+            catch (Exception e) {
+            System.err.println("Error. Fecha invalida");
+                //elegirFechaDeEvento();
+            }
 
         }
         return fecha;
@@ -818,12 +969,12 @@ public class Empresa {
     public boolean verificarFechaValida(LocalDate fechaVali) throws FechaInvalidaException {
 
         boolean fechaValida = false;
+
         if ((fechaVali.isAfter(LocalDate.now().plusDays(2)))) {
             fechaValida = true;
-        } else {
-            throw new FechaInvalidaException("La fecha es invalida") {
-            };
-        }
+        } else{
+            throw new FechaInvalidaException("Fecha Invalida");}
+
         return fechaValida;
 
     }
@@ -839,7 +990,7 @@ public class Empresa {
 
             while (resp) {
 
-                System.out.println("SELECCIONAR MENU");
+
                 Vista.darAltaReservaSeleccionarMenu();
                 op = entrada.nextInt();
 
@@ -1605,71 +1756,98 @@ public class Empresa {
 
     // region ABM
 
-    public void darAltaUnCliente() {
+
+    public Cliente darAltaUnCliente() {
         Scanner entradaEscanner = new Scanner(System.in);
         Cliente cliente = null;
         List<Reserva> listaReservas = null;
+
         System.out.println("DAR ALTA CLIENTE");
         System.out.println("");
+
+        //Pedimos al usuario cliente el nombre y apellido
         System.out.print("\nIngrese el nombre del cliente: ");
         String nombre = entradaEscanner.next();
         System.out.print("\nIngrese el apellido del cliente: ");
         String apellido = entradaEscanner.next();
 
-        // validacion de fecha
+        // Validamos  fecha de nacimiento
+        boolean fechaNacimientoval = false;
+        String fechadeNacimiento = null;
+        System.out.println("Ingrese el nacimiento del cliente: dd/MM/yyyy ");
+        String dia, mes, anio;
+        LocalDate fecha4 = null;
+        do {
+            do {
+                System.out.println("Dia: ");
+                dia = entradaEscanner.next();
+            } while (!validarDia(dia));
 
-        System.out.print("\nIngrese el nacimiento del cliente: dd/MM/yyyy ");
-        int dia, mes, anio;
-        LocalDate fecha = null;
+            do {
+                System.out.println("Mes: ");
+                mes = entradaEscanner.next();
+            } while (!validarMes(mes));
 
-        System.out.println("Ingrese el dia: ");
-        dia = entradaEscanner.nextInt();
-        System.out.println("Ingrese el mes: ");
-        mes = entradaEscanner.nextInt();
-        System.out.println("Ingrese el año");
-        anio = entradaEscanner.nextInt();
-        fecha = LocalDate.of(anio, mes, dia);
+            do {
+                System.out.println("Año: ");
+                anio = entradaEscanner.next();
+                entradaEscanner.nextLine();
+            } while (!validarAnio(anio));
 
-        // validacion telefono
+            LocalDate fechaNacimiento = LocalDate.of(Integer.parseInt(anio), Integer.parseInt(mes), Integer.parseInt(dia));
+            if(fechaNacimiento.isBefore(LocalDate.now().minusYears(18))){
+                fechaNacimientoval = true;
+                fechadeNacimiento=fechaNacimiento.toString();
+            }else {
+                System.out.println("No cumple con la edad minima para registrarse");
+                System.out.println(fechaNacimiento.toString());
+            }
+
+        } while(!fechaNacimientoval);
+
+
+        // Pedimos y validamos el telefono celular
         String telefono = "";
-        int seleccion;
+        do {
+            System.out.println("\nIngrese numero de celular sin 0 ni 15");
+            telefono = entradaEscanner.next();
+            entradaEscanner.nextLine();
+        }while(!Helpers.validarTel(telefono));
 
-        System.out.print("\nIngrese numero de celular sin 0 ni 15");
-        telefono = entradaEscanner.next();
 
-        // Validamos el dni que nos da el cliente.
-        boolean respuesta = Helpers.validarTel(telefono);
+        // Pedimos y validamos la direccion.
+        String direccion = null;
 
-        String dni = "";
-
-        System.out.print("\nIngrese la direccion: ");
-        direccion = entradaEscanner.next();
-        entradaEscanner.next();
-        boolean respuest = false;
-        System.out.print("\nIngrese dni del cliente: ");
-        dni = entradaEscanner.next();
-
-        // Validamos el dni que nos da el cliente.
-        respuest = Helpers.validarDni(dni);
-
-        // validamos el estado
-        String email = "";
-        boolean estado = true;
-        boolean respu = true;
-        while (respu == true) {
-            // Validamos el email que nos da el cliente.
-            System.out.println("\nIngrese el email del cliente: ");
-            email = entradaEscanner.next();
-
-            respu = false;
-            String fecha3 = "12-12-12";
-
+        do{
+            System.out.println("\nIngrese la direccion: ");
+            direccion = entradaEscanner.nextLine();
         }
-        String fecha3 = null;
-        cliente = new Cliente(nombre, apellido, fecha3, telefono, direccion, dni, email, estado, listaReservas);
+        while (direccion==null);
+
+
+        // Pedimos y validamos el dni que nos da el cliente.
+        boolean respuest = false;
+        String dniV = "";
+        do {
+            System.out.print("\nIngrese dni del cliente: ");
+            dniV = entradaEscanner.next();
+        }while (!Helpers.validarDni(dniV));
+
+        // Pedimos y validamos el email que nos da el cliente.
+        String email = null;
+         do {
+             System.out.println("\nIngrese el email del cliente: ");
+             email = entradaEscanner.next();
+             System.out.println(email);
+         }while(!Helpers.validarEmail(email));
+
+        //Guardamos y mostramos los datos a cargar como nuevo cliente
+        cliente = new Cliente(email,dniV,email,nombre, apellido, fechadeNacimiento, telefono, direccion, dniV);
+
         System.out.println("Se agrego exitosamente el cliente");
         accesoClientes.agregarRegistro(cliente);
 
+        return cliente;
     }
 
     public void buscarCliente() {

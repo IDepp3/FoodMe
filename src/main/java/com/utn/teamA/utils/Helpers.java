@@ -163,7 +163,7 @@ public class Helpers {
         boolean resp = mather.find();
 
         if (resp == true) {
-            //System.out.println("El dni ingresado es valido");
+            System.out.println("El dni ingresado es valido");
         } else {
             System.out.println("El dni es incorrecto");
         }
@@ -172,7 +172,7 @@ public class Helpers {
 
     public static boolean validarTel(String telefono) {
 
-        Pattern pattern = Pattern.compile("^\\d{10}$");
+        Pattern pattern = Pattern.compile("^\\d{7}$");
         Matcher mather = pattern.matcher(telefono);
 
         boolean resp = mather.find();
@@ -192,9 +192,10 @@ public class Helpers {
         LocalDate fecha = null;
 
         while (resp) {
-            dia = Integer.parseInt(Helpers.validaciones("Dia", Helpers.VALIDAR_ENTEROS, "Ingrese solo numeros"));
-            mes = Integer.parseInt(Helpers.validaciones("Dia", Helpers.VALIDAR_ENTEROS, "Ingrese solo numeros"));
-            anio = Integer.parseInt(Helpers.validaciones("Dia", Helpers.VALIDAR_ENTEROS, "Ingrese solo numeros"));
+
+            dia = Integer.parseInt(Helpers.validaciones("Dia", Helpers.VALIDAR_ENTEROS, "Error. Fecha incorrecta"));
+            mes = Integer.parseInt(Helpers.validaciones("Mes", Helpers.VALIDAR_ENTEROS, "Error. Fecha incorrecta"));
+            anio = Integer.parseInt(Helpers.validaciones("Anio", Helpers.VALIDAR_ENTEROS, "Error. Fecha incorrecta"));
             try{
                 fecha = LocalDate.of(anio, mes, dia);
                 resp = false;
@@ -248,17 +249,10 @@ public class Helpers {
     }
 
     public static String ingresoPassword() {
-        Console c;
-        String valor = "";
-        char[] password = null;
-        if ((c = System.console()) != null) {
-            Vista.ingreseDato("Ingrese password");
-            password = c.readPassword();
-        }
-
-        valor = String.valueOf(password);
-
-        return valor;
+       Scanner entrada = new Scanner(System.in);
+       Vista.ingreseDato("Ingrese password");
+        String passwordString = entrada.next();
+        return passwordString;
     }
 
     private static SecretKeySpec crearClave(String llave) {

@@ -38,26 +38,20 @@ public abstract class Usuario{
      */
     
 
-    // CONSTRUCTOR PARA QUE NO SE ROMPA
 
-    public Usuario(String username, String password, String fechaRegistro){
-        this.username      = username;
-        this.password      = password;
-        this.fechaRegistro = fechaRegistro;
+
+    public Usuario(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
     public Usuario(String email){
         this.email = email;
     }
 
-    // CONSTRUCTOR USADO PARA LOGUEAR UN USUARIO 
-    
-    public Usuario(String username, String password){
-        this.username = username;
-        this.password = password;
-    }
 
-    // CONSTRUCTOR USADO PARA CREAR UN USUARIO
+
+    // CONSTRUCTOR PARA QUE NO SE ROMPA . CARGAR UN USUARIO DESDE EL JSON
 
     public Usuario(String username, String password, String email, String fechaRegistro, String tipoUsuario){
         this.username      = username;
@@ -65,6 +59,15 @@ public abstract class Usuario{
         this.email         = email;
         this.fechaRegistro = fechaRegistro;
         this.tipoUsuario   = tipoUsuario;
+    }
+    // CONSTRUCTOR USADO PARA REGISTRAR UN USUARIO
+
+    public Usuario(String username, String password, String email , String tipoUsuario){
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.tipoUsuario = tipoUsuario;
+        this.fechaRegistro = LocalDate.now().toString();
     }
 
     //endregion
