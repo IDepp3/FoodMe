@@ -253,7 +253,8 @@ public class Empresa implements Serializable {
                 case 2:
                     Vista.titulo("Registrarse");
                     this.cliente = registroUsuario();
-                    if(!existeUsuario(this.cliente)){
+                    System.out.println(this.accesoClientes.existeRegistro(this.accesoClientes.obtenerRegistros(), this.cliente));
+                    if(!this.accesoClientes.existeRegistro(this.accesoClientes.obtenerRegistros(), this.cliente)){
 
                         if (this.accesoClientes.agregarRegistro(this.cliente))
                             Vista.opcionCorrecta("Usuario creado correctamente");
@@ -268,8 +269,6 @@ public class Empresa implements Serializable {
                     break;
             }
             this.cliente = null;
-            this.listaClientes = this.accesoClientes.obtenerRegistros();
-
         }
         System.out.println("Gracias por usar la aplicacion");
     }
@@ -310,19 +309,14 @@ public class Empresa implements Serializable {
 
         while (!resp) {
             pass = Helpers.validaciones("Ingrese password", Helpers.VALIDAR_PASSWORD, "Su contraseña debe ser como minimo de 8 caracteres maximo 15, 1 mayuscula, 1 minuscula, 1 digito, no espacios en blanco y al menos 1 caracter especial($@!%*?&)");
-            confirmacion = Helpers.validaciones("Ingrese password", Helpers.VALIDAR_PASSWORD, "Su contraseña debe ser como minimo de 8 caracteres maximo 15, 1 mayuscula, 1 minuscula, 1 digito, no espacios en blanco y al menos 1 caracter especial($@!%*?&)");
+            confirmacion = Helpers.validaciones("Reingrese password", Helpers.VALIDAR_PASSWORD, "Su contraseña debe ser como minimo de 8 caracteres maximo 15, 1 mayuscula, 1 minuscula, 1 digito, no espacios en blanco y al menos 1 caracter especial($@!%*?&)");
             if (pass.equals(confirmacion))
                 resp = true;
             else
-                Vista.opcionCorrecta("Las contraseñas no coinciden");
+                Vista.opcionIncorrecta("Las contraseñas no coinciden");
         }
 
         return pass;
-    }
-
-    private boolean existeUsuario(Cliente c){
-
-        return false;
     }
 
     // endregion

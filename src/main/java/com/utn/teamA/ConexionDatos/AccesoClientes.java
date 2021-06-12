@@ -204,7 +204,7 @@ public class AccesoClientes implements ObtenerDatos<Cliente>{
         return resp;
     }
 
-    private boolean existeRegistro(List<Cliente> clientes, Cliente cliente){
+    public boolean existeRegistro(List<Cliente> clientes, Cliente cliente){
         boolean resp = false;
         int i = 0;
 
