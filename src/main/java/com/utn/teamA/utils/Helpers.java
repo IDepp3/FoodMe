@@ -221,7 +221,7 @@ public class Helpers {
         return ingreso;
     }
 
-    public static String validarPassword(String mensaje) {
+    /* public static String validarPassword(String mensaje) {
 
        // Console c;
        Scanner c = new Scanner(System.in);
@@ -259,7 +259,7 @@ public class Helpers {
         valor = String.valueOf(password);
 
         return valor;
-    }
+    } */
 
     private static SecretKeySpec crearClave(String llave) {
         SecretKeySpec secretKeySpec = null;
