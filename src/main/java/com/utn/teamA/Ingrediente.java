@@ -17,14 +17,15 @@ public class Ingrediente {
     //region constructores
     public Ingrediente() {
         this.id = UUID.randomUUID().toString();
+        this.estado = true;
     }
 
-    public Ingrediente(String nombre, String descripcion, double precio,boolean estado, String proveedor) {
-        this.id = UUID.randomUUID().toString();
+    public Ingrediente(String nombre, String descripcion, double precio, String proveedor) {
+        this();
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
-        this.estado = estado;
+        this.estado = true;
         this.proveedor = proveedor;
     }
     //endregion

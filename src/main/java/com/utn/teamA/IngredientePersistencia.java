@@ -124,7 +124,7 @@ public class IngredientePersistencia {
 
         while(!resp && i < ingredientes.size()){
             if(ingredientes.get(i).equals(t)){
-                ingredientes.remove(i);
+                ingredientes.get(i).setEstado(false);
                 if(guardarInformacion(ingredientes))
                     resp = true;
             }

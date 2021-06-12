@@ -10,7 +10,6 @@ public class IngredienteLista {
 
     public IngredienteLista() {
         ingredientePersistencia = new IngredientePersistencia();
-        this.listaDeIngredites = ingredientePersistencia.obtenerRegistros();
     }
 
     private void agregarIngredienteView(){
@@ -67,11 +66,15 @@ public class IngredienteLista {
                     System.out.println(Color.ANSI_BLACK + "Seccion en construccion" + Color.ANSI_RESET);
                     break;
                 case 3:
-                    System.out.println(Color.ANSI_BLACK + "Seccion en construccion" + Color.ANSI_RESET);
+                    this.eliminarIngrediete();
                     break;
                 case 4:
+                    listaDeIngredites = ingredientePersistencia.obtenerRegistros();
                     for ( Ingrediente ingrediente : listaDeIngredites ) {
-                        System.out.println(ingrediente);
+                        if (ingrediente.getEstado()){
+                            System.out.println(ingrediente);
+                        }
+
                     }
                     break;
                 default:
@@ -93,6 +96,32 @@ public class IngredienteLista {
 
         nuevoIngrediente.crear();
 
-        listaDeIngredites.add(nuevoIngrediente);
+        ingredientePersistencia.agregarRegistro(nuevoIngrediente);
+
+    }
+
+    public void eliminarIngrediete(){
+        listaDeIngredites = ingredientePersistencia.obtenerRegistros();
+        int i = 0;
+        for ( Ingrediente ing : listaDeIngredites ) {
+
+            if( ing.getEstado() ){
+                System.out.println( "[ " + i  + " ] " + ing.getNombre() );
+            }
+            i++;
+        }
+
+        System.out.println("ingrese el godigo del ingrediente a eliminar");
+        int codigo = Helpers.validarInt();
+
+        if (codigo < 0 || codigo > listaDeIngredites.size() || !listaDeIngredites.get(codigo).getEstado()){
+            System.out.println("opcion invalida");
+        }else {
+            Ingrediente ing = listaDeIngredites.get(codigo);
+            //TODO preguntar si este es el ingrediente a eliminar
+            System.out.println(ing);
+            ingredientePersistencia.borrarRegistro(ing);
+        }
+
     }
 }
