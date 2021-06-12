@@ -98,6 +98,7 @@ public class AccesoClientes implements ObtenerDatos<Cliente>{
 
         return cliente;
     }
+
     public Cliente buscarCliente( List<Cliente> clientes, String dni) throws ClienteNotieneReservas {
         boolean resp = false;
         int i = 0;

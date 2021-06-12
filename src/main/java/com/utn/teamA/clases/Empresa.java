@@ -247,7 +247,7 @@ public class Empresa {
                         if (this.cliente.getTipoUsuario().equals(TipoUsuario.ADMINISTRADOR.tipo))
                             getMenuAdministrador();
                         else if (this.cliente.getTipoUsuario().equals(TipoUsuario.CLIENTE.tipo))
-                            getMenuCliente();
+                            getMenuCliente(cliente);
                     }else
                         Vista.opcionIncorrecta("El usuario o contraseña es incorrecto");
                     break;
@@ -573,7 +573,7 @@ public class Empresa {
                         break;
                     case 1:
                         Vista.titulo(" ALTA UNA RESERVA.");
-                        dardeAltaUnaReserva();
+                        darAltaReservas();
                         break;
                     case 2:
                         Vista.titulo(" BAJA UNA RESERVA.");
@@ -604,8 +604,8 @@ public class Empresa {
         }
     }
 
-    // region Alta
-    public void dardeAltaUnaReserva() {
+    // region Alta Como Admin
+    public Reserva darAltaReservas() {
 
         Scanner entradaEscanner2 = new Scanner(System.in);
         int ope = 1;
@@ -727,59 +727,191 @@ public class Empresa {
 
             seguir = "n";
         }
-
+    return reserva;
     }
 
+    // Alta Reserva Como cliente
+    public void dardeAltaUnaReserva(Cliente cliente) {
+
+        Scanner entradaEscanner2 = new Scanner(System.in);
+        int ope = 1;
+        String seguir = "s";
+        LocalDate fecha = null;
+        Hora hora = new Hora();
+        StringBuilder horarioLlegada = null;
+        StringBuilder horarioInicio = null;
+        StringBuilder horarioFinaliza = null;
+        List<Menu> menus;
+        String descripcion;
+        boolean quierebartender;
+        String idCliente2 = null;
+
+        String otro = "";
+
+        while (seguir.equals("s")) {
+
+            // Usuario ingresa fecha, valida que sea 48hs posterior al dia actual
+            try {
+                fecha = elegirFechaDeEvento();
+                System.out.println(fecha.toString());
+            }catch (Exception e){
+                System.err.println("Fecha invalida");
+            }
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            String fecha3 = fecha.toString();
+
+            Vista.deseaSeguirCargandoDatos();
+            seguir = entradaEscanner2.nextLine();
+            if (seguir.equals("n"))
+                break;
+
+            // Usuario ingresa la hora y minutos en el que empieza el evento.
+            // calcula horarios de llegada y finalizacion
+            System.out.println(Color.ANSI_BLUE + " 1 " + Color.ANSI_RESET + "Ingrese hora de inicio del Evento");
+            String aviso = "Acordate que nuestro servivio dura entre:  3.5-4 hs. Llegamos entre: 3-4 hs antes. Finalizamos: 3-4 hs despues ,FOODME.CO ";
+            System.out.println(aviso);
+            hora.init();
+            horarioLlegada = hora.calcularLlegada(3);
+            horarioInicio = hora.setearHoraInicio();
+            horarioFinaliza = hora.calcularFinalizacion(4); // todo constante de horas de servicio
+            Vista.deseaSeguirCargandoDatos();
+            seguir = entradaEscanner2.nextLine();
+            if (seguir.equals("n"))
+                break;
+
+            // Usuario ingresa Cliente/ lo dirige al menu cliente en donde puede buscar
+            // al cliente o darlo de alta. se guarda el id del cliente
+            idCliente2 = cliente.getId();
+
+            // Usuario selecciona Los tipo de Menu, cantidad de personas por menu e
+            // ingredientes
+            System.out.println(Color.ANSI_BLUE + " 3 " + Color.ANSI_RESET + "Seleccione los Menus ");
+            // traer lista de menus y sus ingredientes
+            menus = seleccionarMenus();
+            Vista.deseaSeguirCargandoDatos();
+            seguir = entradaEscanner2.nextLine();
+            if (seguir.equals("n"))
+                break;
+
+            // Usuario Ingresa si quiere bartender como servicio
+            System.out.println(Color.ANSI_BLUE + " 5- " + Color.ANSI_RESET + "Quiere Bartender?s/n");
+            String op = entradaEscanner2.nextLine();
+            quierebartender = op.equals("s");
+
+            // Usuario ingresa descripcion en la reserva. detalles preguntas de servicio
+            // etc.
+            System.out.println(Color.ANSI_BLUE + " 4- " + Color.ANSI_RESET + "Ingrese descripcion");
+            descripcion = entradaEscanner2.nextLine();
+            if (seguir.equals("n"))
+                break;
+            Vista.deseaSeguirCargandoDatos();
+            seguir = entradaEscanner2.nextLine();
+            if (seguir.equals("n"))
+                break;
+
+            Vista.opcionCorrecta("Finalizo cargar su reserva");
+
+            Reserva reserva = new Reserva(fecha3,idCliente2,horarioLlegada,horarioInicio,horarioFinaliza,menus,descripcion,quierebartender);
+            reserva.mostrar();
+
+            // El sistema inicializa el objeto
+            // Reserva reserva = new Reserva(fechaAString, horarioLlegada, horarioInicio,
+            // horarioFinaliza, idCliente, menus, descripcion, quierebartender);
+
+            // Calcula costoTotal + servicio(mano de obra) en funcion a la cantidad de
+            // personas
+            reserva.setCostoTotal(100.0);
+            // reserva.setCosto(reserva.calcularCosto());//todo Antonela1
+
+            // Calcula Precio Final = a costo + IVA (si el cliente paga en efectivo) con una
+            // rentabilidad del 25%
+            reserva.calcularPrecionFinal();
+
+            System.out.println("Costo:" + reserva.getCostoTotal());
+            System.out.println("Precio Final:" + reserva.getPrecioFinal());
+
+
+
+            Vista.finalizarReserva();
+            seguir = entradaEscanner2.nextLine();
+            if (seguir.equals("n"))
+                break;
+
+            // El sistema guarda en el archivo en formato json
+            accesoReservas.mostrar(reserva);
+
+            boolean a = accesoReservas.agregarRegistro(reserva);
+
+            Vista.opcionCorrecta("La reserva se cargo con exito");
+
+
+            seguir = "n";
+        }
+
+    }
 
     private String reserevaIngresarCliente() {
         Scanner entradaEscanner2 = new Scanner(System.in);
-        String idCliente = null;
+
         String dni = null;
-        Cliente cliente2 = null;
-        System.out.println("1- Alta cliente");
-        System.out.println("1- Id cliente");
-        try {
+        Cliente clienteRegistrado = null;
+        String idClienteReserva = null;
+        String s = "s";
 
-            boolean resp = true;
-            int opt = 0;
-            opt=entradaEscanner2.nextInt();
-            entradaEscanner2.nextLine();
-            while (resp) {
-                switch (opt) {
-                    case 0:
-                        resp = false;
-                        break;
-                    case 1:
-                         Cliente cliente = darAltaUnCliente();
-                         cliente.mostrar();
-                         idCliente = cliente.getId();
-                        break;
-                    case 2:
-                        System.out.println("Buscar Cliente");
+        do {
 
-                        while(!Helpers.validarDni(dni)) {
-                            System.out.println("Ingrese DNI");
-                        }
-                        cliente2 = accesoClientes.obtenerRegistro(dni);
-                        cliente2.mostrar();
-                        idCliente = cliente2.getId();
-                        break;
-                    default:
-                        System.err.println("Dato incorrecto. Reintente");
-                        break;
+            try {
+
+                boolean resp = true;
+                int opt = 0;
+
+                while (resp) {
+
+                System.out.println("");
+                System.out.println("0- Guardar");
+                System.out.println("1- Alta cliente");
+                System.out.println("2- Id cliente");
+
+                opt = entradaEscanner2.nextInt();
+                entradaEscanner2.nextLine();
+
+
+                    switch (opt) {
+                        case 0:
+                            resp = false;
+                            break;
+                        case 1:
+                            Vista.titulo("Alta Cliente");
+                            Cliente cliente = darAltaUnCliente();
+                            idClienteReserva= cliente.getId();
+                            cliente.mostrar();
+                            break;
+                        case 2:
+                            Vista.titulo("Buscar Cliente");
+                            String dni3 = null;
+                            do {
+                                System.out.println("Ingrese DNI");
+                                dni3 = entradaEscanner2.next();
+                            } while (!Helpers.validarDni(dni3));
+                            clienteRegistrado = accesoClientes.obtenerRegistro(dni3);
+                            idClienteReserva = clienteRegistrado.getId();
+                            break;
+                        default:
+                            System.err.println("Dato incorrecto. Reintente");
+                            break;
+                    }
                 }
+
+            } catch (NullPointerException e) {
+                System.err.println(" porque no existe el Cliente ");
+
+
+            } catch (Exception e) {
+
             }
 
-        } catch (Exception e) {
-
-        }
-        return idCliente;
-    }
-
-    public static void main(String[] args) {
-        Empresa empresa = new Empresa();
-        Cliente cliente =empresa.darAltaUnCliente();
-        cliente.mostrar();
+        }while(idClienteReserva==null);
+        return idClienteReserva;
     }
 
     private boolean validarDia(String dia) {
@@ -1693,7 +1825,7 @@ public class Empresa {
 
     }
 
-    private void getMenuCliente() {
+    private void getMenuCliente(Cliente cliente) {
         boolean resp = true;
         int opcion;
         while (resp) {
@@ -1708,7 +1840,7 @@ public class Empresa {
                     System.out.println("VISTA DE LOS MENUS DISPONIBLES");
                     break;
                 case 2:
-                    dardeAltaUnaReserva();
+                    dardeAltaUnaReserva(cliente);
                     break;
                 case 3:
                     menuInformacionPersonal();
@@ -1728,8 +1860,6 @@ public class Empresa {
         Cliente cliente = null;
         List<Reserva> listaReservas = null;
 
-        System.out.println("DAR ALTA CLIENTE");
-        System.out.println("");
 
         //Pedimos al usuario cliente el nombre y apellido
         System.out.print("\nIngrese el nombre del cliente: ");
