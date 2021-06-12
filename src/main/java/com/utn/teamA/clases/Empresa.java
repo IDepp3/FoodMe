@@ -231,9 +231,6 @@ public class Empresa implements Serializable {
         boolean resp = true;
 
         int opcion;
-        for (Cliente c : this.listaClientes) {
-            System.out.println(c);
-        }
         while (resp) {
             Vista.titulo("Empresa de Catering");
             Vista.menuPrincipal();
@@ -245,10 +242,9 @@ public class Empresa implements Serializable {
                 case 1:
                     Vista.titulo("Login");
                     this.cliente = loginUsuario();
-                    // this.cliente = this.listaClientes.get(0);
                     if (this.cliente != null)
                         if (this.cliente.getTipoUsuario().equals(TipoUsuario.ADMINISTRADOR.tipo))
-                            seleccionDeMenu();
+                            getMenuAdministrador();
                         else if (this.cliente.getTipoUsuario().equals(TipoUsuario.CLIENTE.tipo))
                             getMenuCliente();
                         else
@@ -272,30 +268,6 @@ public class Empresa implements Serializable {
 
         }
         System.out.println("Gracias por usar la aplicacion");
-    }
-
-    private void seleccionDeMenu() {
-        boolean resp = true;
-        int opcion;
-        while (resp) {
-            Vista.titulo("Seleccion de vistas");
-            Vista.seleccionMenuAdmin();
-            opcion = Helpers.validarInt();
-            switch (opcion) {
-                case 0:
-                    resp = false;
-                    break;
-                case 1:
-                    getMenuAdministrador();
-                    break;
-                case 2:
-                    getMenuCliente();
-                    break;
-                default:
-                    Vista.opcionIncorrecta(opcion);
-                    break;
-            }
-        }
     }
 
     // endregion
