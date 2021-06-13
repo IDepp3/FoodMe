@@ -891,6 +891,7 @@ public class Empresa {
 
     }
 
+
     private String reserevaIngresarCliente() {
         Scanner entradaEscanner2 = new Scanner(System.in);
 
@@ -931,9 +932,10 @@ public class Empresa {
                             Vista.titulo("Buscar Cliente");
                             String dni3 = null;
                             do {
-                                System.out.println("Ingrese DNI");
+                                System.out.println("Ingrese DNI: ");
                                 dni3 = entradaEscanner2.next();
-                            } while (!Helpers.validarDni(dni3));
+                            } while (Helpers.validarDni(dni3));
+                                clienteRegistrado.setDni(dni3);
                             clienteRegistrado = accesoClientes.obtenerRegistro(dni3);
                             idClienteReserva = clienteRegistrado.getId();
                             break;
