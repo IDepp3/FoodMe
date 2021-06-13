@@ -94,6 +94,7 @@ public class Reserva {
         this.descripcion = descripcion;
         this.quiereBartender = quiereBartender;
         this.status = true;
+        this.cantidadPersonasTotal = calcularCantPerTotal();
     }
     //ESTE CONSTRUCTOR LO USAMOS PARA GUARDAR LOS DATOS COMO VIENEN DEL JSON
     public Reserva(String id, String fechaReserva, String fechaEvento, String idCliente, StringBuilder horarioLlegada, StringBuilder horarioInicio, StringBuilder horarioFinaliza, List<Menu> menus, String descripcion, Double costoTotal, boolean quiereBartender, boolean status, int cantidadPersonasTotal, double precioFinal) {

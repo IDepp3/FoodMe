@@ -9,6 +9,7 @@ import com.utn.teamA.ConexionDatos.interfaces.ObtenerDatos;
 import com.utn.teamA.clases.Cliente;
 import com.utn.teamA.clases.Reserva;
 import com.utn.teamA.excepciones.FechaNoDisponible;
+import com.utn.teamA.excepciones.NoExisteReserva;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -68,12 +69,13 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
      * @param id
      * @return
      */
-    public Reserva obtenerRegistro(String id) {
+    public Reserva obtenerRegistro(String id)throws NoExisteReserva {
         Reserva reserva = null;
+        boolean resp = false;
         try {
 
             List<Reserva> reservas = obtenerRegistros();
-            boolean resp = false;
+
             int i = 0;
             while (!resp && i < reservas.size()) {
                 if (reservas.get(i).getId().equals(id)) {
@@ -82,11 +84,21 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
                 }
                 i++;
             }
+
+            if(!resp){
+                throw new NoExisteReserva("No existe la reserva");
+            }
+
         } catch (NullPointerException e) {
-            System.out.println();
+
+
+        } catch (NoExisteReserva existeReserva) {
+
+
         } catch (Exception e) {
 
         }
+
 
         return reserva;
     }
@@ -101,21 +113,27 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
      * @param fecha
      * @return
      */
-    public Reserva obtenerRegistro(LocalDate fecha) {
+    public Reserva obtenerRegistro(LocalDate fecha)throws NoExisteReserva {
         Reserva reserva = null;
+        boolean resp = false;
+
         try {
 
             List<Reserva> reservas = obtenerRegistros();
-            boolean resp = false;
+
             int i = 0;
             while (!resp && i < reservas.size()) {
                 if (reservas.get(i).getFechaEvento().equals(fecha.toString())) {
                     reserva = reservas.get(i);
                     resp = true;
-
                 }
                 i++;
             }
+            if (!resp) {
+                throw new NoExisteReserva("No existe la reserva");
+            }
+        }catch (NoExisteReserva e){
+        System.err.println("No existe reservas con esa fecha");
 
         } catch (NullPointerException e) {
 
@@ -145,17 +163,22 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
             List<Reserva> reservas = obtenerRegistros();
             boolean resp = false;
             int i = 0;
-            while (!resp && i < reservas.size()) {
+            while ( i < reservas.size()) {
                 if (reservas.get(i).getIdCliente().equals(cliente.getId())) {
                     reservasCliente.add(reservas.get(i));
                     resp = true;
                 }
                 i++;
             }
+            if(!resp){
+                throw new NoExisteReserva("");
+            }
         } catch (NullPointerException e) {
 
         } catch (Exception e) {
 
+        } catch (NoExisteReserva existeReserva) {
+            System.err.println("no hay reservas para ese cliente");
         }
 
         return reservasCliente;
@@ -214,16 +237,14 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
             while (!resp && i < reservas.size()) {
                 if (reservas.get(i).equals(t)) {
                     reservas.get(i).setStatus(false);
-                    reservas.get(i).mostrar();
                     if (guardarInformacion(reservas))
                         resp = true;
                 }
                 i++;
             }
 
-
          }catch (NullPointerException e){
-            e.getMessage();
+
          }catch (Exception e){
 
         }
