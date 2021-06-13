@@ -400,14 +400,14 @@ public class Empresa {
 
         String nombre = "";
 
-        while (respuestaNombre == false) {
+        //while (respuestaNombre == false) {
 
             System.out.println("\nIngrese el nombre del empleado: ");
             nombre = Helpers.nextLine();
             // Validamos el email que nos da el cliente.
-            respuestaNombre = Helpers.validarNombre(nombre);
+            //respuestaNombre = Helpers.validarNombre(nombre);
             
-        }
+       // }
 
         System.out.print("\nIngrese el apellido del empleado: ");
         String apellido = Helpers.nextLine();
