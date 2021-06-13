@@ -336,6 +336,7 @@ public class Empresa {
                     resp = false;
                     break;
                 case 1:
+                    Vista.titulo("GESTION DE PERSONAL");
                     getMenuGestionPersonal();
                     break;
                 case 2:
@@ -396,8 +397,19 @@ public class Empresa {
         double sueldo = 0;
         System.out.println("DAR ALTA EMPLEADO");
         System.out.println();
-        System.out.print("\nIngrese el nombre del empleado: ");
-        String nombre = Helpers.nextLine();
+        boolean respuestaNombre = false;
+
+        String nombre = "";
+
+        while (respuestaNombre == false) {
+
+            System.out.println("\nIngrese el nombre del empleado: ");
+            nombre = Helpers.nextLine();
+            // Validamos el email que nos da el cliente.
+            respuestaNombre = Helpers.validarNombre(nombre);
+            
+        }
+
         System.out.print("\nIngrese el apellido del empleado: ");
         String apellido = Helpers.nextLine();
 
@@ -506,7 +518,7 @@ public class Empresa {
         h.setDni(dni);
         boolean a = accesoEmpleados.borrarRegistro(h);
         if (a == true) {
-            System.out.println("El empleado con dni " + dni + " fue dado de baja");
+            System.out.println("El empleado con dni: " + dni + " fue dado de baja.");
             h.setEstado(false);
             h.toString();
         } else {
