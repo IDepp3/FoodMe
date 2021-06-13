@@ -176,13 +176,13 @@ public class Helpers {
 
     public static boolean validarTel(String telefono) {
 
-        Pattern pattern = Pattern.compile("^\\d{7}$");
+        Pattern pattern = Pattern.compile("^\\d{10}$");
         Matcher mather = pattern.matcher(telefono);
 
         boolean resp = mather.find();
 
         if (resp == true) {
-
+            System.out.println("El telefono es valido.");
         } else {
             System.out.println("El telefono es invalido.");
         }
@@ -192,19 +192,33 @@ public class Helpers {
 
     public static boolean validarNombre(String nombre) {
 
-        Pattern pat = Pattern.compile("^([A-Z]{1} [a-z] +[ ] ?){1,2}$");
-        Matcher mat = pat.matcher(nombre);
-        boolean valido = mat.find();
-        if (valido == true) {
-            System.out.println("Nombre Válido");
-        } else {
-            System.out.println("Nombre inválido");
-        }
-        return valido;
-
-    }
-
+            Pattern pat = Pattern.compile("^([a-zA-Z]{3,20}\s*)+$"); 
+            
+            Matcher mat = pat.matcher(nombre);
+            boolean valido = mat.find();
+           if(valido == true){
+              System.out.println("Nombre válido");
+           }else{
+              System.out.println("Nombre inválido");
+         }
+            return valido;
     
+        }
+
+        public static boolean validarApellido(String apellido){
+
+            Pattern pat = Pattern.compile("^[a-zA-Z]{3,20}$"); 
+            
+            Matcher mat = pat.matcher(apellido);
+            boolean validos = mat.find();
+           if(validos == true){
+              System.out.println("Apellido válido");
+           }else{
+              System.out.println("Apellido inválido");
+         }
+            return validos;
+    
+        }
 
     public static LocalDate validarFecha() {
         boolean resp = true;

@@ -400,17 +400,26 @@ public class Empresa {
 
         String nombre = "";
 
-        //while (respuestaNombre == false) {
+        while (respuestaNombre == false) {
 
             System.out.println("\nIngrese el nombre del empleado: ");
             nombre = Helpers.nextLine();
-            // Validamos el email que nos da el cliente.
-            //respuestaNombre = Helpers.validarNombre(nombre);
+            // Validamos el nombre que nos brinda el cliente.
+            respuestaNombre = Helpers.validarNombre(nombre);
             
-       // }
+        }
+
+        boolean respuestaApellido = false;
+
+        String apellido = "";
+
+        while (respuestaApellido ==false){
 
         System.out.print("\nIngrese el apellido del empleado: ");
-        String apellido = Helpers.nextLine();
+        apellido = Helpers.nextLine();
+        //  Validamos el apellido que nos brinda el cliente.
+        respuestaApellido = Helpers.validarApellido(apellido);
+    }
 
         boolean respuestaFecha = false;
 
