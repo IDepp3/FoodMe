@@ -24,7 +24,7 @@ public class Cliente extends Persona {
      *
      */
     public Cliente(){
-    super();
+        super();
     }
 
     /**
@@ -35,9 +35,14 @@ public class Cliente extends Persona {
         reservas = lasReservas;
     }
 
+    public Cliente(String dni){
+        super(dni);
+    }
+
     public Cliente(String nombreUsuario, String password){
         super(nombreUsuario, password);
     }
+
 
     /**
      * Constructor Cliente + Persona

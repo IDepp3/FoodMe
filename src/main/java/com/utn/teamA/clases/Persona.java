@@ -36,6 +36,10 @@ public abstract class Persona extends Usuario {
         this.estado = true;
     }
 
+    public Persona(String dni){
+        this.dni = dni;
+    }
+
     public Persona(String nombreUsuario, String password){
         super(nombreUsuario, password);
     }
