@@ -2,6 +2,7 @@ package com.utn.teamA.clases;
 
 import com.utn.teamA.utils.Helpers;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -79,9 +80,11 @@ public class Reserva {
 
 
     }
-
+    //ESTE CONSTRUCTOR LO USAMOS PARA REGISTRAR UNA RESERVA
     public Reserva(String fechaEvento, String idCliente, StringBuilder horarioLlegada, StringBuilder horarioInicio, StringBuilder horarioFinaliza, List<Menu> menus, String descripcion, boolean quiereBartender) {
 
+        this.id =UUID.randomUUID().toString().substring(0, 10).replace("-", "g");
+        this.fechaReserva = LocalDate.now().toString();
         this.fechaEvento = fechaEvento;
         this.idCliente = idCliente;
         this.horarioLlegada = horarioLlegada;
@@ -90,8 +93,9 @@ public class Reserva {
         this.menus = menus;
         this.descripcion = descripcion;
         this.quiereBartender = quiereBartender;
+        this.status = true;
     }
-
+    //ESTE CONSTRUCTOR LO USAMOS PARA GUARDAR LOS DATOS COMO VIENEN DEL JSON
     public Reserva(String id, String fechaReserva, String fechaEvento, String idCliente, StringBuilder horarioLlegada, StringBuilder horarioInicio, StringBuilder horarioFinaliza, List<Menu> menus, String descripcion, Double costoTotal, boolean quiereBartender, boolean status, int cantidadPersonasTotal, double precioFinal) {
         this.id = id;
         this.fechaReserva = fechaReserva;
@@ -107,6 +111,7 @@ public class Reserva {
         this.status = status;
         this.cantidadPersonasTotal = cantidadPersonasTotal;
         this.precioFinal = precioFinal;
+
     }
     //endregion
 

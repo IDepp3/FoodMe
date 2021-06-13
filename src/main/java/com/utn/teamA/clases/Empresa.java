@@ -658,6 +658,7 @@ public class Empresa {
             // al cliente o darlo de alta. se guarda el id del cliente
             System.out.println(Color.ANSI_BLUE + " 2 " + Color.ANSI_RESET + "Seleccione el Cliente ");
             idCliente = reserevaIngresarCliente();
+            System.out.println("Id Cliente :" + idCliente);
             Vista.deseaSeguirCargandoDatos();
             seguir = entradaEscanner2.nextLine();
             if (seguir.equals("n"))
@@ -692,7 +693,7 @@ public class Empresa {
             Vista.opcionCorrecta("Finalizo cargar su reserva");
 
             Reserva reserva = new Reserva(fecha3,idCliente,horarioLlegada,horarioInicio,horarioFinaliza,menus,descripcion,quierebartender);
-            reserva.mostrar();
+
 
             // El sistema inicializa el objeto
             // Reserva reserva = new Reserva(fechaAString, horarioLlegada, horarioInicio,
@@ -700,7 +701,7 @@ public class Empresa {
 
             // Calcula costoTotal + servicio(mano de obra) en funcion a la cantidad de
             // personas
-            reserva.setCostoTotal(100.0);
+            reserva.setCostoTotal(1000.0);
             // reserva.setCosto(reserva.calcularCosto());//todo Antonela1
 
             // Calcula Precio Final = a costo + IVA (si el cliente paga en efectivo) con una
@@ -710,6 +711,7 @@ public class Empresa {
             System.out.println("Costo:" + reserva.getCostoTotal());
             System.out.println("Precio Final:" + reserva.getPrecioFinal());
 
+            reserva.mostrar();
 
 
             Vista.finalizarReserva();
@@ -868,9 +870,10 @@ public class Empresa {
                 while (resp) {
 
                 System.out.println("");
-                System.out.println("0- Guardar");
+
                 System.out.println("1- Alta cliente");
                 System.out.println("2- Id cliente");
+                System.out.println("0- Guardar");
 
                 opt = entradaEscanner2.nextInt();
                 entradaEscanner2.nextLine();
@@ -1195,6 +1198,7 @@ public class Empresa {
 
                 Vista.darBajaReservas();
                 op = scanner.nextInt();
+                scanner.nextLine();
 
                 switch (op) {
                     case 0:
@@ -1205,19 +1209,46 @@ public class Empresa {
                         String idReserva = scanner.next();
                         reserva = buscarReserva(idReserva);// esto despues lo puedo borraar
                         boolean reservaBajaId = darBajaReserva(reserva);
-                        reserva = buscarReserva(idReserva);// esto despues lo puedo borraar
+
                         break;
                     case 2:
                         System.out.println(Color.ANSI_BLUE + " 2 " + Color.ANSI_RESET + "FECHA dd/MM/yyyy");
                         String fecha = scanner.next();
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                         LocalDate fechaLD = LocalDate.parse(fecha, formatter);
-                        reserva = buscarReserva(fechaLD);// esto despues lo puedo borraar
+
+                        reserva = buscarReserva(fechaLD);
+
+                        reserva.mostrar();
+
                         boolean reservaBajaFecha = darBajaReserva(reserva);
-                        reserva = buscarReserva(fechaLD);// esto despues lo puedo borraar
+                        reserva = buscarReserva(fechaLD);
                         break;
+                    case 3:
+                        System.out.println(Color.ANSI_BLUE + " 3 " + Color.ANSI_RESET + "Dar de baja  por Cliente");
+                        boolean dnivalido = false;
+                        List <Reserva> reservasClienteBaja = null;
+                        while (!dnivalido) {
+                            System.out.println("Ingrese dni");
+                            String dni = scanner.next();
+                            scanner.nextLine();
+                            if (Helpers.validarDni(dni)) {
+                                reservasClienteBaja = buscarReservas(dni);
+                                listarReservasPorCliente(reservasClienteBaja);
+                                if(reservasClienteBaja!=null) {
+                                    System.out.println(Color.ANSI_BLUE + " 1- " + Color.ANSI_RESET + "ID");
+                                    String idReserva2 = scanner.next();
+                                    reserva = buscarReserva(idReserva2);// esto despues lo puedo borraar
+                                    boolean reservaBajaId2 = darBajaReserva(reserva);
+                                    reserva = buscarReserva(idReserva2);// esto despues lo puedo borraar
+                                    dnivalido = true;
+                                }
+                            }
+
+                        }
                     default:
                         System.err.println("Ingreso un dato incorrecto. Reintente");
+                        break;
 
                 }
             }
@@ -1247,6 +1278,7 @@ public class Empresa {
             }
         } catch (NullPointerException e) {
 
+            System.err.println("No existen reservas");
         } catch (Exception e) {
 
         }
@@ -1254,6 +1286,10 @@ public class Empresa {
         return reservaEliminada;
     }
 
+    public static void main(String[] args) {
+        Empresa empresa = new Empresa();
+        empresa.darBajaReservas();
+    }
     // endregion
 
     // region Modificar
@@ -1453,6 +1489,7 @@ public class Empresa {
                             scanner.nextLine();
                             if (Helpers.validarDni(dni)) {
                                 reservasCliente = buscarReservas(dni);
+                                listarReservasPorCliente(reservasCliente);
                                 dnivalido = true;
                             }
                         }
@@ -1502,7 +1539,9 @@ public class Empresa {
         Reserva reserva = null;
         try {
 
+
             reserva = accesoReservas.obtenerRegistro(fechaLD);
+
 
         } catch (NullPointerException e) {
 
@@ -1536,8 +1575,8 @@ public class Empresa {
     public List<Reserva> buscarReservas(Cliente cliente) {
         List<Reserva> reservasCliente = new ArrayList<>();
         try {
-            Cliente clienteObj = accesoClientes.obtenerRegistro(cliente);
-            reservasCliente = accesoReservas.obtenerRegistro(clienteObj);
+
+            reservasCliente = accesoReservas.obtenerRegistro(cliente);
 
         } catch (NullPointerException e) {
 
@@ -1548,13 +1587,26 @@ public class Empresa {
     }
 
     public List<Reserva> buscarReservas(String dni) {
-
-        List<Reserva> reservasCliente = new ArrayList<>();
-
+        boolean resp = false;
+        List<Reserva> reservasCliente = null;
+        List<Reserva> reservas = null;
         try {
 
+
             Cliente clienteObj = accesoClientes.obtenerRegistro(dni);
-            reservasCliente = accesoReservas.obtenerRegistro(clienteObj);
+            reservas = accesoReservas.obtenerRegistros();
+            if (!reservas.isEmpty()) {
+                for (Reserva x : reservas) {
+                    if (x != null) {
+                        if(x.getIdCliente().equals(cliente.getId()))
+                            reservasCliente.add(x);
+                            resp=true;
+                    }
+                }
+            }
+            if(!resp){
+                System.out.println("No hay reservas");
+            }
 
         } catch (NullPointerException e) {
 
@@ -1608,7 +1660,7 @@ public class Empresa {
                             if (Helpers.validarDni(dni)) {
                                 cliente = accesoClientes.obtenerRegistro(dni);
                                 List<Reserva> reservasCliente = new ArrayList<>();
-                                reservasCliente = buscarReservas(cliente);
+                                reservasCliente = buscarReservas(dni);
                                 listarReservasPorCliente(reservasCliente);
                                 resp4 = true;
                             }
@@ -1633,9 +1685,10 @@ public class Empresa {
         boolean resp = false;
         int i = 0;
 
+
+
         try {
 
-            countReservas();
             reservas = accesoReservas.obtenerRegistros();
 
             for (Reserva x : reservas) {
@@ -1645,8 +1698,13 @@ public class Empresa {
                 }
             }
 
-            if (!resp)
-                System.out.println("No hay resrevas");
+
+            if (!resp) {
+                System.out.println("No hay reservas");
+                System.out.println("");
+            }else
+                countReservas();
+
 
         } catch (NullPointerException e) {
 
@@ -1716,14 +1774,23 @@ public class Empresa {
     }
 
     public void listarReservasPorCliente(List<Reserva> reservas) {
+        boolean resp = false;
+        int count = 0 ;
         if (!reservas.isEmpty()) {
             for (Reserva x : reservas) {
                 if (x != null) {
                     x.mostrar();
-                } else {
-                    System.out.println("No hay reservas");
+                    count++;
+                    resp=true;
                 }
             }
+        }
+        if (!resp) {
+            System.out.println("No hay reservas");
+            System.out.println("Total : " + count );
+            System.out.println("");
+        }else {
+            System.out.println("Total : " + count );
         }
     }
 

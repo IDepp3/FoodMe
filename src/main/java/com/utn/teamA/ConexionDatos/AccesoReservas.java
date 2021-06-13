@@ -109,12 +109,14 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
             boolean resp = false;
             int i = 0;
             while (!resp && i < reservas.size()) {
-                if (reservas.get(i).getFechaEvento().equals(fecha)) {
+                if (reservas.get(i).getFechaEvento().equals(fecha.toString())) {
                     reserva = reservas.get(i);
                     resp = true;
+
                 }
                 i++;
             }
+
         } catch (NullPointerException e) {
 
 
@@ -212,11 +214,13 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
             while (!resp && i < reservas.size()) {
                 if (reservas.get(i).equals(t)) {
                     reservas.get(i).setStatus(false);
+                    reservas.get(i).mostrar();
                     if (guardarInformacion(reservas))
                         resp = true;
                 }
                 i++;
             }
+
 
          }catch (NullPointerException e){
             e.getMessage();
