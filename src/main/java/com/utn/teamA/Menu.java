@@ -102,6 +102,7 @@ public class Menu {
         return Color.ANSI_BLUE + "\n\t MENU \n" +
                 Color.ANSI_CYAN + "Tipo: " + Color.ANSI_GREEN + tipo + "\n" +
                 Color.ANSI_CYAN + "Nombre:" + Color.ANSI_GREEN + nombre + "\n" +
+                Color.ANSI_CYAN + "Precio: " + Color.ANSI_GREEN + precio + '\n' +
                 Color.ANSI_CYAN + "Descripcion: " + Color.ANSI_GREEN + descripcion + "\n\n" +
                 //TODO buscar y agregar platos al plato
                 //Color.ANSI_CYAN + "<<<<< Platos >>>>> " + Color.ANSI_GREEN + "\n" +
