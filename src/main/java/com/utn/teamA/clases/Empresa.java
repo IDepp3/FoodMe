@@ -430,7 +430,7 @@ public class Empresa {
         while (respuestaNombre == false) {
 
             System.out.println("\nIngrese el nombre del empleado: ");
-            
+
             nombre = Helpers.nextLine();
             // Validamos el nombre que nos brinda el cliente.
             respuestaNombre = Helpers.validarNombre(nombre);
@@ -891,7 +891,6 @@ public class Empresa {
 
     }
 
-
     private String reserevaIngresarCliente() {
         Scanner entradaEscanner2 = new Scanner(System.in);
 
@@ -935,7 +934,7 @@ public class Empresa {
                                 System.out.println("Ingrese DNI: ");
                                 dni3 = entradaEscanner2.next();
                             } while (Helpers.validarDni(dni3));
-                                clienteRegistrado.setDni(dni3);
+                            clienteRegistrado.setDni(dni3);
                             clienteRegistrado = accesoClientes.obtenerRegistro(dni3);
                             idClienteReserva = clienteRegistrado.getId();
                             break;
