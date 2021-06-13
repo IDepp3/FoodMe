@@ -21,17 +21,18 @@ public class Menu {
 
     //region contructores
     public Menu() {
+
         this.id = UUID.randomUUID().toString();
+        this.estado = true;
     }
 
-    public Menu(TipoMenu tipo, String nombre, String descripcion, List<Plato> platos, double precio, boolean estado) {
+    public Menu(TipoMenu tipo, String nombre, String descripcion, List<Plato> platos, double precio) {
         this();
         this.tipo = tipo;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.listaDePlatos = platos;
         this.precio = precio;
-        this.estado = estado;
     }
     //endregion
 
@@ -106,6 +107,20 @@ public class Menu {
                 //Color.ANSI_CYAN + "<<<<< Platos >>>>> " + Color.ANSI_GREEN + "\n" +
                 //listaDePlatos + "\n" +
                 Color.ANSI_RESET + "\n";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj)
+            return true;
+
+        if(obj instanceof Menu){
+            Menu m = (Menu)obj;
+            if(this.getId().equals(m.getId()))
+                return true;
+        }
+
+        return false;
     }
 
     public void crear(){

@@ -47,12 +47,10 @@ public class MenuLista {
                     System.out.println(Color.ANSI_BLACK + "Seccion en construccion" + Color.ANSI_RESET);
                     break;
                 case 3:
-                    System.out.println(Color.ANSI_BLACK + "Seccion en construccion" + Color.ANSI_RESET);
+                    this.eliminarMenu();
                     break;
                 case 4:
-                    for ( Menu menu : listaDeMenus ) {
-                        System.out.println(menu);
-                    }
+                    this.mostrarPlatosActivos();
                     break;
                 default:
                     System.out.println(
@@ -96,8 +94,45 @@ public class MenuLista {
 
         nuevoMenu.crear();
 
-        listaDeMenus.add(nuevoMenu);
+        menuPersistencia.agregarRegistro(nuevoMenu);
     }
 
     //endregion
+
+    public void eliminarMenu(){
+        listaDeMenus = menuPersistencia.obtenerRegistros();
+        int i = 0;
+
+        System.out.println(Color.ANSI_YELLOW + "\t Ingrese el codigo del plato a eliminar" + Color.ANSI_RESET);
+
+        for ( Menu menu : listaDeMenus ) {
+
+            if( menu.getEstado() ){
+                System.out.println( Color.ANSI_YELLOW + "[ " + i  + " ] " + Color.ANSI_RESET + menu.getNombre() );
+            }
+            i++;
+        }
+
+
+        int codigo = Helpers.validarInt();
+
+        if (codigo < 0 || codigo > listaDeMenus.size() || !listaDeMenus.get(codigo).getEstado()){
+            System.out.println("opcion invalida");
+        }else {
+            Menu menu = listaDeMenus.get(codigo);
+            //TODO preguntar si este es el menu a eliminar
+            System.out.println(menu);
+            menuPersistencia.borrarRegistro(menu);
+        }
+
+    }
+
+    public  void mostrarPlatosActivos(){
+        listaDeMenus = menuPersistencia.obtenerRegistros();
+        for ( Menu menu : listaDeMenus ) {
+            if (menu.getEstado()){
+                System.out.println(menu);
+            }
+        }
+    }
 }

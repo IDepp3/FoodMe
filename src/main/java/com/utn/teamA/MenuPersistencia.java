@@ -110,7 +110,8 @@ public class MenuPersistencia {
 
         while(!resp && i < menus.size()){
             if(menus.get(i).equals(t)){
-                menus.remove(i);
+                //menus.remove(i);
+                menus.get(i).setEstado(false);
                 if(guardarInformacion(menus))
                     resp = true;
             }
