@@ -665,10 +665,7 @@ public class Empresa {
         List<Menu> menus;
         String descripcion;
         boolean quierebartender;
-        Cliente cliente = new Cliente();
         String idCliente = null;
-
-        String otro = "";
 
         while (seguir.equals("s")) {
 
