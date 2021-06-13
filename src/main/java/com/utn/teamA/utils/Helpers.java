@@ -53,7 +53,7 @@ public class Helpers {
             if (texto.length() == 0) {
                 esTextoVacio = true;
                 System.out.println(Color.ANSI_RED + "\n\t EL CAMPO NO PUEDE QUEDAR VACIO \n" + Color.ANSI_CYAN
-                        + "\nIngrese un dato:");
+                        + "\nIngrese un dato:" + Color.ANSI_RESET);
             } else {
                 esTextoVacio = false;
             }
@@ -192,7 +192,7 @@ public class Helpers {
 
     public static boolean validarNombre(String nombre) {
 
-            Pattern pat = Pattern.compile("^([a-zA-Z]{3,20}\s*)+$"); 
+            Pattern pat = Pattern.compile("^([a-zA-Z]{3,20}\\s*)+$"); 
             
             Matcher mat = pat.matcher(nombre);
             boolean valido = mat.find();
@@ -291,32 +291,6 @@ public class Helpers {
         String passwordString = entrada.next();
         return passwordString;
     }
-
-    /*
-     * public static String validarPassword(String mensaje) {
-     * 
-     * // Console c; Scanner c = new Scanner(System.in); boolean resp = true; String
-     * valor = ""; String password = ""; while (resp) { if ((c != null)) {
-     * Vista.ingreseDato(mensaje); password = c.next(); }
-     * 
-     * valor = String.valueOf(password);
-     * 
-     * if (valor.matches(Helpers.VALIDAR_PASSWORD)) resp = false; else
-     * Vista.opcionIncorrecta(
-     * "Su contraseña debe ser como minimo de 8 caracteres maximo 15, 1 mayuscula, 1 minuscula, 1 digito, no espacios en blanco y al menos 1 caracter especial($@!%*?&)"
-     * , valor); }
-     * 
-     * return valor; }
-     * 
-     * public static String ingresoPassword() { Console c; String valor = ""; char[]
-     * password = null; if ((c = System.console()) != null) {
-     * Vista.ingreseDato("Ingrese password"); password = c.readPassword(); }
-     * 
-     * valor = String.valueOf(password);
-     * 
-     * return valor; }
-     */
-
 
     private static SecretKeySpec crearClave(String llave) {
         SecretKeySpec secretKeySpec = null;
