@@ -39,16 +39,16 @@ public class PlatoLista {
                     continuar = false;
                     break;
                 case 1:
-                    agregarPlatoView();
+                    this.agregarPlatoView();
                     break;
                 case 2:
-                    System.out.println(Color.ANSI_BLACK + "Seccion en construccion" + Color.ANSI_RESET);
+                    this.editarPlato();
                     break;
                 case 3:
                     this.eliminarPlato();
                     break;
                 case 4:
-                    this.mostrarIngredientesActivos();
+                    this.mostrarPlatosActivos();
                     break;
                 default:
                     System.out.println(
@@ -95,6 +95,139 @@ public class PlatoLista {
        platoPersistencia.agregarRegistro(nuevoPlato);
     }
 
+
+    public void editarPlato(){
+        listaDePlatos = platoPersistencia.obtenerRegistros();
+        int i = 0;
+
+        System.out.println(Color.ANSI_YELLOW + "\t Ingrese el codigo del plato a editar" + Color.ANSI_RESET);
+
+        for ( Plato plato : listaDePlatos ) {
+
+            if( plato.getEstado() ){
+                System.out.println( Color.ANSI_YELLOW + "[ " + i  + " ] " + Color.ANSI_RESET + plato.getNombre() );
+            }
+            i++;
+        }
+
+        System.out.println("");
+        int codigo = Helpers.validarInt();
+
+        if (codigo < 0 || codigo > listaDePlatos.size() || !listaDePlatos.get(codigo).getEstado()){
+            System.out.println("Opcion invalida");
+        }else {
+            Plato plato = listaDePlatos.get(codigo);
+
+            plato = editarPlatoVista(plato);
+
+            if( plato.getPlatoId() != null ){
+                System.out.println(plato);
+                platoPersistencia.actualizarRegistro(plato);
+            }
+
+        }
+
+    }
+
+    public Plato editarPlatoVista( Plato plato){
+        int opcion = 0;
+        boolean continuar = true;
+
+        do{
+
+            System.out.println(
+                    Color.ANSI_BLUE +
+                            "\n\n" +
+                            " ------------------------------------------------\n" +
+                            "| \t\t E D I T A R    I N G R E D I E N T E \t\t |\n" +
+                            " ------------------------------------------------" +
+                            " \n\n" +
+                            Color.ANSI_RESET);
+
+            System.out.println(plato);
+
+            System.out.println(Color.ANSI_YELLOW + "\t Ingrese una opcion:" + Color.ANSI_RESET);
+            System.out.println(Color.ANSI_GREEN + " 1  Guardar Cambios" + Color.ANSI_RESET);
+            System.out.println(Color.ANSI_GREEN + " 2 " + Color.ANSI_RESET + " Editar Nombre");
+            System.out.println(Color.ANSI_GREEN + " 3 " + Color.ANSI_RESET + " Editar Descripcion");
+            System.out.println(Color.ANSI_GREEN + " 4 " + Color.ANSI_RESET + " Editar Tipo");
+            System.out.println(Color.ANSI_RED + " 0  Cancelar " + Color.ANSI_RESET );
+
+            opcion = Helpers.validarInt();
+
+            switch (opcion){
+                case 0:
+                    continuar = false;
+                    plato.setPlatoId(null);
+                    break;
+                case 1:
+                    continuar = false;
+                    break;
+                case 2:
+                    System.out.print(Color.ANSI_CYAN + "Ingrese nombre: " + Color.ANSI_RESET);
+                    System.out.println(Color.ANSI_YELLOW + "< " + plato.getNombre() + " >" + Color.ANSI_RESET);
+                    plato.setNombre( Helpers.nextLine() );
+                    break;
+                case 3:
+                    System.out.print(Color.ANSI_CYAN + "Ingrese Descripcion: " + Color.ANSI_RESET);
+                    System.out.println(Color.ANSI_YELLOW + "< " + plato.getDescripcion() + " >" + Color.ANSI_RESET);
+                    plato.setDescripcion( Helpers.nextLine() );
+                    break;
+                case 4:
+                    plato = this.editarTipoDePlato(plato);
+                    break;
+                default:
+                    System.out.println(
+                            Color.ANSI_RED +
+                                    "\n\t [[ " + opcion + " ]] NO ES UNA OPCION VALIDA \n" +
+                                    Color.ANSI_RESET
+                    );
+                    break;
+            }
+
+        } while( continuar );
+
+        return plato;
+    }
+
+    private Plato editarTipoDePlato(Plato plato){
+        int opcion = 0;
+        boolean continuar = false;
+
+        do{
+            System.out.print(Color.ANSI_CYAN + "Ingrese tipo:" + Color.ANSI_RESET);
+            System.out.println(Color.ANSI_YELLOW + "< " + plato.getTipo() + " >" + Color.ANSI_RESET);
+            System.out.println(Color.ANSI_GREEN + " 1 " + Color.ANSI_RESET + " Entrada");
+            System.out.println(Color.ANSI_GREEN + " 2 " + Color.ANSI_RESET + " Principal");
+            System.out.println(Color.ANSI_GREEN + " 3 " + Color.ANSI_RESET + " Postre");
+
+            opcion = Helpers.validarInt();
+            continuar = false;
+
+            switch (opcion){
+                case 1:
+                    plato.setTipo( TipoPlato.ENTRADA );
+                    break;
+                case 2:
+                    plato.setTipo( TipoPlato.PRINCIPAL );
+                    break;
+                case 3:
+                    plato.setTipo( TipoPlato.POSTRE );
+                    break;
+                default:
+                    continuar = true;
+                    System.out.println(
+                            Color.ANSI_RED +
+                                    "\n\t [[ " + opcion + " ]] NO ES UNA OPCION VALIDA \n" +
+                                    Color.ANSI_RESET
+                    );
+                    break;
+            }
+        }while (continuar);
+
+        return plato;
+    }
+
     public void eliminarPlato(){
         listaDePlatos = platoPersistencia.obtenerRegistros();
         int i = 0;
@@ -123,7 +256,7 @@ public class PlatoLista {
 
     }
 
-    public  void mostrarIngredientesActivos(){
+    public  void mostrarPlatosActivos(){
         listaDePlatos = platoPersistencia.obtenerRegistros();
         for ( Plato plato : listaDePlatos ) {
             if (plato.getEstado()){
