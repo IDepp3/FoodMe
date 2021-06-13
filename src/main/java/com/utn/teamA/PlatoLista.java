@@ -2,6 +2,7 @@ package com.utn.teamA;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class PlatoLista {
 
@@ -86,13 +87,112 @@ public class PlatoLista {
 
     }
 
+
+
     public void agregarPlato(){
 
         Plato nuevoPlato = new Plato();
 
-        nuevoPlato.crear();
+        System.out.println(
+                Color.ANSI_BLUE +
+                        "\n\n" +
+                        " ----------------------------------------\n" +
+                        "| \t\t N U E V O    P L A T O \t\t |\n" +
+                        " ----------------------------------------" +
+                        " \n\n" +
+                        Color.ANSI_RESET);
+
+        int opcion = 0;
+        boolean continuar = false;
+
+        do{
+
+            System.out.println(Color.ANSI_CYAN + "Ingrese tipo:" + Color.ANSI_RESET);
+            System.out.println(Color.ANSI_GREEN + " 1 " + Color.ANSI_RESET + " Entrada");
+            System.out.println(Color.ANSI_GREEN + " 2 " + Color.ANSI_RESET + " Principal");
+            System.out.println(Color.ANSI_GREEN + " 3 " + Color.ANSI_RESET + " Postre");
+
+            opcion = Helpers.validarInt();
+            continuar = false;
+
+
+            switch (opcion){
+                case 1:
+                    nuevoPlato.setTipo( TipoPlato.ENTRADA );
+                    break;
+                case 2:
+                    nuevoPlato.setTipo( TipoPlato.PRINCIPAL );
+                    break;
+                case 3:
+                    nuevoPlato.setTipo( TipoPlato.POSTRE );
+                    break;
+                default:
+                    continuar = true;
+                    System.out.println(
+                            Color.ANSI_RED +
+                                    "\n\t [[ " + opcion + " ]] NO ES UNA OPCION VALIDA \n" +
+                                    Color.ANSI_RESET
+                    );
+                    break;
+            }
+        }while (continuar);
+
+        System.out.println(Color.ANSI_CYAN + "Ingrese nombre:" + Color.ANSI_RESET);
+        nuevoPlato.setNombre( Helpers.nextLine() );
+
+        System.out.println(Color.ANSI_CYAN + "Ingrese Descripcion:" + Color.ANSI_RESET);
+        nuevoPlato.setDescripcion( Helpers.nextLine() );
+
+        nuevoPlato.setListaDeIngredites( agregarIngredientes() );
+
+        System.out.println( nuevoPlato );
 
        platoPersistencia.agregarRegistro(nuevoPlato);
+    }
+
+    private List<String> agregarIngredientes(){
+
+        IngredientePersistencia ingredientePersistencia = new IngredientePersistencia();
+        List<Ingrediente> listaDeIngredites;
+        List<String> ingredientes = new ArrayList<>();
+
+        listaDeIngredites = ingredientePersistencia.obtenerRegistros();
+
+        char unElementoMas = 's';
+
+        while ( unElementoMas == 's' ){
+
+            System.out.println(Color.ANSI_YELLOW + "\t Ingrese el codigo del ingrediente a incorporar" + Color.ANSI_RESET);
+
+            int i = 0;
+            for ( Ingrediente ing : listaDeIngredites ) {
+
+                if( ing.getEstado() ){
+                    System.out.println( Color.ANSI_YELLOW + "[ " + i  + " ] " + Color.ANSI_RESET + ing.getNombre() );
+                }
+                i++;
+            }
+
+            int codigo = Helpers.validarInt();
+
+            if (codigo < 0 || codigo > listaDeIngredites.size() || !listaDeIngredites.get(codigo).getEstado()){
+                System.out.println("opcion invalida");
+            }else {
+                ingredientes.add( listaDeIngredites.get(codigo).getId() );
+            }
+
+            System.out.print(
+                    Color.ANSI_YELLOW + " \n\n \t\t Desea agregar otro Ingrediente? " +
+                            Color.ANSI_YELLOW + "[" +
+                            Color.ANSI_GREEN + " S " +
+                            Color.ANSI_YELLOW + "/" +
+                            Color.ANSI_RED + " N " +
+                            Color.ANSI_YELLOW + "]" + Color.ANSI_RESET);
+            unElementoMas = Helpers.charAt0();
+
+        }
+
+        return ingredientes;
     }
 
 

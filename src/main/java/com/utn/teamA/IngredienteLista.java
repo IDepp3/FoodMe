@@ -108,7 +108,6 @@ public class IngredienteLista {
             i++;
         }
 
-        System.out.println("");
         int codigo = Helpers.validarInt();
 
         if (codigo < 0 || codigo > listaDeIngredites.size() || !listaDeIngredites.get(codigo).getEstado()){

@@ -1,5 +1,6 @@
 package com.utn.teamA;
 
+import java.sql.Array;
 import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
@@ -8,21 +9,13 @@ public class Plato {
 
     private String platoId;
     private String nombre;
-    private List<Ingrediente> listaDeIngredites;
+    private List<String> ingredientes;
+    private String ingredientesArray[];
     private String descripcion;
     private TipoPlato tipo;
     private boolean estado;
     //TODO el plato no tiene precio ???
     //private double precio;
-
-    public void setEstado(boolean estado){
-        this.estado = estado;
-    }
-
-    public boolean getEstado(){
-        return this.estado;
-    }
-
 
     //region constructores
 
@@ -31,10 +24,10 @@ public class Plato {
         this.estado = true;
     }
 
-    public Plato(String nombre, List<Ingrediente> listaDeIngredites, String descripcion, TipoPlato tipo, boolean estado) {
+    public Plato(String nombre, List<String> listaDeIngredites, String descripcion, TipoPlato tipo, boolean estado) {
         this();
         this.nombre = nombre;
-        this.listaDeIngredites = listaDeIngredites;
+        this.ingredientes = listaDeIngredites;
         this.descripcion = descripcion;
         this.tipo = tipo;
     }
@@ -59,12 +52,12 @@ public class Plato {
         this.nombre = nombre;
     }
 
-    public List<Ingrediente> getListaDeIngredites() {
-        return listaDeIngredites;
+    public List<String> getListaDeIngredites() {
+        return ingredientes;
     }
 
-    public void setListaDeIngredites(List<Ingrediente> listaDeIngredites) {
-        this.listaDeIngredites = listaDeIngredites;
+    public void setListaDeIngredites(List<String> listaDeIngredites) {
+        this.ingredientes = listaDeIngredites;
     }
 
     public String getDescripcion() {
@@ -83,6 +76,29 @@ public class Plato {
         this.tipo = tipo;
     }
 
+    public void setEstado(boolean estado){
+        this.estado = estado;
+    }
+
+    public boolean getEstado(){
+        return this.estado;
+    }
+
+    public List<String> getIngredientes() {
+        return ingredientes;
+    }
+
+    public void setIngredientes(List<String> ingredientes) {
+        this.ingredientes = ingredientes;
+    }
+
+    public String[] getIngredientesArray() {
+        return ingredientesArray;
+    }
+
+    public void setIngredientesArray(String ingredientesArray[]) {
+        this.ingredientesArray = ingredientesArray;
+    }
 
     //endregion
 
@@ -94,8 +110,9 @@ public class Plato {
                 Color.ANSI_CYAN + "Nombre:" + Color.ANSI_GREEN + nombre + "\n" +
                 Color.ANSI_CYAN + "Descripcion: " + Color.ANSI_GREEN + descripcion + "\n\n" +
                 //TODO buscar y agregar ingredientes al plato
-                //Color.ANSI_CYAN + "<<<<< Ingredientes >>>>> " + Color.ANSI_GREEN + "\n" +
+                Color.ANSI_CYAN + "<<<<< Ingredientes >>>>> " + Color.ANSI_GREEN + "\n" +
                 //listaDeIngredites + "\n" +
+                this.mostrartIngredientes() + "\n" +
                 Color.ANSI_RESET + "\n";
     }
 
@@ -166,8 +183,27 @@ public class Plato {
         System.out.println(Color.ANSI_CYAN + "Ingrese Descripcion:" + Color.ANSI_RESET);
         this.descripcion =  Helpers.nextLine();
 
-
         System.out.println( this );
 
+    }
+
+    private String mostrartIngredientes(){
+        String ingredientes = "";
+        IngredientePersistencia ingredientePersistencia = new IngredientePersistencia();
+        List<Ingrediente> listaDeIngredites = ingredientePersistencia.obtenerRegistros();
+        System.out.println("pasa por aca \n" + this.ingredientesArray);
+        if( this.ingredientesArray != null ){
+            for ( String ingredienteId : this.ingredientesArray ) {
+                if( ingredienteId != null ){
+                    for ( Ingrediente ingrediente : listaDeIngredites ) {
+                        if(ingrediente.getId().equals( ingredienteId ) ){
+                            ingredientes += ingrediente.toString();
+                        }
+                    }
+                }
+            }
+        }
+
+        return ingredientes;
     }
 }

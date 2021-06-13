@@ -16,9 +16,7 @@ public class PlatoPersistencia {
         this.json = new GsonBuilder().setPrettyPrinting().create();
     }
 
-
-
-    public void arregloALista(Plato[] arreglo, List<Plato> platos){
+   public void arregloALista(Plato[] arreglo, List<Plato> platos){
         if(arreglo != null){
             for(Plato p : arreglo){
                 platos.add(p);
@@ -72,6 +70,10 @@ public class PlatoPersistencia {
     public boolean guardarInformacion(List<Plato> platos){
         boolean resp = false;
         BufferedWriter writer;
+
+        for ( Plato p : platos ) {
+            p.setIngredientesArray( p.getIngredientes().toArray( new String[ p.getIngredientes().size() ] ));
+        }
 
         try {
             writer = new BufferedWriter(new FileWriter(this.url));
