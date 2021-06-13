@@ -28,10 +28,11 @@ public class Plato {
 
     public Plato() {
         this.platoId = UUID.randomUUID().toString();
+        this.estado = true;
     }
 
     public Plato(String nombre, List<Ingrediente> listaDeIngredites, String descripcion, TipoPlato tipo, boolean estado) {
-        this.platoId = UUID.randomUUID().toString();
+        this();
         this.nombre = nombre;
         this.listaDeIngredites = listaDeIngredites;
         this.descripcion = descripcion;

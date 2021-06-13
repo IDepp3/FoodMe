@@ -10,7 +10,6 @@ public class PlatoLista {
 
     public PlatoLista() {
         this.platoPersistencia = new PlatoPersistencia();
-        listaDePlatos = platoPersistencia.obtenerRegistros();
     }
 
     public void platoMenu(){
@@ -46,12 +45,10 @@ public class PlatoLista {
                     System.out.println(Color.ANSI_BLACK + "Seccion en construccion" + Color.ANSI_RESET);
                     break;
                 case 3:
-                    System.out.println(Color.ANSI_BLACK + "Seccion en construccion" + Color.ANSI_RESET);
+                    this.eliminarPlato();
                     break;
                 case 4:
-                    for ( Plato plato : listaDePlatos ) {
-                        System.out.println(plato);
-                    }
+                    this.mostrarIngredientesActivos();
                     break;
                 default:
                     System.out.println(
@@ -95,6 +92,43 @@ public class PlatoLista {
 
         nuevoPlato.crear();
 
-        listaDePlatos.add(nuevoPlato);
+       platoPersistencia.agregarRegistro(nuevoPlato);
+    }
+
+    public void eliminarPlato(){
+        listaDePlatos = platoPersistencia.obtenerRegistros();
+        int i = 0;
+
+        System.out.println(Color.ANSI_YELLOW + "\t Ingrese el codigo del plato a eliminar" + Color.ANSI_RESET);
+
+        for ( Plato plato : listaDePlatos ) {
+
+            if( plato.getEstado() ){
+                System.out.println( Color.ANSI_YELLOW + "[ " + i  + " ] " + Color.ANSI_RESET + plato.getNombre() );
+            }
+            i++;
+        }
+
+
+        int codigo = Helpers.validarInt();
+
+        if (codigo < 0 || codigo > listaDePlatos.size() || !listaDePlatos.get(codigo).getEstado()){
+            System.out.println("opcion invalida");
+        }else {
+            Plato plato = listaDePlatos.get(codigo);
+            //TODO preguntar si este es el plato a eliminar
+            System.out.println(plato);
+            platoPersistencia.borrarRegistro(plato);
+        }
+
+    }
+
+    public  void mostrarIngredientesActivos(){
+        listaDePlatos = platoPersistencia.obtenerRegistros();
+        for ( Plato plato : listaDePlatos ) {
+            if (plato.getEstado()){
+                System.out.println(plato);
+            }
+        }
     }
 }

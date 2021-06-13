@@ -112,7 +112,8 @@ public class PlatoPersistencia {
 
         while(!resp && i < platos.size()){
             if(platos.get(i).equals(t)){
-                platos.remove(i);
+                //platos.remove(i);
+                platos.get(i).setEstado(false);
                 if(guardarInformacion(platos))
                     resp = true;
             }
