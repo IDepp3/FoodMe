@@ -30,7 +30,6 @@ public class Empresa {
     private String nacimiento;
     private String localidad;
 
-    private List<Cliente> listaClientes;
     private List<Reserva> listaReservas = new ArrayList<>();
     private List<Menu> listaMenus;
     private List<Empleado> listaEmpleados;
@@ -62,7 +61,6 @@ public class Empresa {
         this.accesoReservas = new AccesoReservas();
 
         this.listaEmpleados = this.accesoEmpleados.obtenerRegistros();
-        this.listaClientes = this.accesoClientes.obtenerRegistros();
         this.listaReservas = this.accesoReservas.obtenerRegistros();
 
     }
@@ -81,14 +79,12 @@ public class Empresa {
         CUIT = elCUIT;
         nacimiento = elNacimiento;
         localidad = unaLocalidad;
-        listaClientes = new ArrayList<>();
         listaReservas = new ArrayList<>();
         listaEmpleados = new ArrayList<>();
         listaMenus = new ArrayList<Menu>();
 
         this.cliente = null;
         this.accesoClientes = new AccesoClientes();
-        this.listaClientes = this.accesoClientes.obtenerRegistros();
 
         this.empleado = null;
         this.accesoEmpleados = new AccesoEmpleados();
@@ -119,14 +115,12 @@ public class Empresa {
         this.CUIT = CUIT;
         this.nacimiento = nacimiento;
         this.localidad = localidad;
-        this.listaClientes = listaClientes;
         this.listaReservas = listaReservas;
         this.listaMenus = listaMenus;
         this.listaEmpleados = listaEmpleados;
 
         this.cliente = null;
         this.accesoClientes = new AccesoClientes();
-        this.listaClientes = this.accesoClientes.obtenerRegistros();
 
         this.empleado = null;
         this.accesoEmpleados = new AccesoEmpleados();
@@ -168,10 +162,6 @@ public class Empresa {
         this.localidad = localidad;
     }
 
-    public void setListaReservas(List<Reserva> listaReservas) {
-        this.listaReservas = listaReservas;
-    }
-
     public List<Menu> getListaMenus() {
         return listaMenus;
     }
@@ -188,9 +178,6 @@ public class Empresa {
         this.listaEmpleados = listaEmpleados;
     }
 
-    public void setListaClientes(List<Cliente> listaClientes) {
-        this.listaClientes = listaClientes;
-    }
 
     public void setAccesoClientes(AccesoClientes accesoClientes) {
         this.accesoClientes = accesoClientes;
@@ -253,7 +240,6 @@ public class Empresa {
                 case 2:
                     Vista.titulo("Registrarse");
                     this.cliente = registroUsuario();
-                    System.out.println(this.accesoClientes.existeRegistro(this.accesoClientes.obtenerRegistros(), this.cliente));
                     if(!this.accesoClientes.existeRegistro(this.accesoClientes.obtenerRegistros(), this.cliente)){
 
                         if (this.accesoClientes.agregarRegistro(this.cliente))
@@ -292,12 +278,12 @@ public class Empresa {
 
     private Cliente registroUsuario() {
         Cliente cliente;
-        String nombreUsuario = Helpers.validaciones("nombre usuario", Helpers.VALIDAR_NOMBRE_USUARIO,
+        String nombreUsuario = Helpers.validaciones("Nombre usuario", Helpers.VALIDAR_NOMBRE_USUARIO,
                 "Error, comienza con numeros o letras y puede contener (._) minimo 8, maximo 20 caracteres");
         String password = passwordIguales();
-        String email = Helpers.validaciones("email", Helpers.VALIDAR_EMAIL, "Ingrese email valido");
+        String email = Helpers.validaciones("Email", Helpers.VALIDAR_EMAIL, "Ingrese email valido");
         cliente = new Cliente(Helpers.generarID(), nombreUsuario, password, email,
-                Helpers.fechaActual(), Helpers.tipoCliente(), Helpers.estadoActivo());
+                Helpers.fechaActual(), Helpers.tipoAdministrador(), Helpers.estadoActivo());
 
         return cliente;
     }
@@ -343,7 +329,6 @@ public class Empresa {
                     getMenuGestionReservas();
                     break;
                 case 3:
-                    Vista.titulo("GESTION DE CLIENTES");
                     getMenuGestionClientes();
                     break;
                 case 4:
@@ -1946,7 +1931,7 @@ public class Empresa {
                     resp = false;
                     break;
                 case 1:
-                    darAltaUnCliente();
+                    menuAltaCliente();
                     break;
                 case 2:
                     darDeBajaCliente();
@@ -1956,6 +1941,7 @@ public class Empresa {
                     break;
                 case 4:
                     listarClientes();
+                    break;
                 default:
                     Vista.opcionIncorrecta(seleccion);
                     break;
@@ -1963,6 +1949,32 @@ public class Empresa {
             }
         }
 
+    }
+
+    private void menuAltaCliente(){
+        boolean resp = true;
+        int opcion;
+
+        while(resp){
+            Vista.titulo("Alta Cliente");
+            System.out.println("1 Cliente existente");
+            System.out.println("2 Crear nuevo cliente");
+            System.out.println("0 Volver");
+            opcion = Helpers.validarInt();
+            switch (opcion) {
+                case 0 :
+                    resp = false;
+                    break;
+                case 1 : 
+                    darAltaClienteExistente();
+                    break;
+                case 2 :
+                    darAltaUnCliente();
+                    break;
+                default :
+                    Vista.opcionIncorrecta(opcion);
+            }
+        }
     }
 
     private void getMenuCliente(Cliente cliente) {
@@ -1993,7 +2005,21 @@ public class Empresa {
     }
 
     // region ABM
+    private void darAltaClienteExistente(){
+        Vista.ingreseDato("Ingrese id del cliente : ");
+        String id = Helpers.nextLine();
+        Cliente a = new Cliente();
+        a.setId(id);
+        a = this.accesoClientes.obtenerRegistro(a);
+        if(a != null){
+            a.setEstado(true);
+            this.accesoClientes.actualizarRegistro(a);
+            System.out.println("El cliente fue dado de alta nuevamente");
+        }else{
+            System.out.println("El cliente no existe");
+        }
 
+    }
 
     public Cliente darAltaUnCliente() {
         Scanner entradaEscanner = new Scanner(System.in);
@@ -2091,9 +2117,9 @@ public class Empresa {
         System.out.println("Ingrese el dni del cliente a buscar: ");
         String dni = "";
         dni = escanner.next();
-        Cliente g = new Cliente();
-        if (g.getDni().equals(dni)) {
-            g = accesoClientes.obtenerRegistro(g);
+        Cliente aux = new Cliente(dni);
+        Cliente g = this.accesoClientes.obtenerRegistroXDni(aux);
+        if (g != null) {
             System.out.println("Cliente encontrado");
             System.out.println(g);
         } else {
@@ -2108,11 +2134,12 @@ public class Empresa {
     }
 
     public void darDeBajaCliente() {
-        Cliente h = new Cliente();
-        boolean a = accesoClientes.borrarRegistro(h);
+        Cliente c = new Cliente();
+        System.out.println("Ingrese id de cliente : ");
+        c.setId(Helpers.nextLine());
+        boolean a = accesoClientes.borrarRegistro(c);
         if (a == true) {
-            h.setEstado(false);
-            h.toString();
+            System.out.println("El cliente se dio de baja");
         } else {
             System.out.println("El cliente no ha podido darse de baja.");
         }
@@ -2202,7 +2229,6 @@ public class Empresa {
                     break;
             }
             this.accesoClientes.actualizarRegistro(this.cliente);
-            this.listaClientes = accesoClientes.obtenerRegistros();
         }
     }
     // endregion

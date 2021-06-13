@@ -74,9 +74,11 @@ public class AccesoClientes implements ObtenerDatos<Cliente>{
         int i = 0;
 
         while(!resp && i < clientes.size()){
-            if(clientes.get(i).getDni().equals(t.getDni())){
-                cliente = clientes.get(i);
-                resp = true;
+            if(clientes.get(i).getDni() != null){
+                if(clientes.get(i).getDni().equals(t.getDni())){
+                    cliente = clientes.get(i);
+                    resp = true;
+                }
             }
             i++;
         }
@@ -162,7 +164,7 @@ public class AccesoClientes implements ObtenerDatos<Cliente>{
         
         while(!resp && i < clientes.size()){
             if(clientes.get(i).equals(t)){
-                clientes.get(i).setEstado(false);;
+                clientes.get(i).setEstado(false);
                 if(guardarInformacion(clientes))
                     resp = true;
             }
