@@ -195,15 +195,17 @@ public class IngredienteLista {
     public void eliminarIngrediete(){
         listaDeIngredites = ingredientePersistencia.obtenerRegistros();
         int i = 0;
+
+        System.out.println(Color.ANSI_YELLOW + "\t Ingrese el codigo del ingrediente a eliminar" + Color.ANSI_RESET);
+
         for ( Ingrediente ing : listaDeIngredites ) {
 
             if( ing.getEstado() ){
-                System.out.println( "[ " + i  + " ] " + ing.getNombre() );
+                System.out.println( Color.ANSI_YELLOW + "[ " + i  + " ] " + Color.ANSI_RESET + ing.getNombre() );
             }
             i++;
         }
 
-        System.out.println("ingrese el godigo del ingrediente a eliminar");
         int codigo = Helpers.validarInt();
 
         if (codigo < 0 || codigo > listaDeIngredites.size() || !listaDeIngredites.get(codigo).getEstado()){
