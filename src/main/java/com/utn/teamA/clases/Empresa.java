@@ -1,6 +1,6 @@
 package com.utn.teamA.clases;
 
-import java.nio.channels.ScatteringByteChannel;
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -432,7 +432,7 @@ public class Empresa {
         while (respuestaNombre == false) {
 
             System.out.println("\nIngrese el nombre del empleado: ");
-            
+
             nombre = Helpers.nextLine();
             // Validamos el nombre que nos brinda el cliente.
             respuestaNombre = Helpers.validarNombre(nombre);
@@ -933,6 +933,7 @@ public class Empresa {
                             Vista.titulo("Buscar Cliente");
                              idCliente = buscarClienteR();
                            break;
+
                         default:
                             System.err.println("Dato incorrecto. Reintente");
                             break;
