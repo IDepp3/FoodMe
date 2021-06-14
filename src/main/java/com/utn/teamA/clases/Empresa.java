@@ -1263,7 +1263,6 @@ public class Empresa {
                         Cliente cliente = null;
 
                         System.out.println(Color.ANSI_BLUE + " 3 " + Color.ANSI_RESET + "Dar de baja  por Cliente");
-                        System.out.println("Ingrese el username del cliente");
 
                         while (!resp4) {
                             String username = Helpers.validaciones("Nombre usuario", Helpers.VALIDAR_NOMBRE_USUARIO,
@@ -1274,12 +1273,12 @@ public class Empresa {
                             resp4 = true;
                         }
 
-                        if (reservasClientefechas != null) {
+                        if (!reservasClientefechas.isEmpty()) {
                             System.out.println(Color.ANSI_BLUE + " 1- " + Color.ANSI_RESET + "Ingrese el Id de la reserva a borrar");
                             String idReserva2 = scanner.next();
-                            reserva = buscarReserva(idReserva2);// esto despues lo puedo borraar
+                            reserva = buscarReserva(idReserva2);
                             boolean reservaBajaId2 = darBajaReserva(reserva);
-                            reserva = buscarReserva(idReserva2);// esto despues lo puedo borraar
+                            reserva = buscarReserva(idReserva2);
                             reserva.mostrar();
                         }
                         break;
@@ -1737,14 +1736,14 @@ public class Empresa {
 
     }
 
-    public List<Reserva> buscarReservas(Cliente cliente) {
-        List<Reserva> reservasCliente = new ArrayList<>();
+    public List<Reserva> buscarReservas(Cliente cliente)throws NoExisteReserva {
+        List<Reserva> reservasCliente = null;
         try {
 
             reservasCliente = accesoReservas.obtenerRegistro(cliente);
 
         }catch (NoExisteReserva r){
-            System.err.println("A");
+
         } catch (NullPointerException e) {
 
         } catch (Exception e) {
