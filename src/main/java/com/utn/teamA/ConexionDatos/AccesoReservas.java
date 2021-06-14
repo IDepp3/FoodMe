@@ -3,8 +3,6 @@ package com.utn.teamA.ConexionDatos;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParseException;
-import com.utn.teamA.ConexionDatos.Gson.LocalDateDeserializer;
-import com.utn.teamA.ConexionDatos.Gson.LocalDateSerializer;
 import com.utn.teamA.ConexionDatos.interfaces.ObtenerDatos;
 import com.utn.teamA.clases.Cliente;
 import com.utn.teamA.clases.Reserva;
@@ -32,8 +30,7 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
 
     public AccesoReservas() throws JsonParseException {
         GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.registerTypeAdapter(LocalDate.class, new LocalDateSerializer());
-        gsonBuilder.registerTypeAdapter(LocalDate.class, new LocalDateDeserializer());
+
         this.json = gsonBuilder.setPrettyPrinting().serializeNulls().create();
 
     }

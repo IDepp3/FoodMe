@@ -336,6 +336,9 @@ public class Empresa {
                     Vista.titulo("GESTION DE VENTAS");
                     getMenuGestionVentas();
                     break;
+                case 5 :
+                    Vista.titulo("CONFIGURACION");
+                    getMenuConfiguracion();
                 default:
                     Vista.opcionIncorrecta(seleccion);
             }
@@ -2331,5 +2334,45 @@ public class Empresa {
     // endregion
 
     // endregion
+
+    void getMenuConfiguracion(){
+        boolean resp = true;
+        int seleccion;
+        Scanner scanner = new Scanner(System.in);
+        while (resp) {
+            Vista.titulo("Configuracion");
+            Vista.menuPrincipalAdministrador();
+            seleccion = Helpers.validarInt();
+            switch (seleccion) {
+                case 0:
+                    resp = false;
+                    break;
+                case 1:
+                    Vista.titulo("Modificar Nombre");
+                    do{
+                        String nombre = scanner.next();
+                    }while (Helpers.validarNombre(nombre));
+                    this.setNombre(nombre);
+                    break;
+                case 2:
+                    Vista.titulo("Localidad");
+                    String Localidad = scanner.nextLine();
+                    this.setLocalidad(localidad);
+
+                    break;
+                case 3:
+                    Vista.titulo("Horas de servicio");
+                    int horasServicio = scanner.nextInt();
+                    break;
+                case 4:
+                    Vista.titulo("Horas antes de llegada");
+                    int horasAntesLlegada = scanner.nextInt();
+                    break;
+
+                default:
+                    Vista.opcionIncorrecta(seleccion);
+            }
+        }
+    }
 
 }
