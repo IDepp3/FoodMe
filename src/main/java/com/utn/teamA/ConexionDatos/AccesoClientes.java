@@ -13,7 +13,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.utn.teamA.ConexionDatos.interfaces.ObtenerDatos;
 import com.utn.teamA.clases.Cliente;
-import com.utn.teamA.excepciones.ClienteNotieneReservas;
+import com.utn.teamA.excepciones.ClienteNoExiste;
+import com.utn.teamA.excepciones.NoExisteReserva;
 
 public class AccesoClientes implements ObtenerDatos<Cliente>{
 
@@ -85,29 +86,15 @@ public class AccesoClientes implements ObtenerDatos<Cliente>{
         return cliente;
     }
 
-    //Perdon hice esto para buscar por dni en la reserva
-    public Cliente obtenerRegistro(String dni){
-        Cliente cliente = null;
-        try {
-            List<Cliente> clientes = obtenerRegistros();
-            cliente = buscarCliente(clientes, dni);
 
-        }catch (ClienteNotieneReservas e){
-            System.err.println(e.getMessage());
-        }catch (NullPointerException e){
-
-        }
-
-        return cliente;
-    }
-
-    public Cliente buscarCliente( List<Cliente> clientes, String dni) throws ClienteNotieneReservas {
+    public Cliente buscarCliente(String username) throws ClienteNoExiste {
         boolean resp = false;
         int i = 0;
+        List<Cliente> clientes = obtenerRegistros();
         Cliente cliente = null;
 
         while (!resp && i < clientes.size()) {
-            if (clientes.get(i).getDni().equals(dni)) {
+            if ((clientes.get(i).getUsername().equals(username))) {
                 cliente = clientes.get(i);
                 resp = true;
             }
@@ -115,10 +102,15 @@ public class AccesoClientes implements ObtenerDatos<Cliente>{
         }
         if(cliente!=null ){
             return cliente;
-        }else throw new ClienteNotieneReservas();
+        }else throw new ClienteNoExiste("El cliente no existe");
 
     }
 
+    public static void main(String[] args) throws ClienteNoExiste {
+        AccesoClientes  uno = new AccesoClientes();
+        Cliente cliente = uno.buscarCliente("Anto.123");
+        cliente.mostrar();
+    }
     @Override
     public List<Cliente> obtenerRegistros() {
         List<Cliente> clientes = new ArrayList<>();
@@ -186,8 +178,6 @@ public class AccesoClientes implements ObtenerDatos<Cliente>{
         }
         return resp;
     }
-
-
 
     
     // endregion

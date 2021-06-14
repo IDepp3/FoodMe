@@ -213,10 +213,10 @@ public class Vista {
     }
 
     public static void darAltaReservaSeleccionarMenu(){
-        System.out.println(Color.ANSI_GREEN + " 1 " + Color.ANSI_RESET + "CLASICO");
-        System.out.println(Color.ANSI_GREEN + " 2 " + Color.ANSI_RESET + "VEGANO");
-        System.out.println(Color.ANSI_GREEN + " 3 " + Color.ANSI_RESET + "VEGETARIANO");
-        System.out.println(Color.ANSI_GREEN + " 4 " + Color.ANSI_RESET + "DIABETICO");
+        System.out.println(Color.ANSI_GREEN + " 1 " + Color.ANSI_RESET + "Clasico");
+        System.out.println(Color.ANSI_GREEN + " 2 " + Color.ANSI_RESET + "Vegano");
+        System.out.println(Color.ANSI_GREEN + " 3 " + Color.ANSI_RESET + "Vegetariano");
+        System.out.println(Color.ANSI_GREEN + " 4 " + Color.ANSI_RESET + "Diabetico");
         System.out.println(Color.ANSI_RED + " 0 " + Color.ANSI_RESET + "Volver");
         System.out.print(Color.ANSI_GREEN + "  " + Color.ANSI_RESET);
     }

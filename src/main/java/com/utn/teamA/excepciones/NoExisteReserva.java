@@ -1,6 +1,6 @@
 package com.utn.teamA.excepciones;
 
-public class NoExisteReserva extends Throwable {
+public class NoExisteReserva extends Exception {
     String msg2;
     /**
      * Constructs an {@code IllegalAccessException} without a

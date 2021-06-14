@@ -1,12 +1,12 @@
 package com.utn.teamA.excepciones;
 
-public class ClienteNotieneReservas extends Exception {
+public class ClienteNoExiste extends Exception {
     String msg2;
     /**
      * Constructs an {@code IllegalAccessException} without a
      * detail message.
      */
-    public ClienteNotieneReservas() {
+    public ClienteNoExiste() {
         super();
         this.msg2 = "No tiene reservas";
     }
@@ -16,7 +16,7 @@ public class ClienteNotieneReservas extends Exception {
      *
      * @param   s   the detail message.
      */
-    public ClienteNotieneReservas(String s) {
+    public ClienteNoExiste(String s) {
 
         super(s);
         msg2=s;
