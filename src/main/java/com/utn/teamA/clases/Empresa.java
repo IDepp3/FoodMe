@@ -2363,10 +2363,12 @@ public class Empresa {
                 case 3:
                     Vista.titulo("Horas de servicio");
                     int horasServicio = scanner.nextInt();
+                    //todo Antonela Constantes com atributo Horas de servicio (setea a 4hs)
                     break;
                 case 4:
                     Vista.titulo("Horas antes de llegada");
                     int horasAntesLlegada = scanner.nextInt();
+                    //todo Antonela Constantes com atributo Horas antes de llegada (setea a 3.5hs)
                     break;
 
                 default:
