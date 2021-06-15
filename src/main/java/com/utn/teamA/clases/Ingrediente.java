@@ -87,7 +87,6 @@ public class Ingrediente {
 
     public void crear(){
 
-        Scanner teclado = new Scanner(System.in);
 
         System.out.println(
                 Color.ANSI_BLUE +
