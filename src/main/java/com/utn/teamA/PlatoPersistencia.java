@@ -2,6 +2,7 @@ package com.utn.teamA;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -30,7 +31,8 @@ public class PlatoPersistencia {
         try {
             reader = new BufferedReader(new FileReader(this.url));
 
-            arregloALista(this.json.fromJson(reader, Plato[].class), platos);
+            //arregloALista(this.json.fromJson(reader, Plato[].class), platos);
+            platos = json.fromJson(reader, new TypeToken<List<Plato>>(){}.getType());
             reader.close();
         } catch (FileNotFoundException e) {
             crearFichero();
@@ -72,12 +74,15 @@ public class PlatoPersistencia {
         BufferedWriter writer;
 
         for ( Plato p : platos ) {
-            p.setIngredientesArray( p.getIngredientes().toArray( new String[ p.getIngredientes().size() ] ));
+            //p.setIngredientesArray( p.getIngredientes().toArray( new String[ p.getIngredientes().size() ] ));
         }
 
         try {
             writer = new BufferedWriter(new FileWriter(this.url));
-            this.json.toJson(platos.toArray(), Plato[].class, writer);
+            //this.json.toJson(platos.toArray(), Plato[].class, writer);
+            String platosJSon = this.json.toJson(platos);
+            writer.write(platosJSon);
+            writer.flush();
             writer.close();
             resp = true;
         } catch (IOException e) {

@@ -143,6 +143,9 @@ public class PlatoLista {
         System.out.println(Color.ANSI_CYAN + "Ingrese Descripcion:" + Color.ANSI_RESET);
         nuevoPlato.setDescripcion( Helpers.nextLine() );
 
+        System.out.println(Color.ANSI_CYAN + "Ingrese Precio:" + Color.ANSI_RESET);
+        nuevoPlato.setPrecio( Helpers.validarDouble() );
+
         nuevoPlato.setListaDeIngredites( agregarIngredientes() );
 
         System.out.println( nuevoPlato );
@@ -251,6 +254,7 @@ public class PlatoLista {
             System.out.println(Color.ANSI_GREEN + " 2 " + Color.ANSI_RESET + " Editar Nombre");
             System.out.println(Color.ANSI_GREEN + " 3 " + Color.ANSI_RESET + " Editar Descripcion");
             System.out.println(Color.ANSI_GREEN + " 4 " + Color.ANSI_RESET + " Editar Tipo");
+            System.out.println(Color.ANSI_GREEN + " 5 " + Color.ANSI_RESET + " Editar Precio");
             System.out.println(Color.ANSI_RED + " 0  Cancelar " + Color.ANSI_RESET );
 
             opcion = Helpers.validarInt();
@@ -275,6 +279,11 @@ public class PlatoLista {
                     break;
                 case 4:
                     plato = this.editarTipoDePlato(plato);
+                    break;
+                case 5:
+                    System.out.print(Color.ANSI_CYAN + "Ingrese precio: " + Color.ANSI_RESET);
+                    System.out.println(Color.ANSI_YELLOW + "< " + plato.getPrecio() + " >" + Color.ANSI_RESET);
+                    plato.setPrecio( Helpers.validarDouble() );
                     break;
                 default:
                     System.out.println(
@@ -341,7 +350,6 @@ public class PlatoLista {
             }
             i++;
         }
-
 
         int codigo = Helpers.validarInt();
 

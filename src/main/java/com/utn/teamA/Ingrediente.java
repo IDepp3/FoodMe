@@ -96,6 +96,9 @@ public class Ingrediente {
         return false;
     }
 
+    public String mostrarNombre(){
+        return Color.ANSI_YELLOW + "\t * " + this.nombre + Color.ANSI_RESET + '\n';
+    }
 
     @Override
     public String toString() {
