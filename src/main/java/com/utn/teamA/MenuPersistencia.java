@@ -2,6 +2,7 @@ package com.utn.teamA;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -29,7 +30,8 @@ public class MenuPersistencia {
         BufferedReader reader;
         try {
             reader = new BufferedReader(new FileReader(this.url));
-            arregloALista(this.json.fromJson(reader, Menu[].class), menus);
+            //arregloALista(this.json.fromJson(reader, Menu[].class), menus);
+            menus = json.fromJson(reader, new TypeToken<List<Menu>>(){}.getType());
             reader.close();
         } catch (FileNotFoundException e) {
             crearFichero();
@@ -72,7 +74,10 @@ public class MenuPersistencia {
 
         try {
             writer = new BufferedWriter(new FileWriter(this.url));
-            this.json.toJson(menus.toArray(), Menu[].class, writer);
+            //this.json.toJson(menus.toArray(), Menu[].class, writer);
+            String menusJSON = this.json.toJson(menus);
+            writer.write(menusJSON);
+            writer.flush();
             writer.close();
             resp = true;
         } catch (IOException e) {

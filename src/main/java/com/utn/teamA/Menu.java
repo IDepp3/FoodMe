@@ -12,7 +12,7 @@ public class Menu {
     private TipoMenu tipo;
     private String nombre;
     private String descripcion;
-    private List<Plato> listaDePlatos;
+    private List<String> listaDePlatos;
     private double precio;
     private boolean estado;
 
@@ -26,7 +26,7 @@ public class Menu {
         this.estado = true;
     }
 
-    public Menu(TipoMenu tipo, String nombre, String descripcion, List<Plato> platos, double precio) {
+    public Menu(TipoMenu tipo, String nombre, String descripcion, List<String> platos, double precio) {
         this();
         this.tipo = tipo;
         this.nombre = nombre;
@@ -70,11 +70,11 @@ public class Menu {
         this.descripcion = descripcion;
     }
 
-    public List<Plato> getPlatos() {
+    public List<String> getPlatos() {
         return listaDePlatos;
     }
 
-    public void setPlatos(List<Plato> platos) {
+    public void setPlatos(List<String> platos) {
         this.listaDePlatos = platos;
     }
 
@@ -103,10 +103,9 @@ public class Menu {
                 Color.ANSI_CYAN + "Tipo: " + Color.ANSI_GREEN + tipo + "\n" +
                 Color.ANSI_CYAN + "Nombre:" + Color.ANSI_GREEN + nombre + "\n" +
                 Color.ANSI_CYAN + "Precio: " + Color.ANSI_GREEN + precio + '\n' +
-                Color.ANSI_CYAN + "Descripcion: " + Color.ANSI_GREEN + descripcion + "\n\n" +
-                //TODO buscar y agregar platos al plato
-                //Color.ANSI_CYAN + "<<<<< Platos >>>>> " + Color.ANSI_GREEN + "\n" +
-                //listaDePlatos + "\n" +
+                Color.ANSI_CYAN + "Descripcion: " + Color.ANSI_GREEN + descripcion + "\n" +
+                Color.ANSI_CYAN + "<<<<< Platos >>>>> " + Color.ANSI_GREEN + "\n" +
+                this.mostrartPlatos() + "\n" +
                 Color.ANSI_RESET + "\n";
     }
 
@@ -124,68 +123,23 @@ public class Menu {
         return false;
     }
 
-    public void crear(){
 
-        System.out.println(
-                Color.ANSI_BLUE +
-                        "\n\n" +
-                        " ----------------------------------------\n" +
-                        "| \t\t N U E V O    M E N U \t\t |\n" +
-                        " ----------------------------------------" +
-                        " \n\n" +
-                        Color.ANSI_RESET);
+    private String mostrartPlatos(){
+        String platos = "";
+        PlatoPersistencia platoPersistencia = new PlatoPersistencia();
+        List<Plato> listaDePlatos = platoPersistencia.obtenerRegistros();
 
-        int opcion = 0;
-        boolean continuar = false;
-
-        do{
-
-            System.out.println(Color.ANSI_CYAN + "Ingrese tipo:" + Color.ANSI_RESET);
-            System.out.println(Color.ANSI_GREEN + " 1 " + Color.ANSI_RESET + " Vegano");
-            System.out.println(Color.ANSI_GREEN + " 2 " + Color.ANSI_RESET + " Vegetariano");
-            System.out.println(Color.ANSI_GREEN + " 3 " + Color.ANSI_RESET + " Diabetico");
-            System.out.println(Color.ANSI_GREEN + " 4 " + Color.ANSI_RESET + " Clasico");
-
-            opcion = Helpers.validarInt();
-            continuar = false;
-
-
-            switch (opcion){
-                case 1:
-                    this.tipo = TipoMenu.VEGANO;
-                    break;
-                case 2:
-                    this.tipo = TipoMenu.VEGETARIANO;
-                    break;
-                case 3:
-                    this.tipo = TipoMenu.DIABETICO;
-                    break;
-                case 4:
-                    this.tipo = TipoMenu.CLASICO;
-                    break;
-                default:
-                    continuar = true;
-                    System.out.println(
-                            Color.ANSI_RED +
-                                    "\n\t [[ " + opcion + " ]] NO ES UNA OPCION VALIDA \n" +
-                                    Color.ANSI_RESET
-                    );
-                    break;
+        if( this.listaDePlatos != null){
+            for (String platoId : this.listaDePlatos ) {
+                for ( Plato plato : listaDePlatos ) {
+                    if(plato.getPlatoId().equals( platoId ) ){
+                        platos += plato.mostrarNombre();
+                    }
+                }
             }
-        }while (continuar);
+        }
 
-        System.out.println(Color.ANSI_CYAN + "Ingrese nombre:" + Color.ANSI_RESET);
-        this.nombre =  Helpers.nextLine();
-
-        System.out.println(Color.ANSI_CYAN + "Ingrese Descripcion:" + Color.ANSI_RESET);
-        this.descripcion =  Helpers.nextLine();
-
-        System.out.println(Color.ANSI_CYAN + "Ingrese Precio:" + Color.ANSI_RESET);
-        this.precio =  Helpers.validarDouble();
-
-
-        System.out.println( this );
-
+        return platos;
     }
 
 

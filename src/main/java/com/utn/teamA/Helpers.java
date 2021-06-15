@@ -34,6 +34,17 @@ public class Helpers {
         return teclado.next().charAt(0);
     }
 
+    public static void enterParaContinuar(){
+        Scanner teclado = new Scanner(System.in);
+        System.out.print(
+                Color.ANSI_GREEN +
+                        "\t ENTER " +
+                        Color.ANSI_RESET +
+                        " para continuar"
+        );
+        teclado.nextLine();
+    }
+
 
 
     public static double validarDouble() {

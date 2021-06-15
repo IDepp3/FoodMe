@@ -73,10 +73,6 @@ public class PlatoPersistencia {
         boolean resp = false;
         BufferedWriter writer;
 
-        for ( Plato p : platos ) {
-            //p.setIngredientesArray( p.getIngredientes().toArray( new String[ p.getIngredientes().size() ] ));
-        }
-
         try {
             writer = new BufferedWriter(new FileWriter(this.url));
             //this.json.toJson(platos.toArray(), Plato[].class, writer);
