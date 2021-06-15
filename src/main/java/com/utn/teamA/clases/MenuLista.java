@@ -5,6 +5,7 @@ import com.utn.teamA.ConexionDatos.PlatoPersistencia;
 import com.utn.teamA.enums.TipoMenu;
 import com.utn.teamA.utils.Color;
 import com.utn.teamA.utils.Helpers;
+import com.utn.teamA.utils.Vista;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -385,11 +386,17 @@ public class MenuLista {
 
     public  void mostrarMenusActivos(){
         listaDeMenus = menuPersistencia.obtenerRegistros();
-        for ( Menu menu : listaDeMenus ) {
-            if (menu.getEstado()){
-                System.out.println(menu);
+        if(listaDeMenus != null){
+
+            for ( Menu menu : listaDeMenus ) {
+                if (menu.getEstado()){
+                    System.out.println(menu);
+                }
             }
+        }else{
+            Vista.opcionIncorrecta("No hay menus disponibles");
         }
+
     }
 
 

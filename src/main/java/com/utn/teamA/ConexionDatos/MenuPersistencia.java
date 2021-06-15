@@ -130,7 +130,6 @@ public class MenuPersistencia {
     private boolean existeRegistro(List<Menu> menus, Menu menu){
         boolean resp = false;
         int i = 0;
-
         while(!resp && i < menus.size()){
             if(menus.get(i).equals(menu))
                 resp = true;
@@ -144,6 +143,10 @@ public class MenuPersistencia {
     public boolean agregarRegistro(Menu t) {
         boolean resp = false;
         List<Menu> menus = obtenerRegistros();
+
+        if(menus == null){
+            menus = new ArrayList<>();
+        }
 
         if(!existeRegistro(menus, t)){
             menus.add(t);

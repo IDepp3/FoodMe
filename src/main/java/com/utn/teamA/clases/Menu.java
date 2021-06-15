@@ -22,14 +22,14 @@ public class Menu {
 
     // region revisar
 
-    private int cantPersonas;
+    /* private int cantPersonas;
     private double precioPorUnidad; // se calcula segun los ingredientes
-    private double costoTotal;
-    private TipoEmpleado a;
+    private double costoTotal; */
+    //private TipoEmpleado a;
 
     /* public Menu(){
     } */
-    public Menu(int cantPersonas){
+    /* public Menu(int cantPersonas){
         this.cantPersonas = cantPersonas;
     }
 
@@ -55,7 +55,7 @@ public class Menu {
 
     public void setA(TipoEmpleado a) {
         this.a = a;
-    }
+    } */
 
     /* @Override
     public String toString() {
@@ -64,9 +64,9 @@ public class Menu {
                 '}';
     } */
 
-    public double calcularCostoTotal(){
+    /* public double calcularCostoTotal(){
         return precioPorUnidad*cantPersonas;
-    }
+    } */
     // endregion
 
     //region contructores

@@ -1,7 +1,5 @@
 package com.utn.teamA.ConexionDatos.interfaces;
 
-import com.utn.teamA.excepciones.ClienteNoExiste;
-
 import java.util.List;
 
 public interface ObtenerDatos<T> {
