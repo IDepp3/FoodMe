@@ -121,6 +121,7 @@ public class Hora {
     public void showHora() {
         System.out.println(toString());
     }
+
     public StringBuilder calcularLlegada(int hsAntes){
 
         int horaInt = Integer.parseInt(getHoras().toString());
@@ -130,10 +131,13 @@ public class Hora {
         return horaFinaliza.append(horaLlegada).append(":").append(getMinutos());
 
     }
+
     public StringBuilder setearHoraInicio(){
         StringBuilder horario= new StringBuilder();
         return horario.append(getHoras()).append(":").append(getMinutos());
     }
+
+
     public StringBuilder calcularFinalizacion(int hsServicio){
 
         int horaInt = Integer.parseInt(getHoras().toString());

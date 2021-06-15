@@ -1,6 +1,6 @@
 package com.utn.teamA.excepciones;
 
-public class FechaNoDisponible extends Throwable {
+public class FechaNoDisponible extends Exception {
     String msg2;
     /**
      * Constructs an {@code IllegalAccessException} without a

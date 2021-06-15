@@ -176,7 +176,7 @@ public class Helpers {
 
     public static boolean validarTel(String telefono) {
 
-        Pattern pattern = Pattern.compile("^\\d{10}$");
+        Pattern pattern = Pattern.compile("^\\d{7}$");
         Matcher mather = pattern.matcher(telefono);
 
         boolean resp = mather.find();

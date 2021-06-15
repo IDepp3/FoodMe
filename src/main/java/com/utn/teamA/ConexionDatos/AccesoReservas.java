@@ -3,11 +3,10 @@ package com.utn.teamA.ConexionDatos;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParseException;
-import com.utn.teamA.ConexionDatos.Gson.LocalDateDeserializer;
-import com.utn.teamA.ConexionDatos.Gson.LocalDateSerializer;
 import com.utn.teamA.ConexionDatos.interfaces.ObtenerDatos;
 import com.utn.teamA.clases.Cliente;
 import com.utn.teamA.clases.Reserva;
+import com.utn.teamA.excepciones.ClienteNoExiste;
 import com.utn.teamA.excepciones.FechaNoDisponible;
 import com.utn.teamA.excepciones.NoExisteReserva;
 
@@ -31,8 +30,7 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
 
     public AccesoReservas() throws JsonParseException {
         GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.registerTypeAdapter(LocalDate.class, new LocalDateSerializer());
-        gsonBuilder.registerTypeAdapter(LocalDate.class, new LocalDateDeserializer());
+
         this.json = gsonBuilder.setPrettyPrinting().serializeNulls().create();
 
     }
@@ -117,8 +115,6 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
         Reserva reserva = null;
         boolean resp = false;
 
-        try {
-
             List<Reserva> reservas = obtenerRegistros();
 
             int i = 0;
@@ -132,15 +128,6 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
             if (!resp) {
                 throw new NoExisteReserva("No existe la reserva");
             }
-        }catch (NoExisteReserva e){
-        System.err.println("No existe reservas con esa fecha");
-
-        } catch (NullPointerException e) {
-
-
-        } catch (Exception e) {
-
-        }
 
         return reserva;
     }
@@ -155,7 +142,7 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
      * @param cliente variable
      * @return
      */
-    public List<Reserva> obtenerRegistro(Cliente cliente) {
+    public List<Reserva> obtenerRegistro(Cliente cliente) throws NoExisteReserva {
         List<Reserva> reservasCliente = new ArrayList<>();
         Reserva reserva = null;
         try {
@@ -177,8 +164,6 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
 
         } catch (Exception e) {
 
-        } catch (NoExisteReserva existeReserva) {
-            System.err.println("no hay reservas para ese cliente");
         }
 
         return reservasCliente;
@@ -357,7 +342,23 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
     }
     // endregion
 
+    public Cliente buscarCliente( List<Cliente> clientes, String dni) throws ClienteNoExiste {
+        boolean resp = false;
+        int i = 0;
+        Cliente cliente = null;
 
+        while (!resp && i < clientes.size()) {
+            if (clientes.get(i).getDni().equals(dni)) {
+                cliente = clientes.get(i);
+                resp = true;
+            }
+            i++;
+        }
+        if(cliente!=null ){
+            return cliente;
+        }else throw new ClienteNoExiste();
+
+    }
 }
 
 

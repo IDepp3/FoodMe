@@ -1,7 +1,5 @@
 package com.utn.teamA.clases;
 
-import com.utn.teamA.clases.Cliente;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
