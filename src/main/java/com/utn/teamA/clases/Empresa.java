@@ -933,7 +933,7 @@ public class Empresa {
                             do {
                                 System.out.println("Ingrese DNI: ");
                                 dni3 = entradaEscanner2.next();
-                            } while (Helpers.validarDni(dni3));
+                            } while (!Helpers.validarDni(dni3));
                             clienteRegistrado.setDni(dni3);
                             clienteRegistrado = accesoClientes.obtenerRegistro(dni3);
                             idClienteReserva = clienteRegistrado.getId();
