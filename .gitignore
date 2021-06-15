@@ -19,5 +19,5 @@ target
 ## JAVA EE
 webapp
 
-## ARCHIVOS JSON
+## RECURSOS
 src/main/recursos/archivos/*.json

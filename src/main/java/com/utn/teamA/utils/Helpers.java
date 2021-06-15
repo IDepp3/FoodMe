@@ -1,6 +1,5 @@
 package com.utn.teamA.utils;
 
-import java.io.Console;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.MessageDigest;
@@ -9,7 +8,6 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Base64;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.UUID;
 import java.util.regex.Matcher;
@@ -84,6 +82,17 @@ public class Helpers {
     public static char charAt0() {
         Scanner teclado = new Scanner(System.in);
         return teclado.next().charAt(0);
+    }
+
+     public static void enterParaContinuar(){
+        Scanner teclado = new Scanner(System.in);
+        System.out.print(
+                Color.ANSI_GREEN +
+                        "\t ENTER " +
+                        Color.ANSI_RESET +
+                        " para continuar"
+        );
+        teclado.nextLine();
     }
 
     public static double validarDouble() {
@@ -227,9 +236,9 @@ public class Helpers {
 
         while (resp) {
 
-            dia = Integer.parseInt(Helpers.validaciones("Ingrese Dia", Helpers.VALIDAR_ENTEROS, "Ingrese solo numeros"));
-            mes = Integer.parseInt(Helpers.validaciones("Ingrese Mes", Helpers.VALIDAR_ENTEROS, "Ingrese solo numeros"));
-            anio = Integer.parseInt(Helpers.validaciones("Ingrese año", Helpers.VALIDAR_ENTEROS, "Ingrese solo numeros"));
+            dia = Integer.parseInt(Helpers.validaciones("Dia", Helpers.VALIDAR_ENTEROS, "Ingrese solo numeros"));
+            mes = Integer.parseInt(Helpers.validaciones("Dia", Helpers.VALIDAR_ENTEROS, "Ingrese solo numeros"));
+            anio = Integer.parseInt(Helpers.validaciones("Dia", Helpers.VALIDAR_ENTEROS, "Ingrese solo numeros"));
             try {
 
                 fecha = LocalDate.of(anio, mes, dia);

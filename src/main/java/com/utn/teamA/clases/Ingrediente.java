@@ -1,5 +1,8 @@
 package com.utn.teamA.clases;
 
+import com.utn.teamA.utils.Color;
+import com.utn.teamA.utils.Helpers;
+
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -12,6 +15,7 @@ public class Ingrediente {
     private String nombre;
     private String descripcion;
     private double precio;
+    private boolean estado;
 
     //TODO atributo prooveedor tiene que ser tipo Proveedor
     private String proveedor = "---";
@@ -19,13 +23,15 @@ public class Ingrediente {
     //region constructores
     public Ingrediente() {
         this.id = UUID.randomUUID().toString();
+        this.estado = true;
     }
 
     public Ingrediente(String nombre, String descripcion, double precio, String proveedor) {
-        this.id = UUID.randomUUID().toString();
+        this();
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
+        this.estado = true;
         this.proveedor = proveedor;
     }
     //endregion
@@ -72,8 +78,33 @@ public class Ingrediente {
         this.proveedor = proveedor;
     }
 
+    public void setEstado(boolean estado){
+        this.estado = estado;
+    }
+
+    public boolean getEstado(){
+        return this.estado;
+    }
+
     //endregion
 
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj)
+            return true;
+
+        if(obj instanceof Ingrediente){
+            Ingrediente i = (Ingrediente)obj;
+            if(this.getId().equals(i.getId()))
+                return true;
+        }
+
+        return false;
+    }
+
+    public String mostrarNombre(){
+        return Color.ANSI_YELLOW + "\t * " + this.nombre + Color.ANSI_RESET + '\n';
+    }
 
     @Override
     public String toString() {
