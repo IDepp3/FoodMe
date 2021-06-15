@@ -11,10 +11,9 @@ import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.utn.teamA.ConexionDatos.interfaces.ObtenerDatos;
 import com.utn.teamA.clases.Cliente;
-import com.utn.teamA.excepciones.ClienteNoExiste;
-import com.utn.teamA.excepciones.NoExisteReserva;
 
 public class AccesoClientes implements ObtenerDatos<Cliente>{
 
@@ -86,15 +85,29 @@ public class AccesoClientes implements ObtenerDatos<Cliente>{
         return cliente;
     }
 
+    //Perdon hice esto para buscar por dni en la reserva
+   /*  public Cliente obtenerRegistro(String dni){
+        Cliente cliente = null;
+        try {
+            List<Cliente> clientes = obtenerRegistros();
+            cliente = buscarCliente(clientes, dni);
 
-    public Cliente buscarCliente(String username) throws ClienteNoExiste {
+        }catch (ClienteNotieneReservas e){
+            System.err.println(e.getMessage());
+        }catch (NullPointerException e){
+
+        }
+
+        return cliente;
+    }
+
+    public Cliente buscarCliente( List<Cliente> clientes, String dni) throws ClienteNotieneReservas {
         boolean resp = false;
         int i = 0;
-        List<Cliente> clientes = obtenerRegistros();
         Cliente cliente = null;
 
         while (!resp && i < clientes.size()) {
-            if ((clientes.get(i).getUsername().equals(username))) {
+            if (clientes.get(i).getDni().equals(dni)) {
                 cliente = clientes.get(i);
                 resp = true;
             }
@@ -102,22 +115,17 @@ public class AccesoClientes implements ObtenerDatos<Cliente>{
         }
         if(cliente!=null ){
             return cliente;
-        }else throw new ClienteNoExiste("El cliente no existe");
+        }else throw new ClienteNotieneReservas();
 
-    }
+    } */
 
-    public static void main(String[] args) throws ClienteNoExiste {
-        AccesoClientes  uno = new AccesoClientes();
-        Cliente cliente = uno.buscarCliente("Anto.123");
-        cliente.mostrar();
-    }
     @Override
     public List<Cliente> obtenerRegistros() {
         List<Cliente> clientes = new ArrayList<>();
         BufferedReader reader;
         try {
             reader = new BufferedReader(new FileReader(this.url));
-            arregloALista(this.json.fromJson(reader, Cliente[].class), clientes);
+            clientes = this.json.fromJson(reader, new TypeToken<List<Cliente>>(){}.getType());
             reader.close();
         } catch (FileNotFoundException e) {
             crearFichero(); 
@@ -171,15 +179,19 @@ public class AccesoClientes implements ObtenerDatos<Cliente>{
         boolean resp = false;
         List<Cliente> clientes = obtenerRegistros();
 
+        if(clientes == null){
+            clientes = new ArrayList<>();
+        }
+        
         if(!existeRegistro(clientes, t)){
             clientes.add(t);
             if(guardarInformacion(clientes))
-                resp = true;
+            resp = true;
         }
+        
         return resp;
     }
 
-    
     // endregion
 
     // region Metodos propios
@@ -187,10 +199,11 @@ public class AccesoClientes implements ObtenerDatos<Cliente>{
     public boolean guardarInformacion(List<Cliente> clientes){
         boolean resp = false;
         BufferedWriter writer;
-
+        String data;
         try {
             writer = new BufferedWriter(new FileWriter(this.url));
-            this.json.toJson(clientes.toArray(), Cliente[].class, writer);
+            data = this.json.toJson(clientes);
+            writer.write(data);
             writer.close();
             resp = true;
         } catch (IOException e) {
@@ -206,19 +219,11 @@ public class AccesoClientes implements ObtenerDatos<Cliente>{
 
         while(!resp && i < clientes.size()){
             if(clientes.get(i).existeUsuario(cliente))
-                resp = true;
+            resp = true;
             i++;
         }
-
+          
         return resp;
-    }
-
-    public void arregloALista(Cliente[] arreglo, List<Cliente> clientes){
-        if(arreglo != null){
-            for(Cliente c : arreglo){
-                clientes.add(c);
-            }
-        }
     }
 
     private void crearFichero(){

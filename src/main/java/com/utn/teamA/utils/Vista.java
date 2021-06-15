@@ -128,6 +128,13 @@ public class Vista {
 
     // region EMPLEADOS
 
+    public static void vistaEleccionCrearEmpleado(){
+        System.out.println(Color.ANSI_GREEN + " 1 " + Color.ANSI_RESET + "Empleado existente");
+        System.out.println(Color.ANSI_GREEN + " 2 " + Color.ANSI_RESET + "Crear nuevo empleado");
+        System.out.println(Color.ANSI_RED + " 0 " + Color.ANSI_RESET + "Volver");
+        System.out.print(Color.ANSI_GREEN + " : " + Color.ANSI_RESET);
+    }
+
     public static void menuGestionEmpleados() {
         System.out.println(Color.ANSI_GREEN + " 1 " + Color.ANSI_RESET + "Dar de alta un empleado");
         System.out.println(Color.ANSI_GREEN + " 2 " + Color.ANSI_RESET + "Dar de baja un empleado");
@@ -143,7 +150,7 @@ public class Vista {
     public static void menuPrincipalUsuario() {
         System.out.println(Color.ANSI_GREEN + " 1 " + Color.ANSI_RESET + "Ver menus");
         System.out.println(Color.ANSI_GREEN + " 2 " + Color.ANSI_RESET + "Hacer Reserva");
-        System.out.println(Color.ANSI_GREEN + " 3 " + Color.ANSI_RESET + "Informacion ersonal");
+        System.out.println(Color.ANSI_GREEN + " 3 " + Color.ANSI_RESET + "Informacion Personal");
         System.out.println(Color.ANSI_RED + " 0 " + Color.ANSI_RESET + "Salir");
         System.out.print(Color.ANSI_GREEN + " : " + Color.ANSI_RESET);
     }

@@ -14,7 +14,7 @@ import java.util.List;
 
 public class Cliente extends Persona {
 
-    private List<Reserva> reservas;
+    private List<String> reservas;
 
 
     //region Constructores
@@ -31,7 +31,7 @@ public class Cliente extends Persona {
      * Constructor Cliente
      * @param lasReservas
      */
-    public Cliente(List<Reserva> lasReservas){
+    public Cliente(List<String> lasReservas){
         reservas = lasReservas;
     }
 
@@ -56,7 +56,7 @@ public class Cliente extends Persona {
      */
 
      public Cliente(String nombre, String apellido, String fechaNacimiento, String telefono, String direccion,
-                    String dni,String email,Boolean estado,List<Reserva> lasReservas){
+                    String dni,String email,Boolean estado,List<String> lasReservas){
         super(nombre,apellido,fechaNacimiento,telefono,direccion,dni,email,estado );
         reservas = lasReservas;
     }
@@ -70,7 +70,7 @@ public class Cliente extends Persona {
 
     //constructor completo para traer el json (Anto)
 
-    public Cliente(String username, String password, String email, String fechaRegistro, String tipoUsuario, String id, String nombre, String apellido, String fechaNacimiento, String telefono, String direccion, String dni, boolean estado, List<Reserva> reservas) {
+    public Cliente(String username, String password, String email, String fechaRegistro, String tipoUsuario, String id, String nombre, String apellido, String fechaNacimiento, String telefono, String direccion, String dni, boolean estado, List<String> reservas) {
         super(username, password, email, fechaRegistro, tipoUsuario, id, nombre, apellido, fechaNacimiento, telefono, direccion, dni, estado);
         this.reservas = reservas;
     }
@@ -90,11 +90,11 @@ public class Cliente extends Persona {
 
     // region Getters && Setters
 
-    public List<Reserva> getReservas() {
+    public List<String> getReservas() {
         return reservas;
     }
 
-    public void setReservas(List<Reserva> reservas) {
+    public void setReservas(List<String> reservas) {
         this.reservas = reservas;
     }
 
@@ -127,7 +127,7 @@ public class Cliente extends Persona {
 
     public void listarReservas(){
         if(this.reservas != null){
-            for(Reserva r : this.reservas){
+			for(String r : this.reservas){
                 System.out.println(r);
             }
         }else{

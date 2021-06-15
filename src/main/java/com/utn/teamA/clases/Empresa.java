@@ -30,14 +30,10 @@ public class Empresa {
     private String nacimiento;
     private String localidad;
 
-    private List<Reserva> listaReservas = new ArrayList<>();
-    private List<Menu> listaMenus;
-    private List<Empleado> listaEmpleados;
-
     // private List<Venta>listaHistorialVentas;
 
     private Cliente cliente;
-    private Empleado empleado;
+    //private Empleado empleado;
     private Reserva reserva;
 
     private AccesoClientes accesoClientes;
@@ -48,164 +44,14 @@ public class Empresa {
 
     // region Constructor
 
-    /**
-     * Constructor de la clase vacio
-     */
     public Empresa() {
-        this.cliente = null;
-        this.empleado = null;
         this.reserva = null;
 
         this.accesoClientes = new AccesoClientes();
         this.accesoEmpleados = new AccesoEmpleados();
         this.accesoReservas = new AccesoReservas();
 
-        this.listaEmpleados = this.accesoEmpleados.obtenerRegistros();
-        this.listaReservas = this.accesoReservas.obtenerRegistros();
-
     }
-
-    /**
-     * @param elNombre
-     * @param laDireccion
-     * @param elCUIT
-     * @param elNacimiento
-     * @param unaLocalidad
-     */
-
-    public Empresa(String elNombre, String laDireccion, String elCUIT, String elNacimiento, String unaLocalidad) {
-        nombre = elNombre;
-        direccion = laDireccion;
-        CUIT = elCUIT;
-        nacimiento = elNacimiento;
-        localidad = unaLocalidad;
-        listaReservas = new ArrayList<>();
-        listaEmpleados = new ArrayList<>();
-        listaMenus = new ArrayList<Menu>();
-
-        this.cliente = null;
-        this.accesoClientes = new AccesoClientes();
-
-        this.empleado = null;
-        this.accesoEmpleados = new AccesoEmpleados();
-        this.listaEmpleados = this.accesoEmpleados.obtenerRegistros();
-
-        this.reserva = null;
-        this.accesoReservas = new AccesoReservas();
-        this.listaReservas = this.accesoReservas.obtenerRegistros();
-    }
-
-    /**
-     * @param nombre
-     * @param direccion
-     * @param CUIT
-     * @param nacimiento
-     * @param localidad
-     * @param listaUsuarios
-     * @param listaReservas
-     * @param listaMenus
-     * @param listaEmpleados
-     */
-
-    public Empresa(String nombre, String direccion, String CUIT, String nacimiento, String localidad,
-                   List<Usuario> listaUsuarios, List<Cliente> listaClientes, List<Reserva> listaReservas,
-                   List<Menu> listaMenus, List<Empleado> listaEmpleados) {
-        this.nombre = nombre;
-        this.direccion = direccion;
-        this.CUIT = CUIT;
-        this.nacimiento = nacimiento;
-        this.localidad = localidad;
-        this.listaReservas = listaReservas;
-        this.listaMenus = listaMenus;
-        this.listaEmpleados = listaEmpleados;
-
-        this.cliente = null;
-        this.accesoClientes = new AccesoClientes();
-
-        this.empleado = null;
-        this.accesoEmpleados = new AccesoEmpleados();
-        this.listaEmpleados = this.accesoEmpleados.obtenerRegistros();
-
-        this.reserva = null;
-        this.accesoReservas = new AccesoReservas();
-        this.listaReservas = this.accesoReservas.obtenerRegistros();
-    }
-    // endregion
-
-    // region Getters
-
-    /**
-     * Getter del String Nombre
-     *
-     * @return @String
-     */
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    /**
-     * @return @String
-     */
-    public String getDireccion() {
-        return direccion;
-    }
-
-    // endregion
-
-    // region Setters
-
-    public void setLocalidad(String localidad) {
-        this.localidad = localidad;
-    }
-
-    public List<Menu> getListaMenus() {
-        return listaMenus;
-    }
-
-    public void setListaMenus(List<Menu> listaMenus) {
-        this.listaMenus = listaMenus;
-    }
-
-    public List<Empleado> getListaEmpleados() {
-        return listaEmpleados;
-    }
-
-    public void setListaEmpleados(List<Empleado> listaEmpleados) {
-        this.listaEmpleados = listaEmpleados;
-    }
-
-    public void setAccesoClientes(AccesoClientes accesoClientes) {
-        this.accesoClientes = accesoClientes;
-    }
-
-    public void setAccesoEmpleados(AccesoEmpleados accesoEmpleados) {
-        this.accesoEmpleados = accesoEmpleados;
-    }
-
-    public void setAccesoReservas(AccesoReservas accesoReservas) {
-        this.accesoReservas = accesoReservas;
-    }
-
-    // endregion
-
-    // region Mostrar
-
-    @Override
-    public String toString() {
-        return "Empresa{" + "nombre='" + nombre + '\'' + ", direccion='" + direccion + '\'' + ", CUIT='" + CUIT + '\''
-                + ", nacimiento=" + nacimiento + ", localidad='" + localidad + ", listaReservas=" + listaReservas
-                + ", listaMenus=" + listaMenus + ", listaEmpleados=" + listaEmpleados + '}';
-    }
-
-    public void mostrar() {
-        System.out.println(this);
-    }
-
-    // endregion
 
     // region Menu Principal
 
@@ -239,14 +85,9 @@ public class Empresa {
                 case 2:
                     Vista.titulo("Registrarse");
                     this.cliente = registroUsuario();
-                    if (!this.accesoClientes.existeRegistro(this.accesoClientes.obtenerRegistros(), this.cliente)) {
-
-                        if (this.accesoClientes.agregarRegistro(this.cliente))
-                            Vista.opcionCorrecta("Usuario creado correctamente");
-                        else
-                            Vista.opcionIncorrecta("Algo salio mal al crear el usuario");
-
-                    } else
+                    if (this.accesoClientes.agregarRegistro(this.cliente))
+                        Vista.opcionCorrecta("Usuario creado correctamente");
+                    else
                         Vista.opcionIncorrecta("El usuario ya existe");
                     break;
                 default:
@@ -255,7 +96,7 @@ public class Empresa {
             }
             this.cliente = null;
         }
-        System.out.println("Gracias por usar la aplicacion");
+        Vista.opcionCorrecta("Gracias por usar la aplicacion");
     }
 
     // endregion
@@ -304,6 +145,125 @@ public class Empresa {
         }
 
         return pass;
+    }
+
+    // endregion
+
+    // regios SECCION CLIENTE
+
+    private void getMenuCliente(Cliente cliente) {
+        boolean resp = true;
+        int opcion;
+        while (resp) {
+            Vista.titulo("Bienvenido " + this.cliente.getUsername());
+            Vista.menuPrincipalUsuario();
+            opcion = Helpers.validarInt();
+            switch (opcion) {
+                case 0:
+                    resp = false;
+                    break;
+                case 1:
+                    System.out.println("VISTA DE LOS MENUS DISPONIBLES");
+                    break;
+                case 2:
+                    dardeAltaUnaReserva(cliente);
+                    break;
+                case 3:
+                    menuInformacionPersonal();
+                    break;
+                default:
+                    Vista.opcionIncorrecta(opcion);
+                    break;
+            }
+        }
+    }
+
+    private void menuInformacionPersonal() {
+        boolean resp = true;
+        int opcion;
+        while (resp) {
+            Vista.titulo("Informacion Personal");
+            Vista.informacionPersonal();
+            opcion = Helpers.validarInt();
+            switch (opcion) {
+                case 0:
+                    resp = false;
+                    break;
+                case 1:
+                    System.out.println(this.cliente);
+                    break;
+                case 2:
+                    menuModificarDatos();
+                    break;
+                case 3:
+                    this.cliente.listarReservas();
+                    break;
+                case 4:
+                    System.out.println("LISTA CON COMPRAS PENDIENTES AL DIA DE LA FECHA");
+                    System.out.println(
+                            "Si es existe algun pedido se le puede dar la opcion que modifique algo de la reserva realizada");
+                    break;
+                default:
+                    Vista.opcionIncorrecta(opcion);
+                    break;
+            }
+        }
+    }
+
+    private void menuModificarDatos() {
+        boolean resp = true;
+        int opc;
+        String aux = "";
+        LocalDate fecha;
+        while (resp) {
+            Vista.titulo("Modificacion de datos personales");
+            Vista.modificarInformacionPersonal();
+            opc = Helpers.validarInt();
+            switch (opc) {
+                case 0:
+                    resp = false;
+                    break;
+                case 1:
+                    aux = Helpers.validaciones("Ingrese nombre", Helpers.VALIDAR_NOMBRES,
+                            "Tiene que empezar con mayusculas y se pueden ingresar hasta 2 nombres");
+                    this.cliente.setNombre(aux);
+                    break;
+                case 2:
+                    aux = Helpers.validaciones("Ingrese apellido", Helpers.VALIDAR_NOMBRES,
+                            "Tiene que empezar con mayusculas y se pueden ingresar hasta 2 nombres");
+                    this.cliente.setApellido(aux);
+                    break;
+                case 3:
+                    fecha = Helpers.validarFecha();
+                    this.cliente.setFechaNacimiento(String.valueOf(fecha));
+                    break;
+                case 4:
+                    aux = Helpers.validaciones("Ingrese telefono", Helpers.VALIDAR_TELEFONO, "Coloque el numero sin 0 ni 15");
+                    this.cliente.setTelefono(aux);
+                    break;
+                case 5:
+                    Vista.ingreseDato("Ingrese una direccion");
+                    aux = Helpers.nextLine();
+                    this.cliente.setDireccion(aux);
+                    break;
+                case 6:
+                    aux = Helpers.validaciones("Ingrese DNI", Helpers.VALIDAR_DNI, "Ingrese un dni valido");
+                    this.cliente.setDni(aux);
+                    break;
+                case 7:
+                    aux = Helpers.validaciones("Ingrese email", Helpers.VALIDAR_EMAIL, "Ingrese un email valido");
+                    this.cliente.setEmail(aux);
+                    break;
+                case 8:
+                    aux = passwordIguales();
+                    this.cliente.setPassword(aux);
+                    break;
+                default:
+                    Vista.opcionIncorrecta(opc);
+                    break;
+            }
+            this.accesoClientes.actualizarRegistro(this.cliente);
+        }
     }
 
     // endregion
@@ -383,9 +343,7 @@ public class Empresa {
 
         while (resp) {
             Vista.titulo("Alta Empleado");
-            System.out.println("1- Empleado existente");
-            System.out.println("2- Crear nuevo empleado");
-            System.out.println("0- Volver");
+            Vista.vistaEleccionCrearEmpleado();
             opcion = Helpers.validarInt();
             switch (opcion) {
                 case 0:
@@ -657,6 +615,8 @@ public class Empresa {
     }
 
     // region Alta Como Admin
+
+    // region ALTA RESERVA
     public Reserva darAltaReservas() throws FechaInvalidaException {
 
         Scanner entradaEscanner2 = new Scanner(System.in);
@@ -777,6 +737,8 @@ public class Empresa {
         }
         return reserva;
     }
+
+    // endregion
 
     // Alta Reserva Como cliente
     public void dardeAltaUnaReserva(Cliente cliente) {
@@ -963,12 +925,12 @@ public class Empresa {
             String nombreUsuario = Helpers.validaciones("Nombre usuario", Helpers.VALIDAR_NOMBRE_USUARIO,
                     "Error, comienza con numeros o letras y puede contener (._) minimo 8, maximo 20 caracteres");
 
-            clienteRegistrado = accesoClientes.buscarCliente(nombreUsuario);
+            clienteRegistrado = accesoClientes.obtenerRegistroXDni(new Cliente(nombreUsuario));
             clienteRegistrado.mostrar();
             idCliente = clienteRegistrado.getId();
 
 
-        }catch (NullPointerException | ClienteNoExiste e){
+        }catch (NullPointerException e){
             System.err.println("No existe el cliente");
             buscarClienteR();
         }
@@ -2081,32 +2043,7 @@ public class Empresa {
         }
     }
 
-    private void getMenuCliente(Cliente cliente) {
-        boolean resp = true;
-        int opcion;
-        while (resp) {
-            Vista.titulo("Bienvenido " + this.cliente.getUsername());
-            Vista.menuPrincipalUsuario();
-            opcion = Helpers.validarInt();
-            switch (opcion) {
-                case 0:
-                    resp = false;
-                    break;
-                case 1:
-                    System.out.println("VISTA DE LOS MENUS DISPONIBLES");
-                    break;
-                case 2:
-                    dardeAltaUnaReserva(cliente);
-                    break;
-                case 3:
-                    menuInformacionPersonal();
-                    break;
-                default:
-                    Vista.opcionIncorrecta(opcion);
-                    break;
-            }
-        }
-    }
+    
 
     // region ABM
     private void darAltaClienteExistente() {
@@ -2245,92 +2182,9 @@ public class Empresa {
         }
     }
 
-    private void menuInformacionPersonal() {
-        boolean resp = true;
-        int opcion;
-        while (resp) {
-            Vista.titulo("Informacion Personal");
-            Vista.informacionPersonal();
-            opcion = Helpers.validarInt();
-            switch (opcion) {
-                case 0:
-                    resp = false;
-                    break;
-                case 1:
-                    System.out.println(this.cliente);
-                    break;
-                case 2:
-                    menuModificarDatos();
-                    break;
-                case 3:
-                    this.cliente.listarReservas();
-                    break;
-                case 4:
-                    System.out.println("LISTA CON COMPRAS PENDIENTES AL DIA DE LA FECHA");
-                    System.out.println(
-                            "Si es existe algun pedido se le puede dar la opcion que modifique algo de la reserva realizada");
-                    break;
-                default:
-                    Vista.opcionIncorrecta(opcion);
-                    break;
-            }
-        }
-    }
+    
 
-    public void menuModificarDatos() {
-        boolean resp = true;
-        int opc;
-        String aux = "";
-        // LocalDate fecha;
-        while (resp) {
-            Vista.titulo("Modificacion de datos personales");
-            Vista.modificarInformacionPersonal();
-            opc = Helpers.validarInt();
-            switch (opc) {
-                case 0:
-                    resp = false;
-                    break;
-                case 1:
-                    aux = Helpers.validaciones("nombre", Helpers.VALIDAR_NOMBRES,
-                            "Tiene que empezar con mayusculas y se pueden ingresar hasta 2 nombres");
-                    this.cliente.setNombre(aux);
-                    break;
-                case 2:
-                    aux = Helpers.validaciones("apellido", Helpers.VALIDAR_NOMBRES,
-                            "Tiene que empezar con mayusculas y se pueden ingresar hasta 2 nombres");
-                    this.cliente.setApellido(aux);
-                    break;
-                case 3:
-                    // fecha = Helpers.validarFecha();
-                    // this.cliente.setFechaNacimiento(fecha);
-                    break;
-                case 4:
-                    aux = Helpers.validaciones("telefono", Helpers.VALIDAR_TELEFONO, "Coloque el numero sin 0 ni 15");
-                    this.cliente.setTelefono(aux);
-                    break;
-                case 5:
-                    Vista.ingreseDato("Ingrese una direccion");
-                    aux = Helpers.nextLine();
-                    break;
-                case 6:
-                    aux = Helpers.validaciones("DNI", Helpers.VALIDAR_DNI, "Ingrese un dni valido");
-                    this.cliente.setDni(aux);
-                    break;
-                case 7:
-                    aux = passwordIguales();
-                    this.cliente.setPassword(aux);
-                    break;
-                case 8:
-                    aux = Helpers.validaciones("email", Helpers.VALIDAR_EMAIL, "Ingrese un email valido");
-                    this.cliente.setEmail(aux);
-                    break;
-                default:
-                    Vista.opcionIncorrecta(opc);
-                    break;
-            }
-            this.accesoClientes.actualizarRegistro(this.cliente);
-        }
-    }
+
     // endregion
 
     // endregion
@@ -2352,12 +2206,12 @@ public class Empresa {
                     do{
                         String nombre = scanner.next();
                     }while (Helpers.validarNombre(nombre));
-                    this.setNombre(nombre);
+                    //this.setNombre(nombre);
                     break;
                 case 2:
                     Vista.titulo("Localidad");
                     String Localidad = scanner.nextLine();
-                    this.setLocalidad(localidad);
+                    //this.setLocalidad(localidad);
 
                     break;
                 case 3:

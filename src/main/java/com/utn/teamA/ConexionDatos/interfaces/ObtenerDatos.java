@@ -8,7 +8,7 @@ public interface ObtenerDatos<T> {
 
     // region Metodos
 
-    T obtenerRegistro(T t) throws ClienteNoExiste;
+    T obtenerRegistro(T t);
     List<T> obtenerRegistros();
     boolean actualizarRegistro(T t);
     boolean borrarRegistro(T t);

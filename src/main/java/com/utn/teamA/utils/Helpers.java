@@ -227,9 +227,9 @@ public class Helpers {
 
         while (resp) {
 
-            dia = Integer.parseInt(Helpers.validaciones("Dia", Helpers.VALIDAR_ENTEROS, "Ingrese solo numeros"));
-            mes = Integer.parseInt(Helpers.validaciones("Dia", Helpers.VALIDAR_ENTEROS, "Ingrese solo numeros"));
-            anio = Integer.parseInt(Helpers.validaciones("Dia", Helpers.VALIDAR_ENTEROS, "Ingrese solo numeros"));
+            dia = Integer.parseInt(Helpers.validaciones("Ingrese Dia", Helpers.VALIDAR_ENTEROS, "Ingrese solo numeros"));
+            mes = Integer.parseInt(Helpers.validaciones("Ingrese Mes", Helpers.VALIDAR_ENTEROS, "Ingrese solo numeros"));
+            anio = Integer.parseInt(Helpers.validaciones("Ingrese año", Helpers.VALIDAR_ENTEROS, "Ingrese solo numeros"));
             try {
 
                 fecha = LocalDate.of(anio, mes, dia);
