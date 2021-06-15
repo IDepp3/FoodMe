@@ -1,6 +1,8 @@
 package com.utn.teamA;
 
 
+import com.utn.teamA.clases.EmpresaAux;
+
 public class App {
 
     

@@ -1,6 +1,9 @@
-package com.utn.teamA;
+package com.utn.teamA.clases;
 
-import java.util.ArrayList;
+import com.utn.teamA.utils.Color;
+import com.utn.teamA.utils.Helpers;
+import com.utn.teamA.ConexionDatos.IngredientePersistencia;
+
 import java.util.List;
 
 public class IngredienteLista {

@@ -1,7 +1,8 @@
-package com.utn.teamA;
+package com.utn.teamA.ConexionDatos;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.utn.teamA.clases.Ingrediente;
 
 import java.io.*;
 import java.util.ArrayList;

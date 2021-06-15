@@ -1,6 +1,5 @@
-package com.utn.teamA;
+package com.utn.teamA.utils;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Helpers {
