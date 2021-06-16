@@ -1,12 +1,10 @@
 package com.utn.teamA.clases;
 
-import com.utn.teamA.utils.Helpers;
-
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+
+import com.utn.teamA.utils.Helpers;
 
 /**
  * Clase Reserva
@@ -71,9 +69,9 @@ public class Reserva {
         this.id =  UUID.randomUUID().toString().substring(0, 10).replace("-", "g");
         this.fechaReserva = Helpers.fechaActual();
         this.fechaEvento = fechaEvento;
-        this.horarioLlegada =horarioLlegada;
+        /* this.horarioLlegada =horarioLlegada;
         this.horarioInicio = horarioInicio;
-        this.horarioFinaliza = horarioFinaliza;
+        this.horarioFinaliza = horarioFinaliza; */
         this.idCliente = idCliente;
         this.menus = menus;
         this.descripcion = descripcion;

@@ -393,7 +393,7 @@ public class MenuLista {
 
         listaDeMenu = menuPersistencia.obtenerRegistros();
 
-        char unElementoMas = 's';
+        //char unElementoMas = 's';
 
         //while ( unElementoMas == 's' ){
 

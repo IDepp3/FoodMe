@@ -48,8 +48,6 @@ public class AccesoEmpleados implements ObtenerDatos<Empleado>{
         BufferedReader reader;
         try {
             reader = new BufferedReader(new FileReader(this.url));
-            // TODO a investigar recordar descomentar linea y comentar arregloALista();
-            //empleados = Arrays.asList(this.json.fromJson(reader, Empleado[].class));
             arregloALista(this.json.fromJson(reader, Empleado[].class), empleados);
             reader.close();
         } catch (FileNotFoundException e) {

@@ -1,9 +1,5 @@
 package com.utn.teamA.clases;
 
-import com.utn.teamA.utils.Color;
-import com.utn.teamA.utils.Helpers;
-
-import java.util.Scanner;
 import java.util.UUID;
 
 import com.utn.teamA.utils.Color;
@@ -118,7 +114,7 @@ public class Ingrediente {
 
     public void crear(){
 
-        Scanner teclado = new Scanner(System.in);
+        //Scanner teclado = new Scanner(System.in);
 
         System.out.println(
                 Color.ANSI_BLUE +

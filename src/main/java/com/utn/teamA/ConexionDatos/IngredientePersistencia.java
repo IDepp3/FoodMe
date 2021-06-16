@@ -43,8 +43,6 @@ public class IngredientePersistencia {
         BufferedReader reader;
         try {
             reader = new BufferedReader(new FileReader(this.url));
-            // TODO a investigar recordar descomentar linea y comentar arregloALista();
-            //clientes = Arrays.asList(this.json.fromJson(reader, Cliente[].class));
             arregloALista(this.json.fromJson(reader, Ingrediente[].class), ingredientes);
             reader.close();
         } catch (FileNotFoundException e) {

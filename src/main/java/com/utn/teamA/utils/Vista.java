@@ -8,7 +8,6 @@ public class Vista {
 
     // region TITULO PRINCIPAL
 
-    // TODO ver posible mejora
     public static void titulo(String mensaje) {
         int cantidad = mensaje.length() + 16;
         System.out.println(Color.ANSI_BLUE);
@@ -163,7 +162,7 @@ public class Vista {
     public static void informacionPersonal() {
         System.out.println(Color.ANSI_GREEN + " 1 " + Color.ANSI_RESET + "Ver informacion personal");
         System.out.println(Color.ANSI_GREEN + " 2 " + Color.ANSI_RESET + "Modificar informacion");
-        System.out.println(Color.ANSI_GREEN + " 3 " + Color.ANSI_RESET + "Historial de compras");
+        System.out.println(Color.ANSI_GREEN + " 3 " + Color.ANSI_RESET + "Historial de reservas");
         System.out.println(Color.ANSI_RED + " 0 " + Color.ANSI_RESET + "Volver");
         System.out.print(Color.ANSI_GREEN + " : " + Color.ANSI_RESET);
     }
@@ -286,6 +285,16 @@ public class Vista {
 
     // endregion
 
+    // region vista gestion clientes
+
+    public static void menuGestionCliente(){
+        System.out.println(Color.ANSI_GREEN + " 1 " + Color.ANSI_RESET + "Cliente existente");
+        System.out.println(Color.ANSI_GREEN + " 2 " + Color.ANSI_RESET + "Crear nuevo cliente");
+        System.out.println(Color.ANSI_RED + " 0 " + Color.ANSI_RESET + "Volver");
+        System.out.println(Color.ANSI_GREEN + " : " + Color.ANSI_RESET);
+    }
+
+    // endregion
 
     // region vista modificada cliente
 

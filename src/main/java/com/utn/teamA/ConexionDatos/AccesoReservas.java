@@ -145,7 +145,7 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
      */
     public List<Reserva> obtenerRegistro(Cliente cliente) throws NoExisteReserva {
         List<Reserva> reservasCliente = new ArrayList<>();
-        Reserva reserva = null;
+        //Reserva reserva = null;
         try {
 
             List<Reserva> reservas = obtenerRegistros();
@@ -177,8 +177,6 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
         try {
             reservas = new ArrayList<>();
             reader = new BufferedReader(new FileReader(this.url));
-            // TODO a investigar recordar descomentar linea y comentar arregloALista();
-            //reserva = Arrays.asList(this.json.fromJson(reader, Reserva[].class));
             reservas = json.fromJson(reader, new TypeToken<List<Reserva>>(){}.getType());
             reader.close();
 

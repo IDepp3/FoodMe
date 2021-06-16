@@ -42,6 +42,7 @@ public class Helpers {
     }
 
     public static String nextLine() {
+        @SuppressWarnings("resource")
         Scanner teclado = new Scanner(System.in);
         boolean esTextoVacio = false;
         String texto = "";
@@ -61,6 +62,7 @@ public class Helpers {
     }
 
     public static int nextInt() {
+        @SuppressWarnings("resource")
         Scanner teclado = new Scanner(System.in);
         boolean esIntVacio = false;
         int numero;
@@ -80,11 +82,13 @@ public class Helpers {
     }
 
     public static char charAt0() {
+        @SuppressWarnings("resource")
         Scanner teclado = new Scanner(System.in);
         return teclado.next().charAt(0);
     }
 
      public static void enterParaContinuar(){
+        @SuppressWarnings("resource")
         Scanner teclado = new Scanner(System.in);
         System.out.print(
                 Color.ANSI_GREEN +
@@ -96,6 +100,7 @@ public class Helpers {
     }
 
     public static double validarDouble() {
+        @SuppressWarnings("resource")
         Scanner teclado = new Scanner(System.in);
         boolean esDouble = false;
         double num = 0;
@@ -113,6 +118,7 @@ public class Helpers {
     }
 
     public static int validarInt() {
+        @SuppressWarnings("resource")
         Scanner teclado = new Scanner(System.in);
         boolean esInt = false;
         int num = 0;
@@ -131,6 +137,7 @@ public class Helpers {
     }
 
     public static String validarTelefono() {
+        @SuppressWarnings("resource")
         Scanner teclado = new Scanner(System.in);
         boolean resp = true;
         String cadena;
@@ -154,11 +161,9 @@ public class Helpers {
 
         boolean resp = mather.find();
 
-        if (resp == true) {
-            System.out.println("Email ingresado es valido");
-        } else {
-            System.out.println("El email ingresado no es valido");
-        }
+        if (resp != true) {
+            Vista.opcionIncorrecta("El email ingresado no es valido");
+        } 
 
         return resp;
 
@@ -171,15 +176,11 @@ public class Helpers {
 
         boolean resp = mather.find();
 
-        if (resp == true) {
+        if (resp != true) {
 
-            System.out.println("El dni ingresado es valido");
-
-            // System.out.println("El dni ingresado es valido");
-
-        } else {
             System.out.println("El dni es incorrecto");
-        }
+        } 
+        
         return resp;
     }
 
@@ -216,11 +217,10 @@ public class Helpers {
             
             Matcher mat = pat.matcher(apellido);
             boolean validos = mat.find();
-           if(validos == true){
-              System.out.println("Apellido válido");
-           }else{
-              System.out.println("Apellido inválido");
-         }
+           if(validos != true){
+               System.out.println("Apellido inválido");
+            }
+         
             return validos;
     
         }
@@ -265,7 +265,7 @@ public class Helpers {
 
      public static String validarPassword(String mensaje) {
 
-       // Console c;
+       @SuppressWarnings("resource")
        Scanner c = new Scanner(System.in);
         boolean resp = true;
         String valor = "";
@@ -290,7 +290,7 @@ public class Helpers {
     }
 
     public static String ingresoPassword() {
-
+        @SuppressWarnings("resource")
        Scanner entrada = new Scanner(System.in);
        Vista.ingreseDato("Ingrese password");
         String passwordString = entrada.next();

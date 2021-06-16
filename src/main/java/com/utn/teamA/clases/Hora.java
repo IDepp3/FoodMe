@@ -9,7 +9,7 @@ public class Hora {
     private StringBuilder horas;
     private StringBuilder minutos;
     private StringBuilder segundos;
-    private int h;
+    //private int h;
     private int m;
     private int s;
 
@@ -88,6 +88,7 @@ public class Hora {
 
     public void insertSeconds() {
         boolean check = false;
+        @SuppressWarnings("resource")
         Scanner scan = new Scanner(System.in);
         do {
 
