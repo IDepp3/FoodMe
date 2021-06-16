@@ -78,3 +78,12 @@ article img{
     padding: 35px;
 }
 
+.logo{ 
+    margin-left: 330px;
+    height: 280px;
+    background-image: url("imagenes/logos.png");
+    background-size: cover;
+    background-position: center;
+}
+
+
