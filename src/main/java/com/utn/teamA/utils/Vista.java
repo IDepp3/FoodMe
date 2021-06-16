@@ -1,5 +1,9 @@
 package com.utn.teamA.utils;
 
+import com.utn.teamA.clases.Cliente;
+import com.utn.teamA.clases.Empleado;
+import com.utn.teamA.clases.Reserva;
+
 public class Vista {
 
     // region TITULO PRINCIPAL
@@ -94,8 +98,6 @@ public class Vista {
         System.out.println(Color.ANSI_GREEN + " 1 " + Color.ANSI_RESET + "Gestion de Personal");
         System.out.println(Color.ANSI_GREEN + " 2 " + Color.ANSI_RESET + "Gestion de Reservas");
         System.out.println(Color.ANSI_GREEN + " 3 " + Color.ANSI_RESET + "Gestion de Clientes");
-        System.out.println(Color.ANSI_GREEN + " 4 " + Color.ANSI_RESET + "Gestion de Ventas");
-        System.out.println(Color.ANSI_GREEN + " 5 " + Color.ANSI_RESET + "Configuracion");
         System.out.println(Color.ANSI_GREEN + " 6 " + Color.ANSI_RESET + "Gestion Menu");
         System.out.println(Color.ANSI_GREEN + " 7 " + Color.ANSI_RESET + "Gestion Plato");
         System.out.println(Color.ANSI_GREEN + " 8 " + Color.ANSI_RESET + "Gestion Ingrediente");
@@ -162,7 +164,6 @@ public class Vista {
         System.out.println(Color.ANSI_GREEN + " 1 " + Color.ANSI_RESET + "Ver informacion personal");
         System.out.println(Color.ANSI_GREEN + " 2 " + Color.ANSI_RESET + "Modificar informacion");
         System.out.println(Color.ANSI_GREEN + " 3 " + Color.ANSI_RESET + "Historial de compras");
-        System.out.println(Color.ANSI_GREEN + " 4 " + Color.ANSI_RESET + "Reservas pendientes");
         System.out.println(Color.ANSI_RED + " 0 " + Color.ANSI_RESET + "Volver");
         System.out.print(Color.ANSI_GREEN + " : " + Color.ANSI_RESET);
     }
@@ -207,11 +208,8 @@ public class Vista {
     }
 
     public static void menuGestionReserva(){
-        System.out.println(Color.ANSI_GREEN + " 1 " + Color.ANSI_RESET + "Dar de alta una Reserva");
-        System.out.println(Color.ANSI_GREEN + " 2 " + Color.ANSI_RESET + "Dar de baja una Reserva");
-        System.out.println(Color.ANSI_GREEN + " 3 " + Color.ANSI_RESET + "Buscar una Reserva");
-        System.out.println(Color.ANSI_GREEN + " 4 " + Color.ANSI_RESET + "Modificar una Reserva");
-        System.out.println(Color.ANSI_GREEN + " 5 " + Color.ANSI_RESET + "Listar Reservas");
+        System.out.println(Color.ANSI_GREEN + " 1 " + Color.ANSI_RESET + "Dar de baja una Reserva");
+        System.out.println(Color.ANSI_GREEN + " 2 " + Color.ANSI_RESET + "Listar Reservas");
         System.out.println(Color.ANSI_RED + " 0 " + Color.ANSI_RESET + "Volver");
         System.out.print(Color.ANSI_GREEN + "  " + Color.ANSI_RESET);
     }
@@ -287,4 +285,54 @@ public class Vista {
     // endregion
 
     // endregion
+
+
+    // region vista modificada cliente
+
+    public static void informacionPersonalUsuario(Cliente cliente){
+        System.out.println("");
+        System.out.println(Color.ANSI_GREEN + "ID : " + Color.ANSI_RESET + Color.ANSI_YELLOW + cliente.getId() + Color.ANSI_RESET);
+        System.out.println(Color.ANSI_GREEN + "Nombre de usuario : " + Color.ANSI_RESET + Color.ANSI_YELLOW + cliente.getUsername() + Color.ANSI_RESET);
+        System.out.println(Color.ANSI_GREEN + "Email : " + Color.ANSI_RESET + Color.ANSI_YELLOW + cliente.getEmail() + Color.ANSI_RESET);
+        System.out.println(Color.ANSI_GREEN + "Fecha de Registro : " + Color.ANSI_RESET + Color.ANSI_YELLOW + cliente.getFechaRegistro() + Color.ANSI_RESET);
+        System.out.println(Color.ANSI_GREEN + "Tipo de usuario : " + Color.ANSI_RESET + Color.ANSI_YELLOW + cliente.getTipoUsuario() + Color.ANSI_RESET);
+        System.out.println(Color.ANSI_GREEN + "Nombre : " + Color.ANSI_RESET + Color.ANSI_YELLOW + ((cliente.getNombre() != null) ? cliente.getNombre() : "Sin datos") + Color.ANSI_RESET);
+        System.out.println(Color.ANSI_GREEN + "Apellido : " + Color.ANSI_RESET + Color.ANSI_YELLOW + ((cliente.getApellido() != null) ? cliente.getApellido() : "Sin datos") + Color.ANSI_RESET);
+        System.out.println(Color.ANSI_GREEN + "Fecha de nacimiento : " + Color.ANSI_RESET + Color.ANSI_YELLOW + ((cliente.getFechaNacimiento() != null) ? cliente.getFechaNacimiento() : "Sin datos") + Color.ANSI_RESET);
+        System.out.println(Color.ANSI_GREEN + "Telefono : " + Color.ANSI_RESET + Color.ANSI_YELLOW + ((cliente.getTelefono() != null) ? cliente.getTelefono() : "Sin datos") + Color.ANSI_RESET);
+        System.out.println(Color.ANSI_GREEN + "Direccion : " + Color.ANSI_RESET + Color.ANSI_YELLOW + ((cliente.getDireccion() != null) ? cliente.getDireccion() : "Sin datos") + Color.ANSI_RESET);
+        System.out.println(Color.ANSI_GREEN + "DNI : " + Color.ANSI_RESET + Color.ANSI_YELLOW + ((cliente.getDni() != null) ? cliente.getDni() : "Sin datos") + Color.ANSI_RESET);
+        System.out.println(Color.ANSI_GREEN + "Estado de cuenta : " + Color.ANSI_RESET + Color.ANSI_YELLOW + ((cliente.getEstado()) ? "ACTIVO" : "INACTIVO") + Color.ANSI_RESET);
+        System.out.println("");
+    }
+
+    public static void verReservaToString(Reserva reserva){
+        System.out.println("");
+        System.out.println(Color.ANSI_GREEN + "ID : " + Color.ANSI_RESET + Color.ANSI_YELLOW + reserva.getId() + Color.ANSI_RESET);
+        System.out.println(Color.ANSI_GREEN + "Fecha reservacion : " + Color.ANSI_RESET + Color.ANSI_YELLOW + reserva.getFechaReserva() + Color.ANSI_RESET);
+        System.out.println(Color.ANSI_GREEN + "Fecha de evento : " + Color.ANSI_RESET + Color.ANSI_YELLOW + reserva.getFechaEvento() + Color.ANSI_RESET);
+        System.out.println(Color.ANSI_GREEN + "Horario de llegada : " + Color.ANSI_RESET + Color.ANSI_YELLOW + reserva.getHorarioLlegada() + Color.ANSI_RESET);
+        System.out.println(Color.ANSI_GREEN + "Horario de inicio : " + Color.ANSI_RESET + Color.ANSI_YELLOW + reserva.getHorarioInicio() + Color.ANSI_RESET);
+        System.out.println(Color.ANSI_GREEN + "Horario de finalizacion : " + Color.ANSI_RESET + Color.ANSI_YELLOW + reserva.getHorarioFinaliza() + Color.ANSI_RESET);
+        System.out.println(Color.ANSI_GREEN + "Descripcion : " + Color.ANSI_RESET + Color.ANSI_YELLOW + reserva.getDescripcion() + Color.ANSI_RESET);
+        System.out.println(Color.ANSI_GREEN + "Cantidad de personas : " + Color.ANSI_RESET + Color.ANSI_YELLOW + reserva.getCantidadPersonasTotal() + Color.ANSI_RESET);
+        System.out.println(Color.ANSI_GREEN + "Bartender : " + Color.ANSI_RESET + Color.ANSI_YELLOW + (reserva.isQuiereBartender() ? "SI" : "NO") + Color.ANSI_RESET);
+        System.out.println(Color.ANSI_GREEN + "Estado : " + Color.ANSI_RESET + Color.ANSI_YELLOW + ((reserva.isStatus()) ? "Activa" : "Dada de baja") + Color.ANSI_RESET);
+        System.out.println(Color.ANSI_GREEN + "Precio final : " + Color.ANSI_RESET + Color.ANSI_YELLOW + reserva.getPrecioFinal() + Color.ANSI_RESET);
+        System.out.println("");
+    }
+
+    public static void listarEmpleado(Empleado empleado){
+        System.out.println("");
+        System.out.println(Color.ANSI_GREEN + "ID : " + Color.ANSI_RESET + Color.ANSI_YELLOW + empleado.getId() + Color.ANSI_RESET);
+        System.out.println(Color.ANSI_GREEN + "Nombre : " + Color.ANSI_RESET + Color.ANSI_YELLOW + empleado.getNombre() + Color.ANSI_RESET);
+        System.out.println(Color.ANSI_GREEN + "Apellido : " + Color.ANSI_RESET + Color.ANSI_YELLOW + empleado.getApellido() + Color.ANSI_RESET);
+        System.out.println(Color.ANSI_GREEN + "Fecha de nacimiento : " + Color.ANSI_RESET + Color.ANSI_YELLOW + empleado.getFechaNacimiento() + Color.ANSI_RESET);
+        System.out.println(Color.ANSI_GREEN + "Puesto : " + Color.ANSI_RESET + Color.ANSI_YELLOW + empleado.getTipoEmpleado() + Color.ANSI_RESET);
+        System.out.println(Color.ANSI_GREEN + "Telefono : " + Color.ANSI_RESET + Color.ANSI_YELLOW + empleado.getTelefono() + Color.ANSI_RESET);
+        System.out.println(Color.ANSI_GREEN + "Direccion : " + Color.ANSI_RESET + Color.ANSI_YELLOW + empleado.getDireccion() + Color.ANSI_RESET);
+        System.out.println(Color.ANSI_GREEN + "DNI : " + Color.ANSI_RESET + Color.ANSI_YELLOW + empleado.getDni() + Color.ANSI_RESET);
+        System.out.println(Color.ANSI_GREEN + "Estado : " + Color.ANSI_RESET + Color.ANSI_YELLOW + ((empleado.getEstado()) ? "ACTIVO" : "INACTIVO") + Color.ANSI_RESET);
+        System.out.println("");
+    }
 }

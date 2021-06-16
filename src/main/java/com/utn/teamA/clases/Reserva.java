@@ -52,6 +52,9 @@ public class Reserva {
         status=true;
 
     }
+    public Reserva(String id){
+        this.id = id;
+    }
 
     /**
      * Constructor completo
@@ -276,7 +279,7 @@ public class Reserva {
         if (this == o) return true;
         if (!(o instanceof Reserva)) return false;
         Reserva reserva = (Reserva) o;
-        return getId().equals(reserva.getId());
+        return this.id.equals(reserva.getId());
     }
 
     @Override

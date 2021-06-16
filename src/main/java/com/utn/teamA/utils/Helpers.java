@@ -185,15 +185,13 @@ public class Helpers {
 
     public static boolean validarTel(String telefono) {
 
-        Pattern pattern = Pattern.compile("^\\d{7}$");
+        Pattern pattern = Pattern.compile("^\\d{10}$");
         Matcher mather = pattern.matcher(telefono);
 
         boolean resp = mather.find();
 
-        if (resp == true) {
-            System.out.println("El telefono es valido.");
-        } else {
-            System.out.println("El telefono es invalido.");
+        if (resp != true) {
+            Vista.opcionIncorrecta("El telefono es invalido.");
         }
 
         return resp;
@@ -205,13 +203,11 @@ public class Helpers {
             
             Matcher mat = pat.matcher(nombre);
             boolean valido = mat.find();
-           if(valido == true){
-              System.out.println("Nombre válido");
-           }else{
-              System.out.println("Nombre inválido");
-         }
+           if(valido != true){
+               Vista.opcionIncorrecta("Nombre inválido");
+            }
+
             return valido;
-    
         }
 
         public static boolean validarApellido(String apellido){
@@ -237,8 +233,8 @@ public class Helpers {
         while (resp) {
 
             dia = Integer.parseInt(Helpers.validaciones("Dia", Helpers.VALIDAR_ENTEROS, "Ingrese solo numeros"));
-            mes = Integer.parseInt(Helpers.validaciones("Dia", Helpers.VALIDAR_ENTEROS, "Ingrese solo numeros"));
-            anio = Integer.parseInt(Helpers.validaciones("Dia", Helpers.VALIDAR_ENTEROS, "Ingrese solo numeros"));
+            mes = Integer.parseInt(Helpers.validaciones("Mes", Helpers.VALIDAR_ENTEROS, "Ingrese solo numeros"));
+            anio = Integer.parseInt(Helpers.validaciones("Año", Helpers.VALIDAR_ENTEROS, "Ingrese solo numeros"));
             try {
 
                 fecha = LocalDate.of(anio, mes, dia);
@@ -379,4 +375,5 @@ public class Helpers {
     public static String fechaActual() {
         return LocalDate.now().toString();
     }
+
 }

@@ -124,7 +124,7 @@ public class Empresa {
         String password = passwordIguales();
         String email = Helpers.validaciones("Email", Helpers.VALIDAR_EMAIL, "Ingrese email valido");
         cliente = new Cliente(Helpers.generarID(), nombreUsuario, password, email, Helpers.fechaActual(),
-                Helpers.tipoAdministrador(), Helpers.estadoActivo());
+                Helpers.tipoCliente(), Helpers.estadoActivo());
 
         return cliente;
     }
@@ -167,14 +167,17 @@ public class Empresa {
                     this.menus.mostrarMenusActivos();
                     break;
                 case 2:
-                    Reserva aux = dardeAltaUnaReserva(this.cliente);
-                    List<String> aux2 = this.cliente.getReservas();
-                    if(aux2 == null){
-                        aux2 = new ArrayList<String>();
-                    }
-                    aux2.add(aux.getId());
-                    this.cliente.setReservas(aux2);
-                    this.accesoClientes.actualizarRegistro(this.cliente);
+                    if(this.cliente.getNombre() != null && this.cliente.getApellido() != null && this.cliente.getTelefono() != null && this.cliente.getDni() != null && this.cliente.getDireccion() != null && this.cliente.getEstado()){
+                        Reserva aux = dardeAltaUnaReserva(this.cliente);
+                        List<String> aux2 = this.cliente.getReservas();
+                        if(aux2 == null){
+                            aux2 = new ArrayList<String>();
+                        }
+                        aux2.add(aux.getId());
+                        this.cliente.setReservas(aux2);
+                        this.accesoClientes.actualizarRegistro(this.cliente);
+                    }else
+                        Vista.opcionIncorrecta("Complete su perfil antes de hacer una reserva");
                     break;
                 case 3:
                     menuInformacionPersonal();
@@ -198,18 +201,15 @@ public class Empresa {
                     resp = false;
                     break;
                 case 1:
-                    System.out.println(this.cliente);
+                    Vista.informacionPersonalUsuario(this.cliente);;
+                    Helpers.enterParaContinuar();
                     break;
                 case 2:
                     menuModificarDatos();
                     break;
                 case 3:
                     listarReservasCliente();
-                    break;
-                case 4:
-                    System.out.println("LISTA CON COMPRAS PENDIENTES AL DIA DE LA FECHA");
-                    System.out.println(
-                            "Si es existe algun pedido se le puede dar la opcion que modifique algo de la reserva realizada");
+                    Helpers.enterParaContinuar();
                     break;
                 default:
                     Vista.opcionIncorrecta(opcion);
@@ -270,7 +270,10 @@ public class Empresa {
                     Vista.opcionIncorrecta(opc);
                     break;
             }
-            this.accesoClientes.actualizarRegistro(this.cliente);
+        }
+        if(this.accesoClientes.actualizarRegistro(this.cliente)){
+            Vista.opcionCorrecta("Perfil modificado correctamente");
+            Helpers.enterParaContinuar();
         }
     }
 
@@ -296,18 +299,13 @@ public class Empresa {
         Double costoTotal = 5000.0;
         //String otro = "";
 
+        Vista.titulo("Realizando reserva");
+
         while (seguir.equals("s")) {
 
             // Usuario ingresa fecha, valida que sea 48hs posterior al dia actual
-            try {
-                fecha = elegirFechaDeEvento();
-                //System.out.println(fecha.toString());
-            } catch (Exception e) {
-                System.err.println("Fecha invalida");
-            }
-            //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            String fecha3 = fecha.toString();
-
+            fecha = Helpers.validarFecha();
+            
             Vista.deseaSeguirCargandoDatos();
             seguir = Helpers.nextLine();
             if (seguir.equals("n"))
@@ -327,18 +325,9 @@ public class Empresa {
             if (seguir.equals("n"))
                 break;
 
-            // Usuario ingresa Cliente/ lo dirige al menu cliente en donde puede buscar
-            // al cliente o darlo de alta. se guarda el id del cliente
-            idCliente2 = this.cliente.getId();
-
-            // Usuario selecciona Los tipo de Menu, cantidad de personas por menu e
-            // ingredientes
-            //System.out.println(Color.ANSI_BLUE + " 3 " + Color.ANSI_RESET + "Seleccione los Menus ");
-            // traer lista de menus y sus ingredientes
-            //menus = new ArrayList<>();
             this.menus.mostrarMenusActivos();
-
             menu = this.menus.agregarMenuReserva();
+
             Vista.deseaSeguirCargandoDatos();
             seguir = entradaEscanner2.nextLine();
             if (seguir.equals("n"))
@@ -365,7 +354,7 @@ public class Empresa {
 
             /* Reserva reserva = new Reserva(fecha3, idCliente2, horarioLlegada, horarioInicio, horarioFinaliza, menus,
                     descripcion, quierebartender); */
-            reserva = new Reserva(Helpers.generarID(), Helpers.fechaActual(), fecha3, this.cliente.getId(), horarioLlegada, horarioInicio, horarioFinaliza, menu, descripcion, costoTotal, quierebartender, true, cantidadPersonas, costoTotal );
+            reserva = new Reserva(Helpers.generarID(), Helpers.fechaActual(), fecha.toString(), this.cliente.getId(), horarioLlegada, horarioInicio, horarioFinaliza, menu, descripcion, costoTotal, quierebartender, true, cantidadPersonas, costoTotal );
             
             reserva.mostrar();
 
@@ -393,7 +382,7 @@ public class Empresa {
             // El sistema guarda en el archivo en formato json
             //accesoReservas.mostrar(reserva);
 
-            boolean a = accesoReservas.agregarRegistro(reserva);
+            accesoReservas.agregarRegistro(reserva);
 
             Vista.opcionCorrecta("La reserva se cargo con exito");
 
@@ -464,16 +453,18 @@ public class Empresa {
          int j = 0;
          List<Reserva> reservas = this.accesoReservas.obtenerRegistros();    
          for(int i = 0; i < reservasCliente.size(); i++){
+            Reserva reserva = new Reserva(reservasCliente.get(i));
             while(resp && j < reservas.size()){
-               if(reservas.get(i).equals(reservas.get(j))){
-                  System.out.println(reservas.get(j));
+               if(reserva.equals(reservas.get(j))){
+                  Vista.verReservaToString(reservas.get(j));
                   resp = false;
                }
                j++;
             }
             resp = true;
          }
-      }
+      }else
+         Vista.opcionIncorrecta("Todavia no realizaste ninguna reserva");
    }
 
     // endregion
@@ -492,7 +483,6 @@ public class Empresa {
                     resp = false;
                     break;
                 case 1:
-                    Vista.titulo("GESTION DE PERSONAL");
                     getMenuGestionPersonal();
                     break;
                 case 2:
@@ -503,20 +493,12 @@ public class Empresa {
                     getMenuGestionClientes();
                     break;
                 case 4:
-                    Vista.titulo("GESTION DE VENTAS");
-                    getMenuGestionVentas();
-                    break;
-                case 5 :
-                    Vista.titulo("CONFIGURACION");
-                    getMenuConfiguracion();
-                    break;
-                case 6:
                     menus.menuMenu();
                     break;
-                case 7:
+                case 5:
                     platos.platoMenu();
                     break;
-                case 8:
+                case 6:
                     ingredientes.ingredienteMenu();
                     break;
                 default:
@@ -591,9 +573,9 @@ public class Empresa {
         if (a != null) {
             a.setEstado(true);
             this.accesoEmpleados.actualizarRegistro(a);
-            System.out.println("El empleado fue dado de alta nuevamente");
+            Vista.opcionCorrecta("El empleado fue dado de alta nuevamente");
         } else {
-            System.out.println("El empleado no existe");
+            Vista.opcionIncorrecta("El empleado no existe");
         }
 
     }
@@ -771,10 +753,13 @@ public class Empresa {
     }
 
     public void listarEmpleados() {
-        System.out.println("\nACA LISTAMOS LOS EMPLEADOS");
         List<Empleado> listaEmpleado = null;
         listaEmpleado = accesoEmpleados.obtenerRegistros();
-        System.out.println(listaEmpleado.toString());
+        if(listaEmpleado != null){
+            for(Empleado e : listaEmpleado){
+                Vista.listarEmpleado(e);
+            }
+        }
     }
 
     // endregion
@@ -808,10 +793,6 @@ public class Empresa {
                         //darAltaReservas();
                         break;
                     case 2:
-                        Vista.titulo(" BUSCAR UNA RESERVA");
-                        buscarReservas();
-                        break;
-                    case 3:
                         Vista.titulo("LISTAR RESERVAS");
                         listarReservas();
                         break;
