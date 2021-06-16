@@ -97,9 +97,9 @@ public class Vista {
         System.out.println(Color.ANSI_GREEN + " 1 " + Color.ANSI_RESET + "Gestion de Personal");
         System.out.println(Color.ANSI_GREEN + " 2 " + Color.ANSI_RESET + "Gestion de Reservas");
         System.out.println(Color.ANSI_GREEN + " 3 " + Color.ANSI_RESET + "Gestion de Clientes");
-        System.out.println(Color.ANSI_GREEN + " 6 " + Color.ANSI_RESET + "Gestion Menu");
-        System.out.println(Color.ANSI_GREEN + " 7 " + Color.ANSI_RESET + "Gestion Plato");
-        System.out.println(Color.ANSI_GREEN + " 8 " + Color.ANSI_RESET + "Gestion Ingrediente");
+        System.out.println(Color.ANSI_GREEN + " 4 " + Color.ANSI_RESET + "Gestion Menu");
+        System.out.println(Color.ANSI_GREEN + " 5 " + Color.ANSI_RESET + "Gestion Plato");
+        System.out.println(Color.ANSI_GREEN + " 6 " + Color.ANSI_RESET + "Gestion Ingrediente");
         System.out.println(Color.ANSI_RED + " 0 " + Color.ANSI_RESET + "Volver");
         System.out.print(Color.ANSI_GREEN + " : " + Color.ANSI_RESET);
     }

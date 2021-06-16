@@ -58,9 +58,11 @@ public class AccesoClientes implements ObtenerDatos<Cliente>{
         int i = 0;
 
         while(!resp && i < clientes.size()){
-            if(clientes.get(i).getUsername().equals(t.getUsername()) && clientes.get(i).getPassword().equals(t.getPassword())){
-                cliente = clientes.get(i);
-                resp = true;
+            if(clientes.get(i).getUsername() != null){
+                if(clientes.get(i).getUsername().equals(t.getUsername()) && clientes.get(i).getPassword().equals(t.getPassword())){
+                    cliente = clientes.get(i);
+                    resp = true;
+                }
             }
             i++;
         }

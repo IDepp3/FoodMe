@@ -26,14 +26,15 @@ public class MenuLista {
         boolean continuar = true;
 
         do{
-            System.out.println(
+            /* System.out.println(
                     Color.ANSI_BLUE +
                             "\n\n" +
                             " -------------------------\n" +
                             "| \t\t M E N U  \t\t |\n" +
                             " -------------------------" +
                             " \n\n" +
-                            Color.ANSI_RESET);
+                            Color.ANSI_RESET); */
+            Vista.titulo("M E N U");
             System.out.println(Color.ANSI_YELLOW + "\t Ingrese una opcion:" + Color.ANSI_RESET);
             System.out.println(Color.ANSI_GREEN + " 1 " + Color.ANSI_RESET + " Nuevo Menu");
             System.out.println(Color.ANSI_GREEN + " 2 " + Color.ANSI_RESET + " Editar Menu");
@@ -100,14 +101,15 @@ public class MenuLista {
 
         Menu nuevoMenu = new Menu();
 
-        System.out.println(
+        /* System.out.println(
                 Color.ANSI_BLUE +
                         "\n\n" +
                         " ----------------------------------------\n" +
                         "| \t\t N U E V O    M E N U \t\t |\n" +
                         " ----------------------------------------" +
                         " \n\n" +
-                        Color.ANSI_RESET);
+                        Color.ANSI_RESET); */
+        Vista.titulo("N U E V O   M E N U");
 
         int opcion = 0;
         boolean continuar = false;
@@ -252,14 +254,15 @@ public class MenuLista {
 
         do{
 
-            System.out.println(
+            /* System.out.println(
                     Color.ANSI_BLUE +
                             "\n\n" +
                             " -------------------------------------------\n" +
                             "| \t\t E D I T A R    M E N U \t\t |\n" +
                             " -------------------------------------------" +
                             " \n\n" +
-                            Color.ANSI_RESET);
+                            Color.ANSI_RESET); */
+            Vista.titulo("E D I T A R   M E N U");
 
             System.out.println(menu);
 

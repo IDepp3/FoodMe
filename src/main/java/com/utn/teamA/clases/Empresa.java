@@ -11,6 +11,7 @@ import java.util.Scanner;
 import com.utn.teamA.ConexionDatos.AccesoClientes;
 import com.utn.teamA.ConexionDatos.AccesoEmpleados;
 import com.utn.teamA.ConexionDatos.AccesoReservas;
+import com.utn.teamA.ConexionDatos.MenuPersistencia;
 import com.utn.teamA.utils.Color;
 import com.utn.teamA.utils.Helpers;
 import com.utn.teamA.utils.Vista;
@@ -341,28 +342,14 @@ public class Empresa {
                 break;
 
             Vista.opcionCorrecta("Finalizo cargar su reserva");
-
-            /* Reserva reserva = new Reserva(fecha3, idCliente2, horarioLlegada, horarioInicio, horarioFinaliza, menus,
-                    descripcion, quierebartender); */
+            MenuPersistencia men = new MenuPersistencia();
+            Menu aux = new Menu();
+            aux.setId(menu);
+            Menu m = men.obtenerRegistro(aux);
+            costoTotal = calcularTotal(cantidadPersonas, m.getPrecio(), quierebartender);
             reserva = new Reserva(Helpers.generarID(), Helpers.fechaActual(), fecha.toString(), this.cliente.getId(), horarioLlegada, horarioInicio, horarioFinaliza, menu, descripcion, costoTotal, quierebartender, true, cantidadPersonas, costoTotal );
             
-            reserva.mostrar();
-
-            // El sistema inicializa el objeto
-            // Reserva reserva = new Reserva(fechaAString, horarioLlegada, horarioInicio,
-            // horarioFinaliza, idCliente, menus, descripcion, quierebartender);
-
-            // Calcula costoTotal + servicio(mano de obra) en funcion a la cantidad de
-            // personas
-            //reserva.setCostoTotal(100.0);
-            // reserva.setCosto(reserva.calcularCosto());//todo Antonela1
-
-            // Calcula Precio Final = a costo + IVA (si el cliente paga en efectivo) con una
-            // rentabilidad del 25%
-            //reserva.calcularPrecionFinal();
-
-            //System.out.println("Costo:" + reserva.getCostoTotal());
-            //System.out.println("Precio Final:" + reserva.getPrecioFinal());
+            Vista.verReservaToString(reserva);
 
             Vista.finalizarReserva();
             seguir = entradaEscanner2.nextLine();
@@ -382,59 +369,16 @@ public class Empresa {
         return reserva;
     }
 
-    /* private LocalDate elegirFechaDeEvento() {
+    private double calcularTotal(int cantidadPersonas, double precioMenu, boolean bartender){
+        double total = 0;
 
-        LocalDate fecha = null;
-        Scanner entradaEscanner = new Scanner(System.in);
-        String f = "";
-        String si = "s";
-        boolean validar = false;
-        boolean disponibilidad = false;
-        while (si.equals("s")) {
-            try {
-                String mes = null;
-                String anio = null;
-                String dia = null;
-
-                do {
-
-                    LocalDate fechatentativa = validarfecha();
-                    validar = verificarFechaValida(fechatentativa);
-
-                    disponibilidad = accesoReservas.verificarFechaDeEventoDisponible(fechatentativa.toString());
-
-                    if (disponibilidad) {
-                        Vista.opcionCorrecta("Fecha disponible");
-                        fecha = fechatentativa;
-                    } else {
-                        System.err.println("Fecha No Disponible");
-                    }
-
-                    Vista.deseaSeguirCargandoFechas();
-                    si = entradaEscanner.next();
-
-                } while (((!validar) && (!disponibilidad)) || (si.equals("s")));
-
-            } catch (FechaNoDisponible e) {
-                System.err.println("Fecha no disponible");
-                Vista.deseaSeguirCargandoFechas();
-                si = entradaEscanner.next();
-            } catch (FechaInvalidaException e) {
-                System.err.println("Fecha Invalida");
-                Vista.deseaSeguirCargandoFechas();
-                si = entradaEscanner.next();
-
-            } catch (NullPointerException e) {
-                System.err.println("No hay registros aun");
-            } catch (Exception e) {
-                System.err.println("Error. Fecha invalida");
-                elegirFechaDeEvento();
-            }
-
+        total = precioMenu * cantidadPersonas;
+        if(bartender){
+            total += TipoEmpleado.BARTENDER.sueldo;
         }
-        return fecha;
 
-    } */
+        return total;
+    }
 
    private void listarReservasCliente(){
       boolean resp = true;
@@ -520,7 +464,9 @@ public class Empresa {
                     buscarCliente();
                     break;
                 case 4:
+                    Vista.titulo("Lista de Clientes");
                     listarClientes();
+                    Helpers.enterParaContinuar();
                     break;
                 default:
                     Vista.opcionIncorrecta(seleccion);
@@ -648,7 +594,11 @@ public class Empresa {
     public void listarClientes() {
         List<Cliente> listaClientes = null;
         listaClientes = accesoClientes.obtenerRegistros();
-        System.out.println(listaClientes);
+        if(listaClientes != null){
+            for(Cliente c : listaClientes){
+                Vista.informacionPersonalUsuario(c);
+            }
+        }
     }
 
     public void darDeBajaCliente() {
@@ -1010,6 +960,60 @@ public class Empresa {
     }
 
     // region Alta Como Admin
+
+    /* private LocalDate elegirFechaDeEvento() {
+
+        LocalDate fecha = null;
+        Scanner entradaEscanner = new Scanner(System.in);
+        String f = "";
+        String si = "s";
+        boolean validar = false;
+        boolean disponibilidad = false;
+        while (si.equals("s")) {
+            try {
+                String mes = null;
+                String anio = null;
+                String dia = null;
+
+                do {
+
+                    LocalDate fechatentativa = validarfecha();
+                    validar = verificarFechaValida(fechatentativa);
+
+                    disponibilidad = accesoReservas.verificarFechaDeEventoDisponible(fechatentativa.toString());
+
+                    if (disponibilidad) {
+                        Vista.opcionCorrecta("Fecha disponible");
+                        fecha = fechatentativa;
+                    } else {
+                        System.err.println("Fecha No Disponible");
+                    }
+
+                    Vista.deseaSeguirCargandoFechas();
+                    si = entradaEscanner.next();
+
+                } while (((!validar) && (!disponibilidad)) || (si.equals("s")));
+
+            } catch (FechaNoDisponible e) {
+                System.err.println("Fecha no disponible");
+                Vista.deseaSeguirCargandoFechas();
+                si = entradaEscanner.next();
+            } catch (FechaInvalidaException e) {
+                System.err.println("Fecha Invalida");
+                Vista.deseaSeguirCargandoFechas();
+                si = entradaEscanner.next();
+
+            } catch (NullPointerException e) {
+                System.err.println("No hay registros aun");
+            } catch (Exception e) {
+                System.err.println("Error. Fecha invalida");
+                elegirFechaDeEvento();
+            }
+
+        }
+        return fecha;
+
+    } */
 
     // region ALTA RESERVA
     /* public Reserva darAltaReservas() throws FechaInvalidaException {
@@ -2340,8 +2344,6 @@ public class Empresa {
 
     // endregion
 
-    // endregion
-
     // region Ventas
 
     /* private void getMenuGestionVentas() {
@@ -2371,23 +2373,6 @@ public class Empresa {
             }
         }
     } */
-
-    // endregion
-
-    // region Stock
-    // endregion
-
-    // endregion
-
-    // region Menu Cliente
-    
-
-    
-
-    
-
-
-    // endregion
 
     // endregion
 

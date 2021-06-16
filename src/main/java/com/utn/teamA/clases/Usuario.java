@@ -121,8 +121,10 @@ public abstract class Usuario{
 
     public boolean existeUsuario(Cliente t){
         boolean resp = false;
+        
         if(t.getUsername() == null)
             return resp;
+
         if(this.username.equals(t.getUsername()) || this.email.equals(t.getEmail()))
             resp = true;
 

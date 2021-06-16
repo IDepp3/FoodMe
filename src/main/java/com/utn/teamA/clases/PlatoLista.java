@@ -8,6 +8,7 @@ import com.utn.teamA.ConexionDatos.PlatoPersistencia;
 import com.utn.teamA.enums.TipoPlato;
 import com.utn.teamA.utils.Color;
 import com.utn.teamA.utils.Helpers;
+import com.utn.teamA.utils.Vista;
 
 public class PlatoLista {
 
@@ -23,14 +24,15 @@ public class PlatoLista {
         boolean continuar = true;
 
         do{
-            System.out.println(
+            /* System.out.println(
                     Color.ANSI_BLUE +
                             "\n\n" +
                             " ------------------------------------\n" +
                             "| \t\t M E N U    P L A T O \t\t |\n" +
                             " ------------------------------------" +
                             " \n\n" +
-                            Color.ANSI_RESET);
+                            Color.ANSI_RESET); */
+            Vista.titulo("M E N U   P L A T O");
             System.out.println(Color.ANSI_YELLOW + "\t Ingrese una opcion:" + Color.ANSI_RESET);
             System.out.println(Color.ANSI_GREEN + " 1 " + Color.ANSI_RESET + " Nuevo Plato");
             System.out.println(Color.ANSI_GREEN + " 2 " + Color.ANSI_RESET + " Editar Plato");
@@ -98,14 +100,15 @@ public class PlatoLista {
 
         Plato nuevoPlato = new Plato();
 
-        System.out.println(
+        /* System.out.println(
                 Color.ANSI_BLUE +
                         "\n\n" +
                         " ----------------------------------------\n" +
                         "| \t\t N U E V O    P L A T O \t\t |\n" +
                         " ----------------------------------------" +
                         " \n\n" +
-                        Color.ANSI_RESET);
+                        Color.ANSI_RESET); */
+        Vista.titulo("N U E V O   P L A T O");
 
         int opcion = 0;
         boolean continuar = false;
@@ -243,15 +246,16 @@ public class PlatoLista {
 
         do{
 
-            System.out.println(
+            /* System.out.println(
                     Color.ANSI_BLUE +
                             "\n\n" +
                             " -------------------------------------------\n" +
                             "| \t\t E D I T A R    P L A T O \t\t |\n" +
                             " -------------------------------------------" +
                             " \n\n" +
-                            Color.ANSI_RESET);
+                            Color.ANSI_RESET); */
 
+            Vista.titulo("E D I T A R   P L A T O");
             System.out.println(plato);
 
             System.out.println(Color.ANSI_YELLOW + "\t Ingrese una opcion:" + Color.ANSI_RESET);

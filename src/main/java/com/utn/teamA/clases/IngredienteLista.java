@@ -2,6 +2,7 @@ package com.utn.teamA.clases;
 
 import com.utn.teamA.utils.Color;
 import com.utn.teamA.utils.Helpers;
+import com.utn.teamA.utils.Vista;
 import com.utn.teamA.ConexionDatos.IngredientePersistencia;
 
 import java.util.List;
@@ -41,14 +42,15 @@ public class IngredienteLista {
         boolean continuar = true;
 
         do{
-            System.out.println(
+            /* System.out.println(
                     Color.ANSI_BLUE +
                             "\n\n" +
                             " ------------------------------------------------\n" +
                             "| \t\t M E N U    I N G R E D I E N T E \t\t |\n" +
                             " ------------------------------------------------" +
                             " \n\n" +
-                            Color.ANSI_RESET);
+                            Color.ANSI_RESET); */
+            Vista.titulo("M E N U   I N G R E D I E N T E");
             System.out.println(Color.ANSI_YELLOW + "\t Ingrese una opcion:" + Color.ANSI_RESET);
             System.out.println(Color.ANSI_GREEN + " 1 " + Color.ANSI_RESET + " Nuevo Ingrediente");
             System.out.println(Color.ANSI_GREEN + " 2 " + Color.ANSI_RESET + " Editar Ingrediente");
@@ -135,14 +137,15 @@ public class IngredienteLista {
 
         do{
 
-            System.out.println(
+            /* System.out.println(
                     Color.ANSI_BLUE +
                             "\n\n" +
                             " ------------------------------------------------\n" +
                             "| \t\t E D I T A R    I N G R E D I E N T E \t\t |\n" +
                             " ------------------------------------------------" +
                             " \n\n" +
-                            Color.ANSI_RESET);
+                            Color.ANSI_RESET); */
+            Vista.titulo("E D I T A R   I N G R E D I E N T E");
 
             System.out.println(ing);
 
