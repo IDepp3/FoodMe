@@ -281,14 +281,15 @@ public class Empresa {
     public Reserva dardeAltaUnaReserva(Cliente cliente) {
         Reserva reserva = null;
         Scanner entradaEscanner2 = new Scanner(System.in);
-        //int ope = 1;
+        int cantidadPersonas;
         String seguir = "s";
         LocalDate fecha = null;
         Hora hora = new Hora();
         StringBuilder horarioLlegada = null;
         StringBuilder horarioInicio = null;
         StringBuilder horarioFinaliza = null;
-        List<Menu> menus = new ArrayList<>();
+       // List<Menu> menus = new ArrayList<>();
+        String menu;
         String descripcion;
         boolean quierebartender = false;
         String idCliente2 = null;
@@ -335,12 +336,15 @@ public class Empresa {
             //System.out.println(Color.ANSI_BLUE + " 3 " + Color.ANSI_RESET + "Seleccione los Menus ");
             // traer lista de menus y sus ingredientes
             //menus = new ArrayList<>();
-            //menus = seleccionarMenus();
+            this.menus.mostrarMenusActivos();
+
+            menu = this.menus.agregarMenuReserva();
             Vista.deseaSeguirCargandoDatos();
             seguir = entradaEscanner2.nextLine();
             if (seguir.equals("n"))
                 break;
 
+            cantidadPersonas = Integer.parseInt(Helpers.validaciones("Ingrese cantidad de personas", Helpers.VALIDAR_ENTEROS, "Dato incorrecto"));
             // Usuario Ingresa si quiere bartender como servicio
             System.out.println(Color.ANSI_BLUE + " 5- " + Color.ANSI_RESET + "Quiere Bartender?s/n");
             String op = entradaEscanner2.nextLine();
@@ -361,7 +365,7 @@ public class Empresa {
 
             /* Reserva reserva = new Reserva(fecha3, idCliente2, horarioLlegada, horarioInicio, horarioFinaliza, menus,
                     descripcion, quierebartender); */
-            reserva = new Reserva(Helpers.generarID(), Helpers.fechaActual(), fecha3, this.cliente.getId(), horarioLlegada, horarioInicio, horarioFinaliza, menus, descripcion, costoTotal, quierebartender, true, 30, costoTotal );
+            reserva = new Reserva(Helpers.generarID(), Helpers.fechaActual(), fecha3, this.cliente.getId(), horarioLlegada, horarioInicio, horarioFinaliza, menu, descripcion, costoTotal, quierebartender, true, cantidadPersonas, costoTotal );
             
             reserva.mostrar();
 
@@ -798,26 +802,20 @@ public class Empresa {
                         resp = false;
                         break;
                     case 1:
-                        Vista.titulo(" ALTA UNA RESERVA.");
-                        darAltaReservas();
-                        break;
-                    case 2:
+                        //Vista.titulo(" ALTA UNA RESERVA.");
                         Vista.titulo(" BAJA UNA RESERVA.");
                         darBajaReservas();
+                        //darAltaReservas();
                         break;
-                    case 3:
+                    case 2:
                         Vista.titulo(" BUSCAR UNA RESERVA");
                         buscarReservas();
                         break;
-                    case 4:
-                        Vista.titulo("MODIFICAR UNA RESERVA");
-                        modificarReservas();
-                        break;
-                    case 5:
+                    case 3:
                         Vista.titulo("LISTAR RESERVAS");
                         listarReservas();
                         break;
-                    default:
+                     default:
 
                         System.out.println("Ingreso un dato Incorrecto. Reintente");
 
@@ -896,7 +894,7 @@ public class Empresa {
             Vista.deseaSeguirCargandoDatos();
             seguir = entradaEscanner2.nextLine();
             if (seguir.equals("n"))
-                break;
+               break;
 
             // Usuario Ingresa si quiere bartender como servicio
             System.out.println(Color.ANSI_BLUE + " 5- " + Color.ANSI_RESET + "Quiere Bartender?s/n");

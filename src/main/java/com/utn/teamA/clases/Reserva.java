@@ -28,9 +28,10 @@ public class Reserva {
     private StringBuilder horarioLlegada;
     private StringBuilder horarioInicio;
     private StringBuilder horarioFinaliza;
-    private List<Menu> menus = new ArrayList();
+    //private List<Menu> menus = new ArrayList();
+    private String menus;
     private String descripcion;
-    private Double costoTotal;
+    private double costoTotal;
     private boolean quiereBartender;
     private boolean status;
     private int cantidadPersonasTotal;
@@ -62,7 +63,7 @@ public class Reserva {
      * @param quiereBartender
      */
 
-    public Reserva(String fechaEvento, String idCliente, List<Menu> menus,
+    public Reserva(String fechaEvento, String idCliente, String menus,
         String descripcion, boolean quiereBartender) {
         this.id =  UUID.randomUUID().toString().substring(0, 10).replace("-", "g");
         this.fechaReserva = Helpers.fechaActual();
@@ -74,14 +75,14 @@ public class Reserva {
         this.menus = menus;
         this.descripcion = descripcion;
         this.quiereBartender = quiereBartender;
-        this.cantidadPersonasTotal = calcularCantPerTotal();
+        //this.cantidadPersonasTotal = calcularCantPerTotal();
         this.status = true;
 
 
 
     }
     //ESTE CONSTRUCTOR LO USAMOS PARA REGISTRAR UNA RESERVA
-    public Reserva(String fechaEvento, String idCliente, StringBuilder horarioLlegada, StringBuilder horarioInicio, StringBuilder horarioFinaliza, List<Menu> menus, String descripcion, boolean quiereBartender) {
+    public Reserva(String fechaEvento, String idCliente, StringBuilder horarioLlegada, StringBuilder horarioInicio, StringBuilder horarioFinaliza, String menus, String descripcion, boolean quiereBartender) {
 
         this.id =UUID.randomUUID().toString().substring(0, 10).replace("-", "g");
         this.fechaReserva = LocalDate.now().toString();
@@ -94,10 +95,10 @@ public class Reserva {
         this.descripcion = descripcion;
         this.quiereBartender = quiereBartender;
         this.status = true;
-        this.cantidadPersonasTotal = calcularCantPerTotal();
+        //this.cantidadPersonasTotal = calcularCantPerTotal();
     }
     //ESTE CONSTRUCTOR LO USAMOS PARA GUARDAR LOS DATOS COMO VIENEN DEL JSON
-    public Reserva(String id, String fechaReserva, String fechaEvento, String idCliente, StringBuilder horarioLlegada, StringBuilder horarioInicio, StringBuilder horarioFinaliza, List<Menu> menus, String descripcion, Double costoTotal, boolean quiereBartender, boolean status, int cantidadPersonasTotal, double precioFinal) {
+    public Reserva(String id, String fechaReserva, String fechaEvento, String idCliente, StringBuilder horarioLlegada, StringBuilder horarioInicio, StringBuilder horarioFinaliza, String menus, String descripcion, Double costoTotal, boolean quiereBartender, boolean status, int cantidadPersonasTotal, double precioFinal) {
         this.id = id;
         this.fechaReserva = fechaReserva;
         this.fechaEvento = fechaEvento;
@@ -150,7 +151,7 @@ public class Reserva {
         return idCliente;
     }
 
-    public List<Menu> getMenus() {
+    public String getMenus() {
         return menus;
     }
 
@@ -209,7 +210,7 @@ public class Reserva {
         this.idCliente = idCliente;
     }
 
-    public void setMenus(List<Menu> menus) {
+    public void setMenus(String menus) {
         this.menus = menus;
     }
 
@@ -298,19 +299,19 @@ public class Reserva {
     //endregion
 
     //region Calcular Cantidad de personas que tiene la Lista de reservas en Total
-    public int calcularCantPerTotal() {
+    /* public int calcularCantPerTotal() {
         int total = 0;
         for (Menu m : this.menus) {
 
             total = total + m.getCantPersonas();
         }
         return total;
-    }
+    } */
     //endregion
 
     //region Calcular Costo de la Reserva
 
-    public double calcularCosto() {
+    /* public double calcularCosto() {
 
         double costo = 0;
         double costoFinal = 0;
@@ -339,14 +340,14 @@ public class Reserva {
 
         return this.costoTotal ;
 
-    }
+    } */
 
-    public double calcularPrecionFinal(){
+    /* public double calcularPrecionFinal(){
         double IVA = 1.21;
         double ganancia = 0.25;
         double costo = calcularCosto();
         return this.precioFinal= this.costoTotal * IVA / ganancia;
-    }
+    } */
 
 
     //endregion

@@ -3,6 +3,7 @@ package com.utn.teamA.ConexionDatos;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParseException;
+import com.google.gson.reflect.TypeToken;
 import com.utn.teamA.ConexionDatos.interfaces.ObtenerDatos;
 import com.utn.teamA.clases.Cliente;
 import com.utn.teamA.clases.Reserva;
@@ -178,7 +179,7 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
             reader = new BufferedReader(new FileReader(this.url));
             // TODO a investigar recordar descomentar linea y comentar arregloALista();
             //reserva = Arrays.asList(this.json.fromJson(reader, Reserva[].class));
-            arregloALista(this.json.fromJson(reader, Reserva[].class), reservas);
+            reservas = json.fromJson(reader, new TypeToken<List<Reserva>>(){}.getType());
             reader.close();
 
         } catch (FileNotFoundException e) {
@@ -248,6 +249,10 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
         boolean resp = false;
         List<Reserva> reservas = obtenerRegistros();
 
+        if(reservas == null){
+            reservas = new ArrayList<>();
+        }
+
         if (!existeRegistro(reservas, t)) {
             reservas.add(t);
             if (guardarInformacion(reservas))
@@ -263,7 +268,9 @@ public class AccesoReservas implements ObtenerDatos<Reserva> {
 
         try {
             writer = new BufferedWriter(new FileWriter(this.url));
-            this.json.toJson(reservas.toArray(), Reserva[].class, writer);
+            String reservasString = this.json.toJson(reservas);
+            writer.write(reservasString);
+            writer.flush();
             writer.close();
             resp = true;
         } catch (IOException e) {

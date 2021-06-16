@@ -384,6 +384,53 @@ public class MenuLista {
 
     }
 
+    public String agregarMenuReserva(){
+
+        MenuPersistencia menuPersistencia = new MenuPersistencia();
+        List<Menu> listaDeMenu;
+        //List<String> menus = new ArrayList<>();
+        String menu = "";
+
+        listaDeMenu = menuPersistencia.obtenerRegistros();
+
+        char unElementoMas = 's';
+
+        //while ( unElementoMas == 's' ){
+
+            System.out.println(Color.ANSI_YELLOW + "\t Ingrese el codigo del ingrediente a incorporar" + Color.ANSI_RESET);
+
+            int i = 0;
+            for ( Menu ing : listaDeMenu) {
+
+                if( ing.getEstado() ){
+                    System.out.println( Color.ANSI_YELLOW + "[ " + i  + " ] " + Color.ANSI_RESET + ing.getNombre() );
+                }
+                i++;
+            }
+
+            int codigo = Helpers.validarInt();
+
+            if (codigo < 0 || codigo > listaDeMenu.size() || !listaDeMenu.get(codigo).getEstado()){
+                System.out.println("opcion invalida");
+            }else {
+                //menus.add( listaDeMenu.get(codigo).getId() );
+                menu = listaDeMenu.get(codigo).getId();
+            }
+
+            /* System.out.print(
+                    Color.ANSI_YELLOW + " \n\n \t\t Desea agregar otro Ingrediente? " +
+                            Color.ANSI_YELLOW + "[" +
+                            Color.ANSI_GREEN + " S " +
+                            Color.ANSI_YELLOW + "/" +
+                            Color.ANSI_RED + " N " +
+                            Color.ANSI_YELLOW + "]" + Color.ANSI_RESET);
+            unElementoMas = Helpers.charAt0(); */
+
+        //}
+
+        return menu;
+    }
+
     public  void mostrarMenusActivos(){
         listaDeMenus = menuPersistencia.obtenerRegistros();
         if(listaDeMenus != null){
