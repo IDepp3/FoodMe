@@ -42,7 +42,6 @@ public class Helpers {
     }
 
     public static String nextLine() {
-        @SuppressWarnings("resource")
         Scanner teclado = new Scanner(System.in);
         boolean esTextoVacio = false;
         String texto = "";
@@ -62,7 +61,6 @@ public class Helpers {
     }
 
     public static int nextInt() {
-        @SuppressWarnings("resource")
         Scanner teclado = new Scanner(System.in);
         boolean esIntVacio = false;
         int numero;
@@ -82,13 +80,11 @@ public class Helpers {
     }
 
     public static char charAt0() {
-        @SuppressWarnings("resource")
         Scanner teclado = new Scanner(System.in);
         return teclado.next().charAt(0);
     }
 
      public static void enterParaContinuar(){
-        @SuppressWarnings("resource")
         Scanner teclado = new Scanner(System.in);
         System.out.print(
                 Color.ANSI_GREEN +
@@ -100,7 +96,6 @@ public class Helpers {
     }
 
     public static double validarDouble() {
-        @SuppressWarnings("resource")
         Scanner teclado = new Scanner(System.in);
         boolean esDouble = false;
         double num = 0;
@@ -118,7 +113,6 @@ public class Helpers {
     }
 
     public static int validarInt() {
-        @SuppressWarnings("resource")
         Scanner teclado = new Scanner(System.in);
         boolean esInt = false;
         int num = 0;
@@ -137,7 +131,6 @@ public class Helpers {
     }
 
     public static String validarTelefono() {
-        @SuppressWarnings("resource")
         Scanner teclado = new Scanner(System.in);
         boolean resp = true;
         String cadena;
@@ -265,7 +258,6 @@ public class Helpers {
 
      public static String validarPassword(String mensaje) {
 
-       @SuppressWarnings("resource")
        Scanner c = new Scanner(System.in);
         boolean resp = true;
         String valor = "";
@@ -290,7 +282,6 @@ public class Helpers {
     }
 
     public static String ingresoPassword() {
-        @SuppressWarnings("resource")
        Scanner entrada = new Scanner(System.in);
        Vista.ingreseDato("Ingrese password");
         String passwordString = entrada.next();

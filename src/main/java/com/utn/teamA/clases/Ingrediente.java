@@ -128,7 +128,7 @@ public class Ingrediente {
         System.out.println(Color.ANSI_CYAN + "Ingrese nombre:" + Color.ANSI_RESET);
         this.nombre =  Helpers.nextLine();
 
-        System.out.println("Ingrese precio:");
+        //System.out.println("Ingrese precio:");
 
         System.out.println(Color.ANSI_CYAN + "Ingrese Descripcion:" + Color.ANSI_RESET);
         this.descripcion =  Helpers.nextLine();

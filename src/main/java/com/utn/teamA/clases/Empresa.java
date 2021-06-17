@@ -276,7 +276,6 @@ public class Empresa {
 
     public Reserva dardeAltaUnaReserva(Cliente cliente) {
         Reserva reserva = null;
-        @SuppressWarnings("resource")
         Scanner entradaEscanner2 = new Scanner(System.in);
         int cantidadPersonas;
         String seguir = "s";
@@ -521,7 +520,6 @@ public class Empresa {
     }
 
     public Cliente darAltaUnCliente() {
-        @SuppressWarnings("resource")
         Scanner entradaEscanner = new Scanner(System.in);
         Cliente cliente = null;
         Vista.titulo("Creando Cliente");
@@ -576,7 +574,6 @@ public class Empresa {
     }
 
     public void buscarCliente() {
-        @SuppressWarnings("resource")
         Scanner escanner = new Scanner(System.in);
         System.out.println("Ingrese el dni del cliente a buscar: ");
         String dni = "";
@@ -691,7 +688,6 @@ public class Empresa {
 
     // region ABM Personal
     public void darAltaUnEmpleado() {
-        @SuppressWarnings("resource")
         Scanner entradaEscanner = new Scanner(System.in);
         Empleado empleado = null;
         String tipo = "";
@@ -860,7 +856,6 @@ public class Empresa {
     // de encontrarlo dira que fue encontrado.
 
     public void buscarEmpleado() {
-        @SuppressWarnings("resource")
         Scanner escanner = new Scanner(System.in);
         
         Vista.ingreseDato("Ingrese el dni del empleado a buscar");
@@ -896,7 +891,6 @@ public class Empresa {
     // region Reservas
 
     private void getMenuGestionReservas() {
-        @SuppressWarnings("resource")
         Scanner entradaEscanner = new Scanner(System.in);
         boolean resp = true;
 

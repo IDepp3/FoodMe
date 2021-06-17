@@ -234,14 +234,17 @@ public class Vista {
         System.out.print(Color.ANSI_GREEN + "  " + Color.ANSI_RESET);
 
     }
+
     public static void deseaSeguirCargandoFechas(){
         System.out.println(Color.ANSI_RESET + " Desea seguir buscando fechas? " + Color.ANSI_GREEN+ "s/n");
         System.out.print(Color.ANSI_GREEN + "  " + Color.ANSI_RESET);
     }
+
     public static void finalizarReserva() {
         System.out.println(Color.ANSI_RESET + " Desea guardar la Reserva?' " + Color.ANSI_GREEN + "s/n");
         System.out.print(Color.ANSI_GREEN + "  " + Color.ANSI_RESET);
     }
+    
     public static void sleccionarMenuAltaReserva(){
         System.out.println(Color.ANSI_GREEN + " 1 " + Color.ANSI_RESET + "Cantidad de personas");
         System.out.println(Color.ANSI_GREEN + " 2 " + Color.ANSI_RESET + "Modificar ingredientes");
