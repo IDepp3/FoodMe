@@ -375,10 +375,14 @@ public class PlatoLista {
 
     public  void mostrarPlatosActivos(){
         listaDePlatos = platoPersistencia.obtenerRegistros();
+        if(listaDePlatos != null){
         for ( Plato plato : listaDePlatos ) {
             if (plato.getEstado()){
                 System.out.println(plato);
             }
         }
+    }else{
+        System.out.println("No hay platos activos por el momento.");
+    }
     }
 }
