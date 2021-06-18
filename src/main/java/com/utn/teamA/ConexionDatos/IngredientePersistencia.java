@@ -43,7 +43,8 @@ public class IngredientePersistencia {
         BufferedReader reader;
         try {
             reader = new BufferedReader(new FileReader(this.url));
-            arregloALista(this.json.fromJson(reader, Ingrediente[].class), ingredientes);
+           // arregloALista(this.json.fromJson(reader, Ingrediente[].class), ingredientes);
+           ingredientes = json.fromJson(reader,new TypeToken<List<Plato>>(){}.getType());
             reader.close();
         } catch (FileNotFoundException e) {
             crearFichero();
@@ -86,7 +87,10 @@ public class IngredientePersistencia {
 
         try {
             writer = new BufferedWriter(new FileWriter(this.url));
-            this.json.toJson(ingredientes.toArray(), Ingrediente[].class, writer);
+            String ingredientesJson = this.json.toJson(ingredientes);
+            //this.json.toJson(ingredientes.toArray(), Ingrediente[].class, writer);
+            writer.write(ingredientesJson);
+            writer.flush();
             writer.close();
             resp = true;
         } catch (IOException e) {

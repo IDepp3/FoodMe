@@ -76,7 +76,6 @@ public class PlatoPersistencia {
 
         try {
             writer = new BufferedWriter(new FileWriter(this.url));
-            //this.json.toJson(platos.toArray(), Plato[].class, writer);
             String platosJSon = this.json.toJson(platos);
             writer.write(platosJSon);
             writer.flush();
