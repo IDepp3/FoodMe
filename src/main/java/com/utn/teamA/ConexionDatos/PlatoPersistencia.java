@@ -129,7 +129,7 @@ public class PlatoPersistencia {
     private boolean existeRegistro(List<Plato> platos, Plato plato){
         boolean resp = false;
         int i = 0;
-
+        
         while(!resp && i < platos.size()){
             if(platos.get(i).equals(plato))
                 resp = true;
@@ -142,6 +142,10 @@ public class PlatoPersistencia {
     public boolean agregarRegistro(Plato t) {
         boolean resp = false;
         List<Plato> platos = obtenerRegistros();
+
+        if(platos == null){
+            platos = new ArrayList<>();
+        }
 
         if(!existeRegistro(platos, t)){
             platos.add(t);

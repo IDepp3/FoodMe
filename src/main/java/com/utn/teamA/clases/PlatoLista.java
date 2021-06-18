@@ -154,7 +154,9 @@ public class PlatoLista {
         System.out.println(Color.ANSI_CYAN + "Ingrese Precio:" + Color.ANSI_RESET);
         nuevoPlato.setPrecio( Helpers.validarDouble() );
 
-        nuevoPlato.setListaDeIngredites( agregarIngredientes());
+        List<String>ingredientes = agregarIngredientes();
+
+        nuevoPlato.setListaDeIngredites(ingredientes);
 
         System.out.println( nuevoPlato );
 

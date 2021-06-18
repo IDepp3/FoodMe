@@ -2,6 +2,7 @@ package com.utn.teamA.ConexionDatos;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.utn.teamA.clases.Ingrediente;
 
 import java.io.*;
@@ -44,7 +45,7 @@ public class IngredientePersistencia {
         try {
             reader = new BufferedReader(new FileReader(this.url));
            // arregloALista(this.json.fromJson(reader, Ingrediente[].class), ingredientes);
-           ingredientes = json.fromJson(reader,new TypeToken<List<Plato>>(){}.getType());
+           ingredientes = json.fromJson(reader,new TypeToken<List<Ingrediente>>(){}.getType());
             reader.close();
         } catch (FileNotFoundException e) {
             crearFichero();
