@@ -415,6 +415,7 @@ public class Empresa {
         int seleccion;
         while (resp) {
             Vista.titulo("Menu Administrador");
+            Vista.titulo("Bienvenido " + this.cliente.getUsername());
             Vista.menuPrincipalAdministrador();
             seleccion = Helpers.validarInt();
             switch (seleccion) {
