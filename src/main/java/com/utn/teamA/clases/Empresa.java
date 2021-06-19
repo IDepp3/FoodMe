@@ -426,7 +426,6 @@ public class Empresa {
                     getMenuGestionPersonal();
                     break;
                 case 2:
-                    Vista.titulo("GESTION DE RESERVAS");
                     getMenuGestionReservas();
                     break;
                 case 3:
