@@ -804,26 +804,29 @@ public class Empresa {
         int op = 0;
         op = en.nextInt();
         tipo = null;
+
         switch (op) {
             case 4:
                 tipo = TipoEmpleado.MOZO.toString();
+                sueldo = TipoEmpleado.MOZO.sueldo;
                 break;
             case 5:
                 tipo = TipoEmpleado.BARTENDER.toString();
+                sueldo = TipoEmpleado.BARTENDER.sueldo;
                 break;
             case 6:
                 tipo = TipoEmpleado.SUSHIMAN.toString();
+                sueldo = TipoEmpleado.SUSHIMAN.sueldo;
                 break;
             default:
                 Vista.opcionIncorrecta("Opcion incorrecta");
         }
 
-        Vista.ingreseDato("Ingrese sueldo del empleado");
+        // Vista.ingreseDato("Ingrese sueldo del empleado");
 
-        sueldo = entradaEscanner.nextDouble();
+        // sueldo = entradaEscanner.nextDouble();
 
-        empleado = new Empleado(nombre, apellido, fecha.toString(), telefono, direccion, dni, email, tipo, sueldo,
-                estado);
+        empleado = new Empleado(nombre, apellido, fecha.toString(), telefono, direccion, dni, email, tipo, sueldo,estado);
         Vista.opcionCorrecta("El empleado se agrego exitosamente");
         accesoEmpleados.agregarRegistro(empleado);
 
